@@ -132,9 +132,11 @@ void LoginDatabaseConnection::DoPrepareStatements()
     // WoW-Token
     PrepareStatement(LOGIN_INS_WOW_TOKEN, "INSERT INTO wow_token (accountId, characterGuid, realm, coins) VALUES (?, ?, ?, ?)", CONNECTION_SYNCH);
 
+	// BattlePay
 	PrepareStatement(LOGIN_SEL_BATTLEPAY_COINS, "SELECT dp FROM account WHERE id = ?", CONNECTION_SYNCH);
 	PrepareStatement(LOGIN_UPD_BATTLEPAY_INCREMENT_COINS, "UPDATE account SET dp = dp + ? WHERE id = ?", CONNECTION_SYNCH);
 	PrepareStatement(LOGIN_UPD_BATTLEPAY_DECREMENT_COINS, "UPDATE account SET dp = dp - ? WHERE id = ?;", CONNECTION_SYNCH);
+	PrepareStatement(LOGIN_UPD_BATTLEPAY_VP_COINS, "UPDATE account SET vp = vp + ? WHERE id = ?;", CONNECTION_SYNCH);
 
     // project
     PrepareStatement(LOGIN_SEL_project_MEMBER_PREMIUM, "SELECT unsetdate FROM project_member_premiums WHERE (member_id = ? OR member_id = 0) AND active = 1 ORDER BY unsetdate DESC", CONNECTION_SYNCH);
