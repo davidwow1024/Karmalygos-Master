@@ -2038,38 +2038,6 @@ class spell_warl_demonic_fury_energize : public SpellScript
     }
 };
 
-// 122736 - Nonexistent spell
-class spell_warl_demonic_fury_visual_controller : public SpellScript
-{
-    PrepareSpellScript(spell_warl_demonic_fury_visual_controller);
-
-    void HandleCast()
-    {
-        // Demonic Fury visuals
-        int32 val = GetCaster()->GetPower(POWER_DEMONIC_FURY);
-        if (val >= 980)
-        {
-            if (!GetCaster()->HasAura(SPELL_WARLOCK_MAXIMUM_FURY))
-                GetCaster()->CastSpell(GetCaster(), SPELL_WARLOCK_MAXIMUM_FURY, true);
-        }
-        else if (val >= 500)
-        {
-            if (!GetCaster()->HasAura(SPELL_WARLOCK_MASTER_DEMONOLOGIST_VISUAL))
-                GetCaster()->CastSpell(GetCaster(), SPELL_WARLOCK_MASTER_DEMONOLOGIST_VISUAL, true);
-        }
-        else
-        {
-            GetCaster()->RemoveAurasDueToSpell(SPELL_WARLOCK_MAXIMUM_FURY);
-            GetCaster()->RemoveAurasDueToSpell(SPELL_WARLOCK_MASTER_DEMONOLOGIST_VISUAL);
-        }
-    }
-
-    void Register() override
-    {
-        OnCast += SpellCastFn(spell_warl_demonic_fury_visual_controller::HandleCast);
-    }
-};
-
 // 5857 - Hellfire
 class spell_warl_hellfire : public SpellScript
 {
@@ -4381,79 +4349,6 @@ class spell_warl_unending_breath_soulburn : public SpellScript
     }
 };
 
-// 117197 nonexistent spell
-class spell_warl_soul_shards_visual_test : public SpellScript
-{
-    PrepareSpellScript(spell_warl_soul_shards_visual_test);
-
-    bool Load() override
-    {
-        return GetCaster()->GetTypeId() == TYPEID_PLAYER;
-    }
-
-    void HandleCast()
-    {
-        if (GetCaster()->ToPlayer()->GetSpecialization() == SPEC_WARLOCK_DEMONOLOGY)
-            return;
-
-        int32 shards;
-        if (GetCaster()->ToPlayer()->GetSpecialization() == SPEC_WARLOCK_AFFLICTION)
-            shards = int32(std::floor(GetCaster()->GetPower(POWER_SOUL_SHARDS) / 100));
-        else
-            shards = int32(std::floor(GetCaster()->GetPower(POWER_BURNING_EMBERS) / 10));
-
-        bool spheres = GetCaster()->HasAura(SPELL_WARLOCK_GLYPH_OF_VERDANT_SPHERES);
-
-        uint32 spell_1_3    = spheres ? SPELL_WARLOCK_VERDANT_SHPERES_1_3   : SPELL_WARLOCK_SOULSHARDS_1_3;
-        uint32 spell_2_3_4  = spheres ? SPELL_WARLOCK_VERDANT_SHPERES_2_3_4 : SPELL_WARLOCK_SOULSHARDS_2_3_4;
-        uint32 spell_4      = spheres ? SPELL_WARLOCK_VERDANT_SHPERES_4     : SPELL_WARLOCK_SOULSHARDS_4;
-        
-        switch (shards)
-        {
-            case 0:
-                GetCaster()->RemoveAurasDueToSpell(spell_1_3);
-                GetCaster()->RemoveAurasDueToSpell(spell_2_3_4);
-                GetCaster()->RemoveAurasDueToSpell(spell_4);
-                break;
-            case 1:
-                if (!GetCaster()->HasAura(spell_1_3))
-                    GetCaster()->CastSpell(GetCaster(), spell_1_3);
-
-                GetCaster()->RemoveAurasDueToSpell(spell_2_3_4);
-                GetCaster()->RemoveAurasDueToSpell(spell_4);
-                break;
-            case 2:
-                if (!GetCaster()->HasAura(spell_2_3_4))
-                    GetCaster()->CastSpell(GetCaster(), spell_2_3_4);
-
-                GetCaster()->RemoveAurasDueToSpell(spell_1_3);
-                GetCaster()->RemoveAurasDueToSpell(spell_4);
-                break;
-            case 3:
-                if (!GetCaster()->HasAura(spell_1_3))
-                    GetCaster()->CastSpell(GetCaster(), spell_1_3);
-                if (!GetCaster()->HasAura(spell_2_3_4))
-                    GetCaster()->CastSpell(GetCaster(), spell_2_3_4);
-
-                GetCaster()->RemoveAurasDueToSpell(spell_4);
-                break;
-            case 4:
-                if (!GetCaster()->HasAura(spell_2_3_4))
-                    GetCaster()->CastSpell(GetCaster(), spell_2_3_4);
-                if (!GetCaster()->HasAura(spell_4))
-                    GetCaster()->CastSpell(GetCaster(), spell_4);
-
-                GetCaster()->RemoveAurasDueToSpell(spell_1_3);
-                break;
-        }
-    }
-
-    void Register() override
-    {
-        OnCast += SpellCastFn(spell_warl_soul_shards_visual_test::HandleCast);
-    }
-};
-
 // 116860 - Ember Test
 class spell_warl_ember_test : public SpellScript
 {
@@ -4949,7 +4844,6 @@ void AddSC_warlock_spell_scripts()
     new spell_script<spell_warl_summon_doomguard>("spell_warl_summon_doomguard");
     new spell_script<spell_warl_doombolt>("spell_warl_doombolt");
     new spell_script<spell_warl_demonic_fury_energize>("spell_warl_demonic_fury_energize");
-    new spell_script<spell_warl_demonic_fury_visual_controller>("spell_warl_demonic_fury_visual_controller");
     new spell_script<spell_warl_hellfire>("spell_warl_hellfire");
     new aura_script<spell_warl_mastery_master_demonologist>("spell_warl_mastery_master_demonologist");
     new aura_script<spell_warl_master_demonologist>("spell_warl_master_demonologist");
@@ -5027,7 +4921,6 @@ void AddSC_warlock_spell_scripts()
     new spell_script<spell_warl_glyph_of_demon_trainig_firebolt>("spell_warl_glyph_of_demon_trainig_firebolt");
     new spell_script<spell_warl_glyph_of_carrion_swarm>("spell_warl_glyph_of_carrion_swarm");
     new spell_script<spell_warl_unending_breath_soulburn>("spell_warl_unending_breath_soulburn");
-    new spell_script<spell_warl_soul_shards_visual_test>("spell_warl_soul_shards_visual_test");
     new spell_script<spell_warl_ember_test>("spell_warl_ember_test");
     new spell_script<spell_warl_glyph_of_felguard>("spell_warl_glyph_of_felguard");
     new spell_script<spell_warl_glyph_of_felguard_loading>("spell_warl_glyph_of_felguard_loading");

@@ -134,6 +134,17 @@ enum Config
     CONFIG_REWARD_COUNT         = 93210010,
 };
 
+/* Nota Sargero: no existen las siguientes spells en caso de querer activar el evento hay que crearlas, supongo quesean dummy ya que tienen scripts que deben ser la funcionalidad
+
+Scriptname: `spell_afd_royale_in_map` spell (Id: 100115) does not exist.
+Scriptname: `spell_afd_royale_leaving_game` spell (Id: 100116) does not exist.
+Scriptname: `spell_afd_royale_drop` spell (Id: 100117) does not exist.
+Scriptname: `spell_afd_royale_out_of_ring_damage_aura` spell (Id: 100118) does not exist.
+Scriptname: `spell_afd_royale_buff_trigger` spell (Id: 100119) does not exist.
+Scriptname: `spell_afd_royale_portal_trigger` spell (Id: 100125) does not exist.
+
+*/
+
 class Game
 {
     public:
@@ -878,7 +889,7 @@ class npc_afd_royale_ring : CreatureScript
             return new npc_afd_royale_ringAI(creature);
         }
 };
-
+/*
 class spell_afd_royale_in_map : public SpellScriptLoader
 {
     public:
@@ -1166,7 +1177,7 @@ class spell_afd_royale_portal_trigger : public SpellScriptLoader
             return new spell_afd_royale_portal_trigger_SpellScript();
         }
 };
-
+*/
 inline void AddMenuItem(Player *player, GossipOptionIcon icon, const std::string &msg, uint32 sender, uint32 action, const std::string &mbox = "", uint32 money = 0, bool coded = false)
 {
     player->PlayerTalkClass->GetGossipMenu().AddMenuItem(-1, icon, msg, sender, action, mbox, money, coded);
@@ -1263,10 +1274,10 @@ void AddSC_event_afd_royale()
 {
     new npc_afd_royale_controller();
     new npc_afd_royale_ring();
-    new spell_afd_royale_in_map();
-    new spell_afd_royale_leaving_game();
-    new spell_afd_royale_drop();
-    new spell_afd_royale_out_of_ring_damage_aura();
-    new spell_afd_royale_buff_trigger();
-    new spell_afd_royale_portal_trigger();
+    //new spell_afd_royale_in_map();
+    //new spell_afd_royale_leaving_game();
+    //new spell_afd_royale_drop();
+    //new spell_afd_royale_out_of_ring_damage_aura();
+    //new spell_afd_royale_buff_trigger();
+    //new spell_afd_royale_portal_trigger();
 }

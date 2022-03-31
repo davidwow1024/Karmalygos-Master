@@ -2595,33 +2595,6 @@ class spell_pal_hand_of_sacrifice : public AuraScript
     }
 };
 
-// 203782 - Custom spell
-class spell_pal_glyph_of_bladed_judgement : public AuraScript
-{
-    PrepareAuraScript(spell_pal_glyph_of_bladed_judgement);
-
-    void CalculateAmount(AuraEffect const*, float&, bool&)
-    {
-        Player* paladin = GetUnitOwner()->ToPlayer();
-
-        paladin->RemoveAurasDueToSpell(SPELL_PALADIN_GLYPH_OF_BLADED_JUDGEMENT_SWORD);
-        paladin->RemoveAurasDueToSpell(SPELL_PALADIN_GLYPH_OF_BLADED_JUDGEMENT_AXE);
-
-        if (Item* weapon = paladin->GetWeaponForAttack(BASE_ATTACK))
-        {
-            if (weapon->GetTemplate()->SubClass == ITEM_SUBCLASS_WEAPON_SWORD || weapon->GetTemplate()->SubClass == ITEM_SUBCLASS_WEAPON_SWORD2)
-                paladin->CastSpell(paladin, SPELL_PALADIN_GLYPH_OF_BLADED_JUDGEMENT_SWORD, true);
-            else if (weapon->GetTemplate()->SubClass == ITEM_SUBCLASS_WEAPON_AXE || weapon->GetTemplate()->SubClass == ITEM_SUBCLASS_WEAPON_AXE2)
-                paladin->CastSpell(paladin, SPELL_PALADIN_GLYPH_OF_BLADED_JUDGEMENT_AXE, true);
-        }
-    }
-
-    void Register() override
-    {
-        DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_pal_glyph_of_bladed_judgement::CalculateAmount, EFFECT_0, SPELL_AURA_DUMMY);
-    }
-};
-
 void AddSC_paladin_spell_scripts()
 {
     new spell_pal_glyph_of_devotian_aura();
@@ -2707,5 +2680,4 @@ void AddSC_paladin_spell_scripts()
     new aura_script<spell_pal_glyph_of_blessed_life>("spell_pal_glyph_of_blessed_life");
     new aura_script<spell_pal_censure_control_fix>("spell_pal_censure_control_fix");
     new aura_script<spell_pal_hand_of_sacrifice>("spell_pal_hand_of_sacrifice");
-    new aura_script<spell_pal_glyph_of_bladed_judgement>("spell_pal_glyph_of_bladed_judgement");
 }
