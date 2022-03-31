@@ -40,9 +40,9 @@ enum FusionCMSDatabaseStatements
         When updating more than one field, consider looking at the calling function
         name for a suiting suffix.
     */
-    FUSION_SEL_BATTLEPAY_COINS,
-	FUSION_UPD_BATTLEPAY_INCREMENT_COINS,
-	FUSION_UPD_BATTLEPAY_DECREMENT_COINS,
+    // FUSION_SEL_BATTLEPAY_COINS,
+	// FUSION_UPD_BATTLEPAY_INCREMENT_COINS,
+	// FUSION_UPD_BATTLEPAY_DECREMENT_COINS,
     FUSION_UPD_BATTLEPAY_VP_COINS,
     MAX_FUSIONCMSDATABASE_STATEMENTS
 };

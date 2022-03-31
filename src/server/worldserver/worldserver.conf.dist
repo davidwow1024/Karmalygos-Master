@@ -2681,7 +2681,7 @@ Calculate.Gameoject.Zone.Area.Data = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-Wow.Token = 0
+Wow.Token = 1
 
 #    AUTOMATIC EQUIPMENT LEVEL SCALE LEVEL 90
 #
@@ -3058,7 +3058,7 @@ BattlePet.InitialLevel = 1
 #                     1 - (Enabled)
 #
 
-BattlePay.StoreEnabled = 0
+BattlePay.StoreEnabled = 1
 
 #
 #    BattlePay.Currency
