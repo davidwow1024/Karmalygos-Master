@@ -517,21 +517,24 @@ class npc_water_spirit_dailo : public CreatureScript
                 player->CLOSE_GOSSIP_MENU();
                 player->KilledMonsterCredit(55548);
                 player->RemoveAurasDueToSpell(59073); // Remove Phase 2, first water spirit disapear
-
+				// hack
+				player->KilledMonsterCredit(55547);
+				player->RemoveAurasDueToSpell(59074); // Remove phase 4, asleep wugou disappear
+				/*
                 if (Creature* shu = player->SummonCreature(55558, creature->GetPositionX(), creature->GetPositionY(), creature->GetPositionZ(), creature->GetOrientation(), TEMPSUMMON_MANUAL_DESPAWN, 0))
                 {
-                    shu->SetExplicitSeerGuid(player->GetGUID());
+                    shu->SetExplicitSeerGuid(player->GetGUID()); // Invocacion solo visible por el objeto que se le pasa como parametro (Casi personal spawn mas adelante pasarlo y ver su comportamiento en bfa)
 
                     if (shu->AI())
                     {
                         shu->AI()->DoAction(0);
                         shu->AI()->SetGUID(player->GetGUID());
                     }
-                }
+                } */
             }
             return true;
         }
-
+		/*
         struct npc_water_spirit_dailoAI : public ScriptedAI
         {
             npc_water_spirit_dailoAI(Creature* creature) : ScriptedAI(creature) { }
@@ -547,12 +550,12 @@ class npc_water_spirit_dailo : public CreatureScript
                 playerGuid      = 0;
             }
 
-            void DoAction(int32 /*actionId*/) override
+            void DoAction(int32 /*actionId) override
             {
                 eventTimer = 2500;
             }
 
-            void SetGUID(uint64 guid, int32 /*type*/) override
+            void SetGUID(uint64 guid, int32 /*type) override
             {
                 playerGuid = guid;
             }
@@ -607,7 +610,7 @@ class npc_water_spirit_dailo : public CreatureScript
                             case 3:
                                 DoCast(me, 118027, false);
                                 eventTimer = 5500;
-                                ++eventProgress;
+								++eventProgress;
                                 break;
                             case 4:
                                 eventTimer = 0;
@@ -641,17 +644,19 @@ class npc_water_spirit_dailo : public CreatureScript
         CreatureAI* GetAI(Creature* creature) const override
         {
             return new npc_water_spirit_dailoAI(creature);
-        }
+        } */
 };
 
 void AddSC_wandering_island_east()
 {
-    new AreaTrigger_at_bassin_curse();
     new npc_tushui_monk();
+	new npc_nourished_yak();
+	new npc_water_spirit_dailo();
+	new npc_shu_water_spirit();
+
     new spell_rock_jump();
-    new npc_shu_water_spirit();
-    new aura_script<spell_shu_benediction>("spell_shu_benediction");
+	new aura_script<spell_shu_benediction>("spell_shu_benediction");
     new spell_grab_carriage();
-    new npc_nourished_yak();
-    new npc_water_spirit_dailo();
+
+	new AreaTrigger_at_bassin_curse();
 }

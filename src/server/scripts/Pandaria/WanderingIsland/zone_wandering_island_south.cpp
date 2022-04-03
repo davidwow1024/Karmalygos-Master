@@ -1040,11 +1040,9 @@ class npc_shang_xi_choose_faction : public CreatureScript
 
 void AddSC_wandering_island_south()
 {
-    new AreaTrigger_at_mandori();
     new npc_mandori_escort();
     new npc_korga();
     new npc_ji_forest_escort();
-    new AreaTrigger_at_rescue_soldiers();
     new npc_jojo_ironbrow();
     new boss_vordraka();
     //new npc_aysa_gunship_crash();
@@ -1052,4 +1050,7 @@ void AddSC_wandering_island_south()
     new npc_ji_end_event();
     new npc_shen_healer();
     new npc_shang_xi_choose_faction();
+
+	new AreaTrigger_at_mandori();
+	new AreaTrigger_at_rescue_soldiers();
 }

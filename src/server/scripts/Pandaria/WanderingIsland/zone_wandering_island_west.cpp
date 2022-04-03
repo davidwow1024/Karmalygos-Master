@@ -56,56 +56,6 @@ class npc_master_shang_xi_temple : public CreatureScript
         }
 };
 
-class npc_wind_vehicle : public CreatureScript
-{
-    public:
-        npc_wind_vehicle() : CreatureScript("npc_wind_vehicle") { }
-
-        struct npc_wind_vehicleAI : public npc_escortAI
-        {
-            npc_wind_vehicleAI(Creature* creature) : npc_escortAI(creature) { }
-
-            uint32 IntroTimer;
-
-            void Reset() override
-            {
-                IntroTimer = 100;
-            }
-
-            void WaypointReached(uint32 waypointId) override
-            {
-                if (waypointId == 6)
-                {
-                    if (me->GetVehicleKit())
-                        me->GetVehicleKit()->RemoveAllPassengers();
-
-                    me->DespawnOrUnsummon();
-                }
-            }
-
-            void UpdateAI(uint32 diff) override
-            {
-                if (IntroTimer)
-                {
-                    if (IntroTimer <= diff)
-                    {
-                        Start(false, true);
-                        IntroTimer = 0;
-                    }
-                    else
-                        IntroTimer -= diff;
-                }
-
-                npc_escortAI::UpdateAI(diff);
-            }
-        };
-
-        CreatureAI* GetAI(Creature* creature) const override
-        {
-            return new npc_wind_vehicleAI(creature);
-        }
-};
-
 struct AreaTrigger_at_wind_temple_entrance : public AreaTriggerScript
 {
     enum
@@ -121,93 +71,6 @@ struct AreaTrigger_at_wind_temple_entrance : public AreaTriggerScript
             player->CastSpell(player, SPELL_SUMMON_AYSA_MARKER, true);
         return true;
     }
-};
-
-// @todo - script texts
-class npc_aysa_wind_temple_escort : public CreatureScript
-{
-    public:
-        npc_aysa_wind_temple_escort() : CreatureScript("npc_aysa_wind_temple_escort") { }
-        
-        struct npc_aysa_wind_temple_escortAI : public npc_escortAI
-        {
-            enum
-            {
-                SPELL_SUMMON_AYSA_MARKER = 104571
-            };
-
-            npc_aysa_wind_temple_escortAI(Creature* creature) : npc_escortAI(creature)
-            {
-                if (auto const summon = me->ToTempSummon())
-                    summon->SetExplicitSeerGuid(summon->GetSummonerGUID());
-            }
-
-            uint32 introTimer_;
-
-            void Reset() override
-            {
-                introTimer_ = 100;
-                me->SetReactState(REACT_PASSIVE);
-            }
-
-            void DoAction(int32 /*actionId*/) override
-            {
-                SetEscortPaused(false);
-            }
-
-            void WaypointReached(uint32 waypointId) override
-            {
-                switch (waypointId)
-                {
-                    case 2:
-                        SetEscortPaused(true);
-                        me->SetFacingTo(2.38f);
-                        break;
-                    case 7:
-                        SetEscortPaused(true);
-                        break;
-                    case 10:
-                    {
-                        auto const summoner = me->ToTempSummon()->GetSummoner();
-                        if (summoner && summoner->GetTypeId() == TYPEID_PLAYER)
-                        {
-                            auto const player = summoner->ToPlayer();
-
-                            player->KilledMonsterCredit(55666);
-                            player->AreaExploredOrEventHappens(29785);
-                            player->RemoveAurasDueToSpell(SPELL_SUMMON_AYSA_MARKER);
-                        }
-
-                        SetEscortPaused(true);
-                        me->DespawnOrUnsummon(10000);
-                        break;
-                    }
-                    default:
-                        break;
-                }
-            }
-
-            void UpdateAI(uint32 diff) override
-            {
-                if (introTimer_)
-                {
-                    if (introTimer_ <= diff)
-                    {
-                        Start(false, true);
-                        introTimer_ = 0;
-                    }
-                    else
-                        introTimer_ -= diff;
-                }
-
-                npc_escortAI::UpdateAI(diff);
-            }
-        };
-
-        CreatureAI* GetAI(Creature* creature) const override
-        {
-            return new npc_aysa_wind_temple_escortAI(creature);
-        }
 };
 
 class npc_frightened_wind : public CreatureScript
@@ -560,120 +423,6 @@ class npc_master_shang_xi_after_zhao : public CreatureScript
             }
 
             return true;
-        }
-};
-
-// 56159 - Worthy of Passing(29787)
-class npc_master_shang_xi_after_zhao_escort : public CreatureScript
-{
-    public:
-        npc_master_shang_xi_after_zhao_escort() : CreatureScript("npc_master_shang_xi_after_zhao_escort") { }
-
-        struct npc_master_shang_xi_after_zhao_escortAI : public npc_escortAI
-        {
-            npc_master_shang_xi_after_zhao_escortAI(Creature* creature) : npc_escortAI(creature)
-            {
-                summonGUID = 0;
-            }
-
-            uint32 IntroTimer;
-
-            uint64 playerGuid;
-
-            void Reset() override
-            {
-                IntroTimer = 250;
-                me->SetReactState(REACT_PASSIVE);
-            }
-
-            void SetGUID(uint64 guid, int32 /*type*/) override
-            {
-                playerGuid = guid;
-            }
-
-            void WaypointReached(uint32 waypointId)
-            {
-                switch (waypointId)
-                {
-                    case 1:
-                        Talk(0);
-                        break;
-                    case 4:
-                        Talk(1);
-                        break;
-                    case 6:
-                        Talk(2);
-                        break;
-                    case 7:
-                        me->SetWalk(true);
-                        break;
-                    case 8:
-                        Talk(3);
-                        break;
-                    case 10:
-                        if (Creature* creature = me->SummonCreature(56274, 845.89f, 4372.62f, 223.98f, 4.78f, TEMPSUMMON_CORPSE_DESPAWN, 0))
-                        {
-                            creature->SetExplicitSeerGuid(playerGuid);
-                            summonGUID = creature->GetGUID();
-                            creature->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
-                            creature->SetReactState(REACT_DEFENSIVE);
-                        }
-                        break;
-                    case 15:
-                        me->SetFacingTo(5.91f);
-                        if (Creature* creature = Creature::GetCreature(*me, summonGUID))
-                            creature->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
-                        SetEscortPaused(true);
-                        me->SetWalk(false);
-                        break;
-                    case 16:
-                        me->SetFacingTo(4.537860f);
-
-                        if (Player* owner = ObjectAccessor::GetPlayer(*me, playerGuid))
-                            owner->AddAura(59074, owner);
-                        break;
-                    case 17:
-                        Talk(5);
-                        break;
-                    case 21:
-                        me->DespawnOrUnsummon(1000);
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            void SummonedCreatureDespawn(Creature* summon) override
-            {
-                if (summon->GetEntry() == 56274)
-                {
-                    SetEscortPaused(false);
-                    Talk(4);
-                }
-            }
-
-            void UpdateAI(uint32 diff) override
-            {
-                if (IntroTimer)
-                {
-                    if (IntroTimer <= diff)
-                    {
-                        Start(false, true);
-                        IntroTimer = 0;
-                    }
-                    else
-                        IntroTimer -= diff;
-                }
-
-                npc_escortAI::UpdateAI(diff);
-            }
-        private:
-            uint64 summonGUID;
-        };
-
-        CreatureAI* GetAI(Creature* creature) const override
-        {
-            return new npc_master_shang_xi_after_zhao_escortAI(creature);
         }
 };
 
@@ -1084,18 +833,17 @@ class spell_monkey_wisdom : public SpellScriptLoader
 void AddSC_wandering_island_west()
 {
     new npc_master_shang_xi_temple();
-    new npc_wind_vehicle();
-    new AreaTrigger_at_wind_temple_entrance();
-    new npc_aysa_wind_temple_escort();
     new npc_frightened_wind();
     new npc_aysa_in_wind_temple();
     new boss_zhao_ren();
     new npc_rocket_launcher();
     new npc_master_shang_xi_after_zhao();
-    new npc_master_shang_xi_after_zhao_escort();
     new npc_master_shang_xi_thousand_staff();
     new npc_master_shang_xi_thousand_staff_escort();
-    new spell_grab_air_balloon();
-    new npc_shang_xi_air_balloon();
+	new npc_shang_xi_air_balloon();
+
+	new spell_grab_air_balloon();
     new spell_monkey_wisdom();
+
+	new AreaTrigger_at_wind_temple_entrance();
 }
