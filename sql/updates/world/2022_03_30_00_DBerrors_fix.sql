@@ -37,7 +37,6 @@ delete from `achievement_criteria_data` where `criteria_id` in (
 
 delete from `pool_quest` where `entry` in (40313,40325,40326,40327);
 delete from `spell_area` where `quest_start` in (40328,40329);
-delete from `spell_linked_spell` where `quest_start` in (40328,40329);
 
 delete from `spell_linked_spell` where `spell_effect` in (203754,200002,200003) or `spell_trigger` in (203754,200002,200003);
 
