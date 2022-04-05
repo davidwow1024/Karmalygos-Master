@@ -559,7 +559,9 @@ enum SMART_ACTION
     SMART_ACTION_STOP_FOLLOW                        = 205,
     SMART_ACTION_SPELL_VISUAL_KIT                   = 206,
     SMART_ACTION_CAST_RANDOM_SPELL                  = 207,
-    SMART_ACTION_END_project                       = 208,
+    SMART_ACTION_QUEST_COMPLETE                     = 208,    // Force complete quest by ID (misc1, misc2 ...)
+
+    SMART_ACTION_END_project                       = 209,
 };
 
 struct SmartAction
@@ -1078,6 +1080,11 @@ struct SmartAction
             uint32 spell5;
             uint32 flags;
         } castRandomSpell;
+
+		struct
+        {
+            uint32 quest[6];
+        } CompleteQuest;
 
         //! Note for any new future actions
         //! All parameters must have type uint32
