@@ -477,9 +477,6 @@ class npc_master_shang_xi_thousand_staff_escort : public CreatureScript
             {
                 if (IntroTimer < diff)
                 {
-                    if (phase < 6)
-                        Talk(phase, ObjectAccessor::GetPlayer(*me, playerGuid));
-
                     IntroTimer = 15000;
                     ++phase;
 
