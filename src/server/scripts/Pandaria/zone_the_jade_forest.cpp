@@ -3855,7 +3855,7 @@ class npc_prince_anduin_decision_questgiver : public CreatureScript
             if (creature->IsQuestGiver())
                 player->PrepareQuestMenu(creature->GetGUID());
 
-            if (player->GetQuestStatus(QUEST_ANDUIN_DECISION) != QUEST_STATUS_INCOMPLETE || creature->GetPositionZ() < 85.0f)
+            if (player->GetQuestStatus(QUEST_ANDUIN_DECISION) != QUEST_STATUS_INCOMPLETE)
                 return false;
 
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "It is time to go home, Prince Anduin.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1); // miss gossip_menu_id
