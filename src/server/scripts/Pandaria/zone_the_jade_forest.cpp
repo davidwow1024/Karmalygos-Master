@@ -2779,18 +2779,19 @@ struct npc_windward_hatchling : public ScriptedAI
     void SpellHit(Unit* caster, SpellInfo const* spell) override
     {
         auto player = caster->ToPlayer();
-        if (spell->Id == SPELL_SILKEN_ROPE && player && player->GetQuestStatus(QUEST_EMPTY_NESTS) == QUEST_STATUS_INCOMPLETE)
-        {
-            if (auto summon = player->SummonCreature(NPC_WINDWARD_HATCHLING, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), me->GetOrientation(), TEMPSUMMON_TIMED_DESPAWN, 300000))
-            {
-                summon->SetOwnerGUID(player->GetGUID());
-                summon->SetDisplayId(me->GetDisplayId());
-                summon->GetMotionMaster()->MoveFollow(player, PET_FOLLOW_DIST, M_PI);
-                summon->CastSpell(player, SPELL_ROPE_BEAM, true);
-                summon->ClearUnitState(UNIT_STATE_CASTING); // Allows move
-                me->DespawnOrUnsummon();
-            }
-        }
+			if (spell->Id == SPELL_SILKEN_ROPE && player)
+				if (player->GetQuestStatus(QUEST_EMPTY_NESTS) == QUEST_STATUS_INCOMPLETE || player->GetQuestStatus(30157) == QUEST_STATUS_INCOMPLETE)
+				{
+					if (auto summon = player->SummonCreature(NPC_WINDWARD_HATCHLING, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), me->GetOrientation(), TEMPSUMMON_TIMED_DESPAWN, 300000))
+					{
+						summon->SetOwnerGUID(player->GetGUID());
+						summon->SetDisplayId(me->GetDisplayId());
+						summon->GetMotionMaster()->MoveFollow(player, PET_FOLLOW_DIST, M_PI);
+						summon->CastSpell(player, SPELL_ROPE_BEAM, true);
+						summon->ClearUnitState(UNIT_STATE_CASTING); // Allows move
+						me->DespawnOrUnsummon();
+					}
+				}
     }
 };
 
