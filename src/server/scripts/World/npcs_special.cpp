@@ -3312,50 +3312,40 @@ public:
 
 	bool OnGossipHello(Player* player, Creature* creature) override
 	{
-		QueryResult result = LoginDatabase.PQuery(
-			"SELECT counter FROM account WHERE id = %u",
-			player->GetSession()->GetAccountId());
+		QueryResult result = LoginDatabase.PQuery("SELECT counter FROM account WHERE id = %u", player->GetSession()->GetAccountId());
 
 		Field* fields = result->Fetch();
 		uint32 counter = fields[0].GetUInt32();
 
-		if (counter == 0)
+		if (counter == 0 && player->getLevel() < 85)
 		{
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Promocion LVL 85", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
-			//AddGossipItemFor(player, GOSSIP_ICON_CHAT, "LevelUp", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
 		}
-		/*if (counter == 1)
+		/*if (counter == 1 && player->getLevel() < 90)
 		{
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "LevelUp", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
-			//AddGossipItemFor(player, GOSSIP_ICON_CHAT, "LevelUp2", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
 		}*/
 		player->SEND_GOSSIP_MENU(1, creature->GetGUID());
-		//SendGossipMenuFor(player, 1, creature->GetGUID());
 		
 		return true;
 	}
 
 	bool OnGossipSelect(Player * player, Creature * creature, uint32 /*sender*/, uint32 action) override
 	{
+		player->PlayerTalkClass->ClearMenus();
 
-		QueryResult result = CharacterDatabase.PQuery(
-			"SELECT level FROM characters WHERE account = %u ORDER BY level DESC LIMIT 1",
-			player->GetSession()->GetAccountId());
-		QueryResult resultp = LoginDatabase.PQuery(
-			"SELECT counter FROM account WHERE id = %u",
-			player->GetSession()->GetAccountId());
+		QueryResult result = CharacterDatabase.PQuery("SELECT level FROM characters WHERE account = %u ORDER BY level DESC LIMIT 1", player->GetSession()->GetAccountId());
+		QueryResult resultp = LoginDatabase.PQuery("SELECT counter FROM account WHERE id = %u",	player->GetSession()->GetAccountId());
 
 		Field* fieldsp = resultp->Fetch();
 		uint32 counterpoll = fieldsp[0].GetUInt32();
 
 		Field* fields = result->Fetch();
 		uint32 lvl = fields[0].GetUInt32();
-		player->PlayerTalkClass->ClearMenus();
-		uint8 playerLevel = player->getLevel();
-	
+			
 		if (action == GOSSIP_ACTION_INFO_DEF + 1)
 		{
-			if (playerLevel < 84)
+			if (player->getLevel() < 85)
 			{
 				//level up 85
 				player->GiveLevel(85);
@@ -3384,8 +3374,6 @@ public:
 					player->TeleportTo(1, 1365.477051f, -4372.168945f, 26.070314f, 0.167605f);
 				}
 
-				
-				
 				player->SaveToDB();
 				player->PlayerTalkClass->SendCloseGossip();
 				
@@ -3396,13 +3384,12 @@ public:
 
 		if (action == GOSSIP_ACTION_INFO_DEF + 2)
 		{
-			if (playerLevel < 89)
+			if (player->getLevel() < 90)
 			{
 				player->GiveLevel(90);
 				player->ModifyMoney(50000000);
 				player->SaveToDB();
 				player->PlayerTalkClass->SendCloseGossip();
-				//CloseGossipMenuFor(player);
 			}
 			LoginDatabase.PExecute("UPDATE `account` SET `counter` = 2 WHERE `id` = %u", player->GetSession()->GetAccountId());
 
@@ -3413,7 +3400,6 @@ public:
 
 void AddSC_npcs_special()
 {
-	new npc_jc_promotion();
     new npc_air_force_bots();
     new npc_lunaclaw_spirit();
     new npc_chicken_cluck();
@@ -3454,4 +3440,6 @@ void AddSC_npcs_special()
     new creature_script<npc_sa_demolisher>("npc_sa_demolisher");
     new creature_script<npc_rogue_rare_npc>("npc_rogue_rare_npc");
     new creature_script<npc_pandaren_firework_launcher>("npc_pandaren_firework_launcher");
+
+	new npc_jc_promotion();
 }
