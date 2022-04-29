@@ -48,6 +48,7 @@ enum Spells
     SPELL_PROWL                       = 8152,
     SPELL_FEROCIOUS_CLAW              = 115083,
     SPELL_POUNCE                      = 116273,
+	SPELL_CALL_OF_THE_SPIRITSAGE	  = 104596,
 };
 
 enum eEvents
@@ -75,6 +76,7 @@ enum Creatures
     NPC_STONE_1_CREDIT        = 63235,
     NPC_STONE_2_CREDIT        = 63236,
     NPC_STONE_3_CREDIT        = 63237,
+	NPC_WAYWARD_ANCESTOR	  = 55290,
 };
 
 enum Quests
@@ -86,6 +88,7 @@ enum Quests
     QUEST_A_STRONG_BACK         = 29628,
     QUEST_STAY_AND_WHILE        = 31121,
     QUEST_IF_STONES_COULD_SPEAK = 31134,
+	QUEST_THE_WAYWARD_DEAD		= 29752,
 };
 
 enum eTalks
@@ -4775,6 +4778,22 @@ class spell_reverse_cast_ride_seat_1 : public SpellScript
     }
 };
 
+// Wayward Ancestor 55290
+struct npc_wayward_ancestor : public ScriptedAI
+{
+	npc_wayward_ancestor(Creature* creature) : ScriptedAI(creature) { }
+
+	void SpellHit(Unit* caster, SpellInfo const* spell)
+	{
+		if (spell->Id == SPELL_CALL_OF_THE_SPIRITSAGE && caster->GetTypeId() == TYPEID_PLAYER)
+			me->m_Events.Schedule(3000, [this, caster]() 
+			{ 
+				caster->ToPlayer()->KilledMonsterCredit(61290);
+				me->DespawnOrUnsummon();
+			});
+	}
+};
+
 void AddSC_jade_forest()
 {
     // Rare mobs
@@ -4820,6 +4839,7 @@ void AddSC_jade_forest()
     new creature_script<npc_slitherscale_lizard_lord>("npc_slitherscale_lizard_lord");
     new creature_script<npc_shadowfae_trickster>("npc_shadowfae_trickster");
     new creature_script<npc_thunderfist_gorilla>("npc_thunderfist_gorilla");
+	new creature_script<npc_wayward_ancestor>("npc_wayward_ancestor");
     // Quest scripts
     new npc_nectarbreeze_farmer();
     new creature_script<npc_windward_hatchling>("npc_windward_hatchling");
