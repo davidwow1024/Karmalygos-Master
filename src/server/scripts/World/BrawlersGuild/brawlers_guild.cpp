@@ -889,7 +889,7 @@ class npc_brawlers_guild_brawlgar_arena_grunt : public CreatureScript
     
             return true;
         }
-
+		
         bool OnGossipHello(Player* player, Creature* creature) override
         {
             // if player in queue - send gossip with queue sequence, if not - queue to arena
@@ -919,7 +919,7 @@ class npc_brawlers_guild_brawlgar_arena_grunt : public CreatureScript
 
             return false;
         }
-
+		
         struct npc_brawlers_guild_brawlgar_arena_gruntAI : public ScriptedAI
         {
             npc_brawlers_guild_brawlgar_arena_gruntAI(Creature* creature) : ScriptedAI(creature) { }
@@ -5634,7 +5634,6 @@ void AddSC_brawlers_guild()
     new creature_script<npc_brawlers_guild_bizmo>("npc_brawlers_guild_bizmo");
     new npc_brawlers_guild_brawlgar_arena_grunt();
     new creature_script<npc_brawlers_guild_boss_bazzelflange>("npc_brawlers_guild_boss_bazzelflange");
-
     new creature_script<npc_brawlers_guild_bruce>("npc_brawlers_guild_bruce");
     new creature_script<npc_brawlers_guild_vian_the_volatile>("npc_brawlers_guild_vian_the_volatile");
     new creature_script<npc_brawlers_guild_volatile_flame>("npc_brawlers_guild_volatile_flame");
@@ -5708,7 +5707,8 @@ void AddSC_brawlers_guild()
     new aura_script<spell_brawlers_guild_overcharged_aura>("spell_brawlers_guild_overcharged_aura");
     new spell_script<spell_brawlers_guild_chain_lightning_visual>("spell_brawlers_guild_chain_lightning_visual");
     new spell_script<spell_brawlers_guild_overcharging_tesla_coil>("spell_brawlers_guild_overcharging_tesla_coil");
-    new atrigger_script<sat_brawlers_guild_guard_area_trigger>("sat_brawlers_guild_guard_area_trigger");
+    
+	new atrigger_script<sat_brawlers_guild_guard_area_trigger>("sat_brawlers_guild_guard_area_trigger");
     new atrigger_script<sat_brawlers_guild_volatile_flame>("sat_brawlers_guild_volatile_flame");
     new atrigger_script<sat_brawlers_guild_flame_wall_inner>("sat_brawlers_guild_flame_wall_inner");
     new atrigger_script<sat_brawlers_guild_flame_wall_outer>("sat_brawlers_guild_flame_wall_outer");
@@ -5721,5 +5721,6 @@ void AddSC_brawlers_guild()
     new atrigger_script<sat_brawlers_guild_guardians_light>("sat_brawlers_guild_guardians_light");
     new atrigger_script<sat_brawlers_guild_luckydo>("sat_brawlers_guild_luckydo");
     new atrigger_script<sat_brawlers_guild_luckydont>("sat_brawlers_guild_luckydont");
+
     new cond_brawlers_guild_far_sight_totem();
 }
