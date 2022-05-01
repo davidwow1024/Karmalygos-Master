@@ -1050,6 +1050,29 @@ struct npc_minion_of_hogger : public ScriptedAI
     }
 };
 
+// 9296
+class npc_milly_osworth : public CreatureScript
+{
+public:
+	npc_milly_osworth() : CreatureScript("npc_milly_osworth") { }
+
+	bool OnQuestAccept(Player* player, Creature* /*creature*/, const Quest* quest) override
+	{
+		if (quest->GetQuestId() == 26391)
+			player->CastSpell(player, 80209, true);
+
+		return true;
+	}
+
+	bool OnQuestReward(Player * player, Creature* /*creature*/, const Quest * quest, uint32 /*slot*/) override
+	{
+		if (quest->GetQuestId() == 26391)
+			player->RemoveAurasDueToSpell(80209);
+
+		return true;
+	}
+};
+
 void AddSC_elwynn_forest()
 {
     new npc_blackrock_spy();
@@ -1063,4 +1086,5 @@ void AddSC_elwynn_forest()
     new spell_script<spell_summ_varian_alliance_way>("spell_summ_varian_alliance_way");
     new creature_script<npc_hogger>("npc_hogger");
     new creature_script<npc_minion_of_hogger>("npc_minion_of_hogger");
+	new npc_milly_osworth();
 }
