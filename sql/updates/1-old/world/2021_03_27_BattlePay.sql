@@ -7,17 +7,17 @@ INSERT  INTO `battle_pay_entry`(`id`,`productId`,`groupId`,`idx`,`title`,`descri
 (13,100,5,0,'Thunderfury, Blessed Blade of the Windseeker','Legendary One-Handed Sword',135349,0,2,0),
 (4,3,4,0,'Tyrael\'s Hilt','Teaches you how to summon this companion.',135277,0,2,0),
 (5,2,2,0,'Sky Golem','Flying Mount',894222,0,2,0),
-(11,9,10,0,'WoW Token - 01','01 point for the WoW shop',939375,0,3,0),
+(11,9,10,0,'WoW Token - 01','01 point for the Athenas-WoW shop',939375,0,3,0),
 (10,8,9,0,'Recipe: Vial of the Sands','Teaches you how to make the Vial of the Sands.',134940,0,2,0),
 (9,7,8,0,'Puzzle Box of Yogg-Saron','Extremely difficult to open',458238,0,2,0),
 (8,6,7,0,'Shrimp Dumplings','Grants 250 Spirit',651593,0,2,0),
 (7,5,6,0,'Gnomish X-Ray Specs','Allows you TO see players without clothing AND armor.',667398,0,2,0),
 (6,4,3,0,'Embersilk Bag','22 slot bag',348522,0,2,0),
-(14,10,10,0,'WoW Token - 02','02 point for the WoW shop',939375,0,3,0),
-(2,9,1,0,'WoW Token - 01','1 point for the WoW shop',939375,0,3,0),
+(14,10,10,0,'WoW Token - 02','02 point for the Athenas-WoW shop',939375,0,3,0),
+(2,9,1,0,'WoW Token - 01','1 point for the Athenas-WoW shop',939375,0,3,0),
 (3,1,2,0,'Heart of the Aspects','Flying Mount',576138,0,2,0),
-(15,11,10,0,'WoW Token - 05','05 point for the WoW shop',939375,0,3,0),
-(16,12,10,0,'WoW Token - 10','10 point for the WoW shop',939375,0,3,0);
+(15,11,10,0,'WoW Token - 05','05 point for the Athenas-WoW shop',939375,0,3,0),
+(16,12,10,0,'WoW Token - 10','10 point for the Athenas-WoW shop',939375,0,3,0);
 
 /*Data for the table `battle_pay_group` */
 
@@ -49,10 +49,10 @@ INSERT  INTO `battle_pay_product`(`id`,`title`,`description`,`icon`,`price`,`dis
 (6,'Shrimp Dumplings','Grants 250 Spirit',651593,5,0,0,0,1,47,0),
 (7,'Puzzle Box of Yogg-Saron','Extremely difficult to open',458238,25,0,0,0,1,47,0),
 (8,'Recipe: Vial of the Sands','Teaches you how to make the Vial of the Sands.',134940,25,0,0,0,1,47,0),
-(9,'WoW Token - 01','1 point for the WoW shop',939375,2,20,0,0,1,47,0),
-(10,'WoW Token - 02','1 point for the WoW shop',939375,3,20,0,0,1,47,0),
-(11,'WoW Token - 05','1 point for the WoW shop',939375,7,20,0,0,1,47,0),
-(12,'WoW Token - 10','1 point for the WoW shop',939375,13,10,0,0,1,47,0);
+(9,'WoW Token - 01','1 point for the Athenas-WoW shop',939375,2,20,0,0,1,47,0),
+(10,'WoW Token - 02','1 point for the Athenas-WoW shop',939375,3,20,0,0,1,47,0),
+(11,'WoW Token - 05','1 point for the Athenas-WoW shop',939375,7,20,0,0,1,47,0),
+(12,'WoW Token - 10','1 point for the Athenas-WoW shop',939375,13,10,0,0,1,47,0);
 
 /*Data for the table `battle_pay_product_items` */
 
@@ -78,7 +78,7 @@ INSERT  INTO `battle_pay_product_items`(`id`,`itemId`,`count`,`productId`) VALUE
 DELETE FROM `locales_battle_pay_entry`;
 INSERT  INTO `locales_battle_pay_entry`(`id`,`title_loc1`,`title_loc2`,`title_loc3`,`title_loc4`,`title_loc5`,`title_loc6`,`title_loc7`,`title_loc8`,`title_loc9`,`title_loc10`,`title_loc11`,`description_loc1`,`description_loc2`,`description_loc3`,`description_loc4`,`description_loc5`,`description_loc6`,`description_loc7`,`description_loc8`,`description_loc9`,`description_loc10`,`description_loc11`) VALUES 
 (6,'Embersilk Bag',NULL,NULL,NULL,NULL,'Bolsa de seda de ascuas','Bolsa de seda de ascuas',NULL,NULL,NULL,NULL,'Bag of 22 slots',NULL,NULL,NULL,NULL,'Bolsa de 22 casillas','Bolsa de 22 casillas',NULL,NULL,NULL,NULL),
-(2,'WoW Token - 01',NULL,NULL,NULL,NULL,'WoW Token - 01','WoW Token - 01',NULL,NULL,NULL,NULL,'1 point for the WoW shop',NULL,NULL,NULL,NULL,'1 punto para la tienda de WoW.','1 punto para la tienda de WoW.',NULL,NULL,NULL,NULL),
+(2,'WoW Token - 01',NULL,NULL,NULL,NULL,'WoW Token - 01','WoW Token - 01',NULL,NULL,NULL,NULL,'1 point for the Athenas-WoW shop',NULL,NULL,NULL,NULL,'1 punto para la tienda de Athenas-WoW.','1 punto para la tienda de Athenas-WoW.',NULL,NULL,NULL,NULL),
 (3,'Heart of the Aspects',NULL,NULL,NULL,NULL,'Corazón de los Aspectos','Corazón de los Aspectos',NULL,NULL,NULL,NULL,'Flying Mount',NULL,NULL,NULL,NULL,'Montura Voladora','Montura Voladora',NULL,NULL,NULL,NULL),
 (4,'Tyrael\'s Hilt',NULL,NULL,NULL,NULL,'Empeñadura de Tyrael','Empeñadura de Tyrael',NULL,NULL,NULL,NULL,'Teaches you how to summon this companion.',NULL,NULL,NULL,NULL,'Te enseña a convocar a este compañero','Te enseña a convocar a este compañero',NULL,NULL,NULL,NULL),
 (5,'Sky Golem',NULL,NULL,NULL,NULL,'Gólem Aéreo','Gólem Aéreo',NULL,NULL,NULL,NULL,'Flying Mount',NULL,NULL,NULL,NULL,'Montura Voladora','Montura Voladora',NULL,NULL,NULL,NULL),
@@ -86,12 +86,12 @@ INSERT  INTO `locales_battle_pay_entry`(`id`,`title_loc1`,`title_loc2`,`title_lo
 (8,'Shrimp Dumplings',NULL,NULL,NULL,NULL,'Empanadillas de gambas','Empanadillas de gambas',NULL,NULL,NULL,NULL,'Grants 250 Spirit',NULL,NULL,NULL,NULL,'Otorga 250 de espíritu','Otorga 250 de espíritu',NULL,NULL,NULL,NULL),
 (9,'Puzzle Box of Yogg-Saron',NULL,NULL,NULL,NULL,'Caja de puzles de Yogg-Saron','Caja de puzles de Yogg-Saron',NULL,NULL,NULL,NULL,'Extremely difficult to open',NULL,NULL,NULL,NULL,'Extremadamente difícil de abrir','Extremadamente difícil de abrir',NULL,NULL,NULL,NULL),
 (10,'Recipe: Vial of the Sands',NULL,NULL,NULL,NULL,'Receta del vial de las arenas','Receta del vial de las arenas',NULL,NULL,NULL,NULL,'Teaches you how to make the Vial of the Sands.',NULL,NULL,NULL,NULL,'Te enseña la receta del vial de las arenas.','Te enseña la receta del vial de las arenas.',NULL,NULL,NULL,NULL),
-(11,'WoW Token - 01',NULL,NULL,NULL,NULL,'WoW Token - 01','WoW Token - 01',NULL,NULL,NULL,NULL,'01 point for the WoW shop',NULL,NULL,NULL,NULL,'01 punto para la tienda WoW','01 punto para la tienda WoW',NULL,NULL,NULL,NULL),
+(11,'WoW Token - 01',NULL,NULL,NULL,NULL,'WoW Token - 01','WoW Token - 01',NULL,NULL,NULL,NULL,'01 point for the Athenas-WoW shop',NULL,NULL,NULL,NULL,'01 punto para la tienda Athenas-WoW','01 punto para la tienda Athenas-WoW',NULL,NULL,NULL,NULL),
 (12,'Boost 90',NULL,NULL,NULL,NULL,'Boost 90','Boost 90',NULL,NULL,NULL,NULL,'Level Up 90',NULL,NULL,NULL,NULL,'Sube de nivel al 90!','Sube de nivel al 90!',NULL,NULL,NULL,NULL),
 (13,'Thunderfury, Blessed Blade of the Windseeker',NULL,NULL,NULL,NULL,'Trueno Furioso, Espada Bendita del Hijo del Viento','Trueno Furioso, Espada Bendita del Hijo del Viento',NULL,NULL,NULL,NULL,'Legendary One-Handed Sword',NULL,NULL,NULL,NULL,'Espada legendaria de una mano','Espada legendaria de una mano',NULL,NULL,NULL,NULL),
-(14,'WoW Token - 02',NULL,NULL,NULL,NULL,'WoW Token - 02','WoW Token - 02',NULL,NULL,NULL,NULL,'02 points for the WoW shop',NULL,NULL,NULL,NULL,'02 puntos para la tienda WoW','02 puntos para la tienda WoW',NULL,NULL,NULL,NULL),
-(15,'WoW Token - 05',NULL,NULL,NULL,NULL,'WoW Token - 05','WoW Token - 05',NULL,NULL,NULL,NULL,'05 points for the WoW shop',NULL,NULL,NULL,NULL,'05 puntos para la tienda WoW','05 puntos para la tienda WoW',NULL,NULL,NULL,NULL),
-(16,'WoW Token - 10',NULL,NULL,NULL,NULL,'WoW Token - 10','WoW Token - 10',NULL,NULL,NULL,NULL,'10 points for the WoW shop',NULL,NULL,NULL,NULL,'10 puntos para la tienda WoW','10 puntos para la tienda WoW',NULL,NULL,NULL,NULL);
+(14,'WoW Token - 02',NULL,NULL,NULL,NULL,'WoW Token - 02','WoW Token - 02',NULL,NULL,NULL,NULL,'02 points for the Athenas-WoW shop',NULL,NULL,NULL,NULL,'02 puntos para la tienda Athenas-WoW','02 puntos para la tienda Athenas-WoW',NULL,NULL,NULL,NULL),
+(15,'WoW Token - 05',NULL,NULL,NULL,NULL,'WoW Token - 05','WoW Token - 05',NULL,NULL,NULL,NULL,'05 points for the Athenas-WoW shop',NULL,NULL,NULL,NULL,'05 puntos para la tienda Athenas-WoW','05 puntos para la tienda Athenas-WoW',NULL,NULL,NULL,NULL),
+(16,'WoW Token - 10',NULL,NULL,NULL,NULL,'WoW Token - 10','WoW Token - 10',NULL,NULL,NULL,NULL,'10 points for the Athenas-WoW shop',NULL,NULL,NULL,NULL,'10 puntos para la tienda Athenas-WoW','10 puntos para la tienda Athenas-WoW',NULL,NULL,NULL,NULL);
 
 /*Data for the table `locales_battle_pay_group` */
 
