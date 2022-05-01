@@ -3351,13 +3351,13 @@ public:
 				player->GiveLevel(85);
 				
 				//spells mount 
-				player->LearnSpell(33388, true);
-				player->LearnSpell(33391, true);
-				player->LearnSpell(34090, true);
-				player->LearnSpell(90267, true);
-				player->LearnSpell(54197, true);
-				player->LearnSpell(34091, true);
-				player->LearnSpell(90265, true);
+				player->LearnSpell(33388, false);
+				player->LearnSpell(33391, false);
+				player->LearnSpell(34090, false);
+				player->LearnSpell(90267, false);
+				player->LearnSpell(54197, false);
+				player->LearnSpell(34091, false);
+				player->LearnSpell(90265, false);
 			
 				// add money 1000 oro
 				player->ModifyMoney(10000000);
