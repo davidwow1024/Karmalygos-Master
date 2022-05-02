@@ -3434,6 +3434,22 @@ class spell_wakening_122531 : public SpellScript
 		AfterCast += SpellCastFn(spell_wakening_122531::HandleCast);
 	}
 };
+
+// 123709 Mazu's Breath
+class spell_potion_of_mazus_breath : public AuraScript
+{
+	PrepareAuraScript(spell_potion_of_mazus_breath);
+
+	void OnUpdate(uint32 /*diff*/, AuraEffect* /*aurEff*/)
+	{
+		if (GetOwner()->GetAreaId() == 6368)
+			GetOwner()->ToPlayer()->SetSpeed(MOVE_SWIM, 1.8f);
+	}
+	void Register() override
+	{
+		OnEffectUpdate += AuraEffectUpdateFn(spell_potion_of_mazus_breath::OnUpdate, EFFECT_0, SPELL_AURA_DUMMY);
+	}
+};
 void AddSC_dread_wastes()
 {
     // Rare Mobs
@@ -3470,6 +3486,7 @@ void AddSC_dread_wastes()
     // Extending the Vocerage
     new spell_zet_uk_sha_eruption();
     new spell_zet_uk_sha_eruption_periodic_summon();
+	new aura_script<spell_potion_of_mazus_breath>("spell_potion_of_mazus_breath");
     // Quest scripts
     new AreaTrigger_at_q_wood_and_shade();
     new go_full_crab_pot();
