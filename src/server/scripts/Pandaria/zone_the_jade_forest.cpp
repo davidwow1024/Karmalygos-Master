@@ -4874,6 +4874,27 @@ struct npc_day_off_li_li : public ScriptedAI
 	bool text1 = false, text2 = false, text3 = false;
 };
 
+// 62377 Gardener Fran
+struct npc_gardener_fran : public ScriptedAI
+{
+	npc_gardener_fran(Creature* creature) : ScriptedAI(creature) { }
+
+	void sGossipSelect(Player* player, uint32 menuId, uint32 /*action*/) override
+	{
+		if (player->GetQuestStatus(30053) == QUEST_STATUS_INCOMPLETE)
+			if (menuId == 13850)
+			{
+				player->KilledMonsterCredit(62377);
+				if (!talk)
+				{
+					me->AI()->Talk(0);
+					talk = true;
+				}
+			}
+	}
+
+	bool talk = false;
+};
 
 void AddSC_jade_forest()
 {
@@ -4922,6 +4943,7 @@ void AddSC_jade_forest()
     new creature_script<npc_thunderfist_gorilla>("npc_thunderfist_gorilla");
 	new creature_script<npc_wayward_ancestor>("npc_wayward_ancestor");
 	new creature_script<npc_day_off_li_li>("npc_day_off_li_li");
+	new creature_script<npc_gardener_fran>("npc_gardener_fran");
     // Quest scripts
     new npc_nectarbreeze_farmer();
     new creature_script<npc_windward_hatchling>("npc_windward_hatchling");
