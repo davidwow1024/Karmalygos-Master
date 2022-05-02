@@ -4700,32 +4700,33 @@ void Spell::EffectDuel(SpellEffIndex effIndex)
 
 void Spell::EffectStuck(SpellEffIndex /*effIndex*/)
 {
-    if (effectHandleMode != SPELL_EFFECT_HANDLE_HIT)
-        return;
+	if (effectHandleMode != SPELL_EFFECT_HANDLE_HIT)
+		return;
 
-    if (!sWorld->getBoolConfig(CONFIG_CAST_UNSTUCK))
-        return;
+	if (!m_caster || m_caster->GetTypeId() != TYPEID_PLAYER)
+		return;
 
-    Player* player = m_caster->ToPlayer();
-    if (!player)
-        return;
+	if (!sWorld->getBoolConfig(CONFIG_CAST_UNSTUCK))
+		return;
 
-    TC_LOG_DEBUG("spells", "Spell Effect: Stuck");
-    TC_LOG_INFO("spells", "Player %s (guid %u) used auto-unstuck future at map %u (%f, %f, %f)", player->GetName().c_str(), player->GetGUIDLow(), player->GetMapId(), player->GetPositionX(), player->GetPositionY(), player->GetPositionZ());
+	Player * target = (Player*)m_caster;
 
-    if (player->IsInFlight())
-        return;
+	if (target->IsInFlight())
+		return;
 
-    player->TeleportTo(player->GetStartPosition(), TELE_TO_SPELL);
-    // homebind location is loaded always
-    // target->TeleportTo(target->m_homebindMapId, target->m_homebindX, target->m_homebindY, target->m_homebindZ, target->GetOrientation(), (m_caster == m_caster ? TELE_TO_SPELL : 0));
+	if (target->HasFlag(PLAYER_FIELD_PLAYER_FLAGS, PLAYER_FLAGS_GHOST))
+		target->RepopAtGraveyard();
+	else
+		target->TeleportTo(target->GetStartPosition(), TELE_TO_SPELL);
+	// homebind location is loaded always
+	// target->TeleportTo(target->m_homebindMapId, target->m_homebindX, target->m_homebindY, target->m_homebindZ, target->GetOrientation(), (m_caster == m_caster ? TELE_TO_SPELL : 0));
 
-    // Stuck spell trigger Hearthstone cooldown
-    SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(8690);
-    if (!spellInfo)
-        return;
-    Spell spell(player, spellInfo, TRIGGERED_FULL_MASK);
-    spell.SendSpellCooldown();
+	// Stuck spell trigger Hearthstone cooldown
+	SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(8690);
+	if (!spellInfo)
+		return;
+	Spell spell(target, spellInfo, TRIGGERED_FULL_MASK);
+	spell.SendSpellCooldown();
 }
 
 void Spell::EffectSummonPlayer(SpellEffIndex /*effIndex*/)
