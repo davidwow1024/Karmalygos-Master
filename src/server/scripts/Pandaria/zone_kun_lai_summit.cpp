@@ -930,7 +930,7 @@ class npc_waterspeaker_gorai : public CreatureScript
             if (creature->IsVendor())
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, GOSSIP_TEXT_BROWSE_GOODS, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_TRADE);
 
-            if (player->GetQuestStatus(30480) == QUEST_STATUS_INCOMPLETE)
+            if (player->GetQuestStatus(30480) == QUEST_STATUS_INCOMPLETE && !player->GetQuestObjectiveCounter(267832))
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "I'm ready. Begin the ritual.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
 
             player->SEND_GOSSIP_MENU(player->GetGossipTextId(creature), creature->GetGUID());
@@ -944,7 +944,7 @@ class npc_waterspeaker_gorai : public CreatureScript
             {
                 player->KilledMonsterCredit(creature->GetEntry());
                 creature->AI()->SetGUID(player->GetGUID(), 0);
-                creature->RemoveFlag(UNIT_FIELD_NPC_FLAGS, UNIT_NPC_FLAG_QUESTGIVER | UNIT_NPC_FLAG_GOSSIP);
+               // creature->RemoveFlag(UNIT_FIELD_NPC_FLAGS, UNIT_NPC_FLAG_QUESTGIVER | UNIT_NPC_FLAG_GOSSIP);
                 player->CLOSE_GOSSIP_MENU();
             }
             else if (action == GOSSIP_ACTION_TRADE)
