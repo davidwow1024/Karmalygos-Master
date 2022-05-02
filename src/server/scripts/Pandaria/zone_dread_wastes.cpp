@@ -3418,6 +3418,22 @@ class spell_dread_waster_sonic_emission : public SpellScript
     }
 };
 
+class spell_wakening_122531 : public SpellScript
+{
+	PrepareSpellScript(spell_wakening_122531);
+
+	void HandleCast()
+	{
+		Position pos = { -67.0642f, 3743.40f, 155.641f, float(GetCaster()->GetOrientation() + M_PI) };
+		GetCaster()->ToPlayer()->KilledMonsterCredit(62752);
+		GetCaster()->SummonCreature(62752, pos, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 60000);
+	}
+
+	void Register() override
+	{
+		AfterCast += SpellCastFn(spell_wakening_122531::HandleCast);
+	}
+};
 void AddSC_dread_wastes()
 {
     // Rare Mobs
@@ -3480,4 +3496,5 @@ void AddSC_dread_wastes()
     new creature_script<npc_dread_waster_nagging_dreadling>("npc_dread_waster_nagging_dreadling");
     new spell_script<spell_dread_waster_gather_shade>("spell_dread_waster_gather_shade");
     new spell_script<spell_dread_waster_sonic_emission>("spell_dread_waster_sonic_emission");
+	new spell_script<spell_wakening_122531>("spell_wakening_122531");
 }

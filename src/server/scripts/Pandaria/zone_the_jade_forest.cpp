@@ -49,6 +49,7 @@ enum Spells
     SPELL_FEROCIOUS_CLAW              = 115083,
     SPELL_POUNCE                      = 116273,
 	SPELL_CALL_OF_THE_SPIRITSAGE	  = 104596,
+	SPELL_LI_LIS_DAY_OFF_SUMMON_LI_LI = 106276,
 };
 
 enum eEvents
@@ -880,6 +881,7 @@ class npc_sha_reminant : public CreatureScript
                 while (uint32 eventId = events.ExecuteEvent())
                 {
                     switch (eventId)
+
                     {
                         case EVENT_SHADOW_CLAW:
                             if (Unit* target = SelectTarget(SELECT_TARGET_TOPAGGRO))
@@ -4794,6 +4796,85 @@ struct npc_wayward_ancestor : public ScriptedAI
 	}
 };
 
+// 106276 Li Li's Day Off: Summon Li Li
+class spell_summon_li_li : public SpellScript
+{
+	PrepareSpellScript(spell_summon_li_li);
+
+	SpellCastResult CheckCast()
+	{
+		Unit* caster = GetCaster();
+
+		if (!caster)
+			return SPELL_FAILED_CANT_DO_THAT_RIGHT_NOW;
+
+		for (auto summon : GetCaster()->GetSummons())
+			if (summon->IsAlive() && summon->GetDistance(GetCaster()->GetPosition()) > 15.0f)
+				summon->DespawnOrUnsummon();
+			else continue;
+
+		if (!caster->FindNearestCreature(56549, 15.0f, true))
+			return SPELL_CAST_OK;
+
+		return SPELL_FAILED_CANT_DO_THAT_RIGHT_NOW;
+	}
+
+	void Register() override
+	{
+		OnCheckCast += SpellCheckCastFn(spell_summon_li_li::CheckCast);
+	}
+};
+
+// 56549 Li Li's Day Off
+struct npc_day_off_li_li : public ScriptedAI
+{
+	npc_day_off_li_li(Creature* creature) : ScriptedAI(creature) { }
+
+	void IsSummonedBy(Unit* summoner)
+	{ 
+		if (summoner->GetTypeId() == TYPEID_PLAYER)
+			me->GetMotionMaster()->MoveFollow(summoner, PET_FOLLOW_DIST, PET_FOLLOW_ANGLE);
+		me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PACIFIED);
+	}
+
+	void UpdateAI(uint32 diff) override
+	{
+		if (me->GetAreaId() == 6021)
+		{
+			me->ToTempSummon()->GetSummoner()->ToPlayer()->KilledMonsterCredit(56548);
+			if (!text1)
+			{
+				me->AI()->Talk(2);
+				text1 = true;
+			}
+		}
+
+		if (me->GetAreaId() == 5986)
+		{
+			me->ToTempSummon()->GetSummoner()->ToPlayer()->KilledMonsterCredit(56546);
+			if (!text2)
+			{
+				me->AI()->Talk(0);
+				text2 = true;
+			}
+		}
+
+		if (me->GetAreaId() == 5973)
+		{
+			me->ToTempSummon()->GetSummoner()->ToPlayer()->KilledMonsterCredit(56547);
+			if (!text3)
+			{
+				me->AI()->Talk(1);
+				text3 = true;
+			}
+		}
+
+	}
+
+	bool text1 = false, text2 = false, text3 = false;
+};
+
+
 void AddSC_jade_forest()
 {
     // Rare mobs
@@ -4840,6 +4921,7 @@ void AddSC_jade_forest()
     new creature_script<npc_shadowfae_trickster>("npc_shadowfae_trickster");
     new creature_script<npc_thunderfist_gorilla>("npc_thunderfist_gorilla");
 	new creature_script<npc_wayward_ancestor>("npc_wayward_ancestor");
+	new creature_script<npc_day_off_li_li>("npc_day_off_li_li");
     // Quest scripts
     new npc_nectarbreeze_farmer();
     new creature_script<npc_windward_hatchling>("npc_windward_hatchling");
@@ -4886,4 +4968,5 @@ void AddSC_jade_forest()
     new creature_script<npc_jade_forest_instant_message_camera_bunny>("npc_jade_forest_instant_message_camera_bunny");
     new aura_script<spell_jade_forest_signal_flare_initialize>("spell_jade_forest_signal_flare_initialize");
     new spell_script<spell_reverse_cast_ride_seat_1>("spell_reverse_cast_ride_seat_1");
+	new spell_script<spell_summon_li_li>("spell_summon_li_li");
 }
