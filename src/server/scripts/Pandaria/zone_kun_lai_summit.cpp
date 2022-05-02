@@ -2681,6 +2681,23 @@ struct npc_broketooth_leaper : public hozen_grind_baseAI
     }
 };
 
+// 114072 Fresh Pine Scent
+class spell_fresh_pine_scent : public SpellScript
+{
+	PrepareSpellScript(spell_fresh_pine_scent);
+
+	void HandleBeforeHit()
+	{
+		if (GetHitUnit()->GetEntry() == 59319 && !GetHitUnit()->HasAura(114072))
+			GetCaster()->GetCharmerOrOwner()->ToPlayer()->KilledMonsterCredit(59319);
+	}
+
+	void Register() override
+	{
+		BeforeHit += SpellHitFn(spell_fresh_pine_scent::HandleBeforeHit);
+	}
+};
+
 void AddSC_kun_lai_summit()
 {
     new npc_nessos_the_oracle();
@@ -2725,4 +2742,5 @@ void AddSC_kun_lai_summit()
     new creature_script<npc_ooking_shaman>("npc_ooking_shaman");
     new creature_script<npc_silverback_piker>("npc_silverback_piker");
     new creature_script<npc_broketooth_leaper>("npc_broketooth_leaper");
+	new spell_script<spell_fresh_pine_scent>("spell_fresh_pine_scent");
 }
