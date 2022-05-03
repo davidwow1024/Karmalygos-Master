@@ -3944,6 +3944,7 @@ protected:
 
     std::queue<uint32> m_timeSyncQueue;
 	
+	uint32 m_timeSyncCounter;
 	uint32 m_timeSyncTimer;
     uint32 m_timeSyncClient;
     uint32 m_timeSyncServer;
