@@ -11,9 +11,9 @@ INSERT INTO `smart_scripts`(`entryorguid`, `source_type`, `id`, `link`, `event_t
 (55380, 0, 0, 0, 64, 0, 100, 0, 0, 0, 0, 0, 33, 55380, 0, 0, 0, 0, 0, 17, 0, 100, 0, 0, 0, 0, 0, '[Kill]OnSpeak');
 
 
-DELETE FROM `creature` WHERE `id` IN (55380);
+DELETE FROM `creature` WHERE `guid` IN (582664);
 INSERT INTO `creature`(`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `modelid`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `spawntimesecs_max`, `spawndist`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `npcflag2`, `unit_flags`, `unit_flags2`, `dynamicflags`) VALUES 
-(5826589, 55380, 870, 0, 0, 1, 67108865, 0, 0, 1514.21, -1275.23, 246.188, 3.33544, 300, 0, 0, 0, 393941, 0, 0, 0, 0, 0, 0, 0);
+(582664, 55380, 870, 0, 0, 1, 67108865, 0, 0, 1514.21, -1275.23, 246.188, 3.33544, 300, 0, 0, 0, 393941, 0, 0, 0, 0, 0, 0, 0);
 
 
 
