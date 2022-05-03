@@ -930,7 +930,7 @@ class npc_waterspeaker_gorai : public CreatureScript
             if (creature->IsVendor())
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, GOSSIP_TEXT_BROWSE_GOODS, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_TRADE);
 
-            if (player->GetQuestStatus(30480) == QUEST_STATUS_INCOMPLETE)
+            if (player->GetQuestStatus(30480) == QUEST_STATUS_INCOMPLETE && !player->GetQuestObjectiveCounter(267832))
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "I'm ready. Begin the ritual.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
 
             player->SEND_GOSSIP_MENU(player->GetGossipTextId(creature), creature->GetGUID());
@@ -944,7 +944,7 @@ class npc_waterspeaker_gorai : public CreatureScript
             {
                 player->KilledMonsterCredit(creature->GetEntry());
                 creature->AI()->SetGUID(player->GetGUID(), 0);
-                creature->RemoveFlag(UNIT_FIELD_NPC_FLAGS, UNIT_NPC_FLAG_QUESTGIVER | UNIT_NPC_FLAG_GOSSIP);
+               // creature->RemoveFlag(UNIT_FIELD_NPC_FLAGS, UNIT_NPC_FLAG_QUESTGIVER | UNIT_NPC_FLAG_GOSSIP);
                 player->CLOSE_GOSSIP_MENU();
             }
             else if (action == GOSSIP_ACTION_TRADE)
@@ -2681,6 +2681,23 @@ struct npc_broketooth_leaper : public hozen_grind_baseAI
     }
 };
 
+// 114072 Fresh Pine Scent
+class spell_fresh_pine_scent : public SpellScript
+{
+	PrepareSpellScript(spell_fresh_pine_scent);
+
+	void HandleBeforeHit()
+	{
+		if (GetHitUnit()->GetEntry() == 59319 && !GetHitUnit()->HasAura(114072))
+			GetCaster()->GetCharmerOrOwner()->ToPlayer()->KilledMonsterCredit(59319);
+	}
+
+	void Register() override
+	{
+		BeforeHit += SpellHitFn(spell_fresh_pine_scent::HandleBeforeHit);
+	}
+};
+
 void AddSC_kun_lai_summit()
 {
     new npc_nessos_the_oracle();
@@ -2725,4 +2742,5 @@ void AddSC_kun_lai_summit()
     new creature_script<npc_ooking_shaman>("npc_ooking_shaman");
     new creature_script<npc_silverback_piker>("npc_silverback_piker");
     new creature_script<npc_broketooth_leaper>("npc_broketooth_leaper");
+	new spell_script<spell_fresh_pine_scent>("spell_fresh_pine_scent");
 }
