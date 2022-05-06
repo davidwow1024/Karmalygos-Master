@@ -487,6 +487,7 @@ bool Map::AddPlayerToMap(Player* player)
 
     player->m_clientGUIDs.clear();
     player->UpdateObjectVisibility(false);
+	player->UpdatePhasing();
 
     player->RestoreCombatWithInstance();
 
@@ -547,6 +548,9 @@ bool Map::AddToMap(T* obj)
 
     if (obj->isActiveObject())
         AddToActive(obj);
+
+	obj->RebuildTerrainSwaps();
+
     if (obj->HasCustomVisibility())
     {
         obj->SetCustomVisibilityZoneID(obj->IsCustomVisibilityZoneOnly() ? obj->GetZoneId() : 0);

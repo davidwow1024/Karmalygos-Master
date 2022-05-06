@@ -3134,6 +3134,7 @@ public:
 
     template<class T>
     void UpdateVisibilityOf(T* target, UpdateData& data, std::set<Unit*>& visibleNow);
+	void UpdatePhasing();
 
     uint8 m_forced_speed_changes [MAX_MOVE_TYPE];
 

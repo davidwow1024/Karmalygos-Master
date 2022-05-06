@@ -2300,7 +2300,7 @@ public:
     void RemoveAurasDueToItemSpell(uint32 spellId, uint64 castItemGuid);
     void RemoveAurasByType(AuraType auraType, uint64 casterGUID = 0, Aura* except = NULL, bool negative = true, bool positive = true);
     void RemoveAurasByTypeOnImmunity(AuraType auraType);
-    void RemoveBoundAuras(uint32 newPhase = 0x0);
+    void RemoveBoundAuras(uint32 newPhase = 0x0, bool phaseid = false); // // falta a;adirle las funcionalidades de la var phaseid
     void RemoveAurasWithInterruptFlags(SpellAuraInterruptFlags flag, uint32 except = 0, SpellInfo const* bySpell = nullptr)
     {
         RemoveAurasWithInterruptFlags(flag64{ uint32(flag), 0 }, except, bySpell);
@@ -2553,6 +2553,8 @@ public:
     // Visibility system
     bool IsVisible() const;
     void SetVisible(bool x);
+	void ClearPhases(bool update = false);
+	bool SetPhased(uint32 id, bool update, bool apply);
 
     // common function for visibility checks for player/creatures with detection code
     void SetPhaseMask(uint32 newPhaseMask, bool update);// overwrite WorldObject::SetPhaseMask

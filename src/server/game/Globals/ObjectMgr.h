@@ -688,6 +688,20 @@ struct ResearchProjectRequirements
     float chance;
 };
 
+struct PhaseInfoStruct
+{
+    uint32 id;
+    ConditionList Conditions;
+};
+
+// typedef UNORDERED_MAP<uint32, std::vector<PhaseInfoStruct>> TerrainPhaseInfo;
+// typedef UNORDERED_MAP<uint32, std::vector<uint32>> TerrainUIPhaseInfo;
+// typedef UNORDERED_MAP<uint32, std::vector<PhaseInfoStruct>> PhaseInfo;
+
+typedef std::unordered_map<uint32, std::vector<PhaseInfoStruct>> TerrainPhaseInfo;
+typedef std::unordered_map<uint32, std::vector<uint32>> TerrainUIPhaseInfo;
+typedef std::unordered_map<uint32, std::vector<PhaseInfoStruct>> PhaseInfo2;
+
 struct CreatureDifficultyInfo
 {
     uint8 LevelMin;
@@ -1176,10 +1190,47 @@ class ObjectMgr
         void AddSpellToTrainer(uint32 entry, uint32 spell, uint32 spellCost, uint32 reqSkill, uint32 reqSkillValue, uint32 reqLevel);
 
         void LoadPhaseDefinitions();
-        void LoadSpellPhaseInfo();
+		void LoadSpellPhaseInfo();
 
-        PhaseDefinitionStore const* GetPhaseDefinitionStore() { return &_PhaseDefinitionStore; }
-        SpellPhaseStore const* GetSpellPhaseStore() { return &_SpellPhaseStore; }
+		PhaseDefinitionStore const* GetPhaseDefinitionStore() { return &_PhaseDefinitionStore; }
+		SpellPhaseStore const* GetSpellPhaseStore() { return &_SpellPhaseStore; }
+
+		void LoadTerrainPhaseInfo();
+        void LoadTerrainSwapDefaults();
+        void LoadTerrainWorldMaps();
+        void LoadAreaPhases();
+
+        std::vector<PhaseInfoStruct> const* GetPhaseTerrainSwaps(uint32 phaseid) const
+        {
+            auto itr = _terrainPhaseInfoStore.find(phaseid);
+            return itr != _terrainPhaseInfoStore.end() ? &itr->second : nullptr;
+        }
+        std::vector<PhaseInfoStruct> const* GetDefaultTerrainSwaps(uint32 mapid) const
+        {
+            auto itr = _terrainMapDefaultStore.find(mapid);
+            return itr != _terrainMapDefaultStore.end() ? &itr->second : nullptr;
+        }
+        std::vector<uint32> const* GetTerrainWorldMaps(uint32 terrainId) const
+        {
+            auto itr = _terrainWorldMapStore.find(terrainId);
+            return itr != _terrainWorldMapStore.end() ? &itr->second : nullptr;
+        }
+        std::vector<PhaseInfoStruct> const* GetPhasesForArea(uint32 area) const
+        {
+            auto itr = _phases.find(area);
+            return itr != _phases.end() ? &itr->second : nullptr;
+        }
+        TerrainPhaseInfo const& GetDefaultTerrainSwapStore() const { return _terrainMapDefaultStore; }
+		PhaseInfo2 const& GetAreaPhases() const { return _phases; }
+
+        std::vector<PhaseInfoStruct>* GetPhasesForAreaForLoading(uint32 area)
+        {
+            auto itr = _phases.find(area);
+            return itr != _phases.end() ? &itr->second : nullptr;
+        }
+        TerrainPhaseInfo& GetPhaseTerrainSwapStoreForLoading() { return _terrainPhaseInfoStore; }
+        TerrainPhaseInfo& GetDefaultTerrainSwapStoreForLoading() { return _terrainMapDefaultStore; }
+		PhaseInfo2& GetAreaPhasesForLoading() { return _phases; }
 
         void LoadBattlePetBreedData();
         void LoadBattlePetQualityData();
@@ -1740,6 +1791,11 @@ class ObjectMgr
 
         PhaseDefinitionStore _PhaseDefinitionStore;
         SpellPhaseStore _SpellPhaseStore;
+
+		TerrainPhaseInfo _terrainPhaseInfoStore;
+		TerrainPhaseInfo _terrainMapDefaultStore;
+		TerrainUIPhaseInfo _terrainWorldMapStore;
+		PhaseInfo2 _phases;
 
         typedef std::set<uint8> BattleBetBreedSet;
         typedef std::unordered_map<uint16, BattleBetBreedSet> BattlePetBreedXSpeciesMap;

@@ -278,7 +278,10 @@ DBCStorage <WMOAreaTableEntry> sWMOAreaTableStore(WMOAreaTableEntryfmt);
 DBCStorage <WorldMapAreaEntry> sWorldMapAreaStore(WorldMapAreaEntryfmt);
 DBCStorage <WorldMapOverlayEntry> sWorldMapOverlayStore(WorldMapOverlayEntryfmt);
 DBCStorage <WorldSafeLocsEntry> sWorldSafeLocsStore(WorldSafeLocsEntryfmt);
-DBCStorage <PhaseEntry> sPhaseStores(PhaseEntryfmt);
+DBCStorage <PhaseEntry> sPhaseStore(PhaseEntryfmt);
+DBCStorage <PhaseGroupEntry> sPhaseGroupStore(PhaseGroupfmt);
+
+PhaseGroupContainer sPhasesByGroup;
 
 static std::multimap<uint32, SkillRaceClassInfoEntry const*> sSkillRaceClassInfoBySkill;
 static std::map<uint32, std::vector<SkillLineAbilityEntry const*>> sSpellsBySkill;
@@ -512,7 +515,6 @@ void LoadDBCStores(const std::string& dataPath, uint32& availableDbcLocales)
     LoadDBC(availableDbcLocales, bad_dbc_files, sLightStore,                  dbcPath, "Light.dbc"); // 18414
     LoadDBC(availableDbcLocales, bad_dbc_files, sLiquidTypeStore,             dbcPath, "LiquidType.dbc");//15595
     LoadDBC(availableDbcLocales, bad_dbc_files, sLockStore,                   dbcPath, "Lock.dbc");//15595
-    LoadDBC(availableDbcLocales, bad_dbc_files, sPhaseStores,                 dbcPath, "Phase.dbc");//15595
 
     LoadDBC(availableDbcLocales, bad_dbc_files, sMailTemplateStore,           dbcPath, "MailTemplate.dbc");//15595
     LoadDBC(availableDbcLocales, bad_dbc_files, sMapStore,                    dbcPath, "Map.dbc");//15595
@@ -567,6 +569,13 @@ void LoadDBCStores(const std::string& dataPath, uint32& availableDbcLocales)
     LoadDBC(availableDbcLocales, bad_dbc_files, sModifierTreeStore,           dbcPath, "ModifierTree.dbc");//18414
     LoadDBC(availableDbcLocales, bad_dbc_files, sMovieStore,                  dbcPath, "Movie.dbc");//15595
     LoadDBC(availableDbcLocales, bad_dbc_files, sOverrideSpellDataStore,      dbcPath, "OverrideSpellData.dbc");//15595
+
+	LoadDBC(availableDbcLocales, bad_dbc_files, sPhaseStore, dbcPath, "Phase.dbc"); // 18414
+	LoadDBC(availableDbcLocales, bad_dbc_files, sPhaseGroupStore, dbcPath, "PhaseXPhaseGroup.dbc"); // 18414
+	for (uint32 i = 0; i < sPhaseGroupStore.GetNumRows(); ++i)
+		if (PhaseGroupEntry const* group = sPhaseGroupStore.LookupEntry(i))
+			if (PhaseEntry const* phase = sPhaseStore.LookupEntry(group->PhaseId))
+				sPhasesByGroup[group->GroupId].insert(phase->ID);
 
     LoadDBC(availableDbcLocales, bad_dbc_files, sPlayerConditionStore,        dbcPath, "PlayerCondition.dbc"); // 18414
     LoadDBC(availableDbcLocales, bad_dbc_files, sPvPDifficultyStore,          dbcPath, "PvpDifficulty.dbc");//15595
@@ -1464,4 +1473,9 @@ void dbc::FillSpellPowers(uint32 spellId, std::vector<SpellPowerEntry const*>& p
     auto bounds = sSpellPowerMap.equal_range(spellId);
     for (auto it = bounds.first; it != bounds.second; ++it)
         powers.push_back(it->second);
+}
+
+std::set<uint32> const& GetPhasesForGroup(uint32 group)
+{
+	return sPhasesByGroup[group];
 }

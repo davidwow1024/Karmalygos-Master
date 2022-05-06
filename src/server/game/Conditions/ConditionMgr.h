@@ -95,7 +95,9 @@ enum ConditionTypes
     CONDITION_WEEKLY_QUEST_DONE        = 105,                  // quest            0              0                  true if weekly quest has been completed for the week
     CONDITION_MONTHLY_QUEST_DONE       = 106,                  // quest            0              0                  true if monthly quest has been completed for the month
     CONDITION_REPUTATION_VALUE         = 107,                  // faction_id       rep_value      0                  true if reputation value more or equal than rep_value
-    CONDITION_project_MAX              = 108,                  // MAX
+	CONDITION_PHASEID                  = 108,                   // phaseid          0              0                  true if object is in phaseid
+    
+    CONDITION_project_MAX              = 109,                  // MAX
 };
 
 /*! Documentation on implementing a new ConditionSourceType:
@@ -153,9 +155,10 @@ enum ConditionSourceType
     CONDITION_SOURCE_TYPE_NPC_VENDOR                     = 23,
     CONDITION_SOURCE_TYPE_SPELL_PROC                     = 24,
     CONDITION_SOURCE_TYPE_PHASE_DEFINITION               = 25, // only 4.3.4
-    // Condition source type 26 unused
-    CONDITION_SOURCE_TYPE_GRAVEYARD                      = 27,
-    CONDITION_SOURCE_TYPE_MAX                            = 28  // MAX
+    CONDITION_SOURCE_TYPE_PHASE                          = 26,
+	CONDITION_SOURCE_TYPE_TERRAIN_SWAP                   = 27,
+    CONDITION_SOURCE_TYPE_GRAVEYARD                      = 28, // need implementation
+    CONDITION_SOURCE_TYPE_MAX                            = 29  // MAX
 };
 
 enum RelationType
@@ -283,6 +286,8 @@ class ConditionMgr
         bool addToGossipMenuItems(Condition* cond);
         bool AddToSpellImplicitTargetConditions(Condition* cond);
         bool AddToSpellImplicitTargetConditions(Condition* cond, SpellInfo* spellInfo);
+		bool addToTerrainSwaps(Condition* cond);
+		bool addToPhases(Condition* cond);
         bool IsObjectMeetToConditionList(ConditionSourceInfo& sourceInfo, ConditionList const& conditions);
 
         void Clean(); // free up resources
