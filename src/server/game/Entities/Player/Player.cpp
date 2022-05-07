@@ -3528,6 +3528,7 @@ void Player::GiveLevel(uint8 level)
 
     PhaseUpdateData phaseUpdateData;
     phaseUpdateData.AddConditionType(CONDITION_LEVEL);
+	UpdatePhasing();
 
     phaseMgr.NotifyConditionChanged(phaseUpdateData);
 
@@ -16994,6 +16995,8 @@ void Player::CompleteQuest(uint32 quest_id, bool completely, bool fromCommand)
         }
     }
 
+	UpdatePhasing();
+
     if (quest_id)
     {
         SetQuestStatus(quest_id, QUEST_STATUS_COMPLETE);
@@ -17223,6 +17226,8 @@ void Player::RewardQuest(Quest const* quest, uint32 reward, Object* questGiver, 
     PhaseUpdateData phaseUpdateData;
     phaseUpdateData.AddQuestUpdate(quest_id);
     phaseMgr.NotifyConditionChanged(phaseUpdateData);
+
+	UpdatePhasing();
 
     // StoreNewItem, mail reward, etc. save data directly to the database
     // to prevent exploitable data desynchronisation we save the quest status to the database too
@@ -17863,6 +17868,7 @@ void Player::SetQuestStatus(uint32 quest_id, QuestStatus status, bool update /*=
 
     PhaseUpdateData phaseUpdateData;
     phaseUpdateData.AddQuestUpdate(quest_id);
+	UpdatePhasing();
 
     phaseMgr.NotifyConditionChanged(phaseUpdateData);
 
@@ -17913,6 +17919,7 @@ void Player::RemoveActiveQuest(uint32 quest_id, bool update /*= true*/, bool /*r
 
         PhaseUpdateData phaseUpdateData;
         phaseUpdateData.AddQuestUpdate(quest_id);
+		UpdatePhasing();
 
         phaseMgr.NotifyConditionChanged(phaseUpdateData);
 
@@ -17933,6 +17940,8 @@ void Player::RemoveRewardedQuest(uint32 quest_id, bool update /*= true*/)
 
         PhaseUpdateData phaseUpdateData;
         phaseUpdateData.AddQuestUpdate(quest_id);
+
+		UpdatePhasing();
 
         phaseMgr.NotifyConditionChanged(phaseUpdateData);
     }
