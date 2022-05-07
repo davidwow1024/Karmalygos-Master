@@ -3368,11 +3368,11 @@ void WorldObject::SetPhaseMask(uint32 newPhaseMask, bool update)
 }
 
 void WorldObject::RebuildTerrainSwaps()
-{
+{ 
     // Clear all terrain swaps, will be rebuilt below
     // Reason for this is, multiple phases can have the same terrain swap, we should not remove the swap if another phase still use it
     _terrainSwaps.clear();
-
+	
     // Check all applied phases for terrain swap and add it only once
     for (uint32 phaseId : _phases)
     {
@@ -3403,10 +3403,10 @@ void WorldObject::RebuildTerrainSwaps()
 }
 
 void WorldObject::RebuildWorldMapAreaSwaps()
-{
+{ 
     // Clear all world map area swaps, will be rebuilt below
     _worldMapSwaps.clear();
-
+	
     // get ALL default terrain swaps, if we are using it (condition is true) 
     // send the worldmaparea for it, to see swapped worldmaparea in client from other maps too, not just from our current
     TerrainPhaseInfo const& defaults = sObjectMgr->GetDefaultTerrainSwapStore();
@@ -3554,13 +3554,16 @@ bool WorldObject::IsPhased(WorldObject const* obj) const
     if (obj->GetPhases().empty() && IsPhased(169))
         return true;
 
+	if (GetTypeId() == TYPEID_PLAYER && ToPlayer()->IsGameMaster())
+		return true;
+
     return Trinity::Containers::Intersects(_phases.begin(), _phases.end(), obj->GetPhases().begin(), obj->GetPhases().end());
 }
 
 //Temp Speshul Tactics 
 bool WorldObject::InSamePhase(WorldObject const* obj) const
 {
-    return InSamePhase(obj->GetPhaseMask()) && IsPhased(obj);
+	return InSamePhase(obj->GetPhaseMask()) && IsPhased(obj);
 }
 
 void WorldObject::PlayDistanceSound(uint32 sound_id, Player* target /*= NULL*/)

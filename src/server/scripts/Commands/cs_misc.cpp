@@ -461,6 +461,28 @@ public:
         if (status)
             handler->PSendSysMessage(LANG_LIQUID_STATUS, liquidStatus.level, liquidStatus.depth_level, liquidStatus.entry, liquidStatus.type_flags, status);
 
+		if (!object->GetPhases().empty())
+		{
+			std::stringstream ss;
+			for (uint32 swap : object->GetPhases())
+				ss << swap << " ";
+			handler->PSendSysMessage("Target's active phase swaps: %s", ss.str().c_str());
+		}
+		if (!object->GetTerrainSwaps().empty())
+		{
+			std::stringstream ss;
+			for (uint32 swap : object->GetTerrainSwaps())
+				ss << swap << " ";
+			handler->PSendSysMessage("Target's active terrain swaps: %s", ss.str().c_str());
+		}
+		if (!object->GetWorldMapSwaps().empty())
+		{
+			std::stringstream ss;
+			for (uint32 swap : object->GetWorldMapSwaps())
+				ss << swap << " ";
+			handler->PSendSysMessage("Target's active world map area swaps: %s", ss.str().c_str());
+		}
+
         return true;
     }
 
