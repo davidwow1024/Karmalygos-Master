@@ -63,6 +63,7 @@ public:
             { "money",      SEC_GAMEMASTER, false,  &HandleModifyMoneyCommand,      },
             { "mount",      SEC_GAMEMASTER, false,  &HandleModifyMountCommand,      },
             { "phase",      SEC_GAMEMASTER, false,  &HandleModifyPhaseCommand,      },
+			{ "phaseid",    SEC_GAMEMASTER, false,  &HandleModifyPhaseIDCommand,    },
             { "rage",       SEC_GAMEMASTER, false,  &HandleModifyRageCommand,       },
             { "reputation", SEC_GAMEMASTER, false,  &HandleModifyRepCommand,        },
             { "runicpower", SEC_GAMEMASTER, false,  &HandleModifyRunicPowerCommand, },
@@ -1252,9 +1253,9 @@ public:
 
         return true;
     }
-	/* Implement this command Sargero
+	
 	//set temporary phaseid for player
-    static bool HandleModifyPhaseCommand(ChatHandler* handler, const char* args)
+    static bool HandleModifyPhaseIDCommand(ChatHandler* handler, const char* args)
     {
         if (!*args)
             return false;
@@ -1269,7 +1270,7 @@ public:
 
         return true;
     }
-	*/
+	
     //change standstate
     static bool HandleModifyStandStateCommand(ChatHandler* handler, const char* args)
     {

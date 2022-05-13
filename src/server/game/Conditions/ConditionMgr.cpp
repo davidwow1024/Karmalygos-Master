@@ -1856,13 +1856,13 @@ bool ConditionMgr::isSourceTypeValid(Condition* cond)
             break;
         }
         case CONDITION_SOURCE_TYPE_PHASE:
-        {/* Fix this Sargero
-            if (cond->SourceEntry && !GetAreaEntryByAreaID(cond->SourceEntry))
+        {
+            if (cond->SourceEntry && !sAreaTableStore.LookupEntry(cond->SourceEntry))
             {
 				TC_LOG_ERROR("sql.sql", "%u SourceEntry in `condition` table, does not exist in AreaTable.dbc, ignoring.", cond->SourceEntry);
                 return false;
             }
-            break; */
+            break; 
         }
         case CONDITION_SOURCE_TYPE_NPC_VENDOR:
         {
@@ -1879,14 +1879,14 @@ bool ConditionMgr::isSourceTypeValid(Condition* cond)
             }
             break;
         }
-		/*
+		
         case CONDITION_SOURCE_TYPE_GRAVEYARD:
             if (!sWorldSafeLocsStore.LookupEntry(cond->SourceEntry))
             {
                 TC_LOG_ERROR("sql.sql", "%u SourceEntry in `condition` table, does not exist in WorldSafeLocs.db2, ignoring.", cond->SourceEntry);
                 return false;
             }
-            break; */
+            break;
         case CONDITION_SOURCE_TYPE_GOSSIP_MENU:
         case CONDITION_SOURCE_TYPE_GOSSIP_MENU_OPTION:
         case CONDITION_SOURCE_TYPE_SMART_EVENT:

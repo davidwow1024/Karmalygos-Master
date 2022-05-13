@@ -50,6 +50,7 @@ public:
         static std::vector<ChatCommand> gobjectSetCommandTable =
         {
             { "phase",      SEC_GAMEMASTER, false,  &HandleGameObjectSetPhaseCommand,   },
+			{ "phaseid",    SEC_GAMEMASTER, false,  &HandleGameObjectSetPhaseIDCommand, },
             { "state",      SEC_GAMEMASTER, false,  &HandleGameObjectSetStateCommand,   },
         };
         static std::vector<ChatCommand> gobjectCommandTable =
@@ -528,6 +529,41 @@ public:
         }
 
         object->SetPhaseMask(phaseMask, true);
+        object->SaveToDB();
+        return true;
+    }
+
+	//go phase handling
+	//change phase of gameobject
+	static bool HandleGameObjectSetPhaseIDCommand(ChatHandler* handler, char const* args)
+    {
+        // number or [name] Shift-click form |color|Hgameobject:go_id|h[name]|h|r
+        char* id = handler->extractKeyFromLink((char*)args, "Hgameobject");
+        if (!id)
+            return false;
+
+		uint32 phase = (uint32)atoi((char*)args);
+
+        uint32 guidLow = atoi(id);
+        if (!guidLow)
+            return false;
+
+        GameObject* object = nullptr;
+
+        // by DB guid
+        if (GameObjectData const* gameObjectData = sObjectMgr->GetGOData(guidLow))
+            object = handler->GetObjectGlobalyWithGuidOrNearWithDbGuid(guidLow, gameObjectData->id);
+
+        if (!object)
+        {
+            handler->PSendSysMessage(LANG_COMMAND_OBJNOTFOUND, guidLow);
+            handler->SetSentErrorMessage(true);
+            return false;
+        }
+
+		object->ClearPhases();
+		object->SetPhased(phase, true, true);
+        
         object->SaveToDB();
         return true;
     }

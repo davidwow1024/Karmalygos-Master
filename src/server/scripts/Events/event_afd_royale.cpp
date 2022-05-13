@@ -134,7 +134,7 @@ enum Config
     CONFIG_REWARD_COUNT         = 93210010,
 };
 
-/* Nota Sargero: no existen las siguientes spells en caso de querer activar el evento hay que crearlas, supongo quesean dummy ya que tienen scripts que deben ser la funcionalidad
+/* Nota Sargero: no existen las siguientes spells en caso de querer activar el evento hay que crearlas, supongo que sean dummys ya que tienen scripts que pienso deben ser la funcionalidad
 
 Scriptname: `spell_afd_royale_in_map` spell (Id: 100115) does not exist.
 Scriptname: `spell_afd_royale_leaving_game` spell (Id: 100116) does not exist.
