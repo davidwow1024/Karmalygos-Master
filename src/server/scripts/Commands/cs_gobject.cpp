@@ -158,6 +158,9 @@ public:
             return false;
         }
 
+		for (auto phase : player->GetPhases())
+			object->SetPhased(phase, false, true);
+
         if (spawntimeSecs)
         {
             uint32 value = atoi((char*)spawntimeSecs);

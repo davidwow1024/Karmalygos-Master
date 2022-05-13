@@ -1881,6 +1881,12 @@ void ObjectMgr::LoadCreatures()
             data.phaseMask = 1;
         }
 
+		if (data.phaseGroup && GetPhasesForGroup(data.phaseGroup).empty())
+        {
+			TC_LOG_ERROR("sql.sql", "Table `creature` has creature (GUID: %u Entry: %u) with non-existing `phasegroup` (%u) set, `phasegroup` set to 0", guid, data.id, data.phaseGroup);
+            data.phaseGroup = 0;
+        }
+
 		if (data.phaseGroup && data.phaseid)
         {
 			TC_LOG_ERROR("sql.sql", "Table `creature` have creature (GUID: %u Entry: %u) with both `phaseid` and `phasegroup` set, `phasegroup` set to 0", guid, data.id);
@@ -2193,6 +2199,12 @@ void ObjectMgr::LoadGameobjects()
         uint32 PoolId       = fields[19].GetUInt32();
 
         data.gameEventId = gameEvent;
+
+		if (data.phaseGroup && GetPhasesForGroup(data.phaseGroup).empty())
+		{
+			TC_LOG_ERROR("sql.sql", "Table `gameobject` has gameobject (GUID: %u Entry: %u) with non-existing `phasegroup` (%u) set, `phasegroup` set to 0", guid, data.id, data.phaseGroup);
+			data.phaseGroup = 0;
+		}
 
 		if (data.phaseGroup && data.phaseid)
         {
@@ -9507,7 +9519,7 @@ void ObjectMgr::LoadPhaseDefinitions()
         PhaseDefinition.zoneId                = fields[0].GetUInt32();
         PhaseDefinition.entry                 = fields[1].GetUInt32();
         PhaseDefinition.phasemask             = fields[2].GetUInt32();
-        PhaseDefinition.phaseId               = fields[3].GetUInt32();
+        PhaseDefinition.phaseId               = fields[3].GetUInt32(); // not working
         PhaseDefinition.terrainswapmap        = fields[4].GetUInt32();
         PhaseDefinition.worldMapArea          = fields[5].GetUInt32();
         PhaseDefinition.flags                 = fields[6].GetUInt32();

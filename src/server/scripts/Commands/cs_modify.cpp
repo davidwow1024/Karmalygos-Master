@@ -1252,7 +1252,24 @@ public:
 
         return true;
     }
+	/* Implement this command Sargero
+	//set temporary phaseid for player
+    static bool HandleModifyPhaseCommand(ChatHandler* handler, const char* args)
+    {
+        if (!*args)
+            return false;
 
+        uint32 phase = (uint32)atoi((char*)args);
+
+        Unit* target = handler->getSelectedUnit();
+        if (!target)
+            target = handler->GetSession()->GetPlayer();
+
+        target->SetPhased(phase, true, !target->IsPhased(phase));
+
+        return true;
+    }
+	*/
     //change standstate
     static bool HandleModifyStandStateCommand(ChatHandler* handler, const char* args)
     {

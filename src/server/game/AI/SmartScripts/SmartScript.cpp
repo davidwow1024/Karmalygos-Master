@@ -2529,6 +2529,19 @@ void SmartScript::ProcessAction(SmartScriptHolder& e, Unit* unit, uint32 var0, u
             delete targets;
             break;
         }
+		case SMART_ACTION_SET_INGAME_PHASE_ID:
+        {
+            ObjectList* targets = GetTargets(e, unit);
+
+            if (!targets)
+                break;
+
+            for (ObjectList::const_iterator itr = targets->begin(); itr != targets->end(); ++itr)
+                (*itr)->ToUnit()->SetPhased(e.action.ingamePhaseId.id, true, e.action.ingamePhaseId.apply);
+
+            delete targets;
+            break;
+        }
         default:
             TC_LOG_ERROR("sql.sql", "SmartScript::ProcessAction: Entry %d SourceType %u, Event %u, Unhandled Action type %u", e.entryOrGuid, e.GetScriptType(), e.event_id, e.GetActionType());
             break;

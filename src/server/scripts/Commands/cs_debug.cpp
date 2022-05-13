@@ -1014,6 +1014,9 @@ public:
             return false;
         }
 
+		for (auto phase : handler->GetSession()->GetPlayer()->GetPhases())
+			v->SetPhased(phase, false, true);
+
         map->AddToMap(v->ToCreature());
 
         return true;
