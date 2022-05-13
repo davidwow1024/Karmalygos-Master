@@ -1550,6 +1550,8 @@ bool Pet::Create(uint32 guidlow, Map* map, uint32 phaseMask, uint32 Entry, uint3
     SetSpeed(MOVE_WALK, 1.0f);
     SetSpeed(MOVE_RUN, Pet::BaseRunSpeedRate);
 
+	// Force regen flag for player pets, just like we do for players themselves
+	SetFlag(UNIT_FIELD_FLAGS2, UNIT_FLAG2_REGENERATE_POWER);
     SetSheath(SHEATH_STATE_MELEE);
 
     return true;
