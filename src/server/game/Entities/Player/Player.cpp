@@ -4292,6 +4292,10 @@ bool Player::AddSpell(uint32 spellId, bool active, bool learning, bool dependent
         CastSpell(this, spellId, true);
         return false;
     }
+	else if (spellInfo->HasAttribute(SPELL_ATTR1_CAST_WHEN_LEARNED))
+	{
+		CastSpell(this, spellId, true);
+	}
 
     // update used talent points count
     SetUsedTalentCount(GetUsedTalentCount() + talentCost);
