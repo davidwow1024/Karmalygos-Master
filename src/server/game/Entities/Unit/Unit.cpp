@@ -2801,8 +2801,8 @@ SpellMissInfo Unit::MeleeSpellHitResult(Unit* victim, SpellInfo const* spellInfo
     if (roll < tmp)
         return SPELL_MISS_RESIST;
 
-    bool canDodge = true;
-    bool canParry = true;
+	bool canDodge = !spellInfo->HasAttribute(SPELL_ATTR7_NO_ATTACK_DODGE);
+	bool canParry = !spellInfo->HasAttribute(SPELL_ATTR7_NO_ATTACK_PARRY);
     bool canBlock = spellInfo->AttributesEx3 & SPELL_ATTR3_BLOCKABLE_SPELL;
 
     // Same spells cannot be parry/dodge
@@ -2924,6 +2924,9 @@ SpellMissInfo Unit::MagicSpellHitResult(Unit* victim, SpellInfo const* spellInfo
     // Can`t miss on dead target (on skinning for example)
     if ((!victim->IsAlive() && victim->GetTypeId() != TYPEID_PLAYER))
         return SPELL_MISS_NONE;
+
+	if (spellInfo->HasAttribute(SPELL_ATTR7_NO_ATTACK_MISS))
+		return SPELL_MISS_NONE;
 
     if (GetAffectingPlayer())
     {
@@ -17085,6 +17088,11 @@ void Unit::ApplyPvPHealMods(Unit const* target, uint32& damage, SpellInfo const*
 // Crit or block - determined on damage calculation phase! (and can be both in some time)
 float Unit::MeleeSpellMissChance(const Unit* victim, WeaponAttackType attType, uint32 spellId) const
 {
+	SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(spellId);
+
+	if (spellInfo && spellInfo->HasAttribute(SPELL_ATTR7_NO_ATTACK_MISS))
+		return 0.f;
+
     //calculate miss chance
     float missChance = victim->GetUnitMissChance(attType) + 1.5 * GetLevelDifferenceForPenalty(this, victim);
 
