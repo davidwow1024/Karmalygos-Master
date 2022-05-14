@@ -3,6 +3,7 @@
 #include "ScriptedGossip.h"
 #include "ScriptedEscortAI.h"
 #include "CreatureTextMgr.h"
+#include "ScriptPCH.h"
 
 const Position MySerpentPath[2]
 {
@@ -60,6 +61,8 @@ enum eEvents
     EVENT_KEG_TOSS,
     EVENT_FEROCIOUS_CLAW,
     EVENT_POUNCE,
+	EVENT_CHANGE_LEFT,
+	EVENT_CHANGE_RIGHT,
 };
 
 enum Creatures
@@ -90,6 +93,7 @@ enum Quests
     QUEST_STAY_AND_WHILE        = 31121,
     QUEST_IF_STONES_COULD_SPEAK = 31134,
 	QUEST_THE_WAYWARD_DEAD		= 29752,
+	QUEST_ATTENTION				= 29624,
 };
 
 enum eTalks
@@ -4896,6 +4900,170 @@ struct npc_gardener_fran : public ScriptedAI
 	bool talk = false;
 };
 
+// 54917 npc_instructor_xann
+struct npc_instructor_xann : public ScriptedAI
+{
+	npc_instructor_xann(Creature* creature) : ScriptedAI(creature) { }
+
+	Player* master;
+	EventMap events;
+	std::list<Creature*> trainingbag;
+	std::list<Creature*> trainingbagleft;
+	std::list<Creature*> trainingbagright;
+
+
+	void sQuestAccept(Player* player, Quest const* quest) override
+	{
+		if (!player || !quest || quest->GetQuestId() != QUEST_ATTENTION)
+			return;
+
+		master = player;
+
+		Talk(3);
+		me->m_Events.Schedule(8000, [this, player] 
+		{ 
+			if (me->FindNearestCreature(55184, 120.0f, true)->HasAura(103079))
+			{
+				Talk(1, player);
+				me->GetCreatureListWithEntryInGrid(trainingbag, 55183, 120.0f);
+
+				for (auto bag : trainingbag)
+					bag->RemoveAurasDueToSpell(103079);
+
+				events.ScheduleEvent(EVENT_CHANGE_RIGHT, 10000);
+			}
+			else if (me->FindNearestCreature(55183, 120.0f, true)->HasAura(103079))
+			{
+				Talk(2, player);
+				me->GetCreatureListWithEntryInGrid(trainingbag, 55184, 120.0f);
+
+				for (auto bag : trainingbag)
+					bag->RemoveAurasDueToSpell(103079);
+
+				events.ScheduleEvent(EVENT_CHANGE_LEFT, 10000);
+			}
+		});
+	}
+
+	void UpdateAI(uint32 diff) override
+	{
+		events.Update(diff);
+
+		Player* player = master;
+
+		while (uint32 eventId = events.ExecuteEvent())
+		{
+			switch (eventId)
+			{
+			case EVENT_CHANGE_LEFT:
+			{
+				if (player->GetQuestStatus(29624) == QUEST_STATUS_INCOMPLETE)
+				{
+					Talk(1, player);
+					me->GetCreatureListWithEntryInGrid(trainingbagleft, 55183, 120.0f);
+					me->GetCreatureListWithEntryInGrid(trainingbagright, 55184, 120.0f);
+
+					for (auto bagl : trainingbagleft)
+						bagl->RemoveAurasDueToSpell(103079);
+					for (auto bagr : trainingbagright)
+						bagr->AddAura(103079, bagr);
+
+					events.ScheduleEvent(EVENT_CHANGE_RIGHT, 10000);
+				}
+				break;
+			}
+			case EVENT_CHANGE_RIGHT:
+			{
+				if (player->GetQuestStatus(29624) == QUEST_STATUS_INCOMPLETE)
+				{
+					Talk(2, player);
+					me->GetCreatureListWithEntryInGrid(trainingbagleft, 55183, 120.0f);
+					me->GetCreatureListWithEntryInGrid(trainingbagright, 55184, 120.0f);
+
+					for (auto bagr : trainingbagright)
+						bagr->RemoveAurasDueToSpell(103079);
+					for (auto bagl : trainingbagleft)
+						bagl->AddAura(103079, bagl);
+
+					events.ScheduleEvent(EVENT_CHANGE_LEFT, 10000);
+				}
+				break;
+			}
+			}
+		}
+	}
+};
+
+// 55183 Left Bag Training
+struct npc_bag_training_55183 : public ScriptedAI
+{
+	npc_bag_training_55183(Creature* creature) : ScriptedAI(creature) { }
+
+	void DamageTaken(Unit* attacker, uint32& damage) override
+	{
+		Creature* nearest = me->FindNearestCreature(55184, 5.0f);
+		bnearest = nearest;
+		nearest->SetInCombatWith(attacker);
+		nearest->ModifyHealth((damage + CalculatePct(damage, 99)) * -1);
+	}
+
+	void JustDied(Unit* killer) override
+	{
+		Player* player;
+
+		if (killer->GetTypeId() == TYPEID_PLAYER)
+			player = killer->ToPlayer();
+		else if (killer->IsPet())
+			player = killer->GetOwner()->ToPlayer();
+
+		if (player) 
+			if (player->GetQuestStatus(29624) == QUEST_STATUS_INCOMPLETE)
+			{
+				player->CompleteQuest(29624, true, true);
+
+				if (bnearest)
+					bnearest->DespawnOrUnsummon();
+			}
+	}
+
+	Creature* bnearest;
+};
+
+// 55184 Right Bag Training
+struct npc_bag_training_55184 : public ScriptedAI
+{
+	npc_bag_training_55184(Creature* creature) : ScriptedAI(creature) { }
+
+	void DamageTaken(Unit* attacker, uint32& damage) override
+	{
+		Creature* nearest = me->FindNearestCreature(55183, 5.0f);
+		bnearest = nearest;
+		nearest->SetInCombatWith(attacker);
+		nearest->ModifyHealth((damage + CalculatePct(damage, 99)) * -1);
+	}
+
+	void JustDied(Unit* killer) override
+	{
+		Player* player;
+
+		if (killer->GetTypeId() == TYPEID_PLAYER)
+			player = killer->ToPlayer();
+		else if (killer->IsPet())
+			player = killer->GetOwner()->ToPlayer();
+
+		if (player)
+			if (player->GetQuestStatus(29624) == QUEST_STATUS_INCOMPLETE)
+			{
+				player->CompleteQuest(29624, true, true);
+
+				if (bnearest)
+					bnearest->DespawnOrUnsummon();
+			}
+	}
+
+	Creature* bnearest;
+};
+
 void AddSC_jade_forest()
 {
     // Rare mobs
@@ -4991,4 +5159,7 @@ void AddSC_jade_forest()
     new aura_script<spell_jade_forest_signal_flare_initialize>("spell_jade_forest_signal_flare_initialize");
     new spell_script<spell_reverse_cast_ride_seat_1>("spell_reverse_cast_ride_seat_1");
 	new spell_script<spell_summon_li_li>("spell_summon_li_li");
+	new creature_script < npc_instructor_xann>("npc_instructor_xann"); 
+	new creature_script < npc_bag_training_55184>("npc_bag_training_55184");
+	new creature_script < npc_bag_training_55183>("npc_bag_training_55183");
 }

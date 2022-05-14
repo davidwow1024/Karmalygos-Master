@@ -607,9 +607,9 @@ enum SpellAttr7
     SPELL_ATTR7_UNK20                            = 0x00100000, // 20 Blink, Divine Shield, Ice Block
     SPELL_ATTR7_UNK21                            = 0x00200000, // 21 Not set
     SPELL_ATTR7_UNK22                            = 0x00400000, // 22
-    SPELL_ATTR7_UNK23                            = 0x00800000, // 23 Motivate, Mutilate, Shattering Throw
-    SPELL_ATTR7_UNK24                            = 0x01000000, // 24 Motivate, Mutilate, Perform Speech, Shattering Throw
-    SPELL_ATTR7_UNK25                            = 0x02000000, // 25
+	SPELL_ATTR7_NO_ATTACK_DODGE					 = 0x00800000, // 23 No Attack Dodge
+	SPELL_ATTR7_NO_ATTACK_PARRY					 = 0x01000000, // 24 No Attack Parry
+	SPELL_ATTR7_NO_ATTACK_MISS					 = 0x02000000, // 25 No Attack Miss
     SPELL_ATTR7_UNK26                            = 0x04000000, // 26
     SPELL_ATTR7_UNK27                            = 0x08000000, // 27 Not set
     SPELL_ATTR7_CONSOLIDATED_RAID_BUFF           = 0x10000000, // 28 May be collapsed in raid buff frame (clientside attribute)
