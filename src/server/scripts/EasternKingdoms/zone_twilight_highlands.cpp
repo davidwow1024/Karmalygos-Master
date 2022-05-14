@@ -1288,6 +1288,46 @@ struct npc_twilight_firebeads_patrol : public customCreatureAI
     }
 };
 
+// 47422 Baited Black Drake
+struct npc_baited_black_drake_spellclick : public ScriptedAI
+{
+	npc_baited_black_drake_spellclick(Creature* creature) : ScriptedAI(creature) { }
+
+	void IsSummonedBy(Unit* summoner) override
+	{
+		me->SetFacingTo(summoner->GetOrientation());
+		me->GetMotionMaster()->MovePoint(0, summoner->GetPositionX(), summoner->GetPositionY(), summoner->GetPositionZ());
+	}
+
+	void DamageTaken(Unit* attacker, uint32& damage) override
+	{
+		if (HealthBelowPct(50))
+		{
+			me->setFaction(35);
+			// Para que no vuelva hacia la homepos cuando se haga amistoso
+			me->AddUnitState(UNIT_STATE_ROOT);
+		}
+	}
+};
+
+// 51552 Baited Black Drake
+struct npc_baited_black_drake_vehicle : public ScriptedAI
+{
+	npc_baited_black_drake_vehicle(Creature* creature) : ScriptedAI(creature) { }
+
+	void PassengerBoarded(Unit* who, int8 seatId, bool apply) override
+	{
+		if (who->GetTypeId() != TYPEID_PLAYER)
+			return;
+
+		if (apply)
+		{
+			who->ToPlayer()->NearTeleportTo(-3682.6596f, -5306.9165f, 35.863434f, 6.107757f);
+			who->ToPlayer()->KilledMonsterCredit(47416);
+		}
+	}	
+};
+
 // Activate Pools 90409
 class spell_twilight_activate_pools : public SpellScript
 {
@@ -1368,15 +1408,17 @@ void AddSC_twilight_highlands()
     new creature_script<npc_dunwald_victim>("npc_dunwald_victim");
     new npc_quest_mullan_gryphon();
     new npc_gurgthock_twilands();
-
     new creature_script<npc_twilight_hurp_derp>("npc_twilight_hurp_derp");
     new creature_script<npc_twilight_faction_champions>("npc_twilight_faction_champions");
     new creature_script<npc_twilight_calders_creation>("npc_twilight_calders_creation");
     new creature_script<npc_twilight_lord_tulvan>("npc_twilight_lord_tulvan");
     new creature_script<npc_twilight_emberscar_devourer>("npc_twilight_emberscar_devourer");
     new creature_script<npc_twilight_firebeads_patrol>("npc_twilight_firebeads_patrol");
-
+	new creature_script<npc_baited_black_drake_spellclick>("npc_baited_black_drake_spellclick");
+	new creature_script<npc_baited_black_drake_vehicle>("npc_baited_black_drake_vehicle");
+	
     new spell_script<spell_twilight_activate_pools>("spell_twilight_activate_pools");
     new spell_script<spell_twilight_douse_fire>("spell_twilight_douse_fire");
+
 	new gob_thundermar_ale_keg();
 }

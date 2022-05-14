@@ -1046,7 +1046,7 @@ uint32 Unit::DealDamage(Unit* victim, uint32 damage, CleanDamage const* cleanDam
 
         {
             if (victim != this && victim->GetTypeId() == TYPEID_PLAYER && // does not support creature push_back
-                (!spellProto || !spellProto->HasAttribute(SPELL_ATTR3_NO_PUSHBACK_ON_DAMAGE)))
+                (!spellProto || !spellProto->HasAttribute(SPELL_ATTR7_NO_PUSHBACK_ON_DAMAGE)))
             {
                 // IDK how this supposed to work but there are plenty amount of AoE spells that are proofed
                 bool dontDelay = GetTypeId() == TYPEID_UNIT && spellProto && spellProto->IsAoESpell();
