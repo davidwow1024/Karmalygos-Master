@@ -2543,6 +2543,7 @@ void SmartScript::ProcessAction(SmartScriptHolder& e, Unit* unit, uint32 var0, u
 
 					player->SendCinematicStart(e.action.cinematic.entry);
 				}
+			delete targets;
 			break;
 		}
 		case SMART_ACTION_SET_INGAME_PHASE_ID:
