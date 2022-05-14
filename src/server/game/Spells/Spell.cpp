@@ -3775,7 +3775,7 @@ void Spell::cast(bool skipCheck)
     SendSpellGo();
 
     // Okay, everything is prepared. Now we need to distinguish between immediate and evented delayed spells
-    if (((m_spellInfo->Speed > 0.0f || m_delayMoment || m_spellInfo->AttributesEx4 & SPELL_ATTR4_UNK4) && !m_spellInfo->IsChanneled())
+    if (((m_spellInfo->Speed > 0.0f || m_delayMoment || m_spellInfo->AttributesEx4 & SPELL_ATTR4_HAS_DELAY) && !m_spellInfo->IsChanneled())
         || m_spellInfo->Id == 54957 || m_spellInfo->Id == 131547) // FIXME
     {
         // Remove used for cast item if need (it can be already NULL after TakeReagents call
@@ -7369,6 +7369,9 @@ SpellCastResult Spell::CheckItems()
     Player* player = m_caster->ToPlayer();
     if (!player)
         return SPELL_CAST_OK;
+
+	if (m_spellInfo->HasAttribute(SPELL_ATTR2_IGNORE_ITEM_CHECK))
+		return SPELL_CAST_OK;
 
     if (!m_CastItem)
     {

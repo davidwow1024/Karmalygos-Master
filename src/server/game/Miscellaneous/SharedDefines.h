@@ -432,7 +432,7 @@ enum SpellAttr2
     SPELL_ATTR2_UNK25                            = 0x02000000, // 25
     SPELL_ATTR2_NOT_DISPELED_BY_SCHOOL_IMMUNITY  = 0x04000000, // 26 unaffected by school immunity
     SPELL_ATTR2_UNK27                            = 0x08000000, // 27
-    SPELL_ATTR2_UNK28                            = 0x10000000, // 28
+    SPELL_ATTR2_IGNORE_ITEM_CHECK                = 0x10000000, // 28
     SPELL_ATTR2_CANT_CRIT                        = 0x20000000, // 29 Spell can't crit
     SPELL_ATTR2_TRIGGERED_CAN_TRIGGER_PROC       = 0x40000000, // 30 spell can trigger even if triggered
     SPELL_ATTR2_FOOD_BUFF                        = 0x80000000  // 31 Food or Drink Buff (like Well Fed)
@@ -453,7 +453,7 @@ enum SpellAttr3
     SPELL_ATTR3_MAIN_HAND                        = 0x00000400, // 10 Main hand weapon required
     SPELL_ATTR3_BATTLEGROUND                     = 0x00000800, // 11 Can casted only on battleground
     SPELL_ATTR3_ONLY_TARGET_GHOSTS               = 0x00001000, // 12
-    SPELL_ATTR3_UNK13                            = 0x00002000, // 13
+    SPELL_ATTR3_DONT_DISPLAY_CHANNEL_BAR         = 0x00002000, // 13 Clientside attribute - will not display channeling bar
     SPELL_ATTR3_IS_HONORLESS_TARGET              = 0x00004000, // 14 "Honorless Target" only this spells have this flag
     SPELL_ATTR3_UNK15                            = 0x00008000, // 15 Auto Shoot, Shoot, Throw,  - this is autoshot flag
     SPELL_ATTR3_CANT_TRIGGER_PROC                = 0x00010000, // 16 confirmed with many patchnotes
@@ -465,7 +465,7 @@ enum SpellAttr3
     SPELL_ATTR3_REQ_WAND                         = 0x00400000, // 22 Req wand
     SPELL_ATTR3_UNK23                            = 0x00800000, // 23
     SPELL_ATTR3_REQ_OFFHAND                      = 0x01000000, // 24 Req offhand weapon
-    SPELL_ATTR3_NO_PUSHBACK_ON_DAMAGE            = 0x02000000, // 25 no cause spell pushback ?
+    SPELL_ATTR3_TREAT_AS_PERIODIC                = 0x02000000, // 25 Makes the spell appear as periodic in client combat logs - used by spells that trigger another spell on each tick
     SPELL_ATTR3_CAN_PROC_WITH_TRIGGERED          = 0x04000000, // 26 auras with this attribute can proc from triggered spell casts with SPELL_ATTR3_TRIGGERED_CAN_TRIGGER_PROC_2 (67736 + 52999)
     SPELL_ATTR3_DRAIN_SOUL                       = 0x08000000, // 27 only drain soul has this flag
     SPELL_ATTR3_UNK28                            = 0x10000000, // 28
@@ -480,7 +480,7 @@ enum SpellAttr4
     SPELL_ATTR4_PROC_ONLY_ON_CASTER              = 0x00000002, //  1 proc only on effects with TARGET_UNIT_CASTER?
     SPELL_ATTR4_UNK2                             = 0x00000004, //  2
     SPELL_ATTR4_UNK3                             = 0x00000008, //  3
-    SPELL_ATTR4_UNK4                             = 0x00000010, //  4 This will no longer cause guards to attack on use??
+    SPELL_ATTR4_HAS_DELAY                        = 0x00000010, //  4 This will no longer cause guards to attack on use??
     SPELL_ATTR4_UNK5                             = 0x00000020, //  5
     SPELL_ATTR4_NOT_STEALABLE                    = 0x00000040, //  6 although such auras might be dispellable, they cannot be stolen
     SPELL_ATTR4_TRIGGERED                        = 0x00000080, //  7 spells forced to be triggered
@@ -489,9 +489,9 @@ enum SpellAttr4
     SPELL_ATTR4_SPELL_VS_EXTEND_COST             = 0x00000400, // 10 Rogue Shiv have this flag
     SPELL_ATTR4_UNK11                            = 0x00000800, // 11
     SPELL_ATTR4_UNK12                            = 0x00001000, // 12
-    SPELL_ATTR4_UNK13                            = 0x00002000, // 13
+    SPELL_ATTR4_COMBAT_LOG_NO_CASTER             = 0x00002000, // 13 No caster object is sent to client combat log
     SPELL_ATTR4_DAMAGE_DOESNT_BREAK_AURAS        = 0x00004000, // 14 doesn't break auras by damage from these spells
-    SPELL_ATTR4_UNK15                            = 0x00008000, // 15
+    SPELL_ATTR4_HIDDEN_SPELLBOOK                 = 0x00008000, // 15 Arreglar del core de uwow Sargero
     SPELL_ATTR4_NOT_USABLE_IN_ARENA_OR_RATED_BG  = 0x00010000, // 16 Cannot be used in both Arenas or Rated Battlegrounds
     SPELL_ATTR4_USABLE_IN_ARENA                  = 0x00020000, // 17
     SPELL_ATTR4_AREA_TARGET_CHAIN                = 0x00040000, // 18 (NYI)hits area targets one after another instead of all at once
@@ -512,7 +512,7 @@ enum SpellAttr4
 
 enum SpellAttr5
 {
-    SPELL_ATTR5_UNK0                             = 0x00000001, //  0
+    SPELL_ATTR5_USABLE_WHILE_MOVING              = 0x00000001, //  0 usable while moving Arreglar del core de uwow Sargero
     SPELL_ATTR5_NO_REAGENT_WHILE_PREP            = 0x00000002, //  1 not need reagents if UNIT_FLAG_PREPARATION
     SPELL_ATTR5_UNK2                             = 0x00000004, //  2
     SPELL_ATTR5_USABLE_WHILE_STUNNED             = 0x00000008, //  3 usable while stunned
@@ -527,7 +527,7 @@ enum SpellAttr5
     SPELL_ATTR5_UNK12                            = 0x00001000, // 12 Cleave related?
     SPELL_ATTR5_HASTE_AFFECT_DURATION            = 0x00002000, // 13 haste effects decrease duration of this
     SPELL_ATTR5_UNK14                            = 0x00004000, // 14
-    SPELL_ATTR5_UNK15                            = 0x00008000, // 15 Inflits on multiple targets?
+    SPELL_ATTR5_CANT_IMMUNITY_SPELL              = 0x00008000, // 15 Can`t mechanic immunity spell Arreglar del core de uwow Sargero
     SPELL_ATTR5_SPECIAL_ITEM_CLASS_CHECK         = 0x00010000, // 16 this allows spells with EquippedItemClass to affect spells from other items if the required item is equipped
     SPELL_ATTR5_USABLE_WHILE_FEARED              = 0x00020000, // 17 usable while feared
     SPELL_ATTR5_USABLE_WHILE_CONFUSED            = 0x00040000, // 18 usable while confused
@@ -565,15 +565,15 @@ enum SpellAttr6
     SPELL_ATTR6_UNK14                            = 0x00004000, // 14
     SPELL_ATTR6_UNK15                            = 0x00008000, // 15 only 54368, 67892
     SPELL_ATTR6_UNK16                            = 0x00010000, // 16
-    SPELL_ATTR6_UNK17                            = 0x00020000, // 17 Mount spell
+    SPELL_ATTR6_CANT_PROC                        = 0x00020000, // 17 Mount spell, Bonus loot, Quest Arreglar del core de uwow Sargero
     SPELL_ATTR6_CAST_BY_CHARMER                  = 0x00040000, // 18 client won't allow to cast these spells when unit is not possessed && charmer of caster will be original caster
     SPELL_ATTR6_UNK19                            = 0x00080000, // 19 only 47488, 50782
     SPELL_ATTR6_ONLY_VISIBLE_TO_CASTER           = 0x00100000, // 20 Auras with this attribute are only visible to their caster (or pet's owner)
     SPELL_ATTR6_CLIENT_UI_TARGET_EFFECTS         = 0x00200000, // 21 it's only client-side attribute
-    SPELL_ATTR6_UNK22                            = 0x00400000, // 22 only 72054
+    SPELL_ATTR6_NOT_LIMIT_ABSORB                 = 0x00400000, // 22 Absorb not limit Arreglar del core de uwow Sargero
     SPELL_ATTR6_UNK23                            = 0x00800000, // 23
     SPELL_ATTR6_CAN_TARGET_UNTARGETABLE          = 0x01000000, // 24
-    SPELL_ATTR6_UNK25                            = 0x02000000, // 25 Exorcism, Flash of Light
+	SPELL_ATTR6_NOT_RESET_SWING_IF_INSTANT       = 0x02000000, // 25 Exorcism, Flash of Light  Arreglar del core de uwow Sargero
     SPELL_ATTR6_UNK26                            = 0x04000000, // 26 related to player castable positive buff
     SPELL_ATTR6_NO_DONE_HEALING_BONUS            = 0x08000000, // 27 Also few damage spells, but overlaps with SPELL_ATTR3_NO_DONE_BONUS
     SPELL_ATTR6_UNK28                            = 0x10000000, // 28 Death Grip
@@ -590,7 +590,7 @@ enum SpellAttr7
     SPELL_ATTR7_IS_CHEAT_SPELL                   = 0x00000008, //  3 Cannot cast if caster doesn't have UnitFlag2 & UNIT_FLAG2_ALLOW_CHEAT_SPELLS
     SPELL_ATTR7_UNK4                             = 0x00000010, //  4 Only 47883 (Soulstone Resurrection) and test spell.
     SPELL_ATTR7_SUMMON_TOTEM                     = 0x00000020, //  5 Only Shaman totems.
-    SPELL_ATTR7_UNK6                             = 0x00000040, //  6 Dark Surge, Surge of Light, Burning Breath triggers (boss spells).
+    SPELL_ATTR7_NO_PUSHBACK_ON_DAMAGE            = 0x00000040, //  6 Does not cause spell pushback on damage
     SPELL_ATTR7_UNK7                             = 0x00000080, //  7 66218 (Launch) spell.
     SPELL_ATTR7_HORDE_ONLY                       = 0x00000100, //  8 Teleports, mounts and other spells.
     SPELL_ATTR7_ALLIANCE_ONLY                    = 0x00000200, //  9 Teleports, mounts and other spells.
@@ -637,7 +637,7 @@ enum SpellAttr8
     SPELL_ATTR8_UNK14                            = 0x00004000, // 14
     SPELL_ATTR8_WATER_MOUNT                      = 0x00008000, // 15 only one River Boat used in Thousand Needles
     SPELL_ATTR8_UNK16                            = 0x00010000, // 16
-    SPELL_ATTR8_UNK17                            = 0x00020000, // 17
+    SPELL_ATTR8_HASTE_AFFECT_DURATION_RECOVERY   = 0x00020000, // 17 Modify duration on haste Arreglar del core de uwow Sargero
     SPELL_ATTR8_REMEMBER_SPELLS                  = 0x00040000, // 18 at some point in time, these auras remember spells and allow to cast them later
     SPELL_ATTR8_USE_COMBO_POINTS_ON_ANY_TARGET   = 0x00080000, // 19 allows to consume combo points from dead targets
     SPELL_ATTR8_ARMOR_SPECIALIZATION             = 0x00100000, // 20
@@ -645,7 +645,7 @@ enum SpellAttr8
     SPELL_ATTR8_HASTE_AFFECT_DURATION            = 0x00400000, // 22
     SPELL_ATTR8_BATTLE_RESURRECTION              = 0x00800000, // 23 For those resurrection spells that can be used in combat
     SPELL_ATTR8_HEALING_SPELL                    = 0x01000000, // 24
-    SPELL_ATTR8_UNK25                            = 0x02000000, // 25
+    SPELL_ATTR8_USABLE_WHILE_SILENCED            = 0x02000000, // 25 Arreglar del core de uwow
     SPELL_ATTR8_RAID_MARKER                      = 0x04000000, // 26 probably spell no need learn to cast
     SPELL_ATTR8_UNK27                            = 0x08000000, // 27
     SPELL_ATTR8_NOT_IN_BG_OR_ARENA               = 0x10000000, // 28 not allow to cast or deactivate currently active effect, not sure about Fast Track
@@ -679,7 +679,7 @@ enum SpellAttr9
     SPELL_ATTR9_UNK20                            = 0x00100000, // 20
     SPELL_ATTR9_UNK21                            = 0x00200000, // 21
     SPELL_ATTR9_UNK22                            = 0x00400000, // 22
-    SPELL_ATTR9_UNK23                            = 0x00800000, // 23
+    SPELL_ATTR9_UNK23                            = 0x00800000, // 23 Jump or Roll spell
     SPELL_ATTR9_UNK24                            = 0x01000000, // 24
     SPELL_ATTR9_UNK25                            = 0x02000000, // 25
     SPELL_ATTR9_UNK26                            = 0x04000000, // 26
@@ -704,34 +704,34 @@ enum SpellAttr10
     SPELL_ATTR10_UNK9                             = 0x00000200, //  9
     SPELL_ATTR10_UNK10                            = 0x00000400, // 10
     SPELL_ATTR10_HERB_GATHERING_MINING            = 0x00000800, // 11 Only Herb Gathering and Mining
-    SPELL_ATTR10_UNK12                            = 0x00001000, // 12
+	SPELL_ATTR10_USE_SPELL_BASE_LEVEL_FOR_SCALING = 0x00001000, // 12 Arreglar del core de uwow Sargero
     SPELL_ATTR10_UNK13                            = 0x00002000, // 13
-    SPELL_ATTR10_CUMULATIVE_PERIODIC              = 0x00004000, // 14
+    SPELL_ATTR10_CUMULATIVE_PERIODIC              = 0x00004000, // 14 Stack damage(heal) from last damage(heal) by damage(heal) - (damage * tick left(may be time))
     SPELL_ATTR10_UNK15                            = 0x00008000, // 15
     SPELL_ATTR10_UNK16                            = 0x00010000, // 16
-    SPELL_ATTR10_UNK17                            = 0x00020000, // 17
-    SPELL_ATTR10_UNK18                            = 0x00040000, // 18
+    SPELL_ATTR10_CAN_DODGE_ON_CAST                = 0x00020000, // 17 When player casted spell can dodge Arreglar del core de uwow Sargero
+    SPELL_ATTR10_CAN_PARRY_ON_CAST                = 0x00040000, // 18 When player casted spell 46924, 101546, 113656 he can parry Arreglar del core de uwow Sargero
     SPELL_ATTR10_UNK19                            = 0x00080000, // 19
     SPELL_ATTR10_UNK20                            = 0x00100000, // 20
     SPELL_ATTR10_UNK21                            = 0x00200000, // 21
     SPELL_ATTR10_UNK22                            = 0x00400000, // 22
     SPELL_ATTR10_UNK23                            = 0x00800000, // 23
-    SPELL_ATTR10_UNK24                            = 0x01000000, // 24
+    SPELL_ATTR10_COOLDOWN_MARKER                  = 0x01000000, // 24
     SPELL_ATTR10_UNK25                            = 0x02000000, // 25
     SPELL_ATTR10_UNK26                            = 0x04000000, // 26
     SPELL_ATTR10_UNK27                            = 0x08000000, // 27
     SPELL_ATTR10_UNK28                            = 0x10000000, // 28
-    SPELL_ATTR10_MOUNT_CHARACTER                  = 0x20000000, // 29
+    SPELL_ATTR10_MOUNT_CHARACTER                  = 0x20000000, // 29 This mount is stored per-character
     SPELL_ATTR10_UNK30                            = 0x40000000, // 30
     SPELL_ATTR10_UNK31                            = 0x80000000  // 31
 };
 
 enum SpellAttr11
 {
-    SPELL_ATTR11_DONT_TURN_DURING_CAST          = 0x00000001,   // Dunno why this is splitted from SPELL_ATTR5_DONT_TURN_DURING_CAST, may be different behaviour for orientation update
-    SPELL_ATTR11_SCALING_FROM_ITEM              = 0x00000004,
-    SPELL_ATTR11_NOT_USABLE_IN_CHALLENGES       = 0x00010000,
-    SPELL_ATTR11_USABLE_WHILE_STUNNED           = 0x04000000,
+    SPELL_ATTR11_DONT_TURN_DURING_CAST          = 0x00000001, // 0 Dunno why this is splitted from SPELL_ATTR5_DONT_TURN_DURING_CAST, may be different behaviour for orientation update
+    SPELL_ATTR11_SCALING_FROM_ITEM              = 0x00000004, // 2 Stat buffs
+    SPELL_ATTR11_NOT_USABLE_IN_CHALLENGES       = 0x00010000, // 16
+    SPELL_ATTR11_USABLE_WHILE_STUNNED           = 0x04000000, // 26
 };
 
 enum Roles
@@ -1886,12 +1886,13 @@ enum SpellMissInfo
 
 enum SpellHitType
 {
-    SPELL_HIT_TYPE_UNK1 = 0x00001,
-    SPELL_HIT_TYPE_CRIT = 0x00002,
-    SPELL_HIT_TYPE_UNK3 = 0x00004,
-    SPELL_HIT_TYPE_UNK4 = 0x00008,
-    SPELL_HIT_TYPE_UNK5 = 0x00010,                          // replace caster?
-    SPELL_HIT_TYPE_UNK6 = 0x00020
+    SPELL_HIT_TYPE_UNK1                 = 0x00001,
+    SPELL_HIT_TYPE_CRIT                 = 0x00002,
+    SPELL_HIT_TYPE_UNK3                 = 0x00004,
+    SPELL_HIT_TYPE_UNK4                 = 0x00008,
+    SPELL_HIT_TYPE_UNK5                 = 0x00010,                          // replace caster?
+    SPELL_HIT_TYPE_UNK6                 = 0x00020,
+	//SPELL_HIT_TYPE_NO_ATTACKER          = 0x80, // does the same as SPELL_ATTR4_COMBAT_LOG_NO_CASTER  traducir esto Sargero
 };
 
 enum SpellDmgClass

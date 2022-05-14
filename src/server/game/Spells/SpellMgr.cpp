@@ -2375,7 +2375,7 @@ void SpellMgr::LoadPetSpellMap()
                 if (!spell) // not exist or triggered or talent
                     continue;
 
-                if (skillLine->skillId == SKILL_PET_GHOUL && spell->AttributesEx4 & SPELL_ATTR4_UNK15) // It is spell triggered from main ability and it hasn't to display in action bar.
+                if (skillLine->skillId == SKILL_PET_GHOUL && spell->AttributesEx4 & SPELL_ATTR4_HIDDEN_SPELLBOOK) // It is spell triggered from main ability and it hasn't to display in action bar.
                     continue;
 
                 PetLevelupSpellSet& spellSet = mPetSpellMap[creatureFamily->ID];
@@ -7737,7 +7737,7 @@ void SpellMgr::LoadSpellInfoCorrections()
                     spellInfo->Mechanic = MECHANIC_NONE;
                     break;
                 case 42223:  // Rain of Fire
-                    spellInfo->AttributesEx3 &= ~SPELL_ATTR3_NO_PUSHBACK_ON_DAMAGE;
+                    spellInfo->AttributesEx3 &= ~SPELL_ATTR3_TREAT_AS_PERIODIC;
                     break;
                 case 42992:
                     spellInfo->Effects[EFFECT_1].TargetA = TARGET_UNIT_CASTER;
