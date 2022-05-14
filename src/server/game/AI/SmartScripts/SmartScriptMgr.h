@@ -548,7 +548,8 @@ enum SMART_ACTION
     SMART_ACTION_SET_CORPSE_DELAY                   = 116,    // timer
     SMART_ACTION_DISABLE_EVADE                      = 117,    // 0/1 (1 = disabled, 0 = enabled)
     SMART_ACTION_PLAY_ANIMKIT                       = 128,    // id, type (0 = oneShot, 1 = aiAnim, 2 = meleeAnim, 3 = movementAnim)
-    SMART_ACTION_END                                = 129,
+	SMART_ACTION_PLAY_CINEMATIC						= 135,    // cinematic entry
+    SMART_ACTION_END                                = 136,
 
     // project
     SMART_ACTION_project                           = 200,
@@ -1066,6 +1067,11 @@ struct SmartAction
             uint32 sceneId;
             uint32 apply;
         } scene;
+
+		struct
+		{
+			uint32 entry;
+		} cinematic;
 
         struct
         {

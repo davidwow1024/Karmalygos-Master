@@ -2529,6 +2529,22 @@ void SmartScript::ProcessAction(SmartScriptHolder& e, Unit* unit, uint32 var0, u
             delete targets;
             break;
         }
+		case SMART_ACTION_PLAY_CINEMATIC:
+		{
+			ObjectList* targets = GetTargets(e, unit);
+			if (!targets)
+				break;
+
+			for (ObjectList::const_iterator itr = targets->begin(); itr != targets->end(); ++itr)
+				if (Player * player = (*itr)->ToPlayer())
+				{
+					if (!IsPlayer(player))
+						continue;
+
+					player->SendCinematicStart(e.action.cinematic.entry);
+				}
+			break;
+		}
 		case SMART_ACTION_SET_INGAME_PHASE_ID:
         {
             ObjectList* targets = GetTargets(e, unit);
