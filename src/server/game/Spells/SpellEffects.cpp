@@ -252,12 +252,12 @@ pEffect SpellEffects[TOTAL_SPELL_EFFECTS]=
     &Spell::EffectApplyAreaAura,                            //174 SPELL_EFFECT_APPLY_AREA_AURA_ENTRY
     &Spell::EffectUnused,                                   //175 SPELL_EFFECT_175  unused
     &Spell::EffectSanctuary,                                //176 SPELL_EFFECT_SANCTUARY2
-    &Spell::EffectNULL,                                     //177 SPELL_EFFECT_177
+    &Spell::EffectDespawnDynamicObject,                     //177 SPELL_EFFECT_DESPAWN_DYNOBJECT
     &Spell::EffectUnused,                                   //178 SPELL_EFFECT_178 unused
     &Spell::EffectCreateAreaTrigger,                        //179 SPELL_EFFECT_CREATE_AREATRIGGER
     &Spell::EffectUnused,                                   //180 SPELL_EFFECT_180 unused
     &Spell::EffectRemoveTalent,                             //181 SPELL_EFFECT_REMOVE_TALENT
-    &Spell::EffectNULL,                                     //182 SPELL_EFFECT_182
+    &Spell::EffectDespawnAreatrigger,                       //182 SPELL_EFFECT_DESPAWN_AREATRIGGER
     &Spell::EffectNULL,                                     //183 SPELL_EFFECT_183
     &Spell::EffectNULL,                                     //184 SPELL_EFFECT_184
     &Spell::EffectNULL,                                     //185 SPELL_EFFECT_185
@@ -7204,4 +7204,20 @@ void Spell::EffectPlayerChoice(SpellEffIndex effIndex)
         return;
 
     player->GetSession()->SendPlayerChoice(choiceId);
+}
+
+void Spell::EffectDespawnDynamicObject(SpellEffIndex /*effIndex*/)
+{
+    if (!m_caster)
+        return;
+
+    m_caster->RemoveAllDynObjects();
+}
+
+void Spell::EffectDespawnAreatrigger(SpellEffIndex /*effIndex*/)
+{
+    if (!m_caster)
+        return;
+
+    m_caster->RemoveAllAreasTrigger();
 }

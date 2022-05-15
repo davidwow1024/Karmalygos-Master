@@ -503,6 +503,8 @@ class Spell
         void EffectRandomizeDigsite(SpellEffIndex effIndex);
         void EffectBonusRoll(SpellEffIndex effIndex);
         void EffectPlayerChoice(SpellEffIndex effIndex);
+		void EffectDespawnDynamicObject(SpellEffIndex effIndex);
+		void EffectDespawnAreatrigger(SpellEffIndex effIndex);
 
         typedef std::set<Aura*> UsedSpellMods;
 
