@@ -181,6 +181,7 @@ enum Gurgthock
     QUEST_AMPHITHEATER_ANGUISH_YGGDRAS_1          = 12932,
     QUEST_AMPHITHEATER_ANGUISH_MAGNATAUR          = 12933,
     QUEST_AMPHITHEATER_ANGUISH_FROM_BEYOND        = 12934,
+	QUEST_THE_CHAMPION_OF_ANGUISH                 = 12948,
 
     NPC_ORINOKO_TUSKBREAKER                       = 30020,
     NPC_KORRAK_BLOODRAGER                         = 30023,
@@ -194,6 +195,7 @@ enum Gurgthock
     NPC_FIEND_AIR                                 = 30045,
     NPC_FIEND_FIRE                                = 30042,
     NPC_FIEND_EARTH                               = 30043,
+	NPC_VLADOF_THE_BUTCHER                        = 30022,
 
     SAY_QUEST_ACCEPT_TUSKARRMAGEDON               = 0,
     SAY_QUEST_ACCEPT_KORRAK_1                     = 1,
@@ -240,8 +242,10 @@ const Position SpawnPosition[] =
 {
     {5754.692f, -2939.46f, 286.276123f, 5.156380f}, // stinkbeard || orinoko || korrak
     {5762.054199f, -2954.385010f, 273.826955f, 5.108289f},  //yggdras
-    {5776.855f, -2989.77979f, 272.96814f, 5.194f} // elementals
+    {5776.855f, -2989.77979f, 272.96814f, 5.194f}, // elementals
 };
+
+const Position VladofJumpPos = { 5776.32f, -2981.01f, 273.1f,  1.23f };
 
 const Position AddSpawnPosition[] =
 {
@@ -326,6 +330,10 @@ public:
                             uiTimer = 2000;
                             uiPhase = 12;
                             break;
+						case QUEST_THE_CHAMPION_OF_ANGUISH:
+							uiTimer = 2000;
+							uiPhase = 15;
+							break;
                     }
                     break;
             }
@@ -421,6 +429,11 @@ public:
                                 creature->AI()->SetData(1, _bossRandom);
                             uiPhase = 0;
                             break;
+						case 15:
+							Talk(13);
+							Creature* pSummon = me->SummonCreature(NPC_VLADOF_THE_BUTCHER, SpawnPosition[0], TEMPSUMMON_CORPSE_DESPAWN, 1000);
+							uiPhase = 0;
+							break;
                     }
                 }
                 else
@@ -438,7 +451,6 @@ public:
             uint32 uiPhase;
             uint32 uiRemoveFlagTimer;
             uint32 uiQuest;
-
     };
 
     bool OnQuestAccept(Player* player, Creature* creature, Quest const* quest) override
@@ -461,6 +473,10 @@ public:
             case QUEST_AMPHITHEATER_ANGUISH_FROM_BEYOND:
                 creature->AI()->SetData(1, quest->GetQuestId());
                 break;
+			// ???
+			case QUEST_THE_CHAMPION_OF_ANGUISH:
+				creature->AI()->SetData(1, quest->GetQuestId());
+				break;
         }
 
         creature->AI()->SetGUID(player->GetGUID());
@@ -1866,6 +1882,121 @@ public:
     }
 };
 
+enum vladof_spells
+{
+	SPELL_BLOOD_PLAGUE     = 55973, //on range 7000 12000 
+	SPELL_BLOOD_BOIL       = 55974, //on rangue 15000 21000
+	SPELL_HYSTERIA         = 55975, // 21000 26000 21000 26000
+	SPELL_SPELL_DEFLECTION = 55976, // 15000 21000 21000 29000 dice un texto
+
+};
+
+enum vladof_events
+{
+	EVENT_BLOOD_PLAGUE     = 1,
+	EVENT_BLOOD_BOIL       = 2,
+	EVENT_HYSTERIA         = 3,
+	EVENT_SPELL_DEFLECTION = 4
+};
+
+// 30022 Vladof the Butcher
+struct npc_vladof_the_butcher : public ScriptedAI
+{
+	npc_vladof_the_butcher(Creature* creature) : ScriptedAI(creature) 
+	{
+		me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC);
+		me->SetReactState(REACT_PASSIVE);
+		me->Mount(26510);
+		Talk(1);	
+		me->GetMotionMaster()->MoveJump(VladofJumpPos, 20.0f, 20.0f, EVENT_JUMP);
+		/*
+		scheduler.Schedule(Milliseconds(6000), [this](TaskContext context)
+		{
+			
+		}); */
+	}
+
+	TaskScheduler scheduler;
+	EventMap _events;
+
+	void MovementInform(uint32 type, uint32 pointId) override
+    {
+		switch (pointId)
+		{
+			case EVENT_JUMP:
+			{
+				me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC);
+				me->SetHomePosition(VladofJumpPos);
+				me->SetReactState(REACT_AGGRESSIVE);
+				/*
+				scheduler.Schedule(Milliseconds(3000), [this](TaskContext context)
+				{
+					
+				}); */
+				break;
+			}
+		    default:
+				break;
+        }
+    }
+
+	void EnterCombat(Unit* /*who*/) override
+	{
+		Talk(2);
+		Talk(3);
+		_events.ScheduleEvent(EVENT_BLOOD_PLAGUE, 5000); // custom time
+		_events.ScheduleEvent(EVENT_BLOOD_BOIL, 10000);	 // custom time
+		_events.ScheduleEvent(EVENT_HYSTERIA, urand(21000, 26000));
+		_events.ScheduleEvent(EVENT_SPELL_DEFLECTION, urand(15000, 21000));
+	}
+
+	void JustDied(Unit* killer) override
+	{
+		// un sent data 16 16
+		if (Player* player = killer->GetCharmerOrOwnerPlayerOrPlayerItself())
+			player->GroupEventHappens(12948, killer);
+	}
+
+	void EnterEvadeMode() override
+	{
+		// un sent data 10 10
+		me->DespawnOrUnsummon();
+	}
+
+	void UpdateAI(uint32 diff) override
+    {
+		_events.Update(diff);
+		
+		while (uint32 eventId = _events.ExecuteEvent())
+	    {
+			switch (eventId)
+			{
+				case EVENT_BLOOD_PLAGUE:
+					if (me->IsInRange(me->GetVictim(), 0.0f, 5.0f))
+						me->CastSpell(me->GetVictim(), SPELL_BLOOD_PLAGUE, true);
+					_events.ScheduleEvent(EVENT_BLOOD_PLAGUE, urand(7000, 12000));
+					break;
+			    case EVENT_BLOOD_BOIL:
+					if (me->IsInRange(me->GetVictim(), 0.0f, 5.0f))
+						me->CastSpell(me, SPELL_BLOOD_BOIL, true);
+					_events.ScheduleEvent(EVENT_BLOOD_BOIL, urand(15000, 21000)); 
+					break;
+				case EVENT_HYSTERIA:
+					me->CastSpell(me, SPELL_HYSTERIA, true);
+					_events.ScheduleEvent(EVENT_HYSTERIA, urand(21000, 26000));
+					break;
+				case EVENT_SPELL_DEFLECTION:
+					Talk(4);
+					me->CastSpell(me, SPELL_SPELL_DEFLECTION, true);
+					_events.ScheduleEvent(EVENT_SPELL_DEFLECTION, urand(21000, 29000));
+					break;
+				default:
+					break;
+            }
+        }
+	}
+};
+
 void AddSC_zuldrak()
 {
     new npc_drakuru_shackles();
@@ -1879,12 +2010,15 @@ void AddSC_zuldrak()
     new npc_crusade_recruit();
     new npc_elemental_lord();
     new npc_fiend_elemental();
-    new go_scourge_enclosure();
     new npc_alchemist_finklestein();
-    new go_finklesteins_cauldron();
-    new spell_random_ingredient_aura();
+	new npc_storm_cloud();
+	new creature_script<npc_vladof_the_butcher>("npc_vladof_the_butcher");
+
+	new go_scourge_enclosure();
+	new go_finklesteins_cauldron();
+
+	new spell_random_ingredient_aura();
     new spell_random_ingredient();
     new spell_pot_check();
     new spell_fetch_ingredient_aura();
-    new npc_storm_cloud();
 }
