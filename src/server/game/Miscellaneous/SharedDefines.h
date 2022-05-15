@@ -445,7 +445,7 @@ enum SpellAttr3
     SPELL_ATTR3_UNK2                             = 0x00000004, //  2
     SPELL_ATTR3_BLOCKABLE_SPELL                  = 0x00000008, //  3 Only dmg class melee in 3.1.3
     SPELL_ATTR3_IGNORE_RESURRECTION_TIMER        = 0x00000010, //  4 you don't have to wait to be resurrected with these spells
-    SPELL_ATTR3_UNK5                             = 0x00000020, //  5
+	SPELL_ATTR3_NO_DURABILITY_LOSS				 = 0x00000020, //  5 No Durability Loss
     SPELL_ATTR3_UNK6                             = 0x00000040, //  6
     SPELL_ATTR3_STACK_FOR_DIFF_CASTERS           = 0x00000080, //  7 separate stack for every caster
     SPELL_ATTR3_ONLY_TARGET_PLAYERS              = 0x00000100, //  8 can only target players
