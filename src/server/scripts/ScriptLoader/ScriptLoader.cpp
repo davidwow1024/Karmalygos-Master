@@ -2138,6 +2138,7 @@ void AddSC_wow_token();
 void AddSC_custom_reward();
 void AddSC_Boost_Profession();
 void AddSC_Custom_Items();
+void AddSC_custom_xp_rates();
 
 
 void AddCustomScripts()
@@ -2150,6 +2151,7 @@ AddSC_wow_token();
 AddSC_custom_reward();
 AddSC_Boost_Profession();
 AddSC_Custom_Items();
+AddSC_custom_xp_rates();
 
 #endif
     AddSC_Anticheat();
