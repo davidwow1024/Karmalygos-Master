@@ -1,31 +1,35 @@
- enum ForbiddenAreas
+#include <Chat.h>
+
+enum ForbiddenAreas
  {
 	// AREA_TIMELESS_ISLE			= 6757,	// Timeless Isle
 	// AREA_ISLE_OF_GIANT			= 6661, // IsleofGiants
 	// AREA_ISLE_OF_THUNDER		= 6507  // IsleofThunder
+	 MAP_MIST_OF_PANDARIA			= 870,
  };
      
  class protected_zone : public PlayerScript
  {
-	 
  public:
      protected_zone() : PlayerScript("protected_zone") {}
      
-     void OnUpdateZone(Player* player, uint32 newZone, uint32 newArea)
+     void OnMapChanged(Player* player)
      {
-		 switch (newZone)
-		 {
-			// case AREA_TIMELESS_ISLE:
-			// case AREA_ISLE_OF_GIANT:
-			// case AREA_ISLE_OF_THUNDER:
-				// if (player->GetSession()->GetSecurity() >= 1)
-					// return;
-				// player->TeleportTo(0, 278.867340f, 348.756195f, 141.279770f, 4.510715f); // teleport to dalaran crater
-				// break;
+		if (player->GetMapId() == MAP_MIST_OF_PANDARIA)
+		{ 
+			uint64 mod = player->GetMoney() * 0.1f;
 
-		 default:
-			 break;
-		 }
+			if (player->GetSession()->GetSecurity() <= 1)
+			{
+				if (player->GetTeamId() == TEAM_ALLIANCE)
+					player->TeleportTo(0, -8833.07f, 622.778f, 93.9317f, 0.6771f);
+				else if (player->GetTeamId() == TEAM_HORDE)
+					player->TeleportTo(1, 1569.97f, -4397.41f, 16.0472f, 0.543025f);
+
+				player->SetMoney(player->GetMoney() - player->GetMoney() * 0.1f);
+					ChatHandler(player->GetSession()).PSendSysMessage("|cffFF0000Se le ha retirado|r %u |cffFF0000de oro por intentar entrar en una zona prohibida.|r", mod / 10000);
+			}
+		}
      }
  };
      
