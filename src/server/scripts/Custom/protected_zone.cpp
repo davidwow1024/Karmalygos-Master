@@ -27,7 +27,7 @@ enum ForbiddenAreas
 					player->TeleportTo(1, 1569.97f, -4397.41f, 16.0472f, 0.543025f);
 
 				player->SetMoney(player->GetMoney() - player->GetMoney() * 0.1f);
-					ChatHandler(player->GetSession()).PSendSysMessage("|cffFF0000Se le ha retirado|r %u |cffFF0000de oro por intentar entrar en una zona prohibida.|r", mod / 10000);
+				ChatHandler(player->GetSession()).PSendSysMessage("|cffFF0000Se le ha retirado|r %u |cffFF0000de oro por intentar entrar en una zona prohibida.|r", mod / 10000);
 			}
 		}
      }
