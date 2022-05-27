@@ -795,81 +795,6 @@ public:
 	}
 };
 
-// 35118 showfight <> guard 34916
-class npc_bloodfang_worgen_35118 : public CreatureScript
-{
-public:
-	npc_bloodfang_worgen_35118() : CreatureScript("npc_bloodfang_worgen_35118") {}
-
-	enum eNpc
-	{
-		EVENT_ENRAGE_COOLDOWN = 101,
-	};
-
-	struct npc_bloodfang_worgen_35118AI : public ScriptedAI
-	{
-		npc_bloodfang_worgen_35118AI(Creature* creature) : ScriptedAI(creature) {}
-
-		EventMap m_events;
-		bool m_enrage;
-
-		void Reset() override
-		{
-			m_enrage = false;
-		}
-
-		void DamageTaken(Unit* /*who*/, uint32& /*damage*/) override
-		{
-			if (!m_enrage && me->GetHealthPct() < 50.0f)
-			{
-				me->CastSpell(me, SPELL_ENRAGE_8599);
-				m_enrage = true;
-				m_events.ScheduleEvent(EVENT_ENRAGE_COOLDOWN, 20000);
-			}
-		}
-
-		void SpellHit(Unit* caster, SpellInfo const* spell) override
-		{
-			if (Player * player = caster->ToPlayer())
-			{
-				if (player->GetQuestStatus(14276) == QUEST_STATUS_INCOMPLETE)
-					if (spell->Id == 56641)
-						player->KilledMonsterCredit(44175);
-
-				if (player->GetQuestStatus(14281) == QUEST_STATUS_INCOMPLETE)
-					if (spell->Id == 5143)
-						player->KilledMonsterCredit(44175);
-			}
-		}
-
-		void UpdateAI(uint32 diff) override
-		{
-			m_events.Update(diff);
-
-			while (uint32 eventId = m_events.ExecuteEvent())
-			{
-				switch (eventId)
-				{
-				case EVENT_ENRAGE_COOLDOWN:
-				{
-					m_enrage = false;
-					break;
-				}
-				}
-			}
-
-			if (!UpdateVictim())
-				return;
-			else
-				DoMeleeAttackIfReady();
-		}
-	};
-
-	CreatureAI* GetAI(Creature * creature) const override
-	{
-		return new npc_bloodfang_worgen_35118AI(creature);
-	}
-};
 
 class spell_gilneas_prison_periodic_dummy : public SpellScriptLoader
 {
@@ -929,7 +854,6 @@ struct npc_rampaging_worgen : public ScriptedAI
 void AddSC_gilneas()
 {
 	new npc_king_genn_greymane_35112();
-	new npc_bloodfang_worgen_35118();
 	new npc_tobias_mistmantle_35124();
 	new npc_lord_darius_crowley_35077();
 	new npc_worgen_runt_35188();
