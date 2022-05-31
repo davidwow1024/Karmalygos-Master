@@ -3487,9 +3487,6 @@ void WorldObject::UpdateAreaPhase()
         }
     }
 
-	// Para no a;adir la phase 169 a cada area Sargero
-	_phases.insert(169);
-
     // only update visibility and send packets if there was a change in the phase list
 
     if (updateNeeded && GetTypeId() == TYPEID_PLAYER && IsInWorld())
