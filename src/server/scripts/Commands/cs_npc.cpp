@@ -187,7 +187,6 @@ public:
             { "model",      SEC_ADMINISTRATOR,  false,  &HandleNpcSetModelCommand,          },
             { "movetype",   SEC_ADMINISTRATOR,  false,  &HandleNpcSetMoveTypeCommand,       },
             { "phase",      SEC_ADMINISTRATOR,  false,  &HandleNpcSetPhaseCommand,          },
-			{ "phaseid",    SEC_ADMINISTRATOR,  false,  &HandleNpcSetPhaseIDCommand,        },
 			{ "phasegroup", SEC_ADMINISTRATOR,  false,  &HandleNpcSetPhaseGroup,            },
             { "spawndist",  SEC_ADMINISTRATOR,  false,  &HandleNpcSetSpawnDistCommand,      },
             { "spawntime",  SEC_ADMINISTRATOR,  false,  &HandleNpcSetSpawnTimeCommand,      },
@@ -1170,10 +1169,10 @@ public:
 
         return true;
     }
-	
+	/* Implement this command Sargero
     //npc phase handling
     //change phase of creature
-    static bool HandleNpcSetPhaseIDCommand(ChatHandler* handler, char const* args)
+    static bool HandleNpcSetPhaseCommand(ChatHandler* handler, char const* args)
     {
         if (!*args)
             return false;
@@ -1194,7 +1193,7 @@ public:
         creature->SaveToDB();
 
         return true;
-    }
+    }*/
 
     //set spawn dist of creature
     static bool HandleNpcSetSpawnDistCommand(ChatHandler* handler, char const* args)

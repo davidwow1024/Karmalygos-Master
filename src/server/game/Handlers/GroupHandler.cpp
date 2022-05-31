@@ -1164,7 +1164,7 @@ void WorldSession::BuildPartyMemberStatsChangedPacket(Player* player, WorldPacke
     if (player)
         player->GetPhaseMgr().GetActivePhases(phases);
 
-	std::set<uint32> const& phases2 = player->GetPhases(); // verify this Sargero
+	std::set<uint32> const& phases2 = player->GetPhases(); // Sargero fix this
 
     ByteBuffer dataBuffer;
 

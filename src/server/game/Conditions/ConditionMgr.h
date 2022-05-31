@@ -157,7 +157,7 @@ enum ConditionSourceType
     CONDITION_SOURCE_TYPE_PHASE_DEFINITION               = 25, // only 4.3.4
     CONDITION_SOURCE_TYPE_PHASE                          = 26,
 	CONDITION_SOURCE_TYPE_TERRAIN_SWAP                   = 27,
-    CONDITION_SOURCE_TYPE_GRAVEYARD                      = 28,
+    CONDITION_SOURCE_TYPE_GRAVEYARD                      = 28, // need implementation
     CONDITION_SOURCE_TYPE_MAX                            = 29  // MAX
 };
 
