@@ -1164,8 +1164,6 @@ void WorldSession::BuildPartyMemberStatsChangedPacket(Player* player, WorldPacke
     if (player)
         player->GetPhaseMgr().GetActivePhases(phases);
 
-	std::set<uint32> const& phases2 = player->GetPhases(); // Sargero fix this
-
     ByteBuffer dataBuffer;
 
     if (mask & GROUP_UPDATE_FLAG_POWER_TYPE)                // if update power type, update current/max power also
@@ -1466,7 +1464,7 @@ void WorldSession::BuildPartyMemberStatsChangedPacket(Player* player, WorldPacke
     }
 
     if (mask & GROUP_UPDATE_FLAG_PHASE)
-    {   // phasemask
+    {
         dataBuffer << uint32(phases.empty() ? 0x8 : 0x10); // Same as found in SMSG_SET_PHASE_SHIFT.
         dataBuffer.WriteBits(phases.size(), 23);           // Phases Count.
 
@@ -1474,15 +1472,6 @@ void WorldSession::BuildPartyMemberStatsChangedPacket(Player* player, WorldPacke
 
         for (std::set<uint32>::const_iterator itr = phases.begin(); itr != phases.end(); ++itr)
             dataBuffer << uint16(*itr);
-
-		// phaseid
-		dataBuffer << uint32(phases2.empty() ? 0x8 : 0x10); // Same as found in SMSG_SET_PHASE_SHIFT.
-		dataBuffer.WriteBits(phases2.size(), 23);           // Phases Count.
-
-		dataBuffer.FlushBits();
-
-		for (std::set<uint32>::const_iterator itr = phases2.begin(); itr != phases2.end(); ++itr)
-			dataBuffer << uint16(*itr);
     }
 
     if (mask & GROUP_UPDATE_FLAG_UNK_2000000)

@@ -3886,9 +3886,6 @@ void Spell::EffectSummonObjectWild(SpellEffIndex effIndex)
 
     int32 duration = m_spellInfo->GetDuration();
 
-	for (auto phase : m_caster->GetPhases())
-		pGameObj->SetPhased(phase, false, true);
-
     pGameObj->SetRespawnTime(duration > 0 ? duration/IN_MILLISECONDS : 0);
     pGameObj->SetSpellId(m_spellInfo->Id);
 
@@ -3909,9 +3906,6 @@ void Spell::EffectSummonObjectWild(SpellEffIndex effIndex)
             m_caster->GetPhaseMask(), x, y, z, target->GetOrientation(), { }, 100, GO_STATE_READY))
         {
             linkedGO->AddToTransportIfNeeded(m_caster->GetTransport());
-
-			for (auto phase : m_caster->GetPhases())
-				linkedGO->SetPhased(phase, false, true);
 
             linkedGO->SetRespawnTime(duration > 0 ? duration/IN_MILLISECONDS : 0);
             linkedGO->SetSpellId(m_spellInfo->Id);
@@ -4630,9 +4624,6 @@ void Spell::EffectDuel(SpellEffIndex effIndex)
 
     pGameObj->AddToTransportIfNeeded(m_caster->GetTransport());
 
-	for (auto phase : m_caster->GetPhases())
-		pGameObj->SetPhased(phase, false, true);
-
     pGameObj->SetFaction(m_caster->getFaction());
     pGameObj->SetUInt32Value(GAMEOBJECT_FIELD_LEVEL, m_caster->getLevel()+1);
     int32 duration = m_spellInfo->GetDuration();
@@ -5088,10 +5079,6 @@ void Spell::EffectSummonObject(SpellEffIndex effIndex)
 
     //pGameObj->SetUInt32Value(GAMEOBJECT_FIELD_LEVEL, m_caster->getLevel());
     int32 duration = m_spellInfo->GetDuration();
-
-	for (auto phase : m_caster->GetPhases())
-		go->SetPhased(phase, false, true);
-
     go->SetRespawnTime(duration > 0 ? duration/IN_MILLISECONDS : 0);
     go->SetSpellId(m_spellInfo->Id);
     m_caster->AddGameObject(go);
@@ -5861,9 +5848,6 @@ void Spell::EffectTransmitted(SpellEffIndex effIndex)
 
     int32 duration = m_spellInfo->GetDuration();
 
-	for (auto phase : m_caster->GetPhases())
-		pGameObj->SetPhased(phase, false, true);
-
     switch (goinfo->type)
     {
         case GAMEOBJECT_TYPE_FISHINGNODE:
@@ -5925,9 +5909,6 @@ void Spell::EffectTransmitted(SpellEffIndex effIndex)
             m_caster->GetPhaseMask(), fx, fy, fz, m_caster->GetOrientation(), { }, 100, GO_STATE_READY))
         {
             linkedGO->AddToTransportIfNeeded(m_caster->GetTransport());
-
-			for (auto phase : m_caster->GetPhases())
-				linkedGO->SetPhased(phase, false, true);
 
             linkedGO->SetRespawnTime(duration > 0 ? duration/IN_MILLISECONDS : 0);
             //linkedGO->SetUInt32Value(GAMEOBJECT_FIELD_LEVEL, m_caster->getLevel());

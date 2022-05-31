@@ -937,9 +937,6 @@ Creature* Battlefield::SpawnCreature(uint32 entry, float x, float y, float z, fl
     creature->SetSpeed(MOVE_WALK, cinfo->speed_walk);
     creature->SetSpeed(MOVE_RUN, cinfo->speed_run);
 
-	for (auto phase : creature->GetPhases())
-		creature->SetPhased(phase, false, true);
-
     // Set creature in world
     map->AddToMap(creature);
     creature->setActive(true);
@@ -964,9 +961,6 @@ GameObject* Battlefield::SpawnGameObject(uint32 entry, float x, float y, float z
         delete go;
         return NULL;
     }
-
-	for (auto phase : go->GetPhases())
-		go->SetPhased(phase, false, true);
 
     // Add to world
     map->AddToMap(go);

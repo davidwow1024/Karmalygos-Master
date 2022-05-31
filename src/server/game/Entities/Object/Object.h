@@ -740,19 +740,6 @@ class WorldObject : public Object, public WorldLocation
         bool InSamePhase(WorldObject const* obj) const;
         bool InSamePhase(uint32 phasemask) const { return (GetPhaseMask() & phasemask); }
 
-		virtual bool SetPhased(uint32 id, bool update, bool apply);
-		bool HasPhaseList(uint32 phase);
-		void ClearPhases(bool update = false);
-		bool IsPhased(WorldObject const* obj) const;
-		bool IsPhased(uint32 phase) const { return _phases.find(phase) != _phases.end(); }
-		std::set<uint32> const& GetPhases() const { return _phases; }
-		bool IsTerrainSwaped(uint32 terrainSwap) const { return _terrainSwaps.find(terrainSwap) != _terrainSwaps.end(); }
-		std::set<uint32> const& GetTerrainSwaps() const { return _terrainSwaps; }
-		std::set<uint32> const& GetWorldMapSwaps() const { return _worldMapSwaps; }
-		void RebuildTerrainSwaps();
-		void RebuildWorldMapAreaSwaps();
-		void UpdateAreaPhase();
-
         uint32 GetZoneId() const;
         uint32 GetAreaId() const;
         void GetZoneAndAreaId(uint32& zoneid, uint32& areaid) const;
@@ -967,9 +954,6 @@ class WorldObject : public Object, public WorldLocation
         //uint32 m_mapId;                                     // object at map with map_id
         uint32 m_InstanceId;                                // in map copy with instance id
         uint32 m_phaseMask;                                 // in area phase state
-		std::set<uint32> _phases;
-		std::set<uint32> _terrainSwaps;
-		std::set<uint32> _worldMapSwaps;
 
         bool m_hasCustomVisibility = false;
         float m_customVisibilityDistance = 0;

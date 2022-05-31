@@ -8374,7 +8374,6 @@ void Player::UpdateArea(uint32 newArea)
     UpdatePvPState(true);
 
     UpdateAreaDependentAuras(newArea);
-	UpdateAreaPhase();
 
     // previously this was in UpdateZone (but after UpdateArea) so nothing will break
     pvpInfo.IsInNoPvPArea = false;
@@ -8515,7 +8514,6 @@ void Player::UpdateZone(uint32 newZone, uint32 newArea)
     UpdateLocalChannels(newZone);
 
     UpdateZoneDependentAuras(newZone);
-	UpdateAreaPhase();
 
     phaseMgr.RemoveUpdateFlag(PHASE_UPDATE_FLAG_ZONE_UPDATE);
 
@@ -16881,8 +16879,6 @@ void Player::AddQuest(Quest const* quest, Object* questGiver)
     m_QuestStatusSave[questId] = true;
 
     StartCriteria(CRITERIA_START_TYPE_QUEST, questId);
-
-	UpdatePhasing();
 
     if (questGiver) // script managment for every quest
     {
@@ -30093,9 +30089,6 @@ Pet* Player::SummonPet(uint32 entry, float x, float y, float z, float ang, uint3
 
     pet->AddToTransportIfNeeded(GetTransport());
 
-	for (auto itr : GetPhases())
-		pet->SetPhased(itr, false, true);
-
     pet->SetCreatorGUID(GetGUID());
     pet->SetUInt32Value(UNIT_FIELD_FACTION_TEMPLATE, getFaction());
 
@@ -32411,15 +32404,4 @@ bool Player::CanRollForLootIn(WorldObject const* obj) const
         return go->IsLootRecipientGroupMember(GetGUID());
 
     return true;
-}
-
-void Player::UpdatePhasing()
-{
-	std::set<uint32> phaseIds;
-	std::set<uint32> terrainswaps;
-	std::set<uint32> worldAreaSwaps;
-
-	RebuildTerrainSwaps(); // to set default map swaps
-
-	GetSession()->SendSetPhaseShift(GetPhases(), GetTerrainSwaps(), GetWorldMapSwaps());
 }

@@ -1990,9 +1990,6 @@ bool Battleground::AddObject(uint32 type, uint32 entry, float x, float y, float 
         delete go;
         return false;
     }
-
-	for (auto phase : go->GetPhases())
-		go->SetPhased(phase, false, true);
 /*
     uint32 guid = go->GetGUIDLow();
 
@@ -2131,9 +2128,6 @@ Creature* Battleground::AddCreature(uint32 entry, uint32 type, uint32 teamval, f
     // Force using DB speeds
     creature->SetSpeed(MOVE_WALK,  cinfo->speed_walk);
     creature->SetSpeed(MOVE_RUN,   cinfo->speed_run);
-
-	for (auto phase : creature->GetPhases())
-		creature->SetPhased(phase, false, true);
 
     if (!map->AddToMap(creature))
     {
