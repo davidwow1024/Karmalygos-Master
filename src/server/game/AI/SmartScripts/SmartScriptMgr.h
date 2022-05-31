@@ -561,9 +561,8 @@ enum SMART_ACTION
     SMART_ACTION_SPELL_VISUAL_KIT                   = 206,
     SMART_ACTION_CAST_RANDOM_SPELL                  = 207,
     SMART_ACTION_QUEST_COMPLETE                     = 208,    // Force complete quest by ID (misc1, misc2 ...)
-	SMART_ACTION_SET_INGAME_PHASE_ID                = 209,    // phaseid
 
-    SMART_ACTION_END_project                       = 210,
+    SMART_ACTION_END_project                       = 209,
 };
 
 struct SmartAction
@@ -1092,12 +1091,6 @@ struct SmartAction
         {
             uint32 quest[6];
         } CompleteQuest;
-
-		struct
-		{
-			uint32 id;
-			uint32 apply;
-		} ingamePhaseId;
 
         //! Note for any new future actions
         //! All parameters must have type uint32

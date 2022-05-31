@@ -694,6 +694,10 @@ struct PhaseInfoStruct
     ConditionList Conditions;
 };
 
+// typedef UNORDERED_MAP<uint32, std::vector<PhaseInfoStruct>> TerrainPhaseInfo;
+// typedef UNORDERED_MAP<uint32, std::vector<uint32>> TerrainUIPhaseInfo;
+// typedef UNORDERED_MAP<uint32, std::vector<PhaseInfoStruct>> PhaseInfo;
+
 typedef std::unordered_map<uint32, std::vector<PhaseInfoStruct>> TerrainPhaseInfo;
 typedef std::unordered_map<uint32, std::vector<uint32>> TerrainUIPhaseInfo;
 typedef std::unordered_map<uint32, std::vector<PhaseInfoStruct>> PhaseInfo2;

@@ -892,8 +892,7 @@ bool ConditionMgr::CanHaveSourceGroupSet(ConditionSourceType sourceType) const
             sourceType == CONDITION_SOURCE_TYPE_SMART_EVENT ||
             sourceType == CONDITION_SOURCE_TYPE_PHASE_DEFINITION ||
             sourceType == CONDITION_SOURCE_TYPE_NPC_VENDOR ||
-		    sourceType == CONDITION_SOURCE_TYPE_PHASE ||
-		    sourceType == CONDITION_SOURCE_TYPE_TERRAIN_SWAP);
+		    sourceType == CONDITION_SOURCE_TYPE_PHASE);
 }
 
 bool ConditionMgr::CanHaveSourceIdSet(ConditionSourceType sourceType) const
@@ -1481,9 +1480,8 @@ bool ConditionMgr::addToTerrainSwaps(Condition* cond)
     if (added)
         return true;
 
-	TC_LOG_ERROR("sql.sql", "No terrain swap with map %u exists.", cond->SourceEntry);
-
-	return false;
+	TC_LOG_ERROR("sql.sql", "%u No terrain swap with map %u exists.", cond, cond->SourceEntry);
+    return false;
 }
 
 bool ConditionMgr::addToPhases(Condition* cond)

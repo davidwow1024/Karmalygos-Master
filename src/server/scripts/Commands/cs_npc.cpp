@@ -187,7 +187,6 @@ public:
             { "model",      SEC_ADMINISTRATOR,  false,  &HandleNpcSetModelCommand,          },
             { "movetype",   SEC_ADMINISTRATOR,  false,  &HandleNpcSetMoveTypeCommand,       },
             { "phase",      SEC_ADMINISTRATOR,  false,  &HandleNpcSetPhaseCommand,          },
-			{ "phasegroup", SEC_ADMINISTRATOR,  false,  &HandleNpcSetPhaseGroup,            },
             { "spawndist",  SEC_ADMINISTRATOR,  false,  &HandleNpcSetSpawnDistCommand,      },
             { "spawntime",  SEC_ADMINISTRATOR,  false,  &HandleNpcSetSpawnTimeCommand,      },
             { "data",       SEC_ADMINISTRATOR,  false,  &HandleNpcSetDataCommand,           },
@@ -289,9 +288,6 @@ public:
             delete creature;
             return false;
         }
-
-		for (auto phase : chr->GetPhases())
-			creature->SetPhased(phase, false, true);
 
         creature->SaveToDB(map->GetId(), (1 << map->GetSpawnMode()), chr->GetPhaseMgr().GetPhaseMaskForSpawn());
 
@@ -1140,60 +1136,6 @@ public:
 
         return true;
     }
-
-	//npc phase handling
-    //change phase of creature
-    static bool HandleNpcSetPhaseGroup(ChatHandler* handler, char const* args)
-    {
-        if (!*args)
-            return false;
-
-        uint32 phaseGroupId = (uint32)atoi((char*)args);
-
-        Creature* creature = handler->getSelectedCreature();
-        if (!creature || creature->IsPet())
-        {
-            handler->SendSysMessage(LANG_SELECT_CREATURE);
-            handler->SetSentErrorMessage(true);
-            return false;
-        }
-
-        creature->ClearPhases();
-
-        for (uint32 id : GetPhasesForGroup(phaseGroupId))
-            creature->SetPhased(id, false, true); // don't send update here for multiple phases, only send it once after adding all phases
-
-        creature->UpdateObjectVisibility();
-
-        creature->SaveToDB();
-
-        return true;
-    }
-	/* Implement this command Sargero
-    //npc phase handling
-    //change phase of creature
-    static bool HandleNpcSetPhaseCommand(ChatHandler* handler, char const* args)
-    {
-        if (!*args)
-            return false;
-
-        uint32 phase = (uint32)atoi((char*)args);
-
-        Creature* creature = handler->getSelectedCreature();
-        if (!creature || creature->IsPet())
-        {
-            handler->SendSysMessage(LANG_SELECT_CREATURE);
-            handler->SetSentErrorMessage(true);
-            return false;
-        }
-
-        creature->ClearPhases();
-        creature->SetPhased(phase, true, true);
-
-        creature->SaveToDB();
-
-        return true;
-    }*/
 
     //set spawn dist of creature
     static bool HandleNpcSetSpawnDistCommand(ChatHandler* handler, char const* args)
