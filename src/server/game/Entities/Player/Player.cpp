@@ -16883,7 +16883,6 @@ void Player::AddQuest(Quest const* quest, Object* questGiver)
     StartCriteria(CRITERIA_START_TYPE_QUEST, questId);
 
 	UpdatePhasing();
-	UpdateObjectVisibility();
 
     if (questGiver) // script managment for every quest
     {
@@ -32416,8 +32415,9 @@ bool Player::CanRollForLootIn(WorldObject const* obj) const
 
 void Player::UpdatePhasing()
 {
-	if (!IsInWorld())
-		return;
+	std::set<uint32> phaseIds;
+	std::set<uint32> terrainswaps;
+	std::set<uint32> worldAreaSwaps;
 
 	RebuildTerrainSwaps(); // to set default map swaps
 
