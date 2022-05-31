@@ -2139,6 +2139,7 @@ void AddSC_custom_reward();
 void AddSC_Boost_Profession();
 void AddSC_Custom_Items();
 void AddSC_custom_xp_rates();
+void AddSC_promotions_and_rewards();
 
 
 void AddCustomScripts()
@@ -2152,6 +2153,7 @@ AddSC_custom_reward();
 AddSC_Boost_Profession();
 AddSC_Custom_Items();
 AddSC_custom_xp_rates();
+AddSC_promotions_and_rewards();
 
 #endif
     AddSC_Anticheat();
