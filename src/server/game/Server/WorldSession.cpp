@@ -406,12 +406,7 @@ bool WorldSession::Update(uint32 diff, PacketFilter& updater)
                     }
                     break;
                 case STATUS_AUTHED:
-                    // prevent cheating with skip queue wait
-                    if (m_inQueue)
-                    {
-                        LogUnexpectedOpcode(packet, "STATUS_AUTHED", "the player not pass queue yet");
-                        break;
-                    }
+                    
 
                     // some auth opcodes can be recieved before STATUS_LOGGEDIN_OR_RECENTLY_LOGGOUT opcodes
                     // however when we recieve CMSG_CHAR_ENUM we are surely no longer during the logout process.
@@ -826,26 +821,10 @@ void WorldSession::Handle_Deprecated(WorldPacket& recvPacket)
 
 void WorldSession::SendAuthWaitQue(uint32 position)
 {
-    if (position == 0)
-    {
-        WorldPacket packet(SMSG_AUTH_RESPONSE, 1);
-        packet.WriteBit(0); // has account info
-        packet.WriteBit(0); // has queue info
-        packet.FlushBits();
-        packet << uint8(AUTH_OK);
-        SendPacket(&packet);
-    }
-    else
-    {
-        WorldPacket packet(SMSG_AUTH_RESPONSE, 6);
-        packet.WriteBit(0); // has account info
-        packet.WriteBit(1); // has queue info
-        packet.WriteBit(0); // unk queue bool
-        packet.FlushBits();
-        packet << uint32(position);
-        packet << uint8(AUTH_WAIT_QUEUE);
-        SendPacket(&packet);
-    }
+	if (position == 0)
+		SendAuthResponse(AUTH_OK, false);
+	else
+		SendAuthResponse(AUTH_OK, true, position);
 }
 
 void WorldSession::LoadGlobalAccountData()
