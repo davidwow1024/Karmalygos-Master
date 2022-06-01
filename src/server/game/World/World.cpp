@@ -288,13 +288,36 @@ void World::AddSession_(WorldSession* s)
     if (decrease_session)
         --Sessions;
 
-    if (pLimit > 0 && Sessions >= pLimit && AccountMgr::IsPlayerAccount(s->GetSecurity()) && !HasRecentlyDisconnected(s))
-    {
-        AddQueuedPlayer(s);
-        UpdateMaxSessionCounters();
-        TC_LOG_INFO("misc", "PlayerQueue: Account id %u is in Queue Position (%u).", s->GetAccountId(), ++QueueSize);
-        return;
-    }
+	/* Queued VIP system */
+	bool _accountHaveToQueue = true;
+	QueryResult _Result = LoginDatabase.PQuery("SELECT QueueVip FROM account WHERE id = %u", s->GetAccountId());
+
+	if (_Result)
+	{
+		do {
+			uint16 _Index = 0;
+			Field* _Fields = _Result->Fetch();		// Materializar la fila en un objeto
+
+			bool playerqueue = _Fields[_Index++].GetBool();
+
+			if (playerqueue)
+				_accountHaveToQueue = true;
+			else
+				_accountHaveToQueue = false;
+
+		} while (_Result->NextRow());
+	}
+	else
+		_accountHaveToQueue = false;
+							
+      if (pLimit > 0 && Sessions >= pLimit && AccountMgr::IsPlayerAccount(s->GetSecurity()) && !HasRecentlyDisconnected(s) && !_accountHaveToQueue)
+      {
+          AddQueuedPlayer(s);
+          UpdateMaxSessionCounters();
+		  _accountHaveToQueue = false;
+          TC_LOG_INFO("misc", "PlayerQueue: Account id %u is in Queue Position (%u).", s->GetAccountId(), ++QueueSize);
+          return;
+      }  
 
     s->SendDanceStudioCreateResult();
     s->SendAuthResponse(AUTH_OK, false);
