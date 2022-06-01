@@ -1,12 +1,13 @@
 #include <Chat.h>
 
-enum ForbiddenAreas
- {
-	// AREA_TIMELESS_ISLE			= 6757,	// Timeless Isle
-	// AREA_ISLE_OF_GIANT			= 6661, // IsleofGiants
-	// AREA_ISLE_OF_THUNDER		= 6507  // IsleofThunder
-	 MAP_MIST_OF_PANDARIA			= 870,
- };
+enum ForbiddenAreas : uint16
+{
+	AREA_TIMELESS_ISLE			= 6757,	// Timeless Isle
+	AREA_ISLE_OF_GIANT			= 6661, // IsleofGiants
+	AREA_ISLE_OF_THUNDER		= 6507, // IsleofThunder
+
+	MAP_MIST_OF_PANDARIA	    = 870,
+};
      
  class protected_zone : public PlayerScript
  {
@@ -31,6 +32,29 @@ enum ForbiddenAreas
 			}
 		}
      }
+	 /* For the future
+	 void OnUpdateZone(Player* player, uint32 newZone, uint32 newArea)
+	 {
+		 switch (newZone)
+		 {
+			 case AREA_TIMELESS_ISLE:
+			 case AREA_ISLE_OF_GIANT:
+			 case AREA_ISLE_OF_THUNDER:
+			 {
+				 if (player->GetSession()->GetSecurity() >= 1)
+					 return;
+				 
+				 if (player->GetTeamId() == TEAM_ALLIANCE)
+					 player->TeleportTo(0, -8833.07f, 622.778f, 93.9317f, 0.6771f);
+				 else if (player->GetTeamId() == TEAM_HORDE)
+					 player->TeleportTo(1, 1569.97f, -4397.41f, 16.0472f, 0.543025f);
+
+				 break;
+			 }
+			 default:
+				 break;
+		 }
+	 }*/
  };
      
  void AddSC_protected_zone()
