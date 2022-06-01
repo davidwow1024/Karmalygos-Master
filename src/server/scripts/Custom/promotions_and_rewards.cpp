@@ -120,7 +120,7 @@ public:
         if (action > GOSSIP_ACTION_INFO_DEF && action < 1007)
         {
             // Level
-            player->GiveLevel(90);
+            player->GiveLevel(85);
 
             // Equipment specs
             switch (player->getClass())
