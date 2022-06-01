@@ -318,7 +318,7 @@ public:
 						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58097, true);			//pantalone
 						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58195, true);			//palos
 						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58185, true);		//anillo1
-						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58185, true);		//anillo2
+						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56299, true);		//anillo2
 						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58180, true);	    //abalorio1	
 						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56342, true);
 						//player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 61348, true);
@@ -338,7 +338,7 @@ public:
 						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58097, true);			//pantalone
 						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58195, true);			//palos
 						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58185, true);		//anillo1
-						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58185, true);		//anillo2
+						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56299, true);		//anillo2
 						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58180, true);	    //abalorio1	
 						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56342, true);
 						player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 56342, true);
@@ -359,7 +359,7 @@ public:
 						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58097, true);			//pantalone
 						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58195, true);			//palos
 						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58185, true);		//anillo1
-						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58185, true);		//anillo2
+						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56299, true);		//anillo2
 						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58180, true);	    //abalorio1	
 						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56346, true);
 						player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 57926, true);
@@ -388,7 +388,7 @@ public:
 						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58097, true);			//pantalone
 						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58195, true);			//palos
 						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58185, true);		//anillo1
-						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58185, true);		//anillo2
+						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56299, true);		//anillo2
 						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58180, true);	    //abalorio1	
 						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56342, true);
 						//player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 61348, true);
@@ -408,7 +408,7 @@ public:
 						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58097, true);			//pantalone
 						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58195, true);			//palos
 						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58185, true);		//anillo1
-						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58185, true);		//anillo2
+						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56299, true);		//anillo2
 						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58180, true);	    //abalorio1	
 						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56346, true);
 						player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 57926, true);
@@ -593,7 +593,7 @@ public:
 						player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 58139, true);     //pecho
 						player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 71262, true);    //muñecas
 						player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 58152, true);     //manos
-						player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 57918, true);     //cintura
+						player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 57919, true);     //cintura
 						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58140, true);      //pantalones
 						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58484, true);      //palos
 						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58189, true);   //anillo1
@@ -660,7 +660,7 @@ public:
 						player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 58139, true);     //pecho
 						player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 71262, true);    //muñecas
 						player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 58152, true);     //manos
-						player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 57918, true);     //cintura
+						player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 57919, true);     //cintura
 						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58140, true);      //pantalones
 						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58484, true);      //palos
 						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58189, true);   //anillo1
@@ -731,28 +731,7 @@ public:
 						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 65167, true);  //arma
 						//player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);    //barita
                         break;
-                    }
-
-                    case 1002: // PvE
-                    {
-                        player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 98922, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_NECK, 83805, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 98925, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_BACK, 98772, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 98924, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 98769, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 98921, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 98764, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 98923, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_FEET, 98767, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 83800, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 83800, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 102483, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 103987, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 79339, true);
-                        //player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 61350, true);
-                        break;
-                    }
+                    }                   
                     }
                     break;
                 }
@@ -779,26 +758,7 @@ public:
 						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56317, true);	  //arma
                         break;
                     }
-
-                    case 1002: // PvE
-                    {
-                        player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 98822, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_NECK, 83803, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 98824, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_BACK, 98756, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 98820, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 98818, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 98821, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 98814, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 98823, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_FEET, 98817, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 83798, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 83798, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 102483, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 103986, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 77528, true);
-                        break;
-                    }
+                    
                     }
                     break;
                 }
@@ -825,28 +785,7 @@ public:
 						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 65167, true);  //arma
 					   // player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);    //barita
                         break;
-                    }
-
-                    case 1002: // PvE
-                    {
-                        player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 98826, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_NECK, 83805, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 98829, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_BACK, 98772, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 98828, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 98770, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 98825, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 98763, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 98827, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_FEET, 98766, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 83800, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 83800, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 102483, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 103987, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 79339, true);
-                        //player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 61350, true);
-                        break;
-                    }
+                    }                    
                     }
                     break;
                 }
@@ -917,7 +856,7 @@ public:
 						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58097, true);			//pantalone
 						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58195, true);			//palos
 						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58185, true);		//anillo1
-						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58185, true);		//anillo2
+						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56299, true);		//anillo2
 						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58180, true);	    //abalorio1	
 						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56342, true);
 						//player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 61348, true);
@@ -937,7 +876,7 @@ public:
 						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58097, true);			//pantalone
 						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58195, true);			//palos
 						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58185, true);		//anillo1
-						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58185, true);		//anillo2
+						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56299, true);		//anillo2
 						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58180, true);	    //abalorio1	
 						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56342, true);
 						player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 56342, true);
@@ -958,7 +897,7 @@ public:
 						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58097, true);			//pantalone
 						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58195, true);			//palos
 						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58185, true);		//anillo1
-						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58185, true);		//anillo2
+						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56299, true);		//anillo2
 						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58180, true);	    //abalorio1	
 						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56346, true);
 						player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 57926, true);
@@ -987,7 +926,7 @@ public:
 						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58097, true);			//pantalone
 						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58195, true);			//palos
 						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58185, true);		//anillo1
-						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58185, true);		//anillo2
+						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56299, true);		//anillo2
 						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58180, true);	    //abalorio1	
 						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56342, true);
 						//player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 61348, true);
@@ -1007,7 +946,7 @@ public:
 						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58097, true);			//pantalone
 						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58195, true);			//palos
 						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58185, true);		//anillo1
-						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58185, true);		//anillo2
+						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56299, true);		//anillo2
 						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58180, true);	    //abalorio1	
 						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56346, true);
 						player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 57926, true);
@@ -1017,22 +956,21 @@ public:
 
                     case 1003: // Sagrado
                     {
-						player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 58108, true);         //cabesa  
-						player->EquipNewItem(EQUIPMENT_SLOT_NECK, 57934, true);			//cuello
-						player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 58109, true);	//hombros
-						player->EquipNewItem(EQUIPMENT_SLOT_BACK, 58194, true);			//espalda
-						player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 58106, true);		//pecho
-						player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 71260, true);		//muñecas
-						player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 58110, true);		//manos
-						player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 57915, true);		//cintura
-						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58107, true);			//pantalone
-						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58198, true);			//palos
-						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 56307, true);		//anillo1
-						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56307, true);		//anillo2
-						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58184, true);	    //abalorio1	
-						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 57872, true);
-						player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 57925, true);
-						//player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 61348, true);
+						player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 58161, true);      //cabesa
+						player->EquipNewItem(EQUIPMENT_SLOT_NECK, 57934, true);      //cuello
+						player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 58162, true); //hombros
+						player->EquipNewItem(EQUIPMENT_SLOT_BACK, 58194, true);      //espalda
+						player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 58159, true);     //pecho
+						player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 71266, true);    //muñecas
+						player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 58163, true);     //manos
+						player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 57922, true);     //cintura
+						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58160, true);      //pantalones
+						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58486, true);      //palos
+						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58189, true);   //anillo1
+						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58189, true);   //anillo2
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58184, true);  //abalorio1                        
+						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 65167, true);  //arma
+					   // player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);    //barita	
                         break;
                     }
                     }
@@ -1176,70 +1114,23 @@ public:
 
                     case 1003: // Mejora
                     {
-                        player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 98901, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_NECK, 83803, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 98903, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_BACK, 98756, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 98899, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 98818, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 98900, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 98814, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 98902, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_FEET, 98817, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 83798, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 83798, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 102483, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 103986, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 85183, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 85183, true);
-                        //player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 70631, true);
+						player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 58123, true);       //cabesa
+						player->EquipNewItem(EQUIPMENT_SLOT_NECK, 57931, true);		  //cuello
+						player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 58124, true);  //hombros
+						player->EquipNewItem(EQUIPMENT_SLOT_BACK, 58191, true);		  //espalda
+						player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 58121, true);	  //pecho
+						player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 71264, true);	  //muñecas
+						player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 58125, true);	  //manos
+						player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 57916, true);	  //cintura
+						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58122, true);		  //pantalones
+						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58199, true);		  //palos
+						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 68812, true);	  //anillo1
+						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 71209, true);	  //anillo2
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58181, true);   //abalorio1						
+						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56396, true);   //arma1
+						player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 56396, true);	  //arma2
                         break;
-                    }
-
-                    case 1004: // Restauracion
-                    {
-                        player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 98896, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_NECK, 83806, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 98898, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_BACK, 98774, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 98894, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 98893, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 98895, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 98889, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 98897, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_FEET, 98891, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 83801, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 83801, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 102483, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 103988, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 82963, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 82968, true);
-                        //player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 70630, true);
-                        break;
-                    }
-
-                    case 1005: // Elemental
-                    {
-                        player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 98907, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_NECK, 83805, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 98909, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_BACK, 98772, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 98905, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 98892, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 98906, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 98904, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 98908, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_FEET, 98890, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 83800, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 83800, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 102483, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 103987, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 82963, true);
-                        player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 82968, true);
-                        //player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 70629, true);
-                        break;
-                    }
-
+                    }                                      
                     case 1006: // Mejora
                     {
 						player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 58123, true);       //cabesa
@@ -1254,7 +1145,7 @@ public:
 						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58199, true);		  //palos
 						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 68812, true);	  //anillo1
 						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 71209, true);	  //anillo2
-						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58181, true);  //abalorio1						
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58181, true);   //abalorio1						
 						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56396, true);   //arma1
 						player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 56396, true);	  //arma2
                         break;
@@ -1284,7 +1175,7 @@ public:
 						 player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58189, true);   //anillo2
 						 player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58183, true);  //abalorio1                        
 						 player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 65167, true);  //arma
-						// player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);    //barita
+						// player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);  //barita
 						 break;
 					 }
 
@@ -1297,33 +1188,33 @@ public:
 						 player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 58139, true);     //pecho
 						 player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 71262, true);    //muñecas
 						 player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 58152, true);     //manos
-						 player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 57918, true);     //cintura
+						 player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 57919, true);     //cintura
 						 player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58140, true);      //pantalones
 						 player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58484, true);      //palos
 						 player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58189, true);   //anillo1
 						 player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58189, true);   //anillo2
 						 player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58183, true);  //abalorio1                        
 						 player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 65167, true);  //arma
-						// player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);    //barita
+						// player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);  //barita
 						 break;
 					 }
 
 					 case 1003: // Feral
 					 {
-						 player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 58133, true);         //cabesa  
-						 player->EquipNewItem(EQUIPMENT_SLOT_NECK, 57931, true);			//cuello
+						 player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 58133, true);        //cabesa  
+						 player->EquipNewItem(EQUIPMENT_SLOT_NECK, 57931, true);		//cuello
 						 player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 58134, true);	//hombros
-						 player->EquipNewItem(EQUIPMENT_SLOT_BACK, 58191, true);			//espalda
+						 player->EquipNewItem(EQUIPMENT_SLOT_BACK, 58191, true);		//espalda
 						 player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 58131, true);		//pecho
 						 player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 71130, true);		//muñecas
 						 player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 58138, true);		//manos
 						 player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 57918, true);		//cintura
-						 player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58132, true);			//pantalone
-						 player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58482, true);			//palos
+						 player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58132, true);		//pantalone
+						 player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58482, true);		//palos
 						 player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 56412, true);		//anillo1
 						 player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56412, true);		//anillo2
-						 player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58181, true);	    //abalorio1	
-						 player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56382, true);     //arma1						
+						 player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58181, true);    //abalorio1	
+						 player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56382, true);    //arma1						
 						 break;
 					 }
 
@@ -1337,21 +1228,21 @@ public:
 					 {
 					 case 1001: // DPS
 					 {
-						 player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 58133, true);         //cabesa  
-						 player->EquipNewItem(EQUIPMENT_SLOT_NECK, 57931, true);			//cuello
-						 player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 58134, true);	//hombros
-						 player->EquipNewItem(EQUIPMENT_SLOT_BACK, 58191, true);			//espalda
-						 player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 58131, true);		//pecho
-						 player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 71130, true);		//muñecas
-						 player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 58138, true);		//manos
-						 player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 57918, true);		//cintura
-						 player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58132, true);			//pantalone
-						 player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58482, true);			//palos
-						 player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 56412, true);		//anillo1
-						 player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56412, true);		//anillo2
-						 player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58181, true);	    //abalorio1	
+						 player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 58133, true);       //cabesa  
+						 player->EquipNewItem(EQUIPMENT_SLOT_NECK, 57931, true);	   //cuello
+						 player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 58134, true);  //hombros
+						 player->EquipNewItem(EQUIPMENT_SLOT_BACK, 58191, true);	   //espalda
+						 player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 58131, true);	   //pecho
+						 player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 71130, true);	   //muñecas
+						 player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 58138, true);	   //manos
+						 player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 57918, true);	   //cintura
+						 player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58132, true);	   //pantalone
+						 player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58482, true);	   //palos
+						 player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 56412, true);	   //anillo1
+						 player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56412, true);	   //anillo2
+						 player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58181, true);   //abalorio1	
 						 player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56396, true);   //arma1
-						 player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 56396, true);	  //arma2
+						 player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 56396, true);	   //arma2
 						 break;
 					 }
 
@@ -1364,14 +1255,14 @@ public:
 						 player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 58139, true);     //pecho
 						 player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 71262, true);    //muñecas
 						 player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 58152, true);     //manos
-						 player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 57918, true);     //cintura
+						 player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 57919, true);     //cintura
 						 player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58140, true);      //pantalones
 						 player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58484, true);      //palos
 						 player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58189, true);   //anillo1
 						 player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58189, true);   //anillo2
 						 player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58183, true);  //abalorio1                        
 						 player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 65167, true);  //arma
-						// player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);    //barita
+						// player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);  //barita
 						 break;
 					 }
 
