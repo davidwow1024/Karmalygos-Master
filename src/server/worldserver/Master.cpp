@@ -177,9 +177,8 @@ int Master::Run()
     TC_LOG_INFO("server.authserver", " ██╔═██╗░██╔══██║██╔══██╗██║╚██╔╝██║██╔══██║██║░░░░░░░╚██╔╝░░██║░░╚██╗██║░░██║░╚═══██╗");
     TC_LOG_INFO("server.authserver", " ██║░╚██╗██║░░██║██║░░██║██║░╚═╝░██║██║░░██║███████╗░░░██║░░░╚██████╔╝╚█████╔╝██████╔╝");
     TC_LOG_INFO("server.authserver", " ╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═╝░░╚═╝╚══════╝░░░╚═╝░░░░╚═════╝░░╚════╝░╚═════╝░");
-	TC_LOG_INFO("server.authserver", " Project KarMalygosEmu 2014(c) Private-sourced Game Emulation ");
-       TC_LOG_INFO("server.authserver", "<http://www.projectskarmalygos.org/> \n");
-
+	TC_LOG_INFO("server.authserver", " Project KarMalygosEmu 2022(c) Private-sourced Game Emulation ");
+       TC_LOG_INFO("server.authserver", "<http://10.96.65.5/foro/index.php> \n");
 
     /// worldserver PID file creation
     std::string pidFile = sConfigMgr->GetStringDefault("PidFile", "");

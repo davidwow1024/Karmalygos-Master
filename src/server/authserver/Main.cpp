@@ -138,8 +138,9 @@ extern int main(int argc, char** argv)
     TC_LOG_INFO("server.authserver", " ██╔═██╗░██╔══██║██╔══██╗██║╚██╔╝██║██╔══██║██║░░░░░░░╚██╔╝░░██║░░╚██╗██║░░██║░╚═══██╗");
     TC_LOG_INFO("server.authserver", " ██║░╚██╗██║░░██║██║░░██║██║░╚═╝░██║██║░░██║███████╗░░░██║░░░╚██████╔╝╚█████╔╝██████╔╝");
     TC_LOG_INFO("server.authserver", " ╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═╝░░╚═╝╚══════╝░░░╚═╝░░░░╚═════╝░░╚════╝░╚═════╝░");
-	TC_LOG_INFO("server.authserver", " Project KarMalygosEmu 2014(c) Private-sourced Game Emulation ");
-       TC_LOG_INFO("server.authserver", "<http://www.projectskarmalygos.org/> \n");
+	TC_LOG_INFO("server.authserver", " Project KarMalygosEmu 2022(c) Private-sourced Game Emulation ");
+       TC_LOG_INFO("server.authserver", "<http://10.96.65.5/foro/index.php> \n");
+	
 	   
     TC_LOG_INFO("server.authserver", "Using configuration file %s.", configFile);
 
