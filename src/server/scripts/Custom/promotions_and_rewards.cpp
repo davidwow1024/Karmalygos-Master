@@ -427,21 +427,23 @@ public:
 
                     case 1003: // Sagrado
                     {
-						player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 58161, true);      //cabesa
+
+						player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 58108, true);      //cabesa
 						player->EquipNewItem(EQUIPMENT_SLOT_NECK, 57934, true);      //cuello
-						player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 58162, true); //hombros
+						player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 58109, true); //hombros
 						player->EquipNewItem(EQUIPMENT_SLOT_BACK, 58194, true);      //espalda
-						player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 58159, true);     //pecho
-						player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 71266, true);    //muñecas
-						player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 58163, true);     //manos
-						player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 57922, true);     //cintura
-						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58160, true);      //pantalones
-						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58486, true);      //palos
+						player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 58106, true);     //pecho
+						player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 71260, true);    //muñecas
+						player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 58110, true);     //manos
+						player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 57915, true);     //cintura
+						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58107, true);      //pantalones
+						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58198, true);      //palos
 						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58189, true);   //anillo1
 						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58188, true);   //anillo2
 						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58184, true);  //abalorio1  
 						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
-						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 65167, true);  //arma
+						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56312, true);
+						player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 56322, true);
 					   // player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);    //barita						
                         break;
                     }
@@ -987,22 +989,23 @@ public:
 
                     case 1003: // Sagrado
                     {
-						player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 58161, true);      //cabesa
+						player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 58108, true);      //cabesa
 						player->EquipNewItem(EQUIPMENT_SLOT_NECK, 57934, true);      //cuello
-						player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 58162, true); //hombros
+						player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 58109, true); //hombros
 						player->EquipNewItem(EQUIPMENT_SLOT_BACK, 58194, true);      //espalda
-						player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 58159, true);     //pecho
-						player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 71266, true);    //muñecas
-						player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 58163, true);     //manos
-						player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 57922, true);     //cintura
-						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58160, true);      //pantalones
-						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58486, true);      //palos
-						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58188, true);   //anillo1
-						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58189, true);   //anillo2
-						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58184, true);  //abalorio1 
-						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
-						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 65167, true);  //arma
-					   // player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);    //barita	
+						player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 58106, true);     //pecho
+						player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 71260, true);    //muñecas
+						player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 58110, true);     //manos
+						player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 57915, true);     //cintura
+						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58107, true);      //pantalones
+						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58198, true);      //palos
+						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58189, true);   //anillo1
+						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58188, true);   //anillo2
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58184, true);  //abalorio1  
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56312, true);
+						player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 56322, true);
+					   // player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);    //barita
                         break;
                     }
                     }
