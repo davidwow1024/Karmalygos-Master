@@ -2140,6 +2140,7 @@ void AddSC_Boost_Profession();
 void AddSC_Custom_Items();
 void AddSC_custom_xp_rates();
 void AddSC_promotions_and_rewards();
+void AddSC_custom_boss_announcer();
 
 
 void AddCustomScripts()
@@ -2154,6 +2155,7 @@ AddSC_Boost_Profession();
 AddSC_Custom_Items();
 AddSC_custom_xp_rates();
 AddSC_promotions_and_rewards();
+AddSC_custom_boss_announcer();
 
 #endif
     AddSC_Anticheat();
