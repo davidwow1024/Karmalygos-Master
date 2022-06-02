@@ -691,7 +691,7 @@ public:
 						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58097, true);			//pantalone
 						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58195, true);			//palos
 						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58185, true);		//anillo1
-						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58185, true);		//anillo2
+						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56299, true);		//anillo2
 						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58180, true);	    //abalorio1	
 						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56342, true);
 						//player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 61348, true);
@@ -1286,7 +1286,7 @@ public:
 						player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 58097, true);			//pantalone
 						player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58195, true);			//palos
 						player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58185, true);		//anillo1
-						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58185, true);		//anillo2
+						player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56299, true);		//anillo2
 						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58180, true);	    //abalorio1	
 						player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56342, true);
 						//player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 61348, true);
