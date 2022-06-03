@@ -105,16 +105,14 @@ public:
 		TaskScheduler scheduler;
 		if (action == GOSSIP_ACTION_INFO_DEF + 7)
 		{
-			player->AddItem(25533, 1);
 			player->TeleportTo(1, 1365.477051f, -4372.168945f, 26.070314f, 0.167605f);
 			LoginDatabase.PExecute("UPDATE `account` SET `counter` = 2 WHERE `id` = %u", player->GetSession()->GetAccountId());
 		}
 
 		if (action == GOSSIP_ACTION_INFO_DEF + 8)
 		{
-				player->AddItem(25529, 1);
-				player->TeleportTo(0, -9093.825195f, 412.933624f, 92.118713f, 0.679353f);
-				LoginDatabase.PExecute("UPDATE `account` SET `counter` = 2 WHERE `id` = %u", player->GetSession()->GetAccountId());
+			player->TeleportTo(0, -9093.825195f, 412.933624f, 92.118713f, 0.679353f);
+			LoginDatabase.PExecute("UPDATE `account` SET `counter` = 2 WHERE `id` = %u", player->GetSession()->GetAccountId());
 		}
 
         if (action > GOSSIP_ACTION_INFO_DEF && action < 1007)
@@ -168,7 +166,15 @@ public:
             player->LearnSpell(54197, false);
             player->LearnSpell(90267, false);
             
-			//Mount despues por learn speel
+			//Mount 
+			if (player->GetTeamId() == TEAM_ALLIANCE)
+			{
+				player->LearnSpell(32292, false);
+			}
+			else
+			{
+				player->LearnSpell(32297, false);
+			}
 
 
             // Worgen misc
@@ -206,8 +212,15 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58485, true);      //palos
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 56380, true);   //anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58188, true);   //anillo2
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58183, true);  //abalorio1 
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58183, true);  //abalorio1 					
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 65167, true);  //arma
 				   // player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);  //barita
 					break;
@@ -235,7 +248,14 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 56412, true);	  //anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 71209, true);	  //anillo2
 					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58181, true);  //abalorio1
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56317, true);	  //arma
 					break;
 				}
@@ -261,8 +281,15 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58485, true);      //palos
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 56380, true);   //anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58188, true);   //anillo2
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58183, true);  //abalorio1 
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58183, true);  //abalorio1 									
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 65167, true);  //arma
 				   // player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);    //barita
 					break;
@@ -290,7 +317,14 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 56412, true);		//anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 71209, true);		//anillo2
 					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58181, true);	    //abalorio1
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56302, true);
 					player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 56302, true);
 					//player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 61348, true);
@@ -319,7 +353,14 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58185, true);		//anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56299, true);		//anillo2
 					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58180, true);	    //abalorio1
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56342, true);
 					//player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 61348, true);
 					break;
@@ -340,7 +381,14 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58185, true);		//anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56299, true);		//anillo2
 					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58180, true);	    //abalorio1	
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56342, true);
 					player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 56342, true);
 					//player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 61348, true);
@@ -362,7 +410,14 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58185, true);		//anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56299, true);		//anillo2
 					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58180, true);	    //abalorio1	
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56346, true);
 					player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 57926, true);
 					//player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 61348, true);
@@ -392,7 +447,14 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58185, true);		//anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56299, true);		//anillo2
 					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58180, true);	    //abalorio1	
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56342, true);
 					//player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 61348, true);
 					break;
@@ -413,7 +475,14 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58185, true);		//anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56299, true);		//anillo2
 					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58180, true);	    //abalorio1	
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56346, true);
 					player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 57926, true);
 					//player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 61348, true);
@@ -436,7 +505,14 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58189, true);   //anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58188, true);   //anillo2
 					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58184, true);  //abalorio1  
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56312, true);
 					player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 56322, true);
 					// player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);    //barita						
@@ -466,7 +542,14 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58189, true);   //anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58188, true);   //anillo2
 					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58184, true);  //abalorio1
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56424, true);  //arma
 				   // player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);    //barita	
 					break;
@@ -487,7 +570,14 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58188, true);   //anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58189, true);   //anillo2
 					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58183, true);  //abalorio1
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 65167, true);  //arma
 				   // player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);    //barita
 					break;
@@ -508,7 +598,14 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58189, true);   //anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58188, true);   //anillo2
 					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58184, true);  //abalorio1
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56424, true);  //arma
 				   // player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);    //barita
 					break;
@@ -536,7 +633,14 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58189, true);   //anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58188, true);   //anillo2
 					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58183, true);  //abalorio1
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 57872, true);
 					player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 57925, true);
 					// player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);    
@@ -558,7 +662,14 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58189, true);   //anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58188, true);   //anillo2
 					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58183, true);  //abalorio1 
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 57872, true);
 					player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 56402, true);
 					// player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);    
@@ -581,7 +692,14 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 56412, true);	  //anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 71209, true);	  //anillo2
 					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58181, true);  //abalorio1
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56396, true);   //arma1
 					player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 56396, true);	  //arma2
 
@@ -605,13 +723,20 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 63471, true);     //pecho
 					player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 56297, true);    //muñecas
 					player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 63439, true);     //manos
-					player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 57918, true);     //cintura
+					player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 57919, true);     //cintura
 					player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 56408, true);      //pantalones
 					player->EquipNewItem(EQUIPMENT_SLOT_FEET, 58484, true);      //palos
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58189, true);   //anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58188, true);   //anillo2
 					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58183, true);  //abalorio1  
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 65167, true);  //arma
 				   // player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);    //barita
 					break;
@@ -632,7 +757,14 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58189, true);   //anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58188, true);   //anillo2
 					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58183, true);  //abalorio1 
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56424, true);  //arma
 				   // player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);    //barita
 					break;
@@ -653,7 +785,14 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 56412, true);		//anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 71209, true);		//anillo2
 					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58181, true);	    //abalorio1
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56382, true);     //arma1						
 					break;
 				}
@@ -681,7 +820,14 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 56412, true);		//anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 71209, true);		//anillo2
 					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58181, true);	    //abalorio1	
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56396, true);   //arma1
 					player->EquipNewItem(EQUIPMENT_SLOT_OFFHAND, 56396, true);	  //arma2
 					break;
@@ -702,7 +848,14 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58189, true);   //anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 58188, true);   //anillo2
 					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58183, true);  //abalorio1 
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56424, true);  //arma
 				   // player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 71151, true);    //barita
 					break;
@@ -730,7 +883,14 @@ public:
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 58185, true);		//anillo1
 					player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 56299, true);		//anillo2
 					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 58180, true);	    //abalorio1	
-					player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					if (player->GetTeamId() == TEAM_ALLIANCE)
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69861, true);
+					}
+					else
+					{
+						player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 69862, true);
+					}
 					player->EquipNewItem(EQUIPMENT_SLOT_MAINHAND, 56342, true);
 					//player->EquipNewItem(EQUIPMENT_SLOT_RANGED, 61348, true);
 					break;
