@@ -2,11 +2,11 @@
 
 
 /*Cerrando BG y Arenas de Pandaria*/
-UPDATE `battleground_template` SET `MinLvl` = 99 WHERE `id` = 699;
-UPDATE `battleground_template` SET `MinLvl` = 99 WHERE `id` = 708;
-UPDATE `battleground_template` SET `MinLvl` = 99 WHERE `id` = 719;
-UPDATE `battleground_template` SET `MinLvl` = 99 WHERE `id` = 754;
-UPDATE `battleground_template` SET `MinLvl` = 99 WHERE `id` = 757;
+DELETE FROM `battleground_template` WHERE `id` = 757;
+DELETE FROM `battleground_template` WHERE `id` = 719;
+DELETE FROM `battleground_template` WHERE `id` = 754;
+DELETE FROM `battleground_template` WHERE `id` = 708;
+DELETE FROM `battleground_template` WHERE `id` = 699;
 
 
 -- disable pandaria dungeons
