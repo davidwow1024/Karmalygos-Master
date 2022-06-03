@@ -149,3 +149,9 @@ UPDATE `creature` SET `spawntimesecs` = '14400' WHERE `guid` = '516616';
 
 -- Creature Galeon - Id : 89783 , se redujo el % de la montura
 UPDATE `creature_loot_template` SET `ChanceOrQuestChance` = 1 WHERE `entry` = 62346 AND item=89783;
+
+-- Misiones Introductorias a pandaria
+DELETE FROM `disables` WHERE `sourceType`=1 AND `entry`=29547;
+DELETE FROM `disables` WHERE `sourceType`=1 AND `entry`=29612;
+INSERT INTO `disables` (`sourceType`, `entry`, `flags`, `params_0`, `params_1`, `comment`) VALUES (1, 29547, 0, '', '', 'quitar al abrir el parche 5.0.x');
+INSERT INTO `disables` (`sourceType`, `entry`, `flags`, `params_0`, `params_1`, `comment`) VALUES (1, 29612, 0, '', '', 'quitar al abrir el parche 5.0.x');
