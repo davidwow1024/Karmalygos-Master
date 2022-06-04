@@ -7,7 +7,7 @@ public:
 
 	void OnLogin(Player* player)
 	{
-		if (player->getRace() == RACE_WORGEN)
+		if (player->getRace() == RACE_WORGEN && player->getLevel() == 85)
 		{
 			if (!player->HasAura(94293 || 68978 || 68996 || 68976 || 68975 || 68992))
 				player->CastSpell(player, 1645, true);
