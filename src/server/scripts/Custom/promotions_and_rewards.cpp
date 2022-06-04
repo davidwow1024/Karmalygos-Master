@@ -180,12 +180,8 @@ public:
             // Worgen misc
             if (player->getRace() == RACE_WORGEN)
             {
-                player->LearnSpell(94293, false);
-                player->LearnSpell(68978, false);
-                player->LearnSpell(68996, false);
-                player->LearnSpell(68976, false);
                 player->LearnSpell(68992, false);
-                player->CastSpell(player, 97709, true);
+				player->CastSpell(player, 1645, true);
             }
 
             // Goblin misc
