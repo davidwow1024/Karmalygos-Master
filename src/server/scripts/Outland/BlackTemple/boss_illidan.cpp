@@ -1357,12 +1357,12 @@ class npc_akama_illidan : public CreatureScript
             }
             return true;
         }
-
+		
         bool OnGossipHello(Player* player, Creature* creature) override
         {
             InstanceScript* instance = creature->GetInstanceScript();
 
-            if (instance && instance->GetData(DATA_ILLIDAN_STORMRAGE_EVENT) == NOT_STARTED && instance->CheckRequiredBosses(DATA_ILLIDAN_STORMRAGE_EVENT, player))
+            if (instance && instance->GetData(DATA_ILLIDAN_STORMRAGE_EVENT) == NOT_STARTED) //&& instance->CheckRequiredBosses(DATA_ILLIDAN_STORMRAGE_EVENT, player))
                 player->ADD_GOSSIP_ITEM_DB(GOSSIP_ITEM, 0, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF);
 
             player->SEND_GOSSIP_MENU(10465, creature->GetGUID());
