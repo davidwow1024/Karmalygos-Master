@@ -566,11 +566,11 @@ void WorldSession::HandleSetActiveMoverOpcode(WorldPacket& recvPacket)
     recvPacket.ReadByteSeq(guid[1]);
     recvPacket.ReadByteSeq(guid[6]);
 
-    if (GetPlayer()->IsInWorld())
+   /* if (GetPlayer()->IsInWorld())
     {
         if (guid != _player->GetClientMoverGuid())
             TC_LOG_ERROR("network", "HandleSetActiveMoverOpcode: incorrect mover guid: mover is " UI64FMTD " (%s - Entry: %u) and should be " UI64FMTD, uint64(guid), GetLogNameForGuid(guid), GUID_ENPART(guid), _player->GetClientMoverGuid());
-    }
+    }*/
 }
 
 void WorldSession::HandleMoveNotActiveMover(WorldPacket &recvData)
