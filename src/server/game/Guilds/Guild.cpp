@@ -771,22 +771,9 @@ void Guild::Member::SaveProfessionsToDB(SQLTransaction trans)
     stmt->setUInt16(0, m_professions[0].SkillId);
     stmt->setUInt16(1, m_professions[0].Value);
     stmt->setUInt16(2, m_professions[0].Rank);
-
-    std::ostringstream ss;
-    for (auto&& it : m_professions[0].Recipes)
-        ss << it << ' ';
-
-    stmt->setString(3, ss.str());
     stmt->setUInt16(4, m_professions[1].SkillId);
     stmt->setUInt16(5, m_professions[1].Value);
     stmt->setUInt16(6, m_professions[1].Rank);
-
-    ss.str("");
-    for (auto&& it : m_professions[1].Recipes)
-        ss << it << ' ';
-
-    stmt->setString(7, ss.str());
-
     stmt->setUInt32(8, m_guildId);
     stmt->setUInt32(9, GUID_LOPART(m_guid));
     CharacterDatabase.ExecuteOrAppend(trans, stmt, DBConnection::Guild);
@@ -1906,28 +1893,50 @@ void Guild::HandleSetEmblem(WorldSession* session, const EmblemInfo& emblemInfo)
 
 void Guild::HandleSetNewGuildMaster(WorldSession* session, std::string const& name, bool isDethrone)
 {
-    Player* player = session->GetPlayer();
-    // Only the guild master can throne a new guild master
-    if (!IsLeader(player))
-    {
-        if (!isDethrone || (time(NULL) - GetMember(GetLeaderGUID())->GetLogoutTime()) < 90 * DAY)
-        {
-            SendCommandResult(session, GUILD_COMMAND_CHANGE_LEADER, ERR_GUILD_PERMISSIONS);
-            return;
-        }
-    }
-    // Old GM must be a guild member
-    if (Member* oldGuildMaster = GetMember(GetLeaderGUID()))
-    {
-        // Same for the new one
-        if (Member* newGuildMaster = GetMember(name))
-        {
-            SetLeaderGUID(newGuildMaster);
-            oldGuildMaster->ChangeRank(GR_INITIATE);
-            SendEventNewLeader(newGuildMaster, oldGuildMaster, isDethrone);
-        }
-    }
+	Player* player = session->GetPlayer();
+	// Only the guild master can throne a new guild master
+	if (!IsLeader(player))
+		SendCommandResult(session, GUILD_COMMAND_CHANGE_LEADER, ERR_GUILD_PERMISSIONS);
+	// Old GM must be a guild member
+	else if (Member * oldGuildMaster = GetMember(player->GetGUID()))
+	{
+		// Same for the new one
+		if (Member * newGuildMaster = GetMember(name))
+		{
+			SetLeaderGUID(newGuildMaster);
+			oldGuildMaster->ChangeRank(GR_INITIATE);
+			SendEventNewLeader(newGuildMaster, oldGuildMaster, isDethrone);
+		}
+	}  
 }
+
+void Guild::HandleReplaceGuildMaster(WorldSession* session)
+{
+	Player* player = session->GetPlayer();
+
+	if (Member * newGuildMaster = GetMember(player->GetGUID()))
+	{
+		if (newGuildMaster->GetRankId() > GR_MEMBER) // 3 ranks down from gum is the requirements
+		{
+			SendCommandResult(session, GUILD_COMMAND_CHANGE_LEADER, ERR_GUILD_PERMISSIONS);
+			return;
+		}
+
+		if (Member * oldGuildMaster = GetMember(m_leaderGuid))
+		{
+			if (oldGuildMaster->GetLogoutTime() > uint64(time(NULL) - (DAY * 90)))
+			{
+				SendCommandResult(session, GUILD_COMMAND_CHANGE_LEADER, ERR_GUILD_PERMISSIONS);
+				return;
+			}
+
+			SetLeaderGUID(newGuildMaster);
+			oldGuildMaster->ChangeRank(GetLowestRankId());
+			SendEventNewLeader(oldGuildMaster, newGuildMaster, true);
+		}
+	}
+}
+
 
 void Guild::HandleSetBankTabInfo(WorldSession* session, uint8 tabId, std::string const& name, std::string const& icon)
 {
@@ -2206,7 +2215,6 @@ void Guild::HandleAcceptMember(WorldSession* session)
         return;
 
     AddMember(player->GetGUID());
-	player->SaveToDB();
 }
 
 void Guild::HandleLeaveMember(WorldSession* session)
@@ -2730,41 +2738,41 @@ void Guild::SendEventMOTD(WorldSession* session, bool broadcast)
 
 void Guild::SendEventNewLeader(Member* newLeader, Member* oldLeader, bool isSelfPromoted)
 {
-    ObjectGuid newLeaderGUID = newLeader ? newLeader->GetGUID() : 0;
-    std::string newLeaderName = newLeader ? newLeader->GetName() : "";
-    ObjectGuid oldLeaderGUID = oldLeader ? oldLeader->GetGUID() : 0;
-    std::string oldLeaderName = oldLeader ? oldLeader->GetName() : "";
 
-    WorldPacket data(SMSG_GUILD_EVENT_NEW_LEADER);
-    data.WriteGuidMask(newLeaderGUID, 4, 2, 7);
-    data.WriteBit(oldLeaderGUID[4]);
-    data.WriteBits(oldLeaderName.size(), 6);
-    data.WriteBit(oldLeaderGUID[0]);
-    data.WriteGuidMask(newLeaderGUID, 6, 3);
-    data.WriteBit(isSelfPromoted);
-    data.WriteGuidMask(newLeaderGUID, 1, 0);
-    data.WriteGuidMask(oldLeaderGUID, 1, 7, 3, 6, 2);
-    data.WriteBits(newLeaderName.size(), 6);
-    data.WriteBit(oldLeaderGUID[5]);
-    data.WriteBit(newLeaderGUID[5]);
 
-    data.FlushBits();
+	ObjectGuid gumGuid = oldLeader->GetGUID();
+	ObjectGuid newGumGuid = newLeader->GetGUID();
 
-    data.WriteGuidBytes(newLeaderGUID, 5, 6);
-    data.WriteString(oldLeaderName);
-    data.WriteString(newLeaderName);
-    data.WriteGuidBytes(newLeaderGUID, 3, 4);
-    data << uint32(realmID);
-    data.WriteByteSeq(oldLeaderGUID[6]);
-    data.WriteByteSeq(newLeaderGUID[0]);
-    data.WriteByteSeq(oldLeaderGUID[5]);
-    data.WriteGuidBytes(newLeaderGUID, 2, 7);
-    data.WriteGuidBytes(oldLeaderGUID, 7, 4);
-    data << uint32(realmID);
-    data.WriteByteSeq(newLeaderGUID[1]);
-    data.WriteGuidBytes(oldLeaderGUID, 2, 1, 3, 0);
+	WorldPacket data(SMSG_GUILD_EVENT_NEW_LEADER, oldLeader->GetName().size() + newLeader->GetName().size() + 2 * 8);
+	data.WriteGuidMask(newGumGuid, 4, 2, 7);
+	data.WriteBit(gumGuid[4]);
+	data.WriteBits(oldLeader->GetName().size(), 6);
+	data.WriteBit(gumGuid[0]);
+	data.WriteGuidMask(newGumGuid, 6, 3);
+	data.WriteBit(isSelfPromoted);
+	data.WriteGuidMask(newGumGuid, 1, 0);
+	data.WriteGuidMask(gumGuid, 1, 7, 3, 6, 2);
+	data.WriteBits(newLeader->GetName().size(), 6);
+	data.WriteBit(gumGuid[5]);
+	data.WriteBit(newGumGuid[5]);
+	data.FlushBits();
 
-    BroadcastPacket(&data);
+	data.WriteGuidBytes(newGumGuid, 5, 6);
+	data.WriteString(oldLeader->GetName());
+	data.WriteString(newLeader->GetName());
+	data.WriteGuidBytes(newGumGuid, 3, 4);
+	data << (int32)realmID;
+	data.WriteByteSeq(gumGuid[6]);
+	data.WriteByteSeq(newGumGuid[0]);
+	data.WriteByteSeq(gumGuid[5]);
+	data.WriteGuidBytes(newGumGuid, 2, 7);
+	data.WriteGuidBytes(gumGuid, 7, 4);
+	data << (int32)realmID;
+	data.WriteByteSeq(newGumGuid[1]);
+	data.WriteGuidBytes(gumGuid, 2, 1, 3, 0);
+
+	BroadcastPacket(&data);
+
 }
 
 void Guild::SendEventPlayerLeft(Member* leaver, Member* remover, bool isRemoved)
@@ -3216,69 +3224,49 @@ bool Guild::AddMember(uint64 guid, uint8 rankId)
         }
         m_members[lowguid] = member;
     }
+	SQLTransaction trans(NULL);
+	member->SaveToDB(trans);
+	member->SaveProfessionsToDB(trans);
+	// If player not in game data in will be loaded from guild tables, so no need to update it!
+	if (player)
+	{
+		player->SetInGuild(m_id);
+		player->SetRank(rankId);
+		player->SetGuildLevel(GetLevel());
+		player->SetGuildIdInvited(0);
+		if (sWorld->getBoolConfig(CONFIG_GUILD_LEVELING_ENABLED))
+		{
+			for (uint32 i = 0; i < sGuildPerkSpellsStore.GetNumRows(); ++i)
+				if (GuildPerkSpellsEntry const* entry = sGuildPerkSpellsStore.LookupEntry(i))
+					if (entry->Level <= GetLevel())
+						player->LearnSpell(entry->SpellId, true);
+		}
 
-    PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_GUILD_MEMBER_REPUTATION);
-    stmt->setInt32(0, GUID_LOPART(guid));
-    PreparedQueryResult result = CharacterDatabase.Query(stmt);
-    if (result)
-    {
-        Field* fields = result->Fetch();
-        uint32 guild = fields[0].GetUInt32();
-        if (guild != GetId())
-        {
-            if (player)
-            {
-                int32 val = 0;
-                if (FactionEntry const* faction = sFactionStore.LookupEntry(GUILD_REPUTATION_ID))
-                {
-                    ReputationRank rank = player->GetReputationMgr().GetRank(faction);
-                    for (int32 r = REP_NEUTRAL; r < rank; ++r)
-                        val += ReputationMgr::PointsInRank[r];
+		if (FactionEntry const* factionEntry = sFactionStore.LookupEntry(GUILD_REPUTATION_ID))
+			player->GetReputationMgr().SetReputation(factionEntry, 0);
+	}
 
-                    player->GetReputationMgr().SetReputation(faction, val);
-                    member->SetReputation(player->GetReputationMgr().GetReputation(faction));
-                }
-            }
-            else
-            {
-                // FIXME
-            }
-        }
-    }
-    else
-    {
-        if (player)
-            if (FactionEntry const* faction = sFactionStore.LookupEntry(GUILD_REPUTATION_ID))
-                player->GetReputationMgr().SetVisible(faction);
-        member->SetReputation(0);
-    }
+	UpdateAccountsNumber();
+	UpdateGuildRecipes();
+	LogEvent(GUILD_EVENT_LOG_JOIN_GUILD, lowguid);
 
-    SQLTransaction trans = CharacterDatabase.BeginTransaction();
-    member->SaveToDB(trans);
-    member->SaveProfessionsToDB(trans);
-    CharacterDatabase.CommitTransaction(trans, DBConnection::Guild);
+	ObjectGuid Guid = guid;
+	WorldPacket data(SMSG_GUILD_EVENT_PLAYER_JOINED);
+	data.WriteGuidMask(Guid, 6, 1, 3);
+	data.WriteBits(name.size(), 6);
+	data.WriteGuidMask(Guid, 7, 4, 2, 5, 0);
+	data.WriteGuidBytes(Guid, 2, 4, 1, 6, 5);
+	data << uint32(realmID);
+	data.WriteGuidBytes(Guid, 3, 0);
+	data.WriteString(name);
+	data.WriteGuidBytes(Guid, 7);
 
-    UpdateAccountsNumber();
-    UpdateGuildRecipes();
-    LogEvent(GUILD_EVENT_LOG_JOIN_GUILD, lowguid);
+	sGuildFinderMgr->RemoveAllMembershipRequestsFromPlayer(lowguid);
 
-    ObjectGuid Guid = guid;
-    WorldPacket data(SMSG_GUILD_EVENT_PLAYER_JOINED);
-    data.WriteGuidMask(Guid, 6, 1, 3);
-    data.WriteBits(name.size(), 6);
-    data.WriteGuidMask(Guid, 7, 4, 2, 5, 0);
-    data.WriteGuidBytes(Guid, 2, 4, 1, 6, 5);
-    data << uint32(realmID);
-    data.WriteGuidBytes(Guid, 3, 0);
-    data.WriteString(name);
-    data.WriteGuidBytes(Guid, 7);
+	// Call scripts if member was succesfully added (and stored to database)
+	sScriptMgr->OnGuildAddMember(this, player, rankId);
 
-    sGuildFinderMgr->RemoveAllMembershipRequestsFromPlayer(lowguid);
-
-    // Call scripts if member was succesfully added (and stored to database)
-    sScriptMgr->OnGuildAddMember(this, player, rankId);
-
-    return true;
+	return true;
 }
 
 void Guild::DeleteMember(uint64 guid, bool isDisbanding, bool isKicked, bool canDeleteGuild)
