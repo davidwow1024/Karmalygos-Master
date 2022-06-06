@@ -2228,7 +2228,6 @@ void Guild::HandleAcceptMember(WorldSession* session)
         return;
 
     AddMember(player->GetGUID());
-	player->SaveToDB();
 }
 
 void Guild::HandleLeaveMember(WorldSession* session)
