@@ -1102,27 +1102,50 @@ class spell_warl_life_tap_heal_absorb : public AuraScript
     }
 };
 
-// 5782 - Fear 
+// 5782 - Fear
 class spell_warl_fear : public SpellScript
 {
-    PrepareSpellScript(spell_warl_fear);
+	PrepareSpellScript(spell_warl_fear);
 
-    void HandleHit()
-    {
-        Unit* warlock = GetCaster();
-        Unit* caster = GetHitResult() == SPELL_MISS_REFLECT ? GetExplTargetUnit() : warlock;
-        Unit* target = GetHitResult() == SPELL_MISS_REFLECT ? warlock : GetHitUnit();
+	void HandleHit()
+	{
+		Unit* warlock = GetCaster();
+		Unit* caster = GetHitResult() == SPELL_MISS_REFLECT ? GetExplTargetUnit() : warlock;
+		Unit* target = GetHitResult() == SPELL_MISS_REFLECT ? warlock : GetHitUnit();
 
-        if (warlock->HasAura(SPELL_WARLOCK_GLYPH_OF_FEAR))
-            caster->CastSpell(target, SPELL_WARLOCK_GLYPH_OF_FEAR_EFFECT, true);
-        else
-            caster->CastSpell(target, SPELL_WARLOCK_FEAR_EFFECT, true);
-    }
+		if (warlock->HasAura(SPELL_WARLOCK_GLYPH_OF_FEAR))
+			caster->CastSpell(target, SPELL_WARLOCK_GLYPH_OF_FEAR_EFFECT, true);
+		else
+			caster->CastSpell(target, SPELL_WARLOCK_FEAR_EFFECT, true);
+	}
 
-    void Register() override
-    {
-        AfterHit += SpellHitFn(spell_warl_fear::HandleHit);
-    }
+	void Register() override
+	{
+		AfterHit += SpellHitFn(spell_warl_fear::HandleHit);
+	}
+};
+
+// 118699 - Fear (Aura)
+class spell_warl_fear_aurascript : public AuraScript 
+{
+
+	PrepareAuraScript(spell_warl_fear_aurascript);
+
+	void HandleProc(ProcEventInfo& event) {
+
+		Unit* target = event.GetActionTarget();
+
+		if (target->HasAura(SPELL_WARLOCK_GLYPH_OF_FEAR_EFFECT))
+			target->RemoveAura(SPELL_WARLOCK_GLYPH_OF_FEAR_EFFECT);
+
+		if (target->HasAura(SPELL_WARLOCK_FEAR_EFFECT))
+			target->RemoveAura(SPELL_WARLOCK_FEAR_EFFECT);
+	}
+
+	void Register() override
+	{
+		OnProc += AuraProcFn(spell_warl_fear_aurascript::HandleProc);
+	}
 };
 
 // Updated 4.3.4
@@ -4788,6 +4811,25 @@ class spell_warl_nightfall : public AuraScript
     }
 };
 
+// 5484 - Howl of Terror
+class spell_warl_howl_of_terror : public AuraScript
+{
+	PrepareAuraScript(spell_warl_howl_of_terror);
+
+	void HandleProc(ProcEventInfo& event) {
+
+		Unit* target = event.GetActionTarget();
+
+		if (target->HasAura(SPELL_WARLOCK_HOWL_OF_TERROR))
+			target->RemoveAura(SPELL_WARLOCK_HOWL_OF_TERROR);
+	}
+
+	void Register() override
+	{
+		OnProc += AuraProcFn(spell_warl_howl_of_terror::HandleProc);
+	}
+};
+
 void AddSC_warlock_spell_scripts()
 {
     new aura_script<spell_warl_health_funnel>("spell_warl_health_funnel");
@@ -4817,7 +4859,7 @@ void AddSC_warlock_spell_scripts()
     new spell_warl_soul_harverst();
     new spell_script<spell_warl_life_tap>("spell_warl_life_tap");
     new aura_script<spell_warl_life_tap_heal_absorb>("spell_warl_life_tap_heal_absorb");
-    new spell_script<spell_warl_fear>("spell_warl_fear");
+	new spell_script<spell_warl_fear>("spell_warl_fear");
     new spell_warl_banish();
     new spell_warl_soulshatter();
     new aura_script<spell_warl_unstable_affliction>("spell_warl_unstable_affliction");
@@ -4935,4 +4977,6 @@ void AddSC_warlock_spell_scripts()
     new aura_script<spell_warl_meteor_slam>("spell_warl_meteor_slam");
     new aura_script<spell_warl_corruption>("spell_warl_corruption");
     new aura_script<spell_warl_nightfall>("spell_warl_nightfall");
+	new aura_script<spell_warl_fear_aurascript>("spell_warl_fear_aurascript");
+	new aura_script<spell_warl_howl_of_terror>("spell_warl_howl_of_terror");
 }
