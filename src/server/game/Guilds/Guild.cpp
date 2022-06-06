@@ -771,22 +771,9 @@ void Guild::Member::SaveProfessionsToDB(SQLTransaction trans)
     stmt->setUInt16(0, m_professions[0].SkillId);
     stmt->setUInt16(1, m_professions[0].Value);
     stmt->setUInt16(2, m_professions[0].Rank);
-
-    std::ostringstream ss;
-    for (auto&& it : m_professions[0].Recipes)
-        ss << it << ' ';
-
-    stmt->setString(3, ss.str());
     stmt->setUInt16(4, m_professions[1].SkillId);
     stmt->setUInt16(5, m_professions[1].Value);
     stmt->setUInt16(6, m_professions[1].Rank);
-
-    ss.str("");
-    for (auto&& it : m_professions[1].Recipes)
-        ss << it << ' ';
-
-    stmt->setString(7, ss.str());
-
     stmt->setUInt32(8, m_guildId);
     stmt->setUInt32(9, GUID_LOPART(m_guid));
     CharacterDatabase.ExecuteOrAppend(trans, stmt, DBConnection::Guild);
