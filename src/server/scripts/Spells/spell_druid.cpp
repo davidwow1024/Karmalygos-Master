@@ -3281,6 +3281,30 @@ class spell_dru_thrash_bear : public SpellScript
     }
 };
 
+// 106830 - Thrash (Cat form) / 77758 - Trash (Bear form)
+class spell_dru_thrash_cat : public AuraScript
+{
+	PrepareAuraScript(spell_dru_thrash_cat);
+
+	void HandleTick(AuraEffect const* eff)
+	{
+		AuraEffect* damage = const_cast<AuraEffect*>(eff);
+		uint32 ap = GetCaster()->GetTotalAttackPowerValue(MAX_ATTACK);
+		uint32 mastery = GetCaster()->ToPlayer()->GetUInt32Value(PLAYER_FIELD_COMBAT_RATINGS + CR_MASTERY);
+		uint32 amount = damage->GetAmount();
+		uint32 ticks = eff->GetTotalTicks();
+
+		amount = 5 * (686.40f + ap * GetSpellInfo()->Effects[EFFECT_3].BasePoints / 1000);
+		AddPct(amount, 25 + float(mastery / 192));
+		damage->ChangeAmount(amount / ticks);
+	}
+
+	void Register() override
+	{
+		OnEffectPeriodic += AuraEffectPeriodicFn(spell_dru_thrash_cat::HandleTick, EFFECT_1, SPELL_AURA_PERIODIC_DAMAGE);
+	}
+};
+
 // 8921 - Moonfire, 93402 - Sunfire
 class spell_dru_shooting_stars_trigger : public AuraScript
 {
@@ -4855,6 +4879,7 @@ void AddSC_druid_spell_scripts()
     new aura_script<spell_dru_berserk_bear>("spell_dru_berserk_bear");
     new aura_script<spell_dru_glyph_of_the_predator>("spell_dru_glyph_of_the_predator");
     new aura_script<spell_dru_glyph_of_the_chameleon_fix>("spell_dru_glyph_of_the_chameleon_fix");
-    new aura_script<spell_dru_glyph_of_the_chameleon>("spell_dru_glyph_of_the_chameleon");
+    new aura_script<spell_dru_glyph_of_the_chameleon>("spell_dru_glyph_of_the_chameleon"); 
     new spell_script<spell_dru_intimidating_roar>("spell_dru_intimidating_roar");
+	new aura_script<spell_dru_thrash_cat>("spell_dru_thrash_cat");
 }

@@ -7812,8 +7812,6 @@ void SpellMgr::LoadSpellInfoCorrections()
                 case 1160:   // Demoralizing Shout
                 case 29341:  // Shadowburn
                 case 53563:  // Beacon of Light
-                case 77758:  // Thrash
-                case 106830: // Thrash
                 case 108686: // Immolate
                 case 114893: // Stone Bulwark
 					spellInfo->Effects[EFFECT_1].RealPointsPerLevel = 888;
