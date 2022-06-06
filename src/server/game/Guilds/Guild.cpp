@@ -1906,28 +1906,50 @@ void Guild::HandleSetEmblem(WorldSession* session, const EmblemInfo& emblemInfo)
 
 void Guild::HandleSetNewGuildMaster(WorldSession* session, std::string const& name, bool isDethrone)
 {
-    Player* player = session->GetPlayer();
-    // Only the guild master can throne a new guild master
-    if (!IsLeader(player))
-    {
-        if (!isDethrone || (time(NULL) - GetMember(GetLeaderGUID())->GetLogoutTime()) < 90 * DAY)
-        {
-            SendCommandResult(session, GUILD_COMMAND_CHANGE_LEADER, ERR_GUILD_PERMISSIONS);
-            return;
-        }
-    }
-    // Old GM must be a guild member
-    if (Member* oldGuildMaster = GetMember(GetLeaderGUID()))
-    {
-        // Same for the new one
-        if (Member* newGuildMaster = GetMember(name))
-        {
-            SetLeaderGUID(newGuildMaster);
-            oldGuildMaster->ChangeRank(GR_INITIATE);
-            SendEventNewLeader(newGuildMaster, oldGuildMaster, isDethrone);
-        }
-    }
+	Player* player = session->GetPlayer();
+	// Only the guild master can throne a new guild master
+	if (!IsLeader(player))
+		SendCommandResult(session, GUILD_COMMAND_CHANGE_LEADER, ERR_GUILD_PERMISSIONS);
+	// Old GM must be a guild member
+	else if (Member * oldGuildMaster = GetMember(player->GetGUID()))
+	{
+		// Same for the new one
+		if (Member * newGuildMaster = GetMember(name))
+		{
+			SetLeaderGUID(newGuildMaster);
+			oldGuildMaster->ChangeRank(GR_INITIATE);
+			SendEventNewLeader(newGuildMaster, oldGuildMaster, isDethrone);
+		}
+	}  
 }
+
+void Guild::HandleReplaceGuildMaster(WorldSession* session)
+{
+	Player* player = session->GetPlayer();
+
+	if (Member * newGuildMaster = GetMember(player->GetGUID()))
+	{
+		if (newGuildMaster->GetRankId() > GR_MEMBER) // 3 ranks down from gum is the requirements
+		{
+			SendCommandResult(session, GUILD_COMMAND_CHANGE_LEADER, ERR_GUILD_PERMISSIONS);
+			return;
+		}
+
+		if (Member * oldGuildMaster = GetMember(m_leaderGuid))
+		{
+			if (oldGuildMaster->GetLogoutTime() > uint64(time(NULL) - (DAY * 90)))
+			{
+				SendCommandResult(session, GUILD_COMMAND_CHANGE_LEADER, ERR_GUILD_PERMISSIONS);
+				return;
+			}
+
+			SetLeaderGUID(newGuildMaster);
+			oldGuildMaster->ChangeRank(GetLowestRankId());
+			SendEventNewLeader(oldGuildMaster, newGuildMaster, true);
+		}
+	}
+}
+
 
 void Guild::HandleSetBankTabInfo(WorldSession* session, uint8 tabId, std::string const& name, std::string const& icon)
 {
@@ -2730,41 +2752,41 @@ void Guild::SendEventMOTD(WorldSession* session, bool broadcast)
 
 void Guild::SendEventNewLeader(Member* newLeader, Member* oldLeader, bool isSelfPromoted)
 {
-    ObjectGuid newLeaderGUID = newLeader ? newLeader->GetGUID() : 0;
-    std::string newLeaderName = newLeader ? newLeader->GetName() : "";
-    ObjectGuid oldLeaderGUID = oldLeader ? oldLeader->GetGUID() : 0;
-    std::string oldLeaderName = oldLeader ? oldLeader->GetName() : "";
 
-    WorldPacket data(SMSG_GUILD_EVENT_NEW_LEADER);
-    data.WriteGuidMask(newLeaderGUID, 4, 2, 7);
-    data.WriteBit(oldLeaderGUID[4]);
-    data.WriteBits(oldLeaderName.size(), 6);
-    data.WriteBit(oldLeaderGUID[0]);
-    data.WriteGuidMask(newLeaderGUID, 6, 3);
-    data.WriteBit(isSelfPromoted);
-    data.WriteGuidMask(newLeaderGUID, 1, 0);
-    data.WriteGuidMask(oldLeaderGUID, 1, 7, 3, 6, 2);
-    data.WriteBits(newLeaderName.size(), 6);
-    data.WriteBit(oldLeaderGUID[5]);
-    data.WriteBit(newLeaderGUID[5]);
 
-    data.FlushBits();
+	ObjectGuid gumGuid = oldLeader->GetGUID();
+	ObjectGuid newGumGuid = newLeader->GetGUID();
 
-    data.WriteGuidBytes(newLeaderGUID, 5, 6);
-    data.WriteString(oldLeaderName);
-    data.WriteString(newLeaderName);
-    data.WriteGuidBytes(newLeaderGUID, 3, 4);
-    data << uint32(realmID);
-    data.WriteByteSeq(oldLeaderGUID[6]);
-    data.WriteByteSeq(newLeaderGUID[0]);
-    data.WriteByteSeq(oldLeaderGUID[5]);
-    data.WriteGuidBytes(newLeaderGUID, 2, 7);
-    data.WriteGuidBytes(oldLeaderGUID, 7, 4);
-    data << uint32(realmID);
-    data.WriteByteSeq(newLeaderGUID[1]);
-    data.WriteGuidBytes(oldLeaderGUID, 2, 1, 3, 0);
+	WorldPacket data(SMSG_GUILD_EVENT_NEW_LEADER, oldLeader->GetName().size() + newLeader->GetName().size() + 2 * 8);
+	data.WriteGuidMask(newGumGuid, 4, 2, 7);
+	data.WriteBit(gumGuid[4]);
+	data.WriteBits(oldLeader->GetName().size(), 6);
+	data.WriteBit(gumGuid[0]);
+	data.WriteGuidMask(newGumGuid, 6, 3);
+	data.WriteBit(isSelfPromoted);
+	data.WriteGuidMask(newGumGuid, 1, 0);
+	data.WriteGuidMask(gumGuid, 1, 7, 3, 6, 2);
+	data.WriteBits(newLeader->GetName().size(), 6);
+	data.WriteBit(gumGuid[5]);
+	data.WriteBit(newGumGuid[5]);
+	data.FlushBits();
 
-    BroadcastPacket(&data);
+	data.WriteGuidBytes(newGumGuid, 5, 6);
+	data.WriteString(oldLeader->GetName());
+	data.WriteString(newLeader->GetName());
+	data.WriteGuidBytes(newGumGuid, 3, 4);
+	data << (int32)realmID;
+	data.WriteByteSeq(gumGuid[6]);
+	data.WriteByteSeq(newGumGuid[0]);
+	data.WriteByteSeq(gumGuid[5]);
+	data.WriteGuidBytes(newGumGuid, 2, 7);
+	data.WriteGuidBytes(gumGuid, 7, 4);
+	data << (int32)realmID;
+	data.WriteByteSeq(newGumGuid[1]);
+	data.WriteGuidBytes(gumGuid, 2, 1, 3, 0);
+
+	BroadcastPacket(&data);
+
 }
 
 void Guild::SendEventPlayerLeft(Member* leaver, Member* remover, bool isRemoved)

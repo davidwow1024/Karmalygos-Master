@@ -1031,16 +1031,16 @@ void WorldSession::HandleGuildSetGuildMaster(WorldPacket& recvPacket)
     uint8 nameLength = recvPacket.ReadBits(9);
     std::string playerName = recvPacket.ReadString(nameLength);
 
+	normalizePlayerName(playerName);
+
     if (Guild* guild = GetPlayer()->GetGuild())
         guild->HandleSetNewGuildMaster(this, playerName);
 }
 
 void WorldSession::HandleGuildReplaceGuildMaster(WorldPacket& /*recvPacket*/)
 {
-    std::string playerName = GetPlayer()->GetName();
-
-    if (Guild* guild = GetPlayer()->GetGuild())
-        guild->HandleSetNewGuildMaster(this, playerName, true);
+	if (Guild * guild = GetPlayer()->GetGuild())
+		guild->HandleReplaceGuildMaster(this);
 }
 
 void WorldSession::HandleGuildRequestChallengeUpdate(WorldPacket& recvPacket)
