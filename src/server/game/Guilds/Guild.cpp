@@ -3238,69 +3238,49 @@ bool Guild::AddMember(uint64 guid, uint8 rankId)
         }
         m_members[lowguid] = member;
     }
+	SQLTransaction trans(NULL);
+	member->SaveToDB(trans);
+	member->SaveProfessionsToDB(trans);
+	// If player not in game data in will be loaded from guild tables, so no need to update it!
+	if (player)
+	{
+		player->SetInGuild(m_id);
+		player->SetRank(rankId);
+		player->SetGuildLevel(GetLevel());
+		player->SetGuildIdInvited(0);
+		if (sWorld->getBoolConfig(CONFIG_GUILD_LEVELING_ENABLED))
+		{
+			for (uint32 i = 0; i < sGuildPerkSpellsStore.GetNumRows(); ++i)
+				if (GuildPerkSpellsEntry const* entry = sGuildPerkSpellsStore.LookupEntry(i))
+					if (entry->Level <= GetLevel())
+						player->LearnSpell(entry->SpellId, true);
+		}
 
-    PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_GUILD_MEMBER_REPUTATION);
-    stmt->setInt32(0, GUID_LOPART(guid));
-    PreparedQueryResult result = CharacterDatabase.Query(stmt);
-    if (result)
-    {
-        Field* fields = result->Fetch();
-        uint32 guild = fields[0].GetUInt32();
-        if (guild != GetId())
-        {
-            if (player)
-            {
-                int32 val = 0;
-                if (FactionEntry const* faction = sFactionStore.LookupEntry(GUILD_REPUTATION_ID))
-                {
-                    ReputationRank rank = player->GetReputationMgr().GetRank(faction);
-                    for (int32 r = REP_NEUTRAL; r < rank; ++r)
-                        val += ReputationMgr::PointsInRank[r];
+		if (FactionEntry const* factionEntry = sFactionStore.LookupEntry(GUILD_REPUTATION_ID))
+			player->GetReputationMgr().SetReputation(factionEntry, 0);
+	}
 
-                    player->GetReputationMgr().SetReputation(faction, val);
-                    member->SetReputation(player->GetReputationMgr().GetReputation(faction));
-                }
-            }
-            else
-            {
-                // FIXME
-            }
-        }
-    }
-    else
-    {
-        if (player)
-            if (FactionEntry const* faction = sFactionStore.LookupEntry(GUILD_REPUTATION_ID))
-                player->GetReputationMgr().SetVisible(faction);
-        member->SetReputation(0);
-    }
+	UpdateAccountsNumber();
+	UpdateGuildRecipes();
+	LogEvent(GUILD_EVENT_LOG_JOIN_GUILD, lowguid);
 
-    SQLTransaction trans = CharacterDatabase.BeginTransaction();
-    member->SaveToDB(trans);
-    member->SaveProfessionsToDB(trans);
-    CharacterDatabase.CommitTransaction(trans, DBConnection::Guild);
+	ObjectGuid Guid = guid;
+	WorldPacket data(SMSG_GUILD_EVENT_PLAYER_JOINED);
+	data.WriteGuidMask(Guid, 6, 1, 3);
+	data.WriteBits(name.size(), 6);
+	data.WriteGuidMask(Guid, 7, 4, 2, 5, 0);
+	data.WriteGuidBytes(Guid, 2, 4, 1, 6, 5);
+	data << uint32(realmID);
+	data.WriteGuidBytes(Guid, 3, 0);
+	data.WriteString(name);
+	data.WriteGuidBytes(Guid, 7);
 
-    UpdateAccountsNumber();
-    UpdateGuildRecipes();
-    LogEvent(GUILD_EVENT_LOG_JOIN_GUILD, lowguid);
+	sGuildFinderMgr->RemoveAllMembershipRequestsFromPlayer(lowguid);
 
-    ObjectGuid Guid = guid;
-    WorldPacket data(SMSG_GUILD_EVENT_PLAYER_JOINED);
-    data.WriteGuidMask(Guid, 6, 1, 3);
-    data.WriteBits(name.size(), 6);
-    data.WriteGuidMask(Guid, 7, 4, 2, 5, 0);
-    data.WriteGuidBytes(Guid, 2, 4, 1, 6, 5);
-    data << uint32(realmID);
-    data.WriteGuidBytes(Guid, 3, 0);
-    data.WriteString(name);
-    data.WriteGuidBytes(Guid, 7);
+	// Call scripts if member was succesfully added (and stored to database)
+	sScriptMgr->OnGuildAddMember(this, player, rankId);
 
-    sGuildFinderMgr->RemoveAllMembershipRequestsFromPlayer(lowguid);
-
-    // Call scripts if member was succesfully added (and stored to database)
-    sScriptMgr->OnGuildAddMember(this, player, rankId);
-
-    return true;
+	return true;
 }
 
 void Guild::DeleteMember(uint64 guid, bool isDisbanding, bool isKicked, bool canDeleteGuild)
