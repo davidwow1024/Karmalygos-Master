@@ -6,5 +6,5 @@ INSERT INTO `creature_template`(`entry`, `difficulty_entry_1`, `difficulty_entry
 
 DELETE FROM `npc_vendor` WHERE `entry` IN (400000);
 INSERT INTO `npc_vendor`(`entry`, `slot`, `item`, `maxcount`, `incrtime`, `ExtendedCost`, `type`) VALUES 
-(400000, 0, 110005, 0, 0, 3035, 1),
-(400000, 0, 110006, 0, 0, 3164, 1);
+(400000, 0, 110005, 0, 0, 3884, 1),
+(400000, 0, 110008, 0, 0, 3164, 1);
