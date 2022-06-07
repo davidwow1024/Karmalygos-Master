@@ -743,17 +743,14 @@ void Aura::_UnapplyForTarget(Unit* target, Unit* caster, AuraApplication * auraA
 
     ApplicationMap::iterator itr = m_applications.find(target->GetGUID());
 
-	if (target->IsInWorld() && caster->IsInWorld())
-	{
-		/// @todo Figure out why this happens
-		if (itr == m_applications.end())
-		{
-			TC_LOG_ERROR("spells", "Aura::_UnapplyForTarget, target:%u, caster:%u, spell:%u was not found in owners application map!",
-				target->GetGUIDLow(), caster ? caster->GetGUIDLow() : 0, auraApp->GetBase()->GetSpellInfo()->Id);
-			ASSERT(false);
-		}
-	}
-    
+    /// @todo Figure out why this happens
+    if (itr == m_applications.end())
+    {
+        TC_LOG_ERROR("spells", "Aura::_UnapplyForTarget, target:%u, caster:%u, spell:%u was not found in owners application map!",
+        target->GetGUIDLow(), caster ? caster->GetGUIDLow() : 0, auraApp->GetBase()->GetSpellInfo()->Id);
+        ASSERT(false);
+    }
+
     // aura has to be already applied
     ASSERT(itr->second == auraApp);
     m_applications.erase(itr);
