@@ -9,196 +9,90 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
+
+file(GLOB_RECURSE scripts_BlackfathomDeeps Kalimdor/BlackfathomDeeps/*.cpp Kalimdor/BlackfathomDeeps/*.h)
+file(GLOB_RECURSE scripts_BattleForMountHyjal Kalimdor/CavernsOfTime/BattleForMountHyjal/*.cpp Kalimdor/CavernsOfTime/BattleForMountHyjal/*.h)
+file(GLOB_RECURSE scripts_CullingOfStratholme Kalimdor/CavernsOfTime/CullingOfStratholme/*.cpp Kalimdor/CavernsOfTime/CullingOfStratholme/*.h)
+file(GLOB_RECURSE scripts_DragonSoul Kalimdor/CavernsOfTime/DragonSoul/*.cpp Kalimdor/CavernsOfTime/DragonSoul/*.h)
+file(GLOB_RECURSE scripts_EndTime Kalimdor/CavernsOfTime/EndTime/*.cpp Kalimdor/CavernsOfTime/EndTime/*.h)
+file(GLOB_RECURSE scripts_EscapeFromDurnholdeKeep Kalimdor/CavernsOfTime/EscapeFromDurnholdeKeep/*.cpp Kalimdor/CavernsOfTime/EscapeFromDurnholdeKeep/*.h)
+file(GLOB_RECURSE scripts_HourofTwilight Kalimdor/CavernsOfTime/HourofTwilight/*.cpp Kalimdor/CavernsOfTime/HourofTwilight/*.h)
+file(GLOB_RECURSE scripts_TheBlackMorass Kalimdor/CavernsOfTime/TheBlackMorass/*.cpp Kalimdor/CavernsOfTime/TheBlackMorass/*.h)
+file(GLOB_RECURSE scripts_WellofEternity Kalimdor/CavernsOfTime/WellofEternity/*.cpp Kalimdor/CavernsOfTime/WellofEternity/*.h)
+file(GLOB_RECURSE scripts_DireMaul Kalimdor/DireMaul/*.cpp Kalimdor/DireMaul/*.h)
+file(GLOB_RECURSE scripts_Firelands Kalimdor/Firelands/*.cpp Kalimdor/Firelands/*.h)
+file(GLOB_RECURSE scripts_HallsOfOrigination Kalimdor/HallsOfOrigination/*.cpp Kalimdor/HallsOfOrigination/*.h)
+file(GLOB_RECURSE scripts_LostCityOfTheTolvir Kalimdor/LostCityOfTheTolvir/*.cpp Kalimdor/LostCityOfTheTolvir/*.h)
+file(GLOB_RECURSE scripts_Maraudon Kalimdor/Maraudon/*.cpp Kalimdor/Maraudon/*.h)
+file(GLOB_RECURSE scripts_OnyxiasLair Kalimdor/OnyxiasLair/*.cpp Kalimdor/OnyxiasLair/*.h)
+file(GLOB_RECURSE scripts_RagefireChasm Kalimdor/RagefireChasm/*.cpp Kalimdor/RagefireChasm/*.h)
+file(GLOB_RECURSE scripts_RazorfenDowns Kalimdor/RazorfenDowns/*.cpp Kalimdor/RazorfenDowns/*.h)
+file(GLOB_RECURSE scripts_RazorfenKraul Kalimdor/RazorfenKraul/*.cpp Kalimdor/RazorfenKraul/*.h)
+file(GLOB_RECURSE scripts_RuinsOfAhnQiraj Kalimdor/RuinsOfAhnQiraj/*.cpp Kalimdor/RuinsOfAhnQiraj/*.h)
+file(GLOB_RECURSE scripts_TempleOfAhnQiraj Kalimdor/TempleOfAhnQiraj/*.cpp Kalimdor/TempleOfAhnQiraj/*.h)
+file(GLOB_RECURSE scripts_TheVortexPinnacle Kalimdor/TheVortexPinnacle/*.cpp Kalimdor/TheVortexPinnacle/*.h)
+file(GLOB_RECURSE scripts_ThroneoftheFourWinds Kalimdor/ThroneoftheFourWinds/*.cpp Kalimdor/ThroneoftheFourWinds/*.h)
+file(GLOB_RECURSE scripts_WailingCaverns Kalimdor/WailingCaverns/*.cpp Kalimdor/WailingCaverns/*.h)
+file(GLOB_RECURSE scripts_ZulFarrak Kalimdor/ZulFarrak/*.cpp Kalimdor/ZulFarrak/*.h)
+file(GLOB_RECURSE scripts_WorldBosses Kalimdor/WorldBosses/*.cpp Kalimdor/WorldBosses/*.h)
+file(GLOB_RECURSE scripts_Zones Kalimdor/*.cpp Kalimdor/*.h)
+
+source_group(Kalimdor/BlackfathomDeeps FILES ${scripts_BlackfathomDeeps})
+source_group(Kalimdor/CavernsOfTime/BattleForMountHyjal FILES ${scripts_BattleForMountHyjal})
+source_group(Kalimdor/CavernsOfTime/CullingOfStratholme FILES ${scripts_CullingOfStratholme})
+source_group(Kalimdor/CavernsOfTime/DragonSoul FILES ${scripts_DragonSoul})
+source_group(Kalimdor/CavernsOfTime/EndTime FILES ${scripts_EndTime})
+source_group(Kalimdor/CavernsOfTime/EscapeFromDurnholdeKeep FILES ${scripts_EscapeFromDurnholdeKeep})
+source_group(Kalimdor/CavernsOfTime/HourofTwilight FILES ${scripts_HourofTwilight})
+source_group(Kalimdor/CavernsOfTime/TheBlackMorass FILES ${scripts_TheBlackMorass})
+source_group(Kalimdor/CavernsOfTime/WellofEternity FILES ${scripts_WellofEternity})
+source_group(Kalimdor/DireMaul FILES ${scripts_DireMaul})
+source_group(Kalimdor/Firelands FILES ${scripts_Firelands})
+source_group(Kalimdor/HallsOfOrigination FILES ${scripts_HallsOfOrigination})
+source_group(Kalimdor/LostCityOfTheTolvir FILES ${scripts_LostCityOfTheTolvir})
+source_group(Kalimdor/Maraudon FILES ${scripts_Maraudon})
+source_group(Kalimdor/OnyxiasLair FILES ${scripts_OnyxiasLair})
+source_group(Kalimdor/RagefireChasm FILES ${scripts_RagefireChasm})
+source_group(Kalimdor/RazorfenDowns FILES ${scripts_RazorfenDowns})
+source_group(Kalimdor/RazorfenKraul FILES ${scripts_RazorfenKraul})
+source_group(Kalimdor/RuinsOfAhnQiraj FILES ${scripts_RuinsOfAhnQiraj})
+source_group(Kalimdor/TempleOfAhnQiraj FILES ${scripts_TempleOfAhnQiraj})
+source_group(Kalimdor/TheVortexPinnacle FILES ${scripts_TheVortexPinnacle})
+source_group(Kalimdor/ThroneoftheFourWinds FILES ${scripts_ThroneoftheFourWinds})
+source_group(Kalimdor/WailingCaverns FILES ${scripts_WailingCaverns})
+source_group(Kalimdor/ZulFarrak FILES ${scripts_ZulFarrak})
+source_group(Kalimdor/WorldBosses FILES ${scripts_WorldBosses})
+source_group(Kalimdor\\Zones FILES ${scripts_Zones})
+
 set(scripts_STAT_SRCS
   ${scripts_STAT_SRCS}
-  Kalimdor/zone_stonetalon_mountains.cpp
-  Kalimdor/zone_silithus.cpp
-  Kalimdor/zone_moonglade.cpp
-  Kalimdor/RazorfenDowns/razorfen_downs.cpp
-  Kalimdor/RazorfenDowns/instance_razorfen_downs.cpp
-  Kalimdor/RazorfenDowns/boss_amnennar_the_coldbringer.cpp
-  Kalimdor/RazorfenDowns/razorfen_downs.h
-  Kalimdor/ZulFarrak/zulfarrak.h
-  Kalimdor/ZulFarrak/zulfarrak.cpp
-  Kalimdor/ZulFarrak/instance_zulfarrak.cpp
-  Kalimdor/ZulFarrak/boss_zum_rah.cpp
-  Kalimdor/CavernsOfTime/EscapeFromDurnholdeKeep/boss_epoch_hunter.cpp
-  Kalimdor/CavernsOfTime/EscapeFromDurnholdeKeep/old_hillsbrad.h
-  Kalimdor/CavernsOfTime/EscapeFromDurnholdeKeep/boss_leutenant_drake.cpp
-  Kalimdor/CavernsOfTime/EscapeFromDurnholdeKeep/old_hillsbrad.cpp
-  Kalimdor/CavernsOfTime/EscapeFromDurnholdeKeep/instance_old_hillsbrad.cpp
-  Kalimdor/CavernsOfTime/EscapeFromDurnholdeKeep/boss_captain_skarloc.cpp
-  Kalimdor/CavernsOfTime/BattleForMountHyjal/boss_archimonde.cpp
-  Kalimdor/CavernsOfTime/BattleForMountHyjal/hyjalAI.h
-  Kalimdor/CavernsOfTime/BattleForMountHyjal/hyjal_trash.h
-  Kalimdor/CavernsOfTime/BattleForMountHyjal/boss_kazrogal.cpp
-  Kalimdor/CavernsOfTime/BattleForMountHyjal/hyjal_trash.cpp
-  Kalimdor/CavernsOfTime/BattleForMountHyjal/hyjal.cpp
-  Kalimdor/CavernsOfTime/BattleForMountHyjal/hyjalAI.cpp
-  Kalimdor/CavernsOfTime/BattleForMountHyjal/instance_hyjal.cpp
-  Kalimdor/CavernsOfTime/BattleForMountHyjal/boss_rage_winterchill.cpp
-  Kalimdor/CavernsOfTime/BattleForMountHyjal/hyjal.h
-  Kalimdor/CavernsOfTime/BattleForMountHyjal/boss_azgalor.cpp
-  Kalimdor/CavernsOfTime/BattleForMountHyjal/boss_anetheron.cpp
-  Kalimdor/CavernsOfTime/CullingOfStratholme/boss_infinite_corruptor.cpp
-  Kalimdor/CavernsOfTime/CullingOfStratholme/boss_salramm_the_fleshcrafter.cpp
-  Kalimdor/CavernsOfTime/CullingOfStratholme/boss_meathook.cpp
-  Kalimdor/CavernsOfTime/CullingOfStratholme/boss_mal_ganis.cpp
-  Kalimdor/CavernsOfTime/CullingOfStratholme/boss_chrono_lord_epoch.cpp
-  Kalimdor/CavernsOfTime/CullingOfStratholme/culling_of_stratholme.cpp
-  Kalimdor/CavernsOfTime/CullingOfStratholme/instance_culling_of_stratholme.cpp
-  Kalimdor/CavernsOfTime/CullingOfStratholme/culling_of_stratholme.h
-  Kalimdor/CavernsOfTime/TheBlackMorass/the_black_morass.h
-  Kalimdor/CavernsOfTime/TheBlackMorass/instance_the_black_morass.cpp
-  Kalimdor/CavernsOfTime/TheBlackMorass/boss_chrono_lord_deja.cpp
-  Kalimdor/CavernsOfTime/TheBlackMorass/the_black_morass.cpp
-  Kalimdor/CavernsOfTime/TheBlackMorass/boss_aeonus.cpp
-  Kalimdor/CavernsOfTime/TheBlackMorass/boss_temporus.cpp
-  Kalimdor/CavernsOfTime/DragonSoul/boss_hagara.cpp
-  Kalimdor/CavernsOfTime/DragonSoul/boss_madness_of_deathwing.cpp
-  Kalimdor/CavernsOfTime/DragonSoul/boss_morchok.cpp
-  Kalimdor/CavernsOfTime/DragonSoul/boss_spine_of_deathwing.cpp
-  Kalimdor/CavernsOfTime/DragonSoul/boss_ultraxion.cpp
-  Kalimdor/CavernsOfTime/DragonSoul/boss_warlord_zonozz.cpp
-  Kalimdor/CavernsOfTime/DragonSoul/boss_warmaster_blackhorn.cpp
-  Kalimdor/CavernsOfTime/DragonSoul/boss_warmaster_blackhorn.cpp
-  Kalimdor/CavernsOfTime/DragonSoul/boss_yorsahj_the_unsleeping.cpp
-  Kalimdor/CavernsOfTime/DragonSoul/dragon_soul.cpp
-  Kalimdor/CavernsOfTime/DragonSoul/instance_dragon_soul.cpp
-  Kalimdor/CavernsOfTime/DragonSoul/dragon_soul.h
-  Kalimdor/CavernsOfTime/EndTime/boss_echo_of_baine.cpp
-  Kalimdor/CavernsOfTime/EndTime/boss_echo_of_jaina.cpp
-  Kalimdor/CavernsOfTime/EndTime/boss_echo_of_tyrande.cpp
-  Kalimdor/CavernsOfTime/EndTime/boss_echo_of_sylvanas.cpp
-  Kalimdor/CavernsOfTime/EndTime/boss_murozond.cpp
-  Kalimdor/CavernsOfTime/EndTime/end_time.cpp
-  Kalimdor/CavernsOfTime/EndTime/end_time_teleport.cpp
-  Kalimdor/CavernsOfTime/EndTime/instance_end_time.cpp
-  Kalimdor/CavernsOfTime/EndTime/end_time.h
-  Kalimdor/CavernsOfTime/HourofTwilight/boss_archbishop_benedictus.cpp
-  Kalimdor/CavernsOfTime/HourofTwilight/boss_arcurion.cpp
-  Kalimdor/CavernsOfTime/HourofTwilight/boss_asira_dawnslayer.cpp
-  Kalimdor/CavernsOfTime/HourofTwilight/hour_of_twilight.cpp
-  Kalimdor/CavernsOfTime/HourofTwilight/hour_of_twilight.h
-  Kalimdor/CavernsOfTime/HourofTwilight/instance_hour_of_twilight.cpp
-  Kalimdor/CavernsOfTime/WellofEternity/boss_mannoroth.cpp
-  Kalimdor/CavernsOfTime/WellofEternity/boss_perotharn.cpp
-  Kalimdor/CavernsOfTime/WellofEternity/boss_queen_azshara.cpp
-  Kalimdor/CavernsOfTime/WellofEternity/instance_well_of_eternity.cpp
-  Kalimdor/CavernsOfTime/WellofEternity/well_of_eternity.cpp
-  Kalimdor/CavernsOfTime/WellofEternity/well_of_eternity.h
-  Kalimdor/CavernsOfTime/WellofEternity/well_of_eternity_teleport.cpp
-  Kalimdor/BlackfathomDeeps/boss_kelris.cpp
-  Kalimdor/BlackfathomDeeps/instance_blackfathom_deeps.cpp
-  Kalimdor/BlackfathomDeeps/boss_gelihast.cpp
-  Kalimdor/BlackfathomDeeps/blackfathom_deeps.cpp
-  Kalimdor/BlackfathomDeeps/boss_aku_mai.cpp
-  Kalimdor/BlackfathomDeeps/blackfathom_deeps.h
-  Kalimdor/zone_azuremyst_isle.cpp
-  Kalimdor/zone_orgrimmar.cpp
-  Kalimdor/zone_desolace.cpp
-  Kalimdor/zone_feralas.cpp
-  Kalimdor/Maraudon/boss_princess_theradras.cpp
-  Kalimdor/Maraudon/boss_landslide.cpp
-  Kalimdor/Maraudon/boss_celebras_the_cursed.cpp
-  Kalimdor/Maraudon/boss_noxxion.cpp
-  Kalimdor/Maraudon/instance_maraudon.cpp
-  Kalimdor/TempleOfAhnQiraj/boss_fankriss.cpp
-  Kalimdor/TempleOfAhnQiraj/boss_huhuran.cpp
-  Kalimdor/TempleOfAhnQiraj/instance_temple_of_ahnqiraj.cpp
-  Kalimdor/TempleOfAhnQiraj/mob_anubisath_sentinel.cpp
-  Kalimdor/TempleOfAhnQiraj/boss_viscidus.cpp
-  Kalimdor/TempleOfAhnQiraj/boss_twinemperors.cpp
-  Kalimdor/TempleOfAhnQiraj/boss_sartura.cpp
-  Kalimdor/TempleOfAhnQiraj/boss_cthun.cpp
-  Kalimdor/TempleOfAhnQiraj/temple_of_ahnqiraj.h
-  Kalimdor/TempleOfAhnQiraj/boss_skeram.cpp
-  Kalimdor/TempleOfAhnQiraj/boss_ouro.cpp
-  Kalimdor/TempleOfAhnQiraj/boss_bug_trio.cpp
-  Kalimdor/zone_darkshore.cpp
-  Kalimdor/RuinsOfAhnQiraj/boss_buru.cpp
-  Kalimdor/RuinsOfAhnQiraj/instance_ruins_of_ahnqiraj.cpp
-  Kalimdor/RuinsOfAhnQiraj/boss_rajaxx.cpp
-  Kalimdor/RuinsOfAhnQiraj/boss_ossirian.cpp
-  Kalimdor/RuinsOfAhnQiraj/boss_ayamiss.cpp
-  Kalimdor/RuinsOfAhnQiraj/boss_moam.cpp
-  Kalimdor/RuinsOfAhnQiraj/ruins_of_ahnqiraj.h
-  Kalimdor/RuinsOfAhnQiraj/boss_kurinnaxx.cpp
-  Kalimdor/zone_mulgore.cpp
-  Kalimdor/zone_bloodmyst_isle.cpp
-  Kalimdor/zone_thunder_bluff.cpp
-  Kalimdor/zone_azshara.cpp
-  Kalimdor/RazorfenKraul/razorfen_kraul.h
-  Kalimdor/RazorfenKraul/instance_razorfen_kraul.cpp
-  Kalimdor/RazorfenKraul/razorfen_kraul.cpp
-  Kalimdor/zone_the_barrens.cpp
-  Kalimdor/zone_ungoro_crater.cpp
-  Kalimdor/WailingCaverns/wailing_caverns.h
-  Kalimdor/WailingCaverns/instance_wailing_caverns.cpp
-  Kalimdor/WailingCaverns/wailing_caverns.cpp
-  Kalimdor/zone_durotar.cpp
-  Kalimdor/zone_felwood.cpp
-  Kalimdor/boss_azuregos.cpp
-  Kalimdor/zone_tanaris.cpp
-  Kalimdor/zone_dustwallow_marsh.cpp
-  Kalimdor/zone_winterspring.cpp
-  Kalimdor/zone_thousand_needles.cpp
-  Kalimdor/zone_ashenvale.cpp
-  Kalimdor/zone_teldrassil.cpp
-  Kalimdor/OnyxiasLair/boss_onyxia.cpp
-  Kalimdor/OnyxiasLair/onyxias_lair.h
-  Kalimdor/OnyxiasLair/instance_onyxias_lair.cpp
-  Kalimdor/RagefireChasm/instance_ragefire_chasm.cpp
-  Kalimdor/RagefireChasm/ragefire_chasm.h
-  Kalimdor/RagefireChasm/boss_adarogg.cpp
-  Kalimdor/RagefireChasm/boss_dark_shaman_koranthal.cpp
-  Kalimdor/RagefireChasm/boss_lava_guard_gordoth.cpp
-  Kalimdor/RagefireChasm/boss_slagmaw.cpp
-  Kalimdor/DireMaul/instance_dire_maul.cpp
-  Kalimdor/DireMaul/dire_maul.cpp
-  Kalimdor/DireMaul/dire_maul.h
-  Kalimdor/HallsOfOrigination/halls_of_origination.cpp
-  Kalimdor/HallsOfOrigination/halls_of_origination.h
-  Kalimdor/HallsOfOrigination/instance_halls_of_origination.cpp
-  Kalimdor/HallsOfOrigination/boss_temple_guardian_anhuur.cpp
-  Kalimdor/HallsOfOrigination/boss_earthrager_ptah.cpp
-  Kalimdor/HallsOfOrigination/boss_anraphet.cpp
-  Kalimdor/HallsOfOrigination/boss_ammunae.cpp
-  Kalimdor/HallsOfOrigination/boss_isiset.cpp
-  Kalimdor/HallsOfOrigination/boss_rajh.cpp
-  Kalimdor/HallsOfOrigination/boss_setesh.cpp
-  Kalimdor/Firelands/instance_firelands.cpp
-  Kalimdor/Firelands/firelands.cpp
-  Kalimdor/Firelands/firelands.h
-  Kalimdor/Firelands/boss_alysrazor.cpp
-  Kalimdor/Firelands/boss_baleroc.cpp
-  Kalimdor/Firelands/boss_bethtilac.cpp
-  Kalimdor/Firelands/boss_lord_rhyolith.cpp
-  Kalimdor/Firelands/boss_lord_rhyolith.h
-  Kalimdor/Firelands/boss_majordomo_staghelm.cpp
-  Kalimdor/Firelands/boss_ragnaros_firelands.cpp
-  Kalimdor/Firelands/boss_ragnaros_firelands.h
-  Kalimdor/Firelands/boss_shannox.cpp
-  Kalimdor/LostCityOfTheTolvir/boss_general_husam.cpp
-  Kalimdor/LostCityOfTheTolvir/boss_high_prophet_barim.cpp
-  Kalimdor/LostCityOfTheTolvir/boss_lockmaw_augh.cpp
-  Kalimdor/LostCityOfTheTolvir/boss_siamat.cpp
-  Kalimdor/LostCityOfTheTolvir/instance_lost_city_of_the_tolvir.cpp
-  Kalimdor/LostCityOfTheTolvir/lost_city_of_the_tolvir.cpp
-  Kalimdor/LostCityOfTheTolvir/lost_city_of_the_tolvir.h
-  Kalimdor/TheVortexPinnacle/boss_altairus.cpp
-  Kalimdor/TheVortexPinnacle/boss_asaad.cpp
-  Kalimdor/TheVortexPinnacle/boss_grand_vizier_ertan.cpp
-  Kalimdor/TheVortexPinnacle/instance_the_vortex_pinnacle.cpp
-  Kalimdor/TheVortexPinnacle/the_vortex_pinnacle.cpp
-  Kalimdor/TheVortexPinnacle/the_vortex_pinnacle.h
-  Kalimdor/ThroneoftheFourWinds/boss_alakir.cpp
-  Kalimdor/ThroneoftheFourWinds/boss_conclave_of_wind.cpp
-  Kalimdor/ThroneoftheFourWinds/instance_throne_of_the_four_winds.cpp
-  Kalimdor/ThroneoftheFourWinds/throne_of_the_four_winds.cpp
-  Kalimdor/ThroneoftheFourWinds/throne_of_the_four_winds.h
-  Kalimdor/zone_mount_hyjal.cpp
-  Kalimdor/zone_uldum.cpp
+  ${scripts_BlackfathomDeeps}
+  ${scripts_BattleForMountHyjal}
+  ${scripts_CullingOfStratholme}
+  ${scripts_DragonSoul}
+  ${scripts_EndTime}
+  ${scripts_EscapeFromDurnholdeKeep}
+  ${scripts_HourofTwilight}
+  ${scripts_TheBlackMorass}
+  ${scripts_WellofEternity}
+  ${scripts_DireMaul}
+  ${scripts_Firelands}
+  ${scripts_HallsOfOrigination}
+  ${scripts_LostCityOfTheTolvir}
+  ${scripts_Maraudon}
+  ${scripts_OnyxiasLair}
+  ${scripts_RagefireChasm}
+  ${scripts_RazorfenDowns}
+  ${scripts_RazorfenKraul}
+  ${scripts_RuinsOfAhnQiraj}
+  ${scripts_TempleOfAhnQiraj}
+  ${scripts_TheVortexPinnacle}
+  ${scripts_ThroneoftheFourWinds}
+  ${scripts_WailingCaverns}
+  ${scripts_ZulFarrak}
+  ${scripts_WorldBosses}
+  ${scripts_Zones}
 )
+
 
 message("  -> Prepared: Kalimdor")
