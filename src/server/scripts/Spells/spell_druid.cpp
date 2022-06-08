@@ -3263,22 +3263,47 @@ class spell_dru_starfall_damage : public SpellScript
 };
 
 // 77758 - Thrash (Bear form)
-class spell_dru_thrash_bear : public SpellScript
+class spell_dru_thrash_bear_spellscript : public SpellScript
 {
-    PrepareSpellScript(spell_dru_thrash_bear);
+	PrepareSpellScript(spell_dru_thrash_bear_spellscript);
 
-    void HandleHit()
-    {
-        if (Player* druid = GetCaster()->ToPlayer())
-            if (druid->HasSpellCooldown(SPELL_DRUID_MANGLE_BEAR))
-                if (roll_chance_i(25))
-                    druid->RemoveSpellCooldown(SPELL_DRUID_MANGLE_BEAR, true);
-    }
+	void HandleHit()
+	{
+		if (Player * druid = GetCaster()->ToPlayer())
+			if (druid->HasSpellCooldown(SPELL_DRUID_MANGLE_BEAR))
+				if (roll_chance_i(25))
+					druid->RemoveSpellCooldown(SPELL_DRUID_MANGLE_BEAR, true);
+	}
 
-    void Register() override
-    {
-        OnHit += SpellHitFn(spell_dru_thrash_bear::HandleHit);
-    }
+
+	void Register() override
+	{
+		OnHit += SpellHitFn(spell_dru_thrash_bear_spellscript::HandleHit);
+	}
+};
+
+class spell_dru_thrash_bear_aurascript : public AuraScript
+{
+	PrepareAuraScript(spell_dru_thrash_bear_aurascript);
+
+	void HandleTick(AuraEffect const* eff)
+	{
+		if (GetCaster())
+		{
+			AuraEffect* damage = const_cast<AuraEffect*>(eff);
+			uint32 ap = GetCaster()->GetTotalAttackPowerValue(MAX_ATTACK);
+			uint32 amount = damage->GetAmount();
+			uint32 ticks = eff->GetTotalTicks();
+
+			amount = 8 * (686.40f + (ap * GetSpellInfo()->Effects[EFFECT_3].BasePoints / 1000));
+			damage->ChangeAmount(amount / ticks);
+		}
+	}
+
+	void Register() override
+	{
+		OnEffectPeriodic += AuraEffectPeriodicFn(spell_dru_thrash_bear_aurascript::HandleTick, EFFECT_1, SPELL_AURA_PERIODIC_DAMAGE);
+	}
 };
 
 // 106830 - Thrash (Cat form) / 77758 - Trash (Bear form)
@@ -3288,15 +3313,18 @@ class spell_dru_thrash_cat : public AuraScript
 
 	void HandleTick(AuraEffect const* eff)
 	{
-		AuraEffect* damage = const_cast<AuraEffect*>(eff);
-		uint32 ap = GetCaster()->GetTotalAttackPowerValue(MAX_ATTACK);
-		uint32 mastery = GetCaster()->ToPlayer()->GetUInt32Value(PLAYER_FIELD_COMBAT_RATINGS + CR_MASTERY);
-		uint32 amount = damage->GetAmount();
-		uint32 ticks = eff->GetTotalTicks();
+		if (GetCaster())
+		{
+			AuraEffect* damage = const_cast<AuraEffect*>(eff);
+			uint32 ap = GetCaster()->GetTotalAttackPowerValue(MAX_ATTACK);
+			uint32 mastery = GetCaster()->ToPlayer()->GetUInt32Value(PLAYER_FIELD_COMBAT_RATINGS + CR_MASTERY);
+			uint32 amount = damage->GetAmount();
+			uint32 ticks = eff->GetTotalTicks();
 
-		amount = 5 * (686.40f + ap * GetSpellInfo()->Effects[EFFECT_3].BasePoints / 1000);
-		AddPct(amount, 25 + float(mastery / 192));
-		damage->ChangeAmount(amount / ticks);
+			amount = 5 * (686.40f + ap * GetSpellInfo()->Effects[EFFECT_3].BasePoints / 1000);
+			AddPct(amount, 25 + float(mastery / 192));
+			damage->ChangeAmount(amount / ticks);
+		}
 	}
 
 	void Register() override
@@ -4831,7 +4859,8 @@ void AddSC_druid_spell_scripts()
     new aura_script<spell_dru_living_seed_heal>("spell_dru_living_seed_heal");
     new aura_script<spell_dru_starfall>("spell_dru_starfall");
     new spell_script<spell_dru_starfall_damage>("spell_dru_starfall_damage");
-    new spell_script<spell_dru_thrash_bear>("spell_dru_thrash_bear");
+	new spell_script<spell_dru_thrash_bear_spellscript>("spell_dru_thrash_bear_spellscript");
+	new aura_script<spell_dru_thrash_bear_aurascript>("spell_dru_thrash_bear_aurascript");
     new aura_script<spell_dru_shooting_stars_trigger>("spell_dru_shooting_stars_trigger");
     new aura_script<spell_dru_shooting_stars_proc>("spell_dru_shooting_stars_proc");
     new aura_script<spell_dru_soul_of_the_forest>("spell_dru_soul_of_the_forest");
