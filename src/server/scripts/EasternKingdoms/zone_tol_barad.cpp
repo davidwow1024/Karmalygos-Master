@@ -1,4 +1,4 @@
-#include "ScriptPCH.h"
+/*#include "ScriptPCH.h"
 #include "BattlefieldMgr.h"
 #include "BattlefieldTB.h"
 #include "Battlefield.h"
@@ -38,10 +38,10 @@ class npc_tb_spiritguide : public CreatureScript
 
             player->SEND_GOSSIP_MENU(player->GetGossipTextId(creature), creature->GetGUID());
             return true;
-        }
+        }*/
 
-        bool OnGossipSelect(Player* player, Creature* /*creature*/, uint32 /*sender*/, uint32 action) override
-        {
+        //bool OnGossipSelect(Player* player, Creature* /*creature*/, uint32 /*sender*/, uint32 action) override
+        /*{
             player->CLOSE_GOSSIP_MENU();
 
             Battlefield* BfTB = sBattlefieldMgr->GetBattlefieldByBattleId(BATTLEFIELD_BATTLEID_TB);
@@ -91,10 +91,10 @@ class npc_tol_barad_battlemage : public CreatureScript
                 }
             }
             return true;
-        }
+        }*/
 
-        bool OnGossipSelect(Player* player, Creature* /*creature*/, uint32 /*sender*/, uint32 /*action*/) override
-        {
+        //bool OnGossipSelect(Player* player, Creature* /*creature*/, uint32 /*sender*/, uint32 /*action*/) override
+        /*{
             player->CLOSE_GOSSIP_MENU();
 
             Battlefield* BfTB = sBattlefieldMgr->GetBattlefieldByBattleId(BATTLEFIELD_BATTLEID_TB);
@@ -118,4 +118,4 @@ void AddSC_tol_barad()
 {
    new npc_tol_barad_battlemage();
    new npc_tb_spiritguide();
-}
+}*/
