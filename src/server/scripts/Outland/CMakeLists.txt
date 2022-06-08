@@ -9,120 +9,72 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
+file(GLOB_RECURSE scripts_AuchenaiCrypts Outland/Auchindoun/AuchenaiCrypts/*.cpp Outland/Auchindoun/AuchenaiCrypts/*.h)
+file(GLOB_RECURSE scripts_ManaTombs Outland/Auchindoun/ManaTombs/*.cpp Outland/Auchindoun/ManaTombs/*.h)
+file(GLOB_RECURSE scripts_SethekkHalls Outland/Auchindoun/SethekkHalls/*.cpp Outland/Auchindoun/SethekkHalls/*.h)
+file(GLOB_RECURSE scripts_ShadowLabyrinth Outland/Auchindoun/ShadowLabyrinth/*.cpp Outland/Auchindoun/ShadowLabyrinth/*.h)
+file(GLOB_RECURSE scripts_BlackTemple Outland/BlackTemple/*.cpp Outland/BlackTemple/*.h)
+file(GLOB_RECURSE scripts_SerpentShrine Outland/CoilfangReservoir/SerpentShrine/*.cpp Outland/CoilfangReservoir/SerpentShrine/*.h)
+file(GLOB_RECURSE scripts_SteamVault Outland/CoilfangReservoir/SteamVault/*.cpp Outland/CoilfangReservoir/SteamVault/*.h)
+file(GLOB_RECURSE scripts_TheSlavePens Outland/CoilfangReservoir/TheSlavePens/*.cpp Outland/CoilfangReservoir/TheSlavePens/*.h)
+file(GLOB_RECURSE scripts_TheUnderbog Outland/CoilfangReservoir/TheUnderbog/*.cpp Outland/CoilfangReservoir/TheUnderbog/*.h)
+file(GLOB_RECURSE scripts_GruulsLair Outland/GruulsLair/*.cpp Outland/GruulsLair/*.h)
+file(GLOB_RECURSE scripts_BloodFurnace Outland/HellfireCitadel/BloodFurnace/*.cpp Outland/HellfireCitadel/BloodFurnace/*.h)
+file(GLOB_RECURSE scripts_HellfireRamparts Outland/HellfireCitadel/HellfireRamparts/*.cpp Outland/HellfireCitadel/HellfireRamparts/*.h)
+file(GLOB_RECURSE scripts_MagtheridonsLair Outland/HellfireCitadel/MagtheridonsLair/*.cpp Outland/HellfireCitadel/MagtheridonsLair/*.h)
+file(GLOB_RECURSE scripts_ShatteredHalls Outland/HellfireCitadel/ShatteredHalls/*.cpp Outland/HellfireCitadel/ShatteredHalls/*.h)
+file(GLOB_RECURSE scripts_Arcatraz Outland/TempestKeep/Arcatraz/*.cpp Outland/TempestKeep/Arcatraz/*.h)
+file(GLOB_RECURSE scripts_Botanica Outland/TempestKeep/Botanica/*.cpp Outland/TempestKeep/Botanica/*.h)
+file(GLOB_RECURSE scripts_Eye Outland/TempestKeep/Eye/*.cpp Outland/TempestKeep/Eye/*.h)
+file(GLOB_RECURSE scripts_Mechanar Outland/TempestKeep/Mechanar/*.cpp Outland/TempestKeep/Mechanar/*.h)
+file(GLOB_RECURSE scripts_WorldBosses Outland/WorldBosses/*.cpp Outland/WorldBosses/*.h)
+file(GLOB_RECURSE scripts_Zones Outland/*.cpp Outland/*.h)
+
+
+source_group(Outland\\Auchindoun\\AuchenaiCrypts FILES ${scripts_AuchenaiCrypts})
+source_group(Outland\\Auchindoun\\ManaTombs FILES ${scripts_ManaTombs})
+source_group(Outland\\Auchindoun\\SethekkHalls FILES ${scripts_SethekkHalls})
+source_group(Outland\\Auchindoun\\ShadowLabyrinth FILES ${scripts_ShadowLabyrinth})
+source_group(Outland\\BlackTemple FILES ${scripts_BlackTemple})
+source_group(Outland\\CoilfangReservoir\\SerpentShrine FILES ${scripts_SerpentShrine})
+source_group(Outland\\CoilfangReservoir\\SteamVault FILES ${scripts_SteamVault})
+source_group(Outland\\CoilfangReservoir\\TheSlavePens FILES ${scripts_TheSlavePens})
+source_group(Outland\\CoilfangReservoir\\TheUnderbog FILES ${scripts_TheUnderbog})
+source_group(Outland\\GruulsLair FILES ${scripts_GruulsLair})
+source_group(Outland\\HellfireCitadel\\BloodFurnace FILES ${scripts_BloodFurnace})
+source_group(Outland\\HellfireCitadel\\HellfireRamparts FILES ${scripts_HellfireRamparts})
+source_group(Outland\\HellfireCitadel\\MagtheridonsLair FILES ${scripts_MagtheridonsLair})
+source_group(Outland\\HellfireCitadel\\ShatteredHalls FILES ${scripts_ShatteredHalls})
+source_group(Outland\\TempestKeep\\Arcatraz FILES ${scripts_Arcatraz})
+source_group(Outland\\TempestKeep\\Botanica FILES ${scripts_Botanica})
+source_group(Outland\\TempestKeep\\Eye FILES ${scripts_Eye})
+source_group(Outland\\TempestKeep\\Mechanar FILES ${scripts_Mechanar})
+source_group(Outland\\WorldBosses FILES ${scripts_WorldBosses})
+source_group(Outland\\Zones FILES ${scripts_Zones})
+
+
 set(scripts_STAT_SRCS
   ${scripts_STAT_SRCS}
-  Outland/zone_nagrand.cpp
-  Outland/HellfireCitadel/MagtheridonsLair/magtheridons_lair.h
-  Outland/HellfireCitadel/MagtheridonsLair/instance_magtheridons_lair.cpp
-  Outland/HellfireCitadel/MagtheridonsLair/boss_magtheridon.cpp
-  Outland/HellfireCitadel/HellfireRamparts/instance_hellfire_ramparts.cpp
-  Outland/HellfireCitadel/HellfireRamparts/boss_omor_the_unscarred.cpp
-  Outland/HellfireCitadel/HellfireRamparts/boss_watchkeeper_gargolmar.cpp
-  Outland/HellfireCitadel/HellfireRamparts/boss_vazruden_the_herald.cpp
-  Outland/HellfireCitadel/HellfireRamparts/hellfire_ramparts.h
-  Outland/HellfireCitadel/BloodFurnace/boss_the_maker.cpp
-  Outland/HellfireCitadel/BloodFurnace/boss_kelidan_the_breaker.cpp
-  Outland/HellfireCitadel/BloodFurnace/blood_furnace.h
-  Outland/HellfireCitadel/BloodFurnace/instance_blood_furnace.cpp
-  Outland/HellfireCitadel/BloodFurnace/boss_broggok.cpp
-  Outland/HellfireCitadel/ShatteredHalls/shattered_halls.h
-  Outland/HellfireCitadel/ShatteredHalls/boss_warchief_kargath_bladefist.cpp
-  Outland/HellfireCitadel/ShatteredHalls/boss_nethekurse.cpp
-  Outland/HellfireCitadel/ShatteredHalls/instance_shattered_halls.cpp
-  Outland/HellfireCitadel/ShatteredHalls/boss_warbringer_omrogg.cpp
-  Outland/CoilfangReservoir/SteamVault/boss_mekgineer_steamrigger.cpp
-  Outland/CoilfangReservoir/SteamVault/instance_steam_vault.cpp
-  Outland/CoilfangReservoir/SteamVault/boss_hydromancer_thespia.cpp
-  Outland/CoilfangReservoir/SteamVault/boss_warlord_kalithresh.cpp
-  Outland/CoilfangReservoir/SteamVault/steam_vault.h
-  Outland/CoilfangReservoir/SerpentShrine/boss_hydross_the_unstable.cpp
-  Outland/CoilfangReservoir/SerpentShrine/boss_fathomlord_karathress.cpp
-  Outland/CoilfangReservoir/SerpentShrine/instance_serpent_shrine.cpp
-  Outland/CoilfangReservoir/SerpentShrine/serpent_shrine.h
-  Outland/CoilfangReservoir/SerpentShrine/boss_lady_vashj.cpp
-  Outland/CoilfangReservoir/SerpentShrine/boss_leotheras_the_blind.cpp
-  Outland/CoilfangReservoir/SerpentShrine/boss_lurker_below.cpp
-  Outland/CoilfangReservoir/SerpentShrine/boss_morogrim_tidewalker.cpp
-  Outland/CoilfangReservoir/TheSlavePens/boss_frostlord_ahune.cpp
-  Outland/CoilfangReservoir/TheSlavePens/boss_mennu_the_betrayer.cpp
-  Outland/CoilfangReservoir/TheSlavePens/boss_rokmar_the_crackler.cpp
-  Outland/CoilfangReservoir/TheSlavePens/boss_quagmirran.cpp
-  Outland/CoilfangReservoir/TheSlavePens/instance_the_slave_pens.cpp
-  Outland/CoilfangReservoir/TheUnderbog/boss_hungarfen.cpp
-  Outland/CoilfangReservoir/TheUnderbog/boss_the_black_stalker.cpp
-  Outland/CoilfangReservoir/TheUnderbog/instance_the_underbog.cpp
-  Outland/zone_shattrath_city.cpp
-  Outland/TempestKeep/Mechanar/boss_mechano_lord_capacitus.cpp
-  Outland/TempestKeep/Mechanar/boss_pathaleon_the_calculator.cpp
-  Outland/TempestKeep/Mechanar/boss_nethermancer_sepethrea.cpp
-  Outland/TempestKeep/Mechanar/mechanar.h
-  Outland/TempestKeep/Mechanar/boss_gatewatcher_gyrokill.cpp
-  Outland/TempestKeep/Mechanar/instance_mechanar.cpp
-  Outland/TempestKeep/Mechanar/boss_gatewatcher_ironhand.cpp
-  Outland/TempestKeep/Eye/the_eye.h
-  Outland/TempestKeep/Eye/instance_the_eye.cpp
-  Outland/TempestKeep/Eye/boss_void_reaver.cpp
-  Outland/TempestKeep/Eye/boss_astromancer.cpp
-  Outland/TempestKeep/Eye/boss_alar.cpp
-  Outland/TempestKeep/Eye/boss_kaelthas.cpp
-  Outland/TempestKeep/Eye/the_eye.cpp
-  Outland/TempestKeep/botanica/the_botanica.h
-  Outland/TempestKeep/botanica/instance_the_botanica.cpp
-  Outland/TempestKeep/botanica/boss_commander_sarannis.cpp
-  Outland/TempestKeep/botanica/boss_thorngrin_the_tender.cpp
-  Outland/TempestKeep/botanica/boss_high_botanist_freywinn.cpp
-  Outland/TempestKeep/botanica/boss_warp_splinter.cpp
-  Outland/TempestKeep/botanica/boss_laj.cpp
-  Outland/TempestKeep/arcatraz/boss_harbinger_skyriss.cpp
-  Outland/TempestKeep/arcatraz/boss_dalliah_the_doomsayer.cpp
-  Outland/TempestKeep/arcatraz/boss_wrath_scryer_soccothrates.cpp
-  Outland/TempestKeep/arcatraz/boss_zereketh_the_unbound.cpp
-  Outland/TempestKeep/arcatraz/instance_arcatraz.cpp
-  Outland/TempestKeep/arcatraz/arcatraz.h
-  Outland/TempestKeep/arcatraz/arcatraz.cpp
-  Outland/Auchindoun/AuchenaiCrypts/boss_shirrak_the_dead_watcher.cpp
-  Outland/Auchindoun/AuchenaiCrypts/boss_exarch_maladaar.cpp
-  Outland/Auchindoun/AuchenaiCrypts/instance_auchenai_crypts.cpp
-  Outland/Auchindoun/AuchenaiCrypts/auchenai_crypts.h
-  Outland/Auchindoun/ManaTombs/boss_pandemonius.cpp
-  Outland/Auchindoun/ManaTombs/boss_nexusprince_shaffar.cpp
-  Outland/Auchindoun/ManaTombs/instance_mana_tombs.cpp
-  Outland/Auchindoun/ManaTombs/mana_tombs.h
-  Outland/Auchindoun/SethekkHalls/boss_darkweaver_syth.cpp
-  Outland/Auchindoun/SethekkHalls/boss_tailonking_ikiss.cpp
-  Outland/Auchindoun/SethekkHalls/boss_anzu.cpp
-  Outland/Auchindoun/SethekkHalls/instance_sethekk_halls.cpp
-  Outland/Auchindoun/SethekkHalls/sethekk_halls.h
-  Outland/Auchindoun/ShadowLabyrinth/boss_ambassador_hellmaw.cpp
-  Outland/Auchindoun/ShadowLabyrinth/boss_blackheart_the_inciter.cpp
-  Outland/Auchindoun/ShadowLabyrinth/boss_grandmaster_vorpil.cpp
-  Outland/Auchindoun/ShadowLabyrinth/boss_murmur.cpp
-  Outland/Auchindoun/ShadowLabyrinth/instance_shadow_labyrinth.cpp
-  Outland/Auchindoun/ShadowLabyrinth/shadow_labyrinth.h
-  Outland/boss_doomwalker.cpp
-  Outland/zone_terokkar_forest.cpp
-  Outland/zone_hellfire_peninsula.cpp
-  Outland/boss_doomlord_kazzak.cpp
-  Outland/BlackTemple/boss_teron_gorefiend.cpp
-  Outland/BlackTemple/black_temple.h
-  Outland/BlackTemple/illidari_council.cpp
-  Outland/BlackTemple/boss_shade_of_akama.cpp
-  Outland/BlackTemple/boss_supremus.cpp
-  Outland/BlackTemple/black_temple.cpp
-  Outland/BlackTemple/boss_mother_shahraz.cpp
-  Outland/BlackTemple/instance_black_temple.cpp
-  Outland/BlackTemple/boss_reliquary_of_souls.cpp
-  Outland/BlackTemple/boss_warlord_najentus.cpp
-  Outland/BlackTemple/boss_bloodboil.cpp
-  Outland/BlackTemple/boss_illidan.cpp
-  Outland/zone_shadowmoon_valley.cpp
-  Outland/zone_blades_edge_mountains.cpp
-  Outland/GruulsLair/boss_high_king_maulgar.cpp
-  Outland/GruulsLair/boss_gruul.cpp
-  Outland/GruulsLair/gruuls_lair.h
-  Outland/GruulsLair/instance_gruuls_lair.cpp
-  Outland/zone_netherstorm.cpp
-  Outland/zone_zangarmarsh.cpp
+  ${scripts_AuchenaiCrypts}
+  ${scripts_ManaTombs}
+  ${scripts_SethekkHalls}
+  ${scripts_ShadowLabyrinth}
+  ${scripts_BlackTemple}
+  ${scripts_SerpentShrine}
+  ${scripts_SteamVault}
+  ${scripts_TheSlavePens}
+  ${scripts_TheUnderbog}  
+  ${scripts_GruulsLair}  
+  ${scripts_BloodFurnace}
+  ${scripts_HellfireRamparts}
+  ${scripts_MagtheridonsLair}
+  ${scripts_ShatteredHalls}  
+  ${scripts_Arcatraz}
+  ${scripts_Botanica}
+  ${scripts_Eye}
+  ${scripts_Mechanar}  
+  ${scripts_WorldBosses}
+  ${scripts_Zones}
 )
 
 message("  -> Prepared: Outland")
