@@ -9,196 +9,83 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
+file(GLOB_RECURSE scripts_Ahnkahet Northrend/AzjolNerub/Ahnkahet/*.cpp Northrend/AzjolNerub/Ahnkahet/*.h)
+file(GLOB_RECURSE scripts_AzjolNerub Northrend/AzjolNerub/AzjolNerub/*.cpp Northrend/AzjolNerub/AzjolNerub/*.h)
+file(GLOB_RECURSE scripts_ObsidianSanctum Northrend/ChamberOfAspects/ObsidianSanctum/*.cpp Northrend/ChamberOfAspects/ObsidianSanctum/*.h)
+file(GLOB_RECURSE scripts_RubySanctum Northrend/ChamberOfAspects/RubySanctum/*.cpp Northrend/ChamberOfAspects/RubySanctum/*.h)
+file(GLOB_RECURSE scripts_TrialOfTheChampion Northrend/CrusadersColiseum/TrialOfTheChampion/*.cpp Northrend/CrusadersColiseum/TrialOfTheChampion/*.h)
+file(GLOB_RECURSE scripts_TrialOfTheCrusader Northrend/CrusadersColiseum/TrialOfTheCrusader/*.cpp Northrend/CrusadersColiseum/TrialOfTheCrusader/*.h)
+file(GLOB_RECURSE scripts_DraktharonKeep Northrend/DraktharonKeep/*.cpp Northrend/DraktharonKeep/*.h)
+file(GLOB_RECURSE scripts_ForgeOfSouls Northrend/FrozenHalls/ForgeOfSouls/*.cpp Northrend/FrozenHalls/ForgeOfSouls/*.h)
+file(GLOB_RECURSE scripts_HallsOfReflection Northrend/FrozenHalls/HallsOfReflection/*.cpp Northrend/FrozenHalls/HallsOfReflection/*.h)
+file(GLOB_RECURSE scripts_PitOfSaron Northrend/FrozenHalls/PitOfSaron/*.cpp Northrend/FrozenHalls/PitOfSaron/*.h)
+file(GLOB_RECURSE scripts_Gundrak Northrend/Gundrak/*.cpp Northrend/Gundrak/*.h)
+file(GLOB_RECURSE scripts_IcecrownCitadel Northrend/IcecrownCitadel/*.cpp Northrend/IcecrownCitadel/*.h)
+file(GLOB_RECURSE scripts_Naxxramas Northrend/Naxxramas/*.cpp  Northrend/Naxxramas/*.h)
+file(GLOB_RECURSE scripts_EyeOfEternity Northrend/Nexus/EyeOfEternity/*.cpp Northrend/Nexus/EyeOfEternity/*.h)
+file(GLOB_RECURSE scripts_Nexus Northrend/Nexus/Nexus/*.cpp Northrend/Nexus/Nexus/*.h)
+file(GLOB_RECURSE scripts_Oculus Northrend/Nexus/Oculus/*.cpp Northrend/Nexus/Oculus/*.h)
+file(GLOB_RECURSE scripts_HallsOfLightning Northrend/Ulduar/HallsOfLightning/*.cpp Northrend/Ulduar/HallsOfLightning/*.h)
+file(GLOB_RECURSE scripts_HallsOfStone Northrend/Ulduar/HallsOfStone/*.cpp Northrend/Ulduar/HallsOfStone/*.h)
+file(GLOB_RECURSE scripts_Ulduar Northrend/Ulduar/Ulduar/*.cpp Northrend/Ulduar/Ulduar/*.h)
+file(GLOB_RECURSE scripts_UtgardeKeep Northrend/UtgardeKeep/UtgardeKeep/*.cpp Northrend/UtgardeKeep/UtgardeKeep/*.h)
+file(GLOB_RECURSE scripts_UtgardePinnacle Northrend/UtgardeKeep/UtgardePinnacle/*.cpp Northrend/UtgardeKeep/UtgardePinnacle/*.h)
+file(GLOB_RECURSE scripts_VaultOfArchavon Northrend/VaultOfArchavon/*.cpp Northrend/VaultOfArchavon/*.h)
+file(GLOB_RECURSE scripts_VioletHold Northrend/VioletHold/*.cpp Northrend/VioletHold/*.h)
+file(GLOB_RECURSE scripts_Northrend Northrend/*.cpp Northrend/*.h)
+
+
+source_group(Northrend\\AzjolNerub\\Ahnkahet FILES ${scripts_Ahnkahet})
+source_group(Northrend\\AzjolNerub\\AzjolNerub FILES ${scripts_AzjolNerub})
+source_group(Northrend\\ChamberOfAspects\\ObsidianSanctum FILES ${scripts_ObsidianSanctum})
+source_group(Northrend\\ChamberOfAspects\\RubySanctum FILES ${scripts_RubySanctum})
+source_group(Northrend\\CrusadersColiseum\\TrialOfTheChampion FILES ${scripts_TrialOfTheChampion})
+source_group(Northrend\\CrusadersColiseum\\TrialOfTheCrusader FILES ${scripts_TrialOfTheCrusader})
+source_group(Northrend\\DraktharonKeep FILES ${scripts_DraktharonKeep})
+source_group(Northrend\\FrozenHalls\\ForgeOfSouls FILES ${scripts_ForgeOfSouls})
+source_group(Northrend\\FrozenHalls\\HallsOfReflection FILES ${scripts_HallsOfReflection})
+source_group(Northrend\\FrozenHalls\\PitOfSaron FILES ${scripts_PitOfSaron})
+source_group(Northrend\\Gundrak FILES ${scripts_Gundrak})
+source_group(Northrend\\IcecrownCitadel FILES ${scripts_IcecrownCitadel})
+source_group(Northrend\\Naxxramas FILES ${scripts_Naxxramas})
+source_group(Northrend\\Nexus\\EyeOfEternity FILES ${scripts_EyeOfEternity})
+source_group(Northrend\\Nexus\\Nexus FILES ${scripts_Nexus})
+source_group(Northrend\\Nexus\\Oculus FILES ${scripts_Oculus})
+source_group(Northrend\\Ulduar\\HallsOfLightning FILES ${scripts_HallsOfLightning})
+source_group(Northrend\\Ulduar\\HallsOfStone FILES ${scripts_HallsOfStone})
+source_group(Northrend\\Ulduar\\Ulduar FILES ${scripts_Ulduar})
+source_group(Northrend\\UtgardeKeep\\UtgardeKeep FILES ${scripts_UtgardeKeep})
+source_group(Northrend\\UtgardeKeep\\UtgardePinnacle FILES ${scripts_UtgardePinnacle})
+source_group(Northrend\\VaultOfArchavon FILES ${scripts_VaultOfArchavon})
+source_group(Northrend\\VioletHold FILES ${scripts_VioletHold})
+source_group(Northrend\\Zones FILES ${scripts_Northrend})
+
+
 set(scripts_STAT_SRCS
   ${scripts_STAT_SRCS}
-  Northrend/zone_wintergrasp.cpp
-  Northrend/zone_storm_peaks.cpp
-  Northrend/Ulduar/HallsOfLightning/instance_halls_of_lightning.cpp
-  Northrend/Ulduar/HallsOfLightning/boss_bjarngrim.cpp
-  Northrend/Ulduar/HallsOfLightning/halls_of_lightning.h
-  Northrend/Ulduar/HallsOfLightning/halls_of_lightning.cpp
-  Northrend/Ulduar/HallsOfLightning/boss_ionar.cpp
-  Northrend/Ulduar/HallsOfLightning/boss_volkhan.cpp
-  Northrend/Ulduar/HallsOfLightning/boss_loken.cpp
-  Northrend/Ulduar/Ulduar/boss_general_vezax.cpp
-  Northrend/Ulduar/Ulduar/ulduar_teleporter.cpp
-  Northrend/Ulduar/Ulduar/boss_thorim.cpp
-  Northrend/Ulduar/Ulduar/boss_ignis.cpp
-  Northrend/Ulduar/Ulduar/boss_algalon_the_observer.cpp
-  Northrend/Ulduar/Ulduar/instance_ulduar.cpp
-  Northrend/Ulduar/Ulduar/boss_auriaya.cpp
-  Northrend/Ulduar/Ulduar/boss_yogg_saron.cpp
-  Northrend/Ulduar/Ulduar/boss_hodir.cpp
-  Northrend/Ulduar/Ulduar/boss_assembly_of_iron.cpp
-  Northrend/Ulduar/Ulduar/boss_flame_leviathan.cpp
-  Northrend/Ulduar/Ulduar/boss_xt002.cpp
-  Northrend/Ulduar/Ulduar/boss_mimiron.cpp
-  Northrend/Ulduar/Ulduar/ulduar.h
-  Northrend/Ulduar/Ulduar/boss_freya.cpp
-  Northrend/Ulduar/Ulduar/boss_razorscale.cpp
-  Northrend/Ulduar/Ulduar/boss_kologarn.cpp
-  Northrend/Ulduar/Ulduar/ulduar_scripts.cpp
-  Northrend/Ulduar/HallsOfStone/boss_krystallus.cpp
-  Northrend/Ulduar/HallsOfStone/halls_of_stone.h
-  Northrend/Ulduar/HallsOfStone/instance_halls_of_stone.cpp
-  Northrend/Ulduar/HallsOfStone/boss_maiden_of_grief.cpp
-  Northrend/Ulduar/HallsOfStone/boss_sjonnir.cpp
-  Northrend/Ulduar/HallsOfStone/halls_of_stone.cpp
-  Northrend/ChamberOfAspects/ObsidianSanctum/instance_obsidian_sanctum.cpp
-  Northrend/ChamberOfAspects/ObsidianSanctum/obsidian_sanctum.h
-  Northrend/ChamberOfAspects/ObsidianSanctum/boss_sartharion.cpp
-  Northrend/ChamberOfAspects/RubySanctum/instance_ruby_sanctum.cpp
-  Northrend/ChamberOfAspects/RubySanctum/ruby_sanctum.h
-  Northrend/ChamberOfAspects/RubySanctum/ruby_sanctum.cpp
-  Northrend/ChamberOfAspects/RubySanctum/boss_baltharus_the_warborn.cpp
-  Northrend/ChamberOfAspects/RubySanctum/boss_saviana_ragefire.cpp
-  Northrend/ChamberOfAspects/RubySanctum/boss_general_zarithrian.cpp
-  Northrend/ChamberOfAspects/RubySanctum/boss_halion.cpp
-  Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.h
-  Northrend/FrozenHalls/HallsOfReflection/boss_falric.cpp
-  Northrend/FrozenHalls/HallsOfReflection/instance_halls_of_reflection.cpp
-  Northrend/FrozenHalls/HallsOfReflection/halls_of_reflection.cpp
-  Northrend/FrozenHalls/HallsOfReflection/boss_marwyn.cpp
-  Northrend/FrozenHalls/HallsOfReflection/boss_the_lich_king_hor.cpp
-  Northrend/FrozenHalls/PitOfSaron/boss_forgemaster_garfrost.cpp
-  Northrend/FrozenHalls/PitOfSaron/boss_krickandick.cpp
-  Northrend/FrozenHalls/PitOfSaron/pit_of_saron.cpp
-  Northrend/FrozenHalls/PitOfSaron/boss_scourgelord_tyrannus.cpp
-  Northrend/FrozenHalls/PitOfSaron/pit_of_saron.h
-  Northrend/FrozenHalls/PitOfSaron/instance_pit_of_saron.cpp
-  Northrend/FrozenHalls/ForgeOfSouls/forge_of_souls.cpp
-  Northrend/FrozenHalls/ForgeOfSouls/boss_bronjahm.cpp
-  Northrend/FrozenHalls/ForgeOfSouls/instance_forge_of_souls.cpp
-  Northrend/FrozenHalls/ForgeOfSouls/boss_devourer_of_souls.cpp
-  Northrend/FrozenHalls/ForgeOfSouls/forge_of_souls.h
-  Northrend/Nexus/EyeOfEternity/boss_malygos.cpp
-  Northrend/Nexus/EyeOfEternity/instance_eye_of_eternity.cpp
-  Northrend/Nexus/EyeOfEternity/eye_of_eternity.h
-  Northrend/Nexus/Oculus/boss_eregos.cpp
-  Northrend/Nexus/Oculus/boss_drakos.cpp
-  Northrend/Nexus/Oculus/oculus.h
-  Northrend/Nexus/Oculus/boss_varos.cpp
-  Northrend/Nexus/Oculus/boss_urom.cpp
-  Northrend/Nexus/Oculus/oculus.cpp
-  Northrend/Nexus/Oculus/instance_oculus.cpp
-  Northrend/Nexus/Nexus/boss_commander_kolurg.cpp
-  Northrend/Nexus/Nexus/boss_commander_stoutbeard.cpp
-  Northrend/Nexus/Nexus/boss_ormorok.cpp
-  Northrend/Nexus/Nexus/boss_magus_telestra.cpp
-  Northrend/Nexus/Nexus/instance_nexus.cpp
-  Northrend/Nexus/Nexus/boss_keristrasza.cpp
-  Northrend/Nexus/Nexus/boss_anomalus.cpp
-  Northrend/Nexus/Nexus/nexus.h
-  Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_anubarak_trial.cpp
-  Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_faction_champions.cpp
-  Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_lord_jaraxxus.cpp
-  Northrend/CrusadersColiseum/TrialOfTheCrusader/trial_of_the_crusader.h
-  Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_northrend_beasts.cpp
-  Northrend/CrusadersColiseum/TrialOfTheCrusader/trial_of_the_crusader.cpp
-  Northrend/CrusadersColiseum/TrialOfTheCrusader/boss_twin_valkyr.cpp
-  Northrend/CrusadersColiseum/TrialOfTheCrusader/instance_trial_of_the_crusader.cpp
-  Northrend/CrusadersColiseum/TrialOfTheChampion/trial_of_the_champion.h
-  Northrend/CrusadersColiseum/TrialOfTheChampion/trial_of_the_champion.cpp
-  Northrend/CrusadersColiseum/TrialOfTheChampion/boss_grand_champions.cpp
-  Northrend/CrusadersColiseum/TrialOfTheChampion/boss_black_knight.cpp
-  Northrend/CrusadersColiseum/TrialOfTheChampion/instance_trial_of_the_champion.cpp
-  Northrend/CrusadersColiseum/TrialOfTheChampion/boss_argent_challenge.cpp
-  Northrend/Naxxramas/boss_loatheb.cpp
-  Northrend/Naxxramas/boss_anubrekhan.cpp
-  Northrend/Naxxramas/boss_maexxna.cpp
-  Northrend/Naxxramas/boss_patchwerk.cpp
-  Northrend/Naxxramas/boss_gothik.cpp
-  Northrend/Naxxramas/boss_faerlina.cpp
-  Northrend/Naxxramas/boss_gluth.cpp
-  Northrend/Naxxramas/boss_four_horsemen.cpp
-  Northrend/Naxxramas/naxxramas.h
-  Northrend/Naxxramas/boss_kelthuzad.cpp
-  Northrend/Naxxramas/boss_heigan.cpp
-  Northrend/Naxxramas/boss_thaddius.cpp
-  Northrend/Naxxramas/boss_razuvious.cpp
-  Northrend/Naxxramas/boss_sapphiron.cpp
-  Northrend/Naxxramas/instance_naxxramas.cpp
-  Northrend/Naxxramas/boss_grobbulus.cpp
-  Northrend/Naxxramas/boss_noth.cpp
-  Northrend/zone_crystalsong_forest.cpp
-  Northrend/VaultOfArchavon/boss_archavon.cpp
-  Northrend/VaultOfArchavon/boss_koralon.cpp
-  Northrend/VaultOfArchavon/vault_of_archavon.h
-  Northrend/VaultOfArchavon/instance_vault_of_archavon.cpp
-  Northrend/VaultOfArchavon/boss_emalon.cpp
-  Northrend/VaultOfArchavon/boss_toravon.cpp
-  Northrend/zone_sholazar_basin.cpp
-  Northrend/UtgardeKeep/UtgardePinnacle/boss_svala.cpp
-  Northrend/UtgardeKeep/UtgardePinnacle/boss_palehoof.cpp
-  Northrend/UtgardeKeep/UtgardePinnacle/boss_skadi.cpp
-  Northrend/UtgardeKeep/UtgardePinnacle/boss_ymiron.cpp
-  Northrend/UtgardeKeep/UtgardePinnacle/instance_utgarde_pinnacle.cpp
-  Northrend/UtgardeKeep/UtgardePinnacle/utgarde_pinnacle.h
-  Northrend/UtgardeKeep/UtgardeKeep/boss_ingvar_the_plunderer.cpp
-  Northrend/UtgardeKeep/UtgardeKeep/boss_skarvald_dalronn.cpp
-  Northrend/UtgardeKeep/UtgardeKeep/utgarde_keep.h
-  Northrend/UtgardeKeep/UtgardeKeep/instance_utgarde_keep.cpp
-  Northrend/UtgardeKeep/UtgardeKeep/boss_keleseth.cpp
-  Northrend/UtgardeKeep/UtgardeKeep/utgarde_keep.cpp
-  Northrend/zone_dragonblight.cpp
-  Northrend/zone_grizzly_hills.cpp
-  Northrend/AzjolNerub/AzjolNerub/azjol_nerub.h
-  Northrend/AzjolNerub/AzjolNerub/instance_azjol_nerub.cpp
-  Northrend/AzjolNerub/AzjolNerub/boss_krikthir_the_gatewatcher.cpp
-  Northrend/AzjolNerub/AzjolNerub/boss_hadronox.cpp
-  Northrend/AzjolNerub/AzjolNerub/boss_anubarak.cpp
-  Northrend/AzjolNerub/Ahnkahet/boss_herald_volazj.cpp
-  Northrend/AzjolNerub/Ahnkahet/boss_prince_taldaram.cpp
-  Northrend/AzjolNerub/Ahnkahet/instance_ahnkahet.cpp
-  Northrend/AzjolNerub/Ahnkahet/boss_jedoga_shadowseeker.cpp
-  Northrend/AzjolNerub/Ahnkahet/boss_elder_nadox.cpp
-  Northrend/AzjolNerub/Ahnkahet/boss_amanitar.cpp
-  Northrend/AzjolNerub/Ahnkahet/ahnkahet.h
-  Northrend/VioletHold/boss_zuramat.cpp
-  Northrend/VioletHold/instance_violet_hold.cpp
-  Northrend/VioletHold/boss_lavanthor.cpp
-  Northrend/VioletHold/boss_cyanigosa.cpp
-  Northrend/VioletHold/violet_hold.h
-  Northrend/VioletHold/boss_ichoron.cpp
-  Northrend/VioletHold/boss_moragg.cpp
-  Northrend/VioletHold/boss_xevozz.cpp
-  Northrend/VioletHold/boss_erekem.cpp
-  Northrend/VioletHold/violet_hold.cpp
-  Northrend/IcecrownCitadel/instance_icecrown_citadel.cpp
-  Northrend/IcecrownCitadel/icecrown_citadel.cpp
-  Northrend/IcecrownCitadel/icecrown_citadel.h
-  Northrend/IcecrownCitadel/icecrown_citadel_teleport.cpp
-  Northrend/IcecrownCitadel/boss_lord_marrowgar.cpp
-  Northrend/IcecrownCitadel/boss_lady_deathwhisper.cpp
-  Northrend/IcecrownCitadel/boss_deathbringer_saurfang.cpp
-  Northrend/IcecrownCitadel/boss_festergut.cpp
-  Northrend/IcecrownCitadel/boss_rotface.cpp
-  Northrend/IcecrownCitadel/boss_professor_putricide.cpp
-  Northrend/IcecrownCitadel/boss_blood_prince_council.cpp
-  Northrend/IcecrownCitadel/boss_blood_queen_lana_thel.cpp
-  Northrend/IcecrownCitadel/boss_valithria_dreamwalker.cpp
-  Northrend/IcecrownCitadel/boss_sindragosa.cpp
-  Northrend/IcecrownCitadel/boss_the_lich_king.cpp
-  Northrend/IcecrownCitadel/boss_gunship_battle.cpp
-  Northrend/IcecrownCitadel/npc_icecrown_citadel.cpp
-  Northrend/zone_zuldrak.cpp
-  Northrend/zone_icecrown.cpp
-  Northrend/Gundrak/boss_slad_ran.cpp
-  Northrend/Gundrak/instance_gundrak.cpp
-  Northrend/Gundrak/boss_drakkari_colossus.cpp
-  Northrend/Gundrak/gundrak.h
-  Northrend/Gundrak/boss_gal_darah.cpp
-  Northrend/Gundrak/boss_moorabi.cpp
-  Northrend/Gundrak/boss_eck.cpp
-  Northrend/zone_borean_tundra.cpp
-  Northrend/zone_howling_fjord.cpp
-  Northrend/zone_dalaran.cpp
-  Northrend/DraktharonKeep/boss_trollgore.cpp
-  Northrend/DraktharonKeep/instance_drak_tharon_keep.cpp
-  Northrend/DraktharonKeep/boss_novos.cpp
-  Northrend/DraktharonKeep/drak_tharon_keep.h
-  Northrend/DraktharonKeep/boss_tharon_ja.cpp
-  Northrend/DraktharonKeep/boss_king_dred.cpp
+  ${scripts_Ahnkahet}
+  ${scripts_AzjolNerub}
+  ${scripts_ObsidianSanctum}
+  ${scripts_RubySanctum}
+  ${scripts_TrialOfTheChampion}
+  ${scripts_TrialOfTheCrusader}  
+  ${scripts_DraktharonKeep}  
+  ${scripts_ForgeOfSouls}
+  ${scripts_HallsOfReflection}
+  ${scripts_PitOfSaron}  
+  ${scripts_Gundrak}  
+  ${scripts_IcecrownCitadel}  
+  ${scripts_Naxxramas}  
+  ${scripts_EyeOfEternity}
+  ${scripts_Nexus}
+  ${scripts_Oculus}  
+  ${scripts_HallsOfLightning}
+  ${scripts_HallsOfStone}
+  ${scripts_Ulduar}  
+  ${scripts_UtgardeKeep}
+  ${scripts_UtgardePinnacle}  
+  ${scripts_VaultOfArchavon}  
+  ${scripts_VioletHold}  
+  ${scripts_Northrend}
 )
-
 message("  -> Prepared: Northrend")
