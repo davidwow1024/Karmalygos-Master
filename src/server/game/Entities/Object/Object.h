@@ -713,7 +713,12 @@ class WorldObject : public Object, public WorldLocation
         void GetClosePoint(float &x, float &y, float &z, float size, float distance2d = 0, float angle = 0) const;
         void MovePosition(Position &pos, float dist, float angle);
         void GetNearPosition(Position &pos, float dist, float angle);
-        void MovePositionToFirstCollision(Position &pos, float dist, float angle, float offsetZ = 0.0f);
+		Position GetNearPositionAlternate(float dist, float angle);
+		Position GetPositionAlternate() const
+		{
+			return *this;
+		}
+		void MovePositionToFirstCollision(Position &pos, float dist, float angle, float offsetZ = 0.0f);
         inline bool IsOnGround()
         {
             float z = this->GetPositionZ();
@@ -852,6 +857,8 @@ class WorldObject : public Object, public WorldLocation
 
         Player* FindNearestPlayer(float range) const;
         std::list<Player*>  GetNearestPlayersList(float range, bool alive = true);
+		std::list<Creature*> FindNearestCreatures(std::list<uint32> entrys, float range) const;
+		std::vector<Creature*> FindNearestCreatures(uint32 entry, float range, bool alive) const;
 
 
         void GetGameObjectListWithEntryInGrid(std::list<GameObject*>& lList, uint32 uiEntry, float fMaxSearchRange) const;
