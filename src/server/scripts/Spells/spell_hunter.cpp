@@ -1549,8 +1549,8 @@ class spell_hunt_kill_command : public SpellScript
         if (!pet || pet->isDead())
             return SPELL_FAILED_NO_PET;
 
-        if (!GetExplTargetUnit() || !pet->IsWithinDist(GetExplTargetUnit(), 25.0f, true))
-            return SPELL_FAILED_DONT_REPORT;
+		if (!GetExplTargetUnit() || !pet->IsWithinDist(GetExplTargetUnit(), 25.0f, true))
+			return SPELL_FAILED_OUT_OF_RANGE;
 
         uint32 petUnitFlags = pet->GetUInt32Value(UNIT_FIELD_FLAGS);     // Get unit state
         if (petUnitFlags & UNIT_FLAG_STUNNED)
