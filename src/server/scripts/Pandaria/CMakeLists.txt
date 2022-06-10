@@ -43,7 +43,7 @@ file(GLOB_RECURSE scripts_Scenarios_SecretIngridient Pandaria/Scenarios/SecretIn
 file(GLOB_RECURSE scripts_Scenarios_SecretsOfRagefire Pandaria/Scenarios/SecretsOfRagefire/*.cpp Pandaria/Scenarios/SecretsOfRagefire/*.h)
 file(GLOB_RECURSE scripts_Scenarios_UngaIngoo Pandaria/Scenarios/UngaIngoo/*.cpp Pandaria/Scenarios/UngaIngoo/*.h)
 
-#file(GLOB_RECURSE scripts_WorldBosses Pandaria/WorldBosses/*.cpp Pandaria/WorldBosses/*.h)
+file(GLOB_RECURSE scripts_WorldBosses Pandaria/WorldBosses/*.cpp Pandaria/WorldBosses/*.h)
 file(GLOB_RECURSE scripts_Zones Pandaria/*.cpp Pandaria/*.h)
 
 
@@ -80,7 +80,7 @@ source_group(Pandaria\\Scenarios\\SecretIngridient FILES ${scripts_Scenarios_Sec
 source_group(Pandaria\\Scenarios\\SecretsOfRagefire FILES ${scripts_Scenarios_SecretsOfRagefire})
 source_group(Pandaria\\Scenarios\\UngaIngoo FILES ${scripts_Scenarios_UngaIngoo})
 
-#source_group(Pandaria\\WorldBosses FILES ${scripts_WorldBosses})
+source_group(Pandaria\\WorldBosses FILES ${scripts_WorldBosses})
 source_group(Pandaria\\Zones FILES ${scripts_Zones})
 
 
@@ -119,7 +119,7 @@ set(scripts_STAT_SRCS
   ${scripts_Scenarios_SecretsOfRagefire}
   ${scripts_Scenarios_UngaIngoo}
   
-  #${scripts_WorldBosses} 
+  ${scripts_WorldBosses} 
   ${scripts_Zones} 
 )
 message("  -> Prepared: Pandaria")
