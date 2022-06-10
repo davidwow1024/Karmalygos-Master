@@ -287,9 +287,14 @@ void WorldSession::HandlePetActionHelper(Unit* pet, uint64 guid1, uint32 spellid
                     if (!targetUnit)
                         return;
 
-                    if (Unit* owner = pet->GetOwner())
-                        if (!owner->IsValidAttackTarget(targetUnit))
-                            return;
+					if (Unit * owner = pet->GetOwner())
+					{
+						if (!owner->IsValidAttackTarget(targetUnit))
+							return;
+
+						if (!owner->CanSeeOrDetect(targetUnit, false, true))
+							return;
+					}
 
 					// Not let attack through obstructions
 					if (sWorld->getBoolConfig(CONFIG_PET_LOS))

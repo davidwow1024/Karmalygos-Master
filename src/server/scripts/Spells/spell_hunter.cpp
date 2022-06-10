@@ -1549,6 +1549,9 @@ class spell_hunt_kill_command : public SpellScript
         if (!pet || pet->isDead())
             return SPELL_FAILED_NO_PET;
 
+		if (!GetExplTargetUnit()->IsWithinLOSInMap(pet))
+			return SPELL_FAILED_LINE_OF_SIGHT;
+
 		if (!GetExplTargetUnit() || !pet->IsWithinDist(GetExplTargetUnit(), 25.0f, true))
 			return SPELL_FAILED_OUT_OF_RANGE;
 
