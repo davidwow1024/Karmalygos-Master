@@ -28,6 +28,7 @@
 #include "CreatureAIImpl.h"
 #include "CreatureGroups.h"
 #include "Creature.h"
+#include "CreatureTextMgr.h"
 #include "Formulas.h"
 #include "GridNotifiersImpl.h"
 #include "Group.h"
@@ -1808,6 +1809,28 @@ void Unit::HandleEmoteCommand(uint32 anim_id)
         data << uint64(GetGUID());
         SendMessageToSet(&data, true);
     }
+}
+
+void Unit::HandleEmoteCommandWithDelay(uint32 Delay, uint8 Id)
+{
+	class HandleEmoteCommandWithDelay : public BasicEvent
+	{
+	public:
+		HandleEmoteCommandWithDelay(Unit* _creature, uint8 _id, uint32 const& _delay) : creature(_creature), id(_id), delay(_delay) { }
+
+		bool Execute(uint64 /*execTime*/, uint32 /*diff*/)
+		{
+			sCreatureTextMgr->SendEmote(creature, id);
+			return true;
+		}
+
+	private:
+		Unit* creature;
+		uint8 id;
+		uint32 delay;
+	};
+
+	m_Events.AddEvent(new HandleEmoteCommandWithDelay(this, Id, Delay), m_Events.CalculateTime(Delay));
 }
 
 void Unit::HandleEmoteStateCommand(uint32 anim_id)

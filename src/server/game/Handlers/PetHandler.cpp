@@ -291,6 +291,13 @@ void WorldSession::HandlePetActionHelper(Unit* pet, uint64 guid1, uint32 spellid
                         if (!owner->IsValidAttackTarget(targetUnit))
                             return;
 
+					// Not let attack through obstructions
+					if (sWorld->getBoolConfig(CONFIG_PET_LOS))
+					{
+						if (!pet->IsWithinLOSInMap(targetUnit))
+							return;
+					}
+
                     pet->ClearUnitState(UNIT_STATE_FOLLOW);
                     // This is true if pet has no target or has target but targets differs.
                     if (pet->GetVictim() != targetUnit || (pet->GetVictim() == targetUnit && !pet->GetCharmInfo()->IsCommandAttack()))
@@ -392,6 +399,9 @@ void WorldSession::HandlePetActionHelper(Unit* pet, uint64 guid1, uint32 spellid
             {
                 case REACT_PASSIVE:                         //passive
                     pet->AttackStop();
+					charmInfo->SetIsCommandAttack(false);
+					if (charmInfo->HasCommandState(COMMAND_FOLLOW))
+						pet->GetMotionMaster()->MoveFollow(_player, PET_FOLLOW_DIST, pet->GetFollowAngle());
 
                 case REACT_DEFENSIVE:                       //recovery
                 case REACT_AGGRESSIVE:                      //activete

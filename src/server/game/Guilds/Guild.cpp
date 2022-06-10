@@ -3224,27 +3224,46 @@ bool Guild::AddMember(uint64 guid, uint8 rankId)
         }
         m_members[lowguid] = member;
     }
-	SQLTransaction trans(NULL);
+	PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_GUILD_MEMBER_REPUTATION);
+	stmt->setInt32(0, GUID_LOPART(guid));
+	PreparedQueryResult result = CharacterDatabase.Query(stmt);
+	if (result)
+	{
+		Field* fields = result->Fetch();
+		uint32 guild = fields[0].GetUInt32();
+		if (guild != GetId())
+		{
+			if (player)
+			{
+				int32 val = 0;
+				if (FactionEntry const* faction = sFactionStore.LookupEntry(GUILD_REPUTATION_ID))
+				{
+					ReputationRank rank = player->GetReputationMgr().GetRank(faction);
+					for (int32 r = REP_NEUTRAL; r < rank; ++r)
+						val += ReputationMgr::PointsInRank[r];
+
+					player->GetReputationMgr().SetReputation(faction, val);
+					member->SetReputation(player->GetReputationMgr().GetReputation(faction));
+				}
+			}
+			else
+			{
+				// FIXME
+			}
+		}
+	}
+	else
+	{
+		if (player)
+			if (FactionEntry const* faction = sFactionStore.LookupEntry(GUILD_REPUTATION_ID))
+				player->GetReputationMgr().SetVisible(faction);
+		member->SetReputation(0);
+	}
+
+	SQLTransaction trans = CharacterDatabase.BeginTransaction();
 	member->SaveToDB(trans);
 	member->SaveProfessionsToDB(trans);
-	// If player not in game data in will be loaded from guild tables, so no need to update it!
-	if (player)
-	{
-		player->SetInGuild(m_id);
-		player->SetRank(rankId);
-		player->SetGuildLevel(GetLevel());
-		player->SetGuildIdInvited(0);
-		if (sWorld->getBoolConfig(CONFIG_GUILD_LEVELING_ENABLED))
-		{
-			for (uint32 i = 0; i < sGuildPerkSpellsStore.GetNumRows(); ++i)
-				if (GuildPerkSpellsEntry const* entry = sGuildPerkSpellsStore.LookupEntry(i))
-					if (entry->Level <= GetLevel())
-						player->LearnSpell(entry->SpellId, true);
-		}
-
-		if (FactionEntry const* factionEntry = sFactionStore.LookupEntry(GUILD_REPUTATION_ID))
-			player->GetReputationMgr().SetReputation(factionEntry, 0);
-	}
+	CharacterDatabase.CommitTransaction(trans, DBConnection::Guild);
 
 	UpdateAccountsNumber();
 	UpdateGuildRecipes();

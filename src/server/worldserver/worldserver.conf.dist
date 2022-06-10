@@ -313,6 +313,14 @@ vmap.enableIndoorCheck = 1
 #        Default:     1 - (Enabled)
 #                     0 - (Disabled, Less position precision but less CPU usage)
 
+#        
+#    vmap.petLOS
+#        Check LOS for pets, to avoid them going through walls etc.
+#        Default: 0 (disable, less CPU usage)
+#                 1 (enable, each pet attack command will check for LOS)
+
+vmap.petLOS = 0
+
 DetectPosCollision = 1
 
 #

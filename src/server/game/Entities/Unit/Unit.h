@@ -3023,6 +3023,7 @@ public:
     float GetScallingDamageMod() const;
 
     bool PetNeedsLOSCheckOnAttackStart() const;
+	void HandleEmoteCommandWithDelay(uint32 Delay, uint8 Id);
 
 protected:
     explicit Unit(bool isWorldObject);

@@ -2899,6 +2899,29 @@ Player* WorldObject::FindNearestPlayer(float range) const
     return player;
 }
 
+std::list<Creature*> WorldObject::FindNearestCreatures(std::list<uint32> entrys, float range) const
+{
+	std::list<Creature*> creatureList;
+
+	for (std::list<uint32>::iterator itr = entrys.begin(); itr != entrys.end(); ++itr)
+		GetCreatureListWithEntryInGrid(creatureList, (*itr), range);
+	return creatureList;
+}
+
+std::vector<Creature*> WorldObject::FindNearestCreatures(uint32 entry, float range, bool alive) const
+{
+	std::list<Creature*> creatureList;
+	std::vector<Creature*> returnList;
+	GetCreatureListWithEntryInGrid(creatureList, entry, range);
+
+	for (std::list<Creature*>::iterator itr = creatureList.begin(); itr != creatureList.end(); ++itr)
+	{
+		if ((*itr)->IsAlive() == alive)
+			returnList.push_back(*itr);
+	}
+	return returnList;
+}
+
 std::list<Player*> WorldObject::GetNearestPlayersList(float range, bool alive)
 {
     std::list<Player*> players;
@@ -3279,6 +3302,13 @@ void WorldObject::MovePosition(Position &pos, float dist, float angle)
     Trinity::NormalizeMapCoord(pos.m_positionY);
     UpdateGroundPositionZ(pos.m_positionX, pos.m_positionY, pos.m_positionZ);
     pos.SetOrientation(GetOrientation());
+}
+
+Position WorldObject::GetNearPositionAlternate(float dist, float angle)
+{
+	Position pos = GetPositionAlternate();
+	MovePosition(pos, dist, angle);
+	return pos;
 }
 
 void WorldObject::MovePositionToFirstCollision(Position &pos, float dist, float angle, float offsetZ)
