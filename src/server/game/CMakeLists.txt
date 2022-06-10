@@ -12,25 +12,59 @@
 file(GLOB_RECURSE sources_Accounts Accounts/*.cpp Accounts/*.h)
 file(GLOB_RECURSE sources_Achievements Achievements/*.cpp Achievements/*.h)
 file(GLOB_RECURSE sources_Addons Addons/*.cpp Addons/*.h)
+
+file(GLOB_RECURSE sources_CoreAI AI/CoreAI/*.cpp AI/CoreAI/*.h)
+file(GLOB_RECURSE sources_PlayerAI AI/PlayerAI/*.cpp AI/PlayerAI/*.h)
+file(GLOB_RECURSE sources_ScriptedAI AI/ScriptedAI/*.cpp AI/ScriptedAI/*.h)
+file(GLOB_RECURSE sources_SmartScripts AI/SmartScripts/*.cpp AI/SmartScripts/*.h)
 file(GLOB_RECURSE sources_AI AI/*.cpp AI/*.h)
+
 file(GLOB_RECURSE sources_Anticheat Anticheat/*.cpp Anticheat/*.h)
 file(GLOB_RECURSE sources_AuctionHouse AuctionHouse/*.cpp AuctionHouse/*.h)
+
+file(GLOB_RECURSE sources_Battlefield_Zones Battlefield/Zones/*.cpp Battlefield/Zones/*.h)
 file(GLOB_RECURSE sources_Battlefield Battlefield/*.cpp Battlefield/*.h)
+
+file(GLOB_RECURSE sources_Battlegrounds_Zones Battlegrounds/Zones/*.cpp Battlegrounds/Zones/*.h)
 file(GLOB_RECURSE sources_Battlegrounds Battlegrounds/*.cpp Battlegrounds/*.h)
+
 file(GLOB_RECURSE sources_BattlePay BattlePay/*.cpp BattlePay/*.h)
 file(GLOB_RECURSE sources_BattlePet BattlePet/*.cpp BattlePet/*.h)
 file(GLOB_RECURSE sources_BlackMarket BlackMarket/*.cpp BlackMarket/*.h)
 file(GLOB_RECURSE sources_Calendar Calendar/*.cpp Calendar/*.h)
+
+file(GLOB_RECURSE sources_Chat_Channels Chat/Channels/*.cpp Chat/Channels/*.h)
 file(GLOB_RECURSE sources_Chat Chat/*.cpp Chat/*.h)
+
 file(GLOB_RECURSE sources_Combat Combat/*.cpp Combat/*.h)
 file(GLOB_RECURSE sources_Conditions Conditions/*.cpp Conditions/*.h)
 file(GLOB_RECURSE sources_CustomTransmogrification CustomTransmogrification/*.cpp CustomTransmogrification/*.h)
 file(GLOB_RECURSE sources_DataStores DataStores/*.cpp DataStores/*.h)
 file(GLOB_RECURSE sources_DungeonFinding DungeonFinding/*.cpp DungeonFinding/*.h)
-file(GLOB_RECURSE sources_Entities Entities/*.cpp Entities/*.h)
+
+file(GLOB_RECURSE sources_AreaTrigger Entities/AreaTrigger/*.cpp Entities/AreaTrigger/*.h)
+file(GLOB_RECURSE sources_Corpse Entities/Corpse/*.cpp Entities/Corpse/*.h)
+file(GLOB_RECURSE sources_Creature Entities/Creature/*.cpp Entities/Creature/*.h)
+file(GLOB_RECURSE sources_DynamicObject Entities/DynamicObject/*.cpp Entities/DynamicObject/*.h)
+file(GLOB_RECURSE sources_GameObject Entities/GameObject/*.cpp Entities/GameObject/*.h)
+file(GLOB_RECURSE sources_Item_Container Entities/Item/Container/*.cpp Entities/Item/Container/*.h)
+file(GLOB_RECURSE sources_Item Entities/Item/*.cpp Entities/Item/*.h)
+file(GLOB_RECURSE sources_Object_Updates Entities/Object/Updates/*.cpp Entities/Object/Updates/*.h)
+file(GLOB_RECURSE sources_Object Entities/Object/*.cpp Entities/Object/*.h)
+file(GLOB_RECURSE sources_Pet Entities/Pet/*.cpp Entities/Pet/*.h)
+file(GLOB_RECURSE sources_Player Entities/Player/*.cpp Entities/Player/*.h)
+file(GLOB_RECURSE sources_Totem Entities/Totem/*.cpp Entities/Totem/*.h)
+file(GLOB_RECURSE sources_Transport Entities/Transport/*.cpp Entities/Transport/*.h)
+file(GLOB_RECURSE sources_Unit Entities/Unit/*.cpp Entities/Unit/*.h)
+file(GLOB_RECURSE sources_Vehicle Entities/Vehicle/*.cpp Entities/Vehicle/*.h)
+
 file(GLOB_RECURSE sources_Events Events/*.cpp Events/*.h)
 file(GLOB_RECURSE sources_Globals Globals/*.cpp Globals/*.h)
+
+file(GLOB_RECURSE sources_Grids_Cells Grids/Cells/*.cpp Grids/Cells/*.h)
+file(GLOB_RECURSE sources_Grids_Notifiers Grids/Notifiers/*.cpp Grids/Notifiers/*.h)
 file(GLOB_RECURSE sources_Grids Grids/*.cpp Grids/*.h)
+
 file(GLOB_RECURSE sources_Groups Groups/*.cpp Groups/*.h)
 file(GLOB_RECURSE sources_Guilds Guilds/*.cpp Guilds/*.h)
 file(GLOB_RECURSE sources_Handlers Handlers/*.cpp Handlers/*.h)
@@ -40,7 +74,12 @@ file(GLOB_RECURSE sources_Loot Loot/*.cpp Loot/*.h)
 file(GLOB_RECURSE sources_Mails Mails/*.cpp Mails/*.h)
 file(GLOB_RECURSE sources_Maps Maps/*.cpp Maps/*.h)
 file(GLOB_RECURSE sources_Miscellaneous Miscellaneous/*.cpp Miscellaneous/*.h)
+
+file(GLOB_RECURSE sources_MovementGenerators Movement/MovementGenerators/*.cpp Movement/MovementGenerators/*.h)
+file(GLOB_RECURSE sources_Spline Movement/Spline/*.cpp Movement/Spline/*.h)
+file(GLOB_RECURSE sources_Waypoints Movement/Waypoints/*.cpp Movement/Waypoints/*.h)
 file(GLOB_RECURSE sources_Movement Movement/*.cpp Movement/*.h)
+
 file(GLOB_RECURSE sources_OutdoorPvP OutdoorPvP/*.cpp OutdoorPvP/*.h)
 file(GLOB_RECURSE sources_Pools Pools/*.cpp Pools/*.h)
 file(GLOB_RECURSE sources_PrecompiledHeaders PrecompiledHeaders/*.cpp PrecompiledHeaders/*.h)
@@ -48,15 +87,24 @@ file(GLOB_RECURSE sources_Quests Quests/*.cpp Quests/*.h)
 file(GLOB_RECURSE sources_Reputation Reputation/*.cpp Reputation/*.h)
 file(GLOB_RECURSE sources_Scenarios Scenarios/*.cpp Scenarios/*.h)
 file(GLOB_RECURSE sources_Scripting Scripting/*.cpp Scripting/*.h)
+
+file(GLOB_RECURSE sources_Protocol Server/Protocol/*.cpp Server/Protocol/*.h)
 file(GLOB_RECURSE sources_Server Server/*.cpp Server/*.h)
+
 file(GLOB_RECURSE sources_Services Services/*.cpp Services/*.h)
 file(GLOB_RECURSE sources_Skills Skills/*.cpp Skills/*.h)
+
+file(GLOB_RECURSE sources_Auras Spells/Auras/*.cpp Spells/Auras/*.h)
 file(GLOB_RECURSE sources_Spells Spells/*.cpp Spells/*.h)
+
 file(GLOB_RECURSE sources_Texts Texts/*.cpp Texts/*.h)
 file(GLOB_RECURSE sources_Tools Tools/*.cpp Tools/*.h)
 file(GLOB_RECURSE sources_Tickets Tickets/*.cpp Tickets/*.h)
 file(GLOB_RECURSE sources_Vignette Vignette/*.cpp Vignette/*.h)
+
+file(GLOB_RECURSE sources_Modules Warden/Modules/*.cpp Warden/Modules/*.h)
 file(GLOB_RECURSE sources_Warden Warden/*.cpp Warden/*.h)
+
 file(GLOB_RECURSE sources_Weather Weather/*.cpp Weather/*.h)
 file(GLOB_RECURSE sources_World World/*.cpp World/*.h)
 
@@ -64,26 +112,60 @@ source_group(CMake FILES CMakeLists.txt)
 source_group(Accounts FILES ${sources_Accounts})
 source_group(Achievements FILES ${sources_Achievements})
 source_group(Addons FILES ${sources_Addons})
-source_group(AI FILES ${sources_AI})
+
+source_group(AI\\CoreAI FILES ${sources_CoreAI})
+source_group(AI\\PlayerAI FILES ${sources_PlayerAI})
+source_group(AI\\ScriptedAI FILES ${sources_ScriptedAI})
+source_group(AI\\SmartScripts FILES ${sources_SmartScripts})
+source_group(AI\\AI FILES ${sources_AI})
+
 source_group(Anticheat FILES ${sources_Anticheat})
 source_group(AuctionHouse FILES ${sources_AuctionHouse})
-source_group(Battlefield FILES ${sources_Battlefield})
-source_group(Battlegrounds FILES ${sources_Battlegrounds})
+
+source_group(Battlefield\\Zones FILES ${sources_Battlefield_Zones})
+source_group(Battlefield\\Battlefield FILES ${sources_Battlefield})
+
+source_group(Battlegrounds\\Zones FILES ${sources_Battlegrounds_Zones})
+source_group(Battlegrounds\\Battlegrounds FILES ${sources_Battlegrounds})
+
 source_group(BattlePay FILES ${sources_BattlePay})
 source_group(BattlePet FILES ${sources_BattlePet})
 source_group(BlackMarket FILES ${sources_BlackMarket})
 source_group(Calendar FILES ${sources_Calendar})
-source_group(Chat FILES ${sources_Chat})
+
+source_group(Chat\\Channels FILES ${sources_Chat_Channels})
+source_group(Chat\\Chat FILES ${sources_Chat})
+
 source_group(Combat FILES ${sources_Combat})
 source_group(Conditions FILES ${sources_Conditions})
 source_group(CustomTransmogrification FILES ${sources_CustomTransmogrification})
 source_group(CustomLogs FILES ${sources_CustomLogs})
 source_group(DataStores FILES ${sources_DataStores})
 source_group(DungeonFinding FILES ${sources_DungeonFinding})
-source_group(Entities FILES ${sources_Entities})
+
+source_group(Entities\\AreaTrigger FILES ${sources_AreaTrigger})
+source_group(Entities\\Corpse FILES ${sources_Corpse})
+source_group(Entities\\Creature FILES ${sources_Creature})
+source_group(Entities\\DynamicObject FILES ${sources_DynamicObject})
+source_group(Entities\\GameObject FILES ${sources_GameObject})
+source_group(Entities\\Item\\Container FILES ${sources_Item_Container})
+source_group(Entities\\Item\\Item FILES ${sources_Item})
+source_group(Entities\\Object\\Updates FILES ${sources_Object_Updates})
+source_group(Entities\\Object\\Object FILES ${sources_Object})
+source_group(Entities\\Pet FILES ${sources_Pet})
+source_group(Entities\\Player FILES ${sources_Player})
+source_group(Entities\\Totem FILES ${sources_Totem})
+source_group(Entities\\Transport FILES ${sources_Transport})
+source_group(Entities\\Unit FILES ${sources_Unit})
+source_group(Entities\\Vehicle FILES ${sources_Vehicle})
+
 source_group(Events FILES ${sources_Events})
 source_group(Globals FILES ${sources_Globals})
-source_group(Grids FILES ${sources_Grids})
+
+source_group(Grids\\Cells FILES ${sources_Grids_Cells})
+source_group(Grids\\Notifiers FILES ${sources_Grids_Notifiers})
+source_group(Grids\\Grids FILES ${sources_Grids})
+
 source_group(Groups FILES ${sources_Groups})
 source_group(Guilds FILES ${sources_Guilds})
 source_group(Handlers FILES ${sources_Handlers})
@@ -92,7 +174,12 @@ source_group(Loot FILES ${sources_Loot})
 source_group(Mails FILES ${sources_Mails})
 source_group(Maps FILES ${sources_Maps})
 source_group(Miscellaneous FILES ${sources_Miscellaneous})
-source_group(Movement FILES ${sources_Movement})
+
+source_group(Movement\\MovementGenerators FILES ${sources_MovementGenerators})
+source_group(Movement\\Spline FILES ${sources_Spline})
+source_group(Movement\\Waypoints FILES ${sources_Waypoints})
+source_group(Movement\\Movement FILES ${sources_Movement})
+
 source_group(OutdoorPvP FILES ${sources_OutdoorPvP})
 source_group(Pools FILES ${sources_Pools})
 source_group(PrecompiledHeaders FILES ${sources_PrecompiledHeaders})
@@ -100,14 +187,23 @@ source_group(Quests FILES ${sources_Quests})
 source_group(Reputation FILES ${sources_Reputation})
 source_group(Scenarios FILES ${sources_Scenarios})
 source_group(Scripting FILES ${sources_Scripting})
-source_group(Server FILES ${sources_Server})
+
+source_group(Server\\Protocol FILES ${sources_Protocol})
+source_group(Server\\Server FILES ${sources_Server})
+
 source_group(Services FILES ${sources_Services})
 source_group(Skills FILES ${sources_Skills})
-source_group(Spells FILES ${sources_Spells})
+
+source_group(Spells\\Auras FILES ${sources_Auras})
+source_group(Spells\\Spells FILES ${sources_Spells})
+
 source_group(Texts FILES ${sources_Texts})
 source_group(Tools FILES ${sources_Tools})
 source_group(Tickets FILES ${sources_Tickets})
-source_group(Warden FILES ${sources_Warden})
+
+source_group(Warden\\Modules FILES ${sources_Modules})
+source_group(Warden\\Warden FILES ${sources_Warden})
+
 source_group(Weather FILES ${sources_Weather})
 source_group(World FILES ${sources_World})
 # Create game-libary
@@ -122,26 +218,60 @@ set(game_STAT_SRCS
   ${sources_Accounts}
   ${sources_Achievements}
   ${sources_Addons}
+  
+  ${sources_CoreAI}
+  ${sources_PlayerAI}
+  ${sources_ScriptedAI}
+  ${sources_SmartScripts}
   ${sources_AI}
+  
   ${sources_Anticheat}
   ${sources_AuctionHouse}
+  
+  ${sources_Battlefield_Zones}
   ${sources_Battlefield}
+  
+  ${sources_Battlegrounds_Zones}
   ${sources_Battlegrounds}
+  
   ${sources_BattlePay}
   ${sources_BattlePet}
   ${sources_BlackMarket}
   ${sources_Calendar}
+  
+  ${sources_Chat_Channels}
   ${sources_Chat}
+  
   ${sources_Combat}
   ${sources_Conditions}
   ${sources_CustomLogs}
   ${sources_CustomTransmogrification}
   ${sources_DataStores}
   ${sources_DungeonFinding}
-  ${sources_Entities}
+  
+  ${sources_AreaTrigger}
+  ${sources_Corpse}
+  ${sources_Creature}
+  ${sources_DynamicObject}
+  ${sources_GameObject}
+  ${sources_Item_Container}
+  ${sources_Item}
+  ${sources_Object_Updates}
+  ${sources_Object}
+  ${sources_Pet}
+  ${sources_Player}
+  ${sources_Totem}
+  ${sources_Transport}
+  ${sources_Unit}
+  ${sources_Vehicle}
+  
   ${sources_Events}
   ${sources_Globals}
+  
+  ${sources_Grids_Cells}
+  ${sources_Grids_Notifiers}
   ${sources_Grids}
+  
   ${sources_Groups}
   ${sources_Guilds}
   ${sources_Handlers}
@@ -150,22 +280,36 @@ set(game_STAT_SRCS
   ${sources_Mails}
   ${sources_Maps}
   ${sources_Miscellaneous}
+  
+  ${sources_MovementGenerators}
+  ${sources_Spline}
+  ${sources_Waypoints}
   ${sources_Movement}
+  
   ${sources_OutdoorPvP}
   ${sources_Pools}
   ${sources_Quests}
   ${sources_Reputation}
   ${sources_Scenarios}
   ${sources_Scripting}
+  
+  ${sources_Protocol}
   ${sources_Server}
+  
   ${sources_Services}
   ${sources_Skills}
+  
+  ${sources_Auras}
   ${sources_Spells}
+  
   ${sources_Texts}
   ${sources_Tools}
   ${sources_Tickets}
   ${sources_Vignette}
+  
+  ${sources_Modules}
   ${sources_Warden}
+  
   ${sources_Weather}
   ${sources_World}
 )
