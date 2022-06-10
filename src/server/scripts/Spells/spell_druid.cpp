@@ -3288,16 +3288,16 @@ class spell_dru_thrash_bear_aurascript : public AuraScript
 
 	void HandleTick(AuraEffect const* eff)
 	{
-		if (GetCaster())
-		{
-			AuraEffect* damage = const_cast<AuraEffect*>(eff);
-			uint32 ap = GetCaster()->GetTotalAttackPowerValue(MAX_ATTACK);
-			uint32 amount = damage->GetAmount();
-			uint32 ticks = eff->GetTotalTicks();
+		if (!GetCaster())
+			return;
 
-			amount = 8 * (686.40f + (ap * GetSpellInfo()->Effects[EFFECT_3].BasePoints / 1000));
-			damage->ChangeAmount(amount / ticks);
-		}
+		AuraEffect* damage = const_cast<AuraEffect*>(eff);
+		uint32 ap = GetCaster()->GetTotalAttackPowerValue(MAX_ATTACK);
+		uint32 amount = damage->GetAmount();
+		uint32 ticks = eff->GetTotalTicks();
+
+		amount = 8 * (686.40f + (ap * GetSpellInfo()->Effects[EFFECT_3].BasePoints / 1000));
+		damage->ChangeAmount(amount / ticks);
 	}
 
 	void Register() override
@@ -3313,18 +3313,18 @@ class spell_dru_thrash_cat : public AuraScript
 
 	void HandleTick(AuraEffect const* eff)
 	{
-		if (GetCaster())
-		{
-			AuraEffect* damage = const_cast<AuraEffect*>(eff);
-			uint32 ap = GetCaster()->GetTotalAttackPowerValue(MAX_ATTACK);
-			uint32 mastery = GetCaster()->ToPlayer()->GetUInt32Value(PLAYER_FIELD_COMBAT_RATINGS + CR_MASTERY);
-			uint32 amount = damage->GetAmount();
-			uint32 ticks = eff->GetTotalTicks();
+		if (!GetCaster())
+			return;
 
-			amount = 5 * (686.40f + ap * GetSpellInfo()->Effects[EFFECT_3].BasePoints / 1000);
-			AddPct(amount, 25 + float(mastery / 192));
-			damage->ChangeAmount(amount / ticks);
-		}
+		AuraEffect* damage = const_cast<AuraEffect*>(eff);
+		uint32 ap = GetCaster()->GetTotalAttackPowerValue(MAX_ATTACK);
+		uint32 mastery = GetCaster()->ToPlayer()->GetUInt32Value(PLAYER_FIELD_COMBAT_RATINGS + CR_MASTERY);
+		uint32 amount = damage->GetAmount();
+		uint32 ticks = eff->GetTotalTicks();
+
+		amount = 5 * (686.40f + ap * GetSpellInfo()->Effects[EFFECT_3].BasePoints / 1000);
+		AddPct(amount, 25 + float(mastery / 192));
+		damage->ChangeAmount(amount / ticks);
 	}
 
 	void Register() override
