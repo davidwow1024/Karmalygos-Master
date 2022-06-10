@@ -3292,7 +3292,7 @@ class spell_dru_thrash_bear_aurascript : public AuraScript
 			return;
 
 		AuraEffect* damage = const_cast<AuraEffect*>(eff);
-		uint32 ap = GetCaster()->GetTotalAttackPowerValue(MAX_ATTACK);
+		uint32 ap = GetCaster()->GetTotalAttackPowerValue(BASE_ATTACK);
 		uint32 amount = damage->GetAmount();
 		uint32 ticks = eff->GetTotalTicks();
 
@@ -3317,7 +3317,7 @@ class spell_dru_thrash_cat : public AuraScript
 			return;
 
 		AuraEffect* damage = const_cast<AuraEffect*>(eff);
-		uint32 ap = GetCaster()->GetTotalAttackPowerValue(MAX_ATTACK);
+		uint32 ap = GetCaster()->GetTotalAttackPowerValue(BASE_ATTACK);
 		uint32 mastery = GetCaster()->ToPlayer()->GetUInt32Value(PLAYER_FIELD_COMBAT_RATINGS + CR_MASTERY);
 		uint32 amount = damage->GetAmount();
 		uint32 ticks = eff->GetTotalTicks();
