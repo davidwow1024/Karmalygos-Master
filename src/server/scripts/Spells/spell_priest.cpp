@@ -2934,9 +2934,18 @@ class spell_pri_psychic_terror_aura : public AuraScript
                     effectMask &= ~(1 << EFFECT_1);
     }
 
+	void HandleProc(ProcEventInfo& event) {
+
+		Unit* target = event.GetActionTarget();
+
+		if (target->HasAura(SPELL_PRIEST_PSYCHIC_TERROR))
+			target->RemoveAura(SPELL_PRIEST_PSYCHIC_TERROR);
+	}
+
     void Register() override
     {
         OnInitEffects += AuraInitEffectsFn(spell_pri_psychic_terror_aura::InitEffects);
+		OnProc += AuraProcFn(spell_pri_psychic_terror_aura::HandleProc);
     }
 };
 
