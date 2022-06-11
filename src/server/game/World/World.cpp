@@ -1484,7 +1484,7 @@ void World::LoadConfigSettings(bool reload)
     m_int_configs[CONFIG_AUCTIONHOUSE_MIN_DIFF_FOR_LOG]      = sConfigMgr->GetIntDefault("AuctionHouse.MinDiffForLog", 25);
     m_int_configs[CONFIG_AUCTIONHOUSE_MIN_DIFF_FOR_THROTTLE] = sConfigMgr->GetIntDefault("AuctionHouse.MinDiffForThrottle", 25);
 
-    m_bool_configs[CONFIG_BATTLEGROUND_REWARDS_ENABLED] = sConfigMgr->GetBoolDefault("Battleground.Rewards.Enabled", true);
+    m_bool_configs[CONFIG_BATTLEGROUND_REWARDS_ENABLED] = sConfigMgr->GetBoolDefault("Battleground.Rewards.Enabled", false);
     m_int_configs[CONFIG_BATTLEGROUND_REWARD] = sConfigMgr->GetIntDefault("Battleground.Rewards.Item", 32546);
     m_int_configs[CONFIG_BATTLEGROUND_GAMES] = sConfigMgr->GetIntDefault("Battleground.Rewards.Games", 15);
 
