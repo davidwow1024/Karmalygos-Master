@@ -8050,6 +8050,8 @@ void SpellMgr::LoadSpellInfoCorrections()
                     spellInfo->CastTimeEntry = sSpellCastTimesStore.LookupEntry(4);
                     spellInfo->RangeEntry = sSpellRangeStore.LookupEntry(1);
                     break;
+				case 5421: // Aquatic Form Passive
+					spellInfo->Effects[EFFECT_0].BasePoints = 74;
                 default:
                     break;
             }
