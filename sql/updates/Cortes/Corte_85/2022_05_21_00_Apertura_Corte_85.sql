@@ -129,6 +129,8 @@ UPDATE `lfg_dungeon_template` SET `requiredItemLevel` = '600' WHERE `dungeonId` 
 UPDATE `lfg_dungeon_template` SET `requiredItemLevel` = '600' WHERE `dungeonId` = '717'; -- old requiredItemLevel: 496 , las puertas de la venganza
 UPDATE `lfg_dungeon_template` SET `requiredItemLevel` = '600' WHERE `dungeonId` = '724'; -- old requiredItemLevel: 496 , El bunker
 UPDATE `lfg_dungeon_template` SET `requiredItemLevel` = '600' WHERE `dungeonId` = '725'; -- old requiredItemLevel: 496 , El ocaso
+UPDATE `lfg_dungeon_template` SET `requiredItemLevel` = '600' WHERE `dungeonId` = '464'; -- old requiredItemLevel: 358 , Temple of the Jade Serpent
+UPDATE `lfg_dungeon_template` SET `requiredItemLevel` = '600' WHERE `dungeonId` = '465'; -- old requiredItemLevel: 358 , Stormstout Brewery
 
 -- eliminando botín normal de los jefes de mundo Sha de la Ira y Galeon
 DELETE FROM `creature_loot_template` WHERE `entry` = '62346'; -- Galeón
