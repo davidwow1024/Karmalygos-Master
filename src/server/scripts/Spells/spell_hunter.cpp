@@ -1598,8 +1598,8 @@ class spell_hunt_kill_command_damage : public SpellScript
         if (!hunter)
             return;
 
-        float rap = hunter->GetWeaponDamageRange(RANGED_ATTACK, MAXDAMAGE);
-        SetEffectValue(GetSpellInfo()->Effects[effIndex].CalcValue(hunter) + rap * 0.5);
+        float rap = hunter->GetTotalAttackPowerValue(RANGED_ATTACK);
+        SetEffectValue(GetSpellInfo()->Effects[effIndex].CalcValue(hunter) + rap * 0.938);
     }
 
     void HandleHit()
