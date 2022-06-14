@@ -29,6 +29,8 @@
 #include "GridNotifiers.h"
 #include "MoveSpline.h"
 #include "Player.h"
+#include "Battleground.h"
+#include "BattlegroundMgr.h"
 
 
 enum WarriorSpells
@@ -1194,23 +1196,51 @@ class spell_warr_heroic_leap : public SpellScript
 {
     PrepareSpellScript(spell_warr_heroic_leap);
 
-    SpellCastResult CheckElevation()
-    {
-        Unit* caster = GetCaster();
+	bool Validate(SpellInfo const* /*spellInfo*/) override
+	{
+		if (!sSpellMgr->GetSpellInfo(94954))
+			return false;
+		return true;
+	}
 
-        WorldLocation const* dest = GetExplTargetDest();
-        if (!dest)
-            return SPELL_FAILED_DONT_REPORT;
+	SpellCastResult CheckElevation()
+	{
+		if (WorldLocation const* dest = GetExplTargetDest())
+		{
+			if (!GetCaster())
+				return SPELL_FAILED_UNKNOWN;
 
-        if (dest->GetPositionZ() > caster->GetPositionZ() + 5.0f)
-            return SPELL_FAILED_NOPATH;
-        else if (caster->HasAuraType(SPELL_AURA_MOD_ROOT))
-            return SPELL_FAILED_ROOTED;
-        else if (caster->GetMapId() == 1136 && dest->GetPositionZ() > -308.0f && dest->GetPositionZ() < -290.0f && dest->GetPositionX() > 1900.0f) // hack for siegecrafter blackfuse platforms
-            return SPELL_FAILED_NOPATH;
+			if (GetCaster()->HasAuraType(SPELL_AURA_MOD_ROOT))
+				return SPELL_FAILED_ROOTED;
+			
+			if (GetCaster()->GetMap()->Instanceable())
+			{
+				float range = GetSpellInfo()->GetMaxRange(true, GetCaster()) * 1.5f;
 
-        return SPELL_CAST_OK;
-    }
+				PathGenerator generatedPath(GetCaster());
+				generatedPath.SetPathLengthLimit(range);
+
+				bool result = generatedPath.CalculatePath(dest->GetPositionX(), dest->GetPositionY(), dest->GetPositionZ(), false, true);
+				if (generatedPath.GetPathType() & PATHFIND_SHORT)
+					return SPELL_FAILED_OUT_OF_RANGE;
+				else if (!result || generatedPath.GetPathType() & PATHFIND_NOPATH)
+				{
+					result = generatedPath.CalculatePath(dest->GetPositionX(), dest->GetPositionY(), dest->GetPositionZ(), false, false);
+					if (generatedPath.GetPathType() & PATHFIND_SHORT)
+						return SPELL_FAILED_OUT_OF_RANGE;
+					else if (!result || generatedPath.GetPathType() & PATHFIND_NOPATH)
+						return SPELL_FAILED_NOPATH;
+				}
+
+			}
+			else if (dest->GetPositionZ() > GetCaster()->GetPositionZ() + 4.0f)
+				return SPELL_FAILED_NOPATH;
+
+			return SPELL_CAST_OK;
+		}
+
+		return SPELL_FAILED_NO_VALID_TARGETS;
+	}
 
     void HandleHit(SpellEffIndex index)
     {
