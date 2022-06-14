@@ -2880,12 +2880,13 @@ void SpellMgr::LoadSpellInfoCustomAttributes()
 				case 106401: // Twilight Onslaught
 				case 103414: // Stomp
 				case 135703: // Static shock tr ef dmg
-				case 116364:  //Arcane Velocity
-				case 116018:  //Epicenter
-				case 116157:  //Lightning fists
-				case 116374:  //Lightning fists (trigger dmg)
-				case 136324:  //Rising Anger
-				case 136220: //Acidic explosion tr ef dmg
+				case 116364: // Arcane Velocity
+				case 116018: // Epicenter
+				case 116157: // Lightning fists
+				case 116374: // Lightning fists (trigger dmg)
+				case 136324: // Rising Anger
+				case 136220: // Acidic explosion tr ef dmg
+				case 86825:  // Blackout dmg
                     // ONLY SPELLS WITH SPELLFAMILY_GENERIC and EFFECT_SCHOOL_DAMAGE
                     spellInfo->AttributesCu |= SPELL_ATTR0_CU_SHARE_DAMAGE;
                     break;
