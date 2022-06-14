@@ -1981,6 +1981,47 @@ class spell_hour_of_twilight_molten_fury : public SpellScript
     }
 };
 
+enum Spells
+{
+	SPELL_TELEPORT_ARCURION_DEAD = 108928,
+	SPELL_TELEPORT_ASIRA_DEAD = 108929,
+	SPELL_TELEPORT_BENEDICTUS = 108930,
+
+};
+
+/// 210026
+class go_hot_time_transit_device : public GameObjectScript
+{
+public:
+	go_hot_time_transit_device() : GameObjectScript("go_hot_time_transit_device") {}
+
+	bool OnReportUse(Player* player, GameObject* go)
+	{
+		if (player->IsInCombat())
+			return false;
+
+		if (InstanceScript* instance = go->GetInstanceScript())
+		{
+			if (instance->GetBossState(DATA_BENEDICTUS) == DONE)
+			{ 
+				player->CastSpell(player, SPELL_TELEPORT_BENEDICTUS, true);
+				return true;
+			}
+			else if (instance->GetBossState(DATA_ASIRA) == DONE)
+			{ 
+				player->CastSpell(player, SPELL_TELEPORT_ASIRA_DEAD, true);
+				return true;
+			}
+			else if (instance->GetBossState(DATA_ARCURION) == DONE)
+			{ 
+				player->CastSpell(player, SPELL_TELEPORT_ARCURION_DEAD, true);
+				return true;
+			}
+		}
+		return false;
+	}
+};
+
 void AddSC_hour_of_twilight()
 {
     new npc_hour_of_twilight_life_warden();
@@ -1996,5 +2037,8 @@ void AddSC_hour_of_twilight()
     new npc_faceless_minions();
     new npc_crystalline_elemental();
     new npc_ice_wall_exit_stalker();
+
     new spell_script<spell_hour_of_twilight_molten_fury>("spell_hour_of_twilight_molten_fury");
+
+	new go_hot_time_transit_device();
 }
