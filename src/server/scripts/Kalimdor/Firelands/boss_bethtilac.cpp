@@ -29,6 +29,8 @@ enum Spells
     SPELL_CONSUME_DRONE             = 99304,
     SPELL_ENERGIZE                  = 99211, // Drone
     SPELL_VOLATILE_POISON           = 99276,
+
+	SPELL_METEOR_BURN               = 99071,
 };
 
 enum Adds
@@ -68,6 +70,9 @@ enum Events
     EVENT_CHECK_TARGET          = 18,
     EVENT_FIXATE                = 19,
     EVENT_FIXATE_OFF            = 20,
+
+	// Web Rip 53450 id
+	EVENT_METEOR_DUMMY          = 23,
 };
 
 enum Other
@@ -84,9 +89,9 @@ enum Other
 const Position highPos = { 75.68f, 397.199f, 110.0f, 3.63f };
 const Position addsPos[9] = 
 {
-    { 24.691f,  298.297f, 81.54f,    0.0f  }, // spiderling
-    { 134.570f, 360.037f, 85.420f,   0.0f  }, // spiderling
-    { 86.338f,  442.826f, 76.72f,    0.0f  }, // spiderling
+    { 28.156f,  303.488f, 80.014f,   0.0f  }, // spiderling
+    { 78.570f,  355.845f, 74.200f,   0.0f  }, // spiderling
+    { 86.379f,  431.416f, 76.500f,   0.0f  }, // spiderling
     { 11.773f,  479.865f, 78.51f,    0.0f  }, // Drone
     { 48.428f,  376.85f,  106.8785f, 0.0f  }, // Spiderweb Filament
     { 41.594f,  378.043f, 74.05f,    0.0f  }, // center of the room
@@ -494,6 +499,7 @@ class npc_bethtilac_spiderweb_filament : public CreatureScript
             {
                 if (type == POINT_MOTION_TYPE)
                     if (pointId == POINT_DOWN)
+						me->SetFlag(UNIT_FIELD_NPC_FLAGS, UNIT_NPC_FLAG_SPELLCLICK);
                         me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_NOT_SELECTABLE);
             }
 
@@ -553,17 +559,13 @@ class npc_bethtilac_cinderweb_spinner : public CreatureScript
                 me->SetCanFly(false);
                 me->SetDisableGravity(false);
 
-                /*if (bTaunted)
-                    return;
-
-                bTaunted = true;
-
-                if (owner && owner->GetEntry() == NPC_SPIDERWEB_FILAMENT)
-                    if (Creature* pFilament = owner->SummonCreature(NPC_SPIDERWEB_FILAMENT, owner->GetPositionX(), owner->GetPositionY(), owner->GetPositionZ(), 0.0f, TEMPSUMMON_TIMED_DESPAWN, 15000))
-                    {
-                        pFilament->SetCanFly(true);
-                        owner->CastSpell(pFilament, SPELL_SPIDERWEB_FILAMENT_ANY, true);
-                    }*/
+				if (me->IsSummon())
+				{
+					if (Unit * summoner = me->ToTempSummon()->GetSummoner())
+						summoner->SummonCreature(NPC_SPIDERWEB_FILAMENT, summoner->GetPositionX(),
+							summoner->GetPositionY(), summoner->GetPositionZ() - 15.0f, 0,
+							TEMPSUMMON_TIMED_DESPAWN, 60000);
+				}
             }
 
             void SpellHit(Unit* caster, const SpellInfo* spell) override
@@ -1073,6 +1075,79 @@ class spell_bethtilac_burning_acid : public SpellScriptLoader
         }
 };
 
+class npc_web_rip : public CreatureScript
+{
+public:
+	npc_web_rip() :
+		CreatureScript("npc_web_rip")
+	{
+	}
+
+	struct npc_web_ripAI : public ScriptedAI
+	{
+		npc_web_ripAI(Creature* creature) :
+			ScriptedAI(creature)
+		{
+		}
+
+		void JustDied(Unit* /*killer*/)
+		{
+		}
+
+		void IsSummonedBy(Unit* summoner)
+		{
+			events.ScheduleEvent(EVENT_METEOR_DUMMY, 100);
+			me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
+			me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
+		}
+
+		void UpdateAI(const uint32 diff)
+		{
+			if (me->HasUnitState(UNIT_STATE_CASTING))
+				return;
+
+			events.Update(diff);
+
+			while (uint32 eventId = events.ExecuteEvent())
+			{
+				switch (eventId)
+				{
+				case EVENT_METEOR_DUMMY:
+					DoCast(SPELL_METEOR_BURN);
+
+					std::list<Player*> TargetList;
+					Map::PlayerList const& Players = me->GetMap()->GetPlayers();
+					for (Map::PlayerList::const_iterator itr = Players.begin(); itr != Players.end(); ++itr)
+					{
+						if (Player * player = itr->GetSource())
+						{
+							if (player->GetDistance(me) <= 6.0f)
+								TargetList.push_back(player);
+							else
+								continue;
+						}
+					}
+					if (!TargetList.empty())
+						for (std::list<Player*>::const_iterator itr = TargetList.begin();
+							itr != TargetList.end(); ++itr)
+							(*itr)->TeleportTo(me->GetMapId(), me->GetPositionX(), me->GetPositionY(),
+								me->GetPositionZ() - 5.0f, (*itr)->GetOrientation());
+
+					events.ScheduleEvent(EVENT_METEOR_DUMMY, 2500);
+					break;
+				}
+			}
+		}
+	private:
+		EventMap events;
+	};
+
+	CreatureAI* GetAI(Creature * creature) const
+	{
+		return new npc_web_ripAI(creature);
+	}
+};
+
 void AddSC_boss_bethtilac()
 {
     new boss_bethtilac();
@@ -1081,6 +1156,7 @@ void AddSC_boss_bethtilac()
     new npc_bethtilac_cinderweb_drone();
     new npc_bethtilac_cinderweb_spiderling();
     new npc_bethtilac_engorged_broodling();
+	new npc_web_rip();
     new spell_bethtilac_smoldering_devastation();
     new spell_bethtilac_ember_flare();
     new spell_bethtilac_burning_acid();
