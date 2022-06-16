@@ -2853,24 +2853,40 @@ void SpellMgr::LoadSpellInfoCustomAttributes()
                 case 72133: // Pain and Suffering
                     spellInfo->AttributesCu |= SPELL_ATTR0_CU_CONE_LINE;
                     break;
-                case 24340: // Meteor
-                case 26558: // Meteor
-                case 28884: // Meteor
-                case 36837: // Meteor
-                case 38903: // Meteor
-                case 41276: // Meteor
-                case 57467: // Meteor
-                case 26789: // Shard of the Fallen Star
-                case 31436: // Malevolent Cleave
-                case 35181: // Dive Bomb
-                case 40810: // Saber Lash
-                case 43267: // Saber Lash
-                case 43268: // Saber Lash
-                case 42384: // Brutal Swipe
-                case 45150: // Meteor Slash
-                case 64688: // Sonic Screech
-                case 72373: // Shared Suffering
-                case 70492: // Ooze Eruption
+			    // Spells que reparten el da;o segun la cantidad de jugadores afectados en el rango
+                case 24340:  // Meteor
+                case 26558:  // Meteor
+                case 28884:  // Meteor
+                case 36837:  // Meteor
+                case 38903:  // Meteor
+                case 41276:  // Meteor
+                case 57467:  // Meteor
+                case 26789:  // Shard of the Fallen Star
+                case 31436:  // Malevolent Cleave
+                case 35181:  // Dive Bomb
+                case 40810:  // Saber Lash
+                case 43267:  // Saber Lash
+                case 43268:  // Saber Lash
+                case 42384:  // Brutal Swipe
+                case 45150:  // Meteor Slash
+                case 64688:  // Sonic Screech
+                case 72373:  // Shared Suffering
+                case 70492:  // Ooze Eruption
+				case 81280:  // Blood Burst
+				case 98474:  // Flame Scythe
+				case 145944: // Sha Smash
+				case 106375: // Unstable Twilight
+				case 107439: // Twilight Barrage
+				case 106401: // Twilight Onslaught
+				case 103414: // Stomp
+				case 135703: // Static shock tr ef dmg
+				case 116364: // Arcane Velocity
+				case 116018: // Epicenter
+				case 116157: // Lightning fists
+				case 116374: // Lightning fists (trigger dmg)
+				case 136324: // Rising Anger
+				case 136220: // Acidic explosion tr ef dmg
+				case 86825:  // Blackout dmg
                     // ONLY SPELLS WITH SPELLFAMILY_GENERIC and EFFECT_SCHOOL_DAMAGE
                     spellInfo->AttributesCu |= SPELL_ATTR0_CU_SHARE_DAMAGE;
                     break;
@@ -8051,6 +8067,8 @@ void SpellMgr::LoadSpellInfoCorrections()
                     spellInfo->RangeEntry = sSpellRangeStore.LookupEntry(1);
                     break;
 				case 5421: // Aquatic Form Passive
+					spellInfo->Effects[EFFECT_0].BasePoints = 74;
+				case 300200: 
 					spellInfo->Effects[EFFECT_0].BasePoints = 74;
                 default:
                     break;

@@ -95,6 +95,12 @@ bool PetAI::_needToStop()
     if (me->IsCharmed() && me->GetVictim() == me->GetCharmer())
         return true;
 
+	// dont allow pets to follow targets far away from owner
+	if (Unit* owner = me->GetCharmerOrOwner())
+		//if (owner->GetExactDist(me) >= (owner->GetVisibilityRange() - 10.0f))
+		if (owner->GetExactDist(me) >= 40.0f)
+			return true;
+
     return !me->IsValidAttackTarget(me->GetVictim());
 }
 
@@ -369,7 +375,7 @@ void PetAI::UpdateAI(uint32 diff)
         // deleted cached Spell objects
         for (TargetSpellList::const_iterator itr = targetSpellStore.begin(); itr != targetSpellStore.end(); ++itr)
             delete itr->second;
-    }
+    }				
 }
 
 void PetAI::UpdateAllies()
