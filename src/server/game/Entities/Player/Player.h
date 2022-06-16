@@ -3798,6 +3798,7 @@ protected:
     bool   m_SeasonalQuestChanged;
     time_t m_lastDailyQuestTime;
 
+	uint32 m_hostileReferenceCheckTimer;
     uint32 m_drunkTimer;
     uint32 m_weaponChangeTimer;
     uint32 _readyCheckTimer;
