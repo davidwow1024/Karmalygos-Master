@@ -124,7 +124,7 @@ bool Map::ExistVMap(uint32 mapid, int gx, int gy)
     return true;
 }
 
-void Map::LoadMMap(int gx, int gy)
+/*void Map::LoadMMap(int gx, int gy)
 {
     bool mmapLoadResult = MMAP::MMapFactory::createOrGetMMapManager()->loadMap((sWorld->GetDataPath() + "mmaps").c_str(), GetId(), gx, gy, !m_mmapErrorReportEnabled);
 
@@ -132,7 +132,7 @@ void Map::LoadMMap(int gx, int gy)
         TC_LOG_DEBUG("maps", "MMAP loaded name:%s, id:%d, x:%d, y:%d (mmap rep.: x:%d, y:%d)", GetMapName(), GetId(), gx, gy, gx, gy);
     else if (m_mmapErrorReportEnabled)
         TC_LOG_ERROR("maps", "Could not load MMAP name:%s, id:%d, x:%d, y:%d (mmap rep.: x:%d, y:%d)", GetMapName(), GetId(), gx, gy, gx, gy);
-}
+}*/
 
 void Map::LoadVMap(int gx, int gy)
 {
@@ -203,7 +203,7 @@ void Map::LoadMapAndVMap(int gx, int gy)
     if (i_InstanceId == 0)
     {
         LoadVMap(gx, gy);
-        LoadMMap(gx, gy);
+       // LoadMMap(gx, gy);
     }
 }
 

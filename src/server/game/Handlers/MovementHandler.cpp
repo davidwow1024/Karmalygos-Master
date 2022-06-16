@@ -314,6 +314,9 @@ void WorldSession::HandleMovementOpcodes(WorldPacket& recvPacket)
     MovementInfo movementInfo;
     GetPlayer()->ReadMovementInfo(recvPacket, &movementInfo, nullptr, true);
 
+    if (!mover)
+        return;
+	
     // prevent tampered movement data
     if (movementInfo.guid != mover->GetGUID())
     {
