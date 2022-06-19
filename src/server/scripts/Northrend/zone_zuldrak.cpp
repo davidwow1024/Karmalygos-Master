@@ -1972,12 +1972,12 @@ struct npc_vladof_the_butcher : public ScriptedAI
 			switch (eventId)
 			{
 				case EVENT_BLOOD_PLAGUE:
-					if (me->IsInRange(me->GetVictim(), 0.0f, 5.0f, false))
+					//if (me->IsInRange(me->GetVictim(), 0.0f, 5.0f, false))
 						me->CastSpell(me->GetVictim(), SPELL_BLOOD_PLAGUE, true);
 					_events.ScheduleEvent(EVENT_BLOOD_PLAGUE, urand(7000, 12000));
 					break;
 			    case EVENT_BLOOD_BOIL:
-					if (me->IsInRange(me->GetVictim(), 0.0f, 5.0f, false))
+					//if (me->IsInRange(me->GetVictim(), 0.0f, 5.0f, false))
 						me->CastSpell(me, SPELL_BLOOD_BOIL, true);
 					_events.ScheduleEvent(EVENT_BLOOD_BOIL, urand(15000, 21000)); 
 					break;
