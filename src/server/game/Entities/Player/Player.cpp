@@ -2690,7 +2690,7 @@ void Player::ProcessDelayedOperations()
         SaveToDB();
 
     if (m_DelayedOperations & DELAYED_SPELL_CAST_DESERTER)
-        ApplyDeserter();
+		AddAura(26013, this);
 
     if (m_DelayedOperations & DELAYED_BG_MOUNT_RESTORE)
     {
@@ -25037,7 +25037,7 @@ void Player::LeaveBattleground(bool teleportToEntryPoint)
                     return;
                 }
 
-                ApplyDeserter();
+				AddAura(26013, this);
             }
         }
     }
