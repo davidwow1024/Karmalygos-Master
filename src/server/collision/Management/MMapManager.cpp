@@ -247,13 +247,13 @@ namespace MMAP
 
     bool MMapManager::unloadMapInstance(uint32 mapId, uint32 instanceId)
     {
-      /*  // check if we have this map loaded
+        // check if we have this map loaded
         if (loadedMMaps.find(mapId) == loadedMMaps.end())
         {
             // file may not exist, therefore not loaded
             TC_LOG_ERROR("maps", "MMAP:unloadMapInstance: Asked to unload not loaded navmesh map %04u", mapId);
             return false;
-        }*/
+        }
 
         MMapData* mmap = loadedMMaps[mapId];
         if (mmap->navMeshQueries.find(instanceId) == mmap->navMeshQueries.end())
