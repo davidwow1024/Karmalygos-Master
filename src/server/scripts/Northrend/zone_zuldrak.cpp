@@ -361,7 +361,7 @@ public:
                     switch (uiPhase)
                     {
                         case 1:
-                            if (Creature* summon = me->SummonCreature(NPC_ORINOKO_TUSKBREAKER, SpawnPosition[0], TEMPSUMMON_CORPSE_DESPAWN, 1000))
+                            if (Creature* summon = me->SummonCreature(NPC_ORINOKO_TUSKBREAKER, SpawnPosition[0], TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 180000))
                                 _summonGUID = summon->GetGUID();
                             uiPhase = 2;
                             uiTimer = 4000;
@@ -378,7 +378,7 @@ public:
                             uiPhase = 4;
                             break;
                         case 4:
-                            if (Creature* summon = me->SummonCreature(NPC_KORRAK_BLOODRAGER, SpawnPosition[0], TEMPSUMMON_CORPSE_DESPAWN, 1000))
+                            if (Creature* summon = me->SummonCreature(NPC_KORRAK_BLOODRAGER, SpawnPosition[0], TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 180000))
                                 _summonGUID = summon->GetGUID();
                             uiTimer = 3000;
                             uiPhase = 0;
@@ -404,12 +404,12 @@ public:
                             uiPhase = 10;
                             break;
                         case 10:
-                            me->SummonCreature(NPC_YGGDRAS, SpawnPosition[1], TEMPSUMMON_CORPSE_DESPAWN, 1000);
+                            me->SummonCreature(NPC_YGGDRAS, SpawnPosition[1], TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 180000);
                             Talk(EMOTE_YGGDRAS_SPAWN);
                             uiPhase = 0;
                             break;
                         case 11:
-                            if (Creature* creature = me->SummonCreature(NPC_STINKBEARD, SpawnPosition[0], TEMPSUMMON_CORPSE_DESPAWN, 1000))
+                            if (Creature* creature = me->SummonCreature(NPC_STINKBEARD, SpawnPosition[0], TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 180000))
                                 creature->AI()->Talk(SAY_STINKBEARD_SPAWN);
                             uiPhase = 0;
                             break;
@@ -425,13 +425,13 @@ public:
                             break;
                         case 14:
                             _bossRandom = urand(0, 3);
-                            if (Creature* creature = me->SummonCreature(Boss[_bossRandom].uiBoss, SpawnPosition[2], TEMPSUMMON_CORPSE_DESPAWN, 1000))
+                            if (Creature* creature = me->SummonCreature(Boss[_bossRandom].uiBoss, SpawnPosition[2], TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 180000))
                                 creature->AI()->SetData(1, _bossRandom);
                             uiPhase = 0;
                             break;
 						case 15:
 							Talk(13);
-							Creature* pSummon = me->SummonCreature(NPC_VLADOF_THE_BUTCHER, SpawnPosition[0], TEMPSUMMON_CORPSE_DESPAWN, 1000);
+							Creature* pSummon = me->SummonCreature(NPC_VLADOF_THE_BUTCHER, SpawnPosition[0], TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 180000);
 							uiPhase = 0;
 							break;
                     }
@@ -1904,16 +1904,10 @@ struct npc_vladof_the_butcher : public ScriptedAI
 {
 	npc_vladof_the_butcher(Creature* creature) : ScriptedAI(creature) 
 	{
-		me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC);
+		me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC);
 		me->SetReactState(REACT_PASSIVE);
 		me->Mount(26510);
-		Talk(1);	
 		me->GetMotionMaster()->MoveJump(VladofJumpPos, 20.0f, 20.0f, EVENT_JUMP);
-		/*
-		scheduler.Schedule(Milliseconds(6000), [this](TaskContext context)
-		{
-			
-		}); */
 	}
 
 	TaskScheduler scheduler;
@@ -1925,14 +1919,15 @@ struct npc_vladof_the_butcher : public ScriptedAI
 		{
 			case EVENT_JUMP:
 			{
-				me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC);
-				me->SetHomePosition(VladofJumpPos);
-				me->SetReactState(REACT_AGGRESSIVE);
-				/*
-				scheduler.Schedule(Milliseconds(3000), [this](TaskContext context)
+				Talk(1);
+
+				me->m_Events.Schedule(3000, 1, [this]()
 				{
-					
-				}); */
+					me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC);
+					me->SetHomePosition(VladofJumpPos);
+					me->SetReactState(REACT_AGGRESSIVE);
+				});
+
 				break;
 			}
 		    default:
@@ -1944,22 +1939,21 @@ struct npc_vladof_the_butcher : public ScriptedAI
 	{
 		Talk(2);
 		Talk(3);
-		_events.ScheduleEvent(EVENT_BLOOD_PLAGUE, 5000); // custom time
-		_events.ScheduleEvent(EVENT_BLOOD_BOIL, 10000);	 // custom time
+		me->Dismount();
+		_events.ScheduleEvent(EVENT_BLOOD_PLAGUE, urand(7000, 12000)); 
+		_events.ScheduleEvent(EVENT_BLOOD_BOIL, urand(15000, 21000));	
 		_events.ScheduleEvent(EVENT_HYSTERIA, urand(21000, 26000));
 		_events.ScheduleEvent(EVENT_SPELL_DEFLECTION, urand(15000, 21000));
 	}
 
 	void JustDied(Unit* killer) override
 	{
-		// un sent data 16 16
 		if (Player* player = killer->GetCharmerOrOwnerPlayerOrPlayerItself())
 			player->GroupEventHappens(12948, killer);
 	}
 
 	void EnterEvadeMode() override
 	{
-		// un sent data 10 10
 		me->DespawnOrUnsummon();
 	}
 
@@ -1972,13 +1966,15 @@ struct npc_vladof_the_butcher : public ScriptedAI
 			switch (eventId)
 			{
 				case EVENT_BLOOD_PLAGUE:
-					//if (me->IsInRange(me->GetVictim(), 0.0f, 5.0f, false))
-						me->CastSpell(me->GetVictim(), SPELL_BLOOD_PLAGUE, true);
+					if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM))
+						if (me->IsInRange(target, 0.0f, 5.0f, false))
+							me->CastSpell(me->GetVictim(), SPELL_BLOOD_PLAGUE, true);
 					_events.ScheduleEvent(EVENT_BLOOD_PLAGUE, urand(7000, 12000));
 					break;
 			    case EVENT_BLOOD_BOIL:
-					//if (me->IsInRange(me->GetVictim(), 0.0f, 5.0f, false))
-						me->CastSpell(me, SPELL_BLOOD_BOIL, true);
+					if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM))
+						if (me->IsInRange(target, 0.0f, 5.0f, false))
+							me->CastSpell(me, SPELL_BLOOD_BOIL, true);
 					_events.ScheduleEvent(EVENT_BLOOD_BOIL, urand(15000, 21000)); 
 					break;
 				case EVENT_HYSTERIA:

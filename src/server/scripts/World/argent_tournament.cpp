@@ -177,7 +177,7 @@ struct npc_ring_rider_base : ScriptedAI
 
         if (spellTimer <= uiDiff)
         {
-            if (me->IsInRange(target, 5, 40, false))
+            if (me->IsInRange(target, 5.0f, 40.0f, false))
             {
                 switch (urand(0, 2))
                 {

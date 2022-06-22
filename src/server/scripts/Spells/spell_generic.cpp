@@ -3571,6 +3571,7 @@ enum MobileBankingData
 	SPELL_SUMMON_CHEST_ALLIANCE = 88304,
 	SPELL_SUMMON_CHEST_HORDE = 88306
 };
+
 class spell_gen_mobile_banking : public SpellScript
 {
     PrepareSpellScript(spell_gen_mobile_banking);
@@ -3594,8 +3595,8 @@ class spell_gen_mobile_banking : public SpellScript
 
     void Summon()
     {
-		Player* caster = GetCaster()->ToPlayer();
-		caster->CastSpell(caster, caster->GetTeamId() == TEAM_ALLIANCE ? SPELL_SUMMON_CHEST_ALLIANCE : SPELL_SUMMON_CHEST_HORDE, true);
+		if (Player* caster = GetCaster()->ToPlayer())
+			caster->CastSpell(caster, caster->GetTeamId() == TEAM_ALLIANCE ? SPELL_SUMMON_CHEST_ALLIANCE : SPELL_SUMMON_CHEST_HORDE, true);
     }
 
     void Register() override
