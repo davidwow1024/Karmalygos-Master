@@ -4302,6 +4302,8 @@ class spell_nalak_throw_spear : public SpellScript
 			if (Creature* nalak = caster->FindNearestCreature(BOSS_NALAK, 50.0f, true))
 				if (nalak->IsAlive())
 					return SPELL_CAST_OK;
+
+		return SPELL_FAILED_UNKNOWN;
     }
 
     void Register() override
