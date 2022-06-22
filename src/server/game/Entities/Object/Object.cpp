@@ -2204,7 +2204,7 @@ bool WorldObject::CanNeverSee(WorldObject const* obj) const
                 return true;
     }
 
-    Player const* player = ToPlayer();
+	Player const* player = ToPlayer();
     if (obj->GetTypeId() == TYPEID_GAMEOBJECT && player && !player->IsGameMaster())
     {
         auto itr = timelessRareChestsMap.find(obj->GetEntry());
@@ -2212,7 +2212,22 @@ bool WorldObject::CanNeverSee(WorldObject const* obj) const
             if (player->GetQuestStatus(itr->second) == QUEST_STATUS_REWARDED || player->IsWeeklyQuestDone(itr->second) || player->IsDailyQuestDone(itr->second))
                 return true;
     }
-
+	
+	Player const* player2 = ToPlayer();
+	if (obj->GetTypeId() == TYPEID_UNIT && player2 && !player2->IsGameMaster())
+	{
+		// Example
+		if (obj->GetEntry() == 1)
+		{ 
+			if (player2->GetQuestStatus(62) == QUEST_STATUS_REWARDED)
+			{ 
+				return false;
+			}
+			else
+				return true;
+		}
+	}
+		
     if (GetMap() != obj->GetMap() || !InSamePhase(obj))
         return true;
 
@@ -2929,6 +2944,15 @@ std::list<Player*> WorldObject::GetNearestPlayersList(float range, bool alive)
     Trinity::PlayerListSearcher<Trinity::AnyPlayerInObjectRangeCheck> searcher(this, players, checker);
     VisitNearbyWorldObject(range, searcher);
     return players;
+}
+
+std::list<GameObject*> WorldObject::FindNearestGameObject(std::list<uint32> entrys, float range) const
+{
+	std::list<GameObject*> gameobjectList;
+
+	for (std::list<uint32>::iterator itr = entrys.begin(); itr != entrys.end(); ++itr)
+		GetGameObjectListWithEntryInGrid(gameobjectList, (*itr), range);
+	return gameobjectList;
 }
 
 GameObject* WorldObject::FindNearestGameObject(uint32 entry, float range) const

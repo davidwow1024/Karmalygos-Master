@@ -859,8 +859,8 @@ class WorldObject : public Object, public WorldLocation
         std::list<Player*>  GetNearestPlayersList(float range, bool alive = true);
 		std::list<Creature*> FindNearestCreatures(std::list<uint32> entrys, float range) const;
 		std::vector<Creature*> FindNearestCreatures(uint32 entry, float range, bool alive) const;
-
-
+		std::list<GameObject*> FindNearestGameObject(std::list<uint32> entrys, float range) const;
+		
         void GetGameObjectListWithEntryInGrid(std::list<GameObject*>& lList, uint32 uiEntry, float fMaxSearchRange) const;
         void GetCreatureListWithEntryInGrid(std::list<Creature*>& lList, uint32 uiEntry, float fMaxSearchRange) const;
         void GetPlayerListInGrid(std::list<Player*>& lList, float fMaxSearchRange) const;
@@ -933,6 +933,8 @@ class WorldObject : public Object, public WorldLocation
         void SetCustomVisibilityZoneID(uint32 zoneId) { m_customVisibilityZoneID = zoneId; }
 
         virtual Battleground* GetBattlegorund() const;
+
+		void ExecuteCanNeverSee(WorldObject const* obj) { CanNeverSee(obj); }
 
     protected:
         std::string m_name;

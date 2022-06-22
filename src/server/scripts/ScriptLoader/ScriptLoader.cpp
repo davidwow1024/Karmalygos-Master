@@ -2142,6 +2142,7 @@ void AddSC_custom_xp_rates();
 void AddSC_promotions_and_rewards();
 void AddSC_custom_boss_announcer();
 void AddSC_custom_check_racials();
+void AddSC_custom_visibility();
 
 
 void AddCustomScripts()
@@ -2158,6 +2159,7 @@ AddSC_custom_xp_rates();
 AddSC_promotions_and_rewards();
 AddSC_custom_boss_announcer();
 AddSC_custom_check_racials();
+AddSC_custom_visibility();
 
 #endif
     AddSC_Anticheat();
