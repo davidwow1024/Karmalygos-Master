@@ -3304,100 +3304,6 @@ struct npc_pandaren_firework_launcher : public ScriptedAI
     }
 };
 
-/*Npc_515151*/
-class npc_jc_promotion : public CreatureScript
-{
-public:
-	npc_jc_promotion() : CreatureScript("npc_jc_promotion") { }
-
-	bool OnGossipHello(Player* player, Creature* creature) override
-	{
-		QueryResult result = LoginDatabase.PQuery("SELECT counter FROM account WHERE id = %u", player->GetSession()->GetAccountId());
-
-		Field* fields = result->Fetch();
-		uint32 counter = fields[0].GetUInt32();
-
-		if (counter == 0 && player->getLevel() < 85)
-		{
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Promocion LVL 85", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
-		}
-		/*if (counter == 1 && player->getLevel() < 90)
-		{
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "LevelUp", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
-		}*/
-		player->SEND_GOSSIP_MENU(1, creature->GetGUID());
-		
-		return true;
-	}
-
-	bool OnGossipSelect(Player * player, Creature * creature, uint32 /*sender*/, uint32 action) override
-	{
-		player->PlayerTalkClass->ClearMenus();
-
-		QueryResult result = CharacterDatabase.PQuery("SELECT level FROM characters WHERE account = %u ORDER BY level DESC LIMIT 1", player->GetSession()->GetAccountId());
-		QueryResult resultp = LoginDatabase.PQuery("SELECT counter FROM account WHERE id = %u",	player->GetSession()->GetAccountId());
-
-		Field* fieldsp = resultp->Fetch();
-		uint32 counterpoll = fieldsp[0].GetUInt32();
-
-		Field* fields = result->Fetch();
-		uint32 lvl = fields[0].GetUInt32();
-			
-		if (action == GOSSIP_ACTION_INFO_DEF + 1)
-		{
-			if (player->getLevel() < 85)
-			{
-				//level up 85
-				player->GiveLevel(85);
-				
-				//spells mount 
-				player->LearnSpell(33388, false);
-				player->LearnSpell(33391, false);
-				player->LearnSpell(34090, false);
-				player->LearnSpell(90267, false);
-				player->LearnSpell(54197, false);
-				player->LearnSpell(34091, false);
-				player->LearnSpell(90265, false);
-			
-				// add money 1000 oro
-				player->ModifyMoney(10000000);
-				
-				//add mount and tp 
-				if (player->GetTeamId() == TEAM_ALLIANCE)
-				{
-					player->AddItem(25529,1);
-					player->TeleportTo(0, -9093.825195f, 412.933624f, 92.118713f, 0.679353f);
-				}
-				else
-				{
-					player->AddItem(25533, 1);
-					player->TeleportTo(1, 1365.477051f, -4372.168945f, 26.070314f, 0.167605f);
-				}
-
-				player->SaveToDB();
-				player->PlayerTalkClass->SendCloseGossip();
-				
-			}
-			LoginDatabase.PExecute("UPDATE `account` SET `counter` = 1 WHERE `id` = %u", player->GetSession()->GetAccountId());
-
-		}
-
-		if (action == GOSSIP_ACTION_INFO_DEF + 2)
-		{
-			if (player->getLevel() < 90)
-			{
-				player->GiveLevel(90);
-				player->ModifyMoney(50000000);
-				player->SaveToDB();
-				player->PlayerTalkClass->SendCloseGossip();
-			}
-			LoginDatabase.PExecute("UPDATE `account` SET `counter` = 2 WHERE `id` = %u", player->GetSession()->GetAccountId());
-
-		}
-		return true;
-	}
-};
-
 void AddSC_npcs_special()
 {
     new npc_air_force_bots();
@@ -3440,6 +3346,4 @@ void AddSC_npcs_special()
     new creature_script<npc_sa_demolisher>("npc_sa_demolisher");
     new creature_script<npc_rogue_rare_npc>("npc_rogue_rare_npc");
     new creature_script<npc_pandaren_firework_launcher>("npc_pandaren_firework_launcher");
-
-	new npc_jc_promotion();
 }
