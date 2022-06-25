@@ -10188,6 +10188,11 @@ void Player::SendLoot(uint64 guid, LootType lootType, bool isAoE)
                 loot->gold = creature->GetEntry() == 56233 ? 0 : uint32(10 * (a + b) * sWorld->getRate(RATE_DROP_MONEY));  // hack, but I dont know how it must work (money should not drop for pockpocketing from spell?)
                 permission = OWNER_PERMISSION;
             }
+			else
+			{
+				SendGameError(GameError::ERR_ALREADY_PICKPOCKETED);
+				return;
+			}
         }
         else
         {
