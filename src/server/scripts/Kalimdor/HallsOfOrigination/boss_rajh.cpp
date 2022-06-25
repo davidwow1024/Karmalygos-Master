@@ -191,6 +191,7 @@ class boss_rajh : public CreatureScript
                 }
 
                 DoMeleeAttackIfReady();
+				EnterEvadeIfOutOfCombatArea(diff, 50.0f);
             }
         };
 

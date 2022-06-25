@@ -190,8 +190,8 @@ class boss_ammunae : public CreatureScript
                             break;
                     }
                 }
-
                 DoMeleeAttackIfReady();
+				EnterEvadeIfOutOfCombatArea(diff, 50.0f);
             }
         };
 

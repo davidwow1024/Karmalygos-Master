@@ -199,8 +199,8 @@ class boss_earthrager_ptah : public CreatureScript
                             break;                            
                     }
                 }
-
                 DoMeleeAttackIfReady();
+				EnterEvadeIfOutOfCombatArea(diff, 50.0f);
             }
         };
 

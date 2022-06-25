@@ -287,8 +287,8 @@ class boss_temple_guardian_anhuur : public CreatureScript
                             break;
                     }
                 }
-
                 DoMeleeAttackIfReady();
+				EnterEvadeIfOutOfCombatArea(diff, 50.0f);
             }
         };
 

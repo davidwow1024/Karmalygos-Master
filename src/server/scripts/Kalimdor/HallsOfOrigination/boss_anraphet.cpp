@@ -185,6 +185,7 @@ class boss_anraphet : public CreatureScript
                 }
 
                 DoMeleeAttackIfReady();
+				EnterEvadeIfOutOfCombatArea(diff, 50.0f);
             }
 
         private:

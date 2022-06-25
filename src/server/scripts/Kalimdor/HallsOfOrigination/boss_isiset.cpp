@@ -234,8 +234,8 @@ class boss_isiset : public CreatureScript
                             break;
                     }
                 }
-
                 DoMeleeAttackIfReady();
+				EnterEvadeIfOutOfCombatArea(diff, 50.0f);
             }
 
         private:

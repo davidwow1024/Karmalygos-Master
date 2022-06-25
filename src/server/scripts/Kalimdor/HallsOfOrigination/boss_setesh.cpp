@@ -185,6 +185,7 @@ class boss_setesh : public CreatureScript
                             break;
                     }
                 }
+				EnterEvadeIfOutOfCombatArea(diff, 50.0f);
             }
         };
 

@@ -180,6 +180,7 @@ class boss_grand_vizier_ertan : public CreatureScript
                             break;
                     }
                 }
+				EnterEvadeIfOutOfCombatArea(diff, 50.0f);
             }
         };
 
