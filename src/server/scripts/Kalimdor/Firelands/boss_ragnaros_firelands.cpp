@@ -308,6 +308,7 @@ class boss_ragnaros_firelands : public CreatureScript
                 me->setActive(true);
                 me->SetDisableGravity(true);
                 me->SetCanFly(true);
+				me->SetHomePosition(me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), me->GetOrientation());
             }
 
             bool AllowAchieve()
@@ -315,6 +316,11 @@ class boss_ragnaros_firelands : public CreatureScript
                 return false;
             }
 
+			void JustReachedHome() override
+			{
+				Reset();
+			}
+					   
             void Reset() override
             {
                 _Reset();
