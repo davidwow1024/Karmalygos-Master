@@ -100,10 +100,11 @@ class boss_siamat : public CreatureScript
                 me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
                 me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_GRIP, true);
                 me->setActive(true);
+				me->SetHomePosition(me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), me->GetOrientation());
             }
 
-            uint8 uiStaticShockId;
-
+			uint8 uiStaticShockId;
+			
             void Reset() override
             {
                 _Reset();
@@ -269,6 +270,7 @@ class boss_siamat : public CreatureScript
                 }
 
                 DoMeleeAttackIfReady();
+				EnterEvadeIfOutOfCombatArea(diff, 50.0f);
             }
 
             private:
