@@ -2261,6 +2261,9 @@ void WorldSession::HandleRequestHotfix(WorldPacket& recvPacket)
             case DB2_REPLY_ITEM:
                 SendItemDb2Reply(requestedEntries[i], db2Buffer);
                 break;
+			case DB2_REPLY_BATTLE_PET_EFFECT_PROPERTIES:
+			case DB2_REPLY_SCENE_SCRIPT:
+				break;
             case DB2_REPLY_SPARSE:
                 SendItemSparseDb2Reply(requestedEntries[i], db2Buffer);
                 break;
@@ -2273,7 +2276,7 @@ void WorldSession::HandleRequestHotfix(WorldPacket& recvPacket)
 
         if (!db2Buffer.size())
         {
-            TC_LOG_ERROR("network", "SMSG_DB_REPLY: Cant send hotfix entry: %u type: %u, because has no record.", requestedEntries[i], type);
+         //TC_LOG_ERROR("network", "SMSG_DB_REPLY: Cant send hotfix entry: %u type: %u, because has no record.", requestedEntries[i], type);
             continue;
         }
 
@@ -2414,6 +2417,8 @@ void WorldSession::HandleObjectUpdateFailedOpcode(WorldPacket& recvPacket)
     recvPacket.ReadByteSeq(guid[4]);
 
     WorldObject* obj = ObjectAccessor::GetWorldObject(*GetPlayer(), guid);
+	if (obj)
+		obj->SendUpdateToPlayer(GetPlayer());
     TC_LOG_ERROR("network", "Object update failed for object " UI64FMTD " (%s) for player %s (%u)", uint64(guid), obj ? obj->GetName().c_str() : "object-not-found", GetPlayerName().c_str(), GetGuidLow());
 
     // If create object failed for current player then client will be stuck on loading screen
