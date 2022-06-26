@@ -81,9 +81,12 @@ void MoveSpline::computeParabolicElevation(float& el) const
 
 void MoveSpline::computeFallElevation(float& el) const
 {
-    float z_now = spline.getPoint(spline.first()).z - Movement::computeFallElevation(MSToSec(time_passed), false);
+    float z_now = spline.getPoint(spline.first()).z - Movement::computeFallElevation(MSToSec(time_passed), splineflags.fallingSlow);
     float final_z = FinalDestination().z;
-    el = std::max(z_now, final_z);
+	if (z_now < final_z)
+		el = final_z;
+	else
+		el = z_now;
 }
 
 inline uint32 computeDuration(float length, float velocity)
@@ -93,11 +96,12 @@ inline uint32 computeDuration(float length, float velocity)
 
 struct FallInitializer
 {
-    FallInitializer(float _start_elevation) : start_elevation(_start_elevation) { }
+    FallInitializer(float _start_elevation, bool _fallingSlow) : start_elevation(_start_elevation), fallingSlow(_fallingSlow) { }
     float start_elevation;
+	bool fallingSlow;
     inline int32 operator()(Spline<int32>& s, int32 i)
     {
-        return Movement::computeFallTime(start_elevation - s.getPoint(i+1).z, false) * 1000.f;
+        return Movement::computeFallTime(start_elevation - s.getPoint(i + 1).z, fallingSlow) * 1000.f;
     }
 };
 
@@ -108,9 +112,11 @@ enum{
 struct CommonInitializer
 {
     CommonInitializer(float _velocity) : velocityInv(1000.f/_velocity), time(minimal_duration) { }
-    float velocityInv;
+   
+	float velocityInv;
     int32 time;
-    inline int32 operator()(Spline<int32>& s, int32 i)
+   
+	inline int32 operator()(Spline<int32>& s, int32 i)
     {
         time += (s.SegLength(i) * velocityInv);
         return time;
@@ -122,9 +128,11 @@ void MoveSpline::init_spline(const MoveSplineInitArgs& args)
     const SplineBase::EvaluationMode modes[2] = {SplineBase::ModeLinear, SplineBase::ModeCatmullrom};
     if (args.flags.cyclic)
     {
+
+	// MoveSplineFlag::Enter_Cycle support dropped
         uint32 cyclic_point = 0;
-        if (splineflags.enter_cycle)
-            cyclic_point = 1;   // shouldn't be modified, came from client
+    //    if (splineflags.enter_cycle)
+    //       cyclic_point = 1;   // shouldn't be modified, came from client
         spline.init_cyclic_spline(&args.path[0], args.path.size(), args.initialOrientation, modes[args.flags.isSmooth()], cyclic_point);
     }
     else
@@ -135,7 +143,8 @@ void MoveSpline::init_spline(const MoveSplineInitArgs& args)
     // init spline timestamps
     if (splineflags.falling)
     {
-        FallInitializer init(spline.getPoint(spline.first()).z);
+		FallInitializer init(spline.getPoint(spline.first()).z, splineflags.fallingSlow);
+      //  FallInitializer init(spline.getPoint(spline.first()).z);
         spline.initLengths(init);
     }
     else
@@ -208,7 +217,7 @@ bool MoveSplineInitArgs::Validate(Unit* unit) const
         return false;\
     }
     CHECK(path.size() > 1);
-    CHECK(velocity > 0.00000023841858f);
+    CHECK(velocity > 0.1f);
     CHECK(time_perc >= 0.f && time_perc <= 1.f);
     //CHECK(_checkPathBounds());
     return true;
@@ -252,9 +261,15 @@ MoveSpline::UpdateResult MoveSpline::_updateState(int32& ms_time_diff)
     UpdateResult result = Result_None;
 
     int32 minimal_diff = std::min(ms_time_diff, segment_time_elapsed());
-    ASSERT(minimal_diff >= 0);
+   
+	if (minimal_diff < 0)
+		minimal_diff = 0;
+
     time_passed += minimal_diff;
     ms_time_diff -= minimal_diff;
+
+	time_passed += minimal_diff;
+	ms_time_diff -= minimal_diff;
 
     if (time_passed >= next_timestamp())
     {
