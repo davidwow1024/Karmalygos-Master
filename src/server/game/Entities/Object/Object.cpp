@@ -2216,10 +2216,9 @@ bool WorldObject::CanNeverSee(WorldObject const* obj) const
 	Player const* player2 = ToPlayer();
 	if (obj->GetTypeId() == TYPEID_UNIT && player2 && !player2->IsGameMaster())
 	{
-		// Example
-		if (obj->GetEntry() == 1)
+		if (obj->GetEntry() == 66398 || obj->GetEntry() == 66282 || obj->GetEntry() == 66339 || obj->GetEntry() == 66397)
 		{ 
-			if (player2->GetQuestStatus(62) == QUEST_STATUS_REWARDED)
+			if (player2->GetQuestStatus(31735) != QUEST_STATUS_REWARDED)
 			{ 
 				return false;
 			}
