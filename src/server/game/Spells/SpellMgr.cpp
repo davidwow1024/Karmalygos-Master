@@ -8068,8 +8068,8 @@ void SpellMgr::LoadSpellInfoCorrections()
                     break;
 				case 5421: // Aquatic Form Passive
 					spellInfo->Effects[EFFECT_0].BasePoints = 74;
-				case 300200: 
-					spellInfo->Effects[EFFECT_0].BasePoints = 74;
+				case 1850: // Dash speed
+					spellInfo->Effects[EFFECT_0].BasePoints = 95;
                 default:
                     break;
             }
