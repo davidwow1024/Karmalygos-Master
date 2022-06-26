@@ -50,6 +50,10 @@ enum eYells
 	// Texts
 	TEXT_BLACKROCK_INVADER_COMBAT = 0,
 
+	/// Blackrock Spy
+	// Texts
+	TEXT_BLACKROCK_SPY_COMBAT     = 0,
+
     // Alliance Way
     SAY_INTRO                 = 0,
     SAY_SPECIAL_1,
@@ -209,7 +213,9 @@ class npc_blackrock_spy : public CreatureScript
 
             void EnterCombat(Unit* who)
             {
-                Talk(RAND(SAY_BLACKROCK_COMBAT_1, SAY_BLACKROCK_COMBAT_2, SAY_BLACKROCK_COMBAT_3, SAY_BLACKROCK_COMBAT_4, SAY_BLACKROCK_COMBAT_5), me);
+				if (who && who->GetTypeId() == TypeID::TYPEID_PLAYER)
+					if (roll_chance_i(50))
+						Talk(eYells::TEXT_BLACKROCK_SPY_COMBAT, who);
             }
 
             void UpdateAI(uint32 /*diff*/) override
