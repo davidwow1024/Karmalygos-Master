@@ -934,7 +934,10 @@ class WorldObject : public Object, public WorldLocation
 
         virtual Battleground* GetBattlegorund() const;
 
+		// KM Visibility Sistem
 		void ExecuteCanNeverSee(WorldObject const* obj) { CanNeverSee(obj); }
+		bool CheckKMNpcVisibility(WorldObject const* obj, Player const* player) const;
+		bool CheckKMGoVisibility(WorldObject const* obj, Player const* player) const;
 
     protected:
         std::string m_name;

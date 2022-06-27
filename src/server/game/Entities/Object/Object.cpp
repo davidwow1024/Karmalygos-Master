@@ -56,6 +56,7 @@
 #include "Transport.h"
 #include "timeless_isle.h"
 #include <ace/Stack_Trace.h>
+#include "custom_visibility.h"
 
 #define STEALTH_VISIBILITY_UPDATE_TIMER 500
 
@@ -2194,38 +2195,29 @@ bool WorldObject::CanSeeOrDetect(WorldObject const* obj, bool ignoreStealth, boo
 
 bool WorldObject::CanNeverSee(WorldObject const* obj) const
 {
-    // Archaeology Finds can be seen only by owner
-    if (obj->GetTypeId() == TYPEID_GAMEOBJECT && (obj->GetEntry() == 203071 || obj->GetEntry() == 203078 || obj->GetEntry() == 204282 || obj->GetEntry() == 202655 ||
-        obj->GetEntry() == 206836 || obj->GetEntry() == 207187 || obj->GetEntry() == 207188 || obj->GetEntry() == 207189 || obj->GetEntry() == 207190 ||
-        obj->GetEntry() == 211163 || obj->GetEntry() == 211174 || obj->GetEntry() == 218950))
-    {
-        if (uint64 ownerGUID = obj->GetUInt64Value(GAMEOBJECT_FIELD_CREATED_BY))
-            if (GetGUID() != ownerGUID)
-                return true;
-    }
-
-	Player const* player = ToPlayer();
-    if (obj->GetTypeId() == TYPEID_GAMEOBJECT && player && !player->IsGameMaster())
-    {
-        auto itr = timelessRareChestsMap.find(obj->GetEntry());
-        if (itr != timelessRareChestsMap.end())
-            if (player->GetQuestStatus(itr->second) == QUEST_STATUS_REWARDED || player->IsWeeklyQuestDone(itr->second) || player->IsDailyQuestDone(itr->second))
-                return true;
-    }
-	
-	Player const* player2 = ToPlayer();
-	if (obj->GetTypeId() == TYPEID_UNIT && player2 && !player2->IsGameMaster())
-	{
-		if (obj->GetEntry() == 66398 || obj->GetEntry() == 66282 || obj->GetEntry() == 66339 || obj->GetEntry() == 66397)
-		{ 
-			if (player2->GetQuestStatus(31735) != QUEST_STATUS_REWARDED)
-			{ 
-				return false;
-			}
-			else
-				return true;
-		}
-	}
+    if (Player const* player = ToPlayer())
+		if (!player->IsGameMaster())
+	    {
+	    	if (obj->GetTypeId() == TYPEID_UNIT)
+	    	{
+				if (obj->GetEntry() == NPC_GARROSHAR_GRUNT || obj->GetEntry() == NPC_GARROSHAR_GRUNT2 || obj->GetEntry() == NPC_HORDE_WAR_WAGON ||
+					obj->GetEntry() == NPC_GARROSHARR_SHREDDER)
+				{
+					if (!obj->CheckKMNpcVisibility(obj, player))
+						return false;
+					else
+						return true;
+				}
+         	}
+	        
+	    	if (obj->GetTypeId() == TYPEID_GAMEOBJECT)
+            {
+                if (!obj->CheckKMGoVisibility(obj, player))
+	        		return false;
+	        	else
+	        		return true;
+            }
+	    }	
 		
     if (GetMap() != obj->GetMap() || !InSamePhase(obj))
         return true;
@@ -3849,4 +3841,38 @@ Battleground* WorldObject::GetBattlegorund() const
     if (IsInWorld() && m_currMap && m_currMap->IsBattlegroundOrArena())
         return ((BattlegroundMap*)m_currMap)->GetBG();
     return nullptr;
+}
+
+bool WorldObject::CheckKMNpcVisibility(WorldObject const* obj, Player const* player) const
+{
+	if (obj->GetEntry() == NPC_GARROSHAR_GRUNT || obj->GetEntry() == NPC_GARROSHAR_GRUNT2 || obj->GetEntry() == NPC_HORDE_WAR_WAGON || 
+		obj->GetEntry() == NPC_GARROSHARR_SHREDDER)
+	{
+		if (player->GetQuestStatus(THE_RIGTH_TOOL_FOR_THE_JOB) != QUEST_STATUS_REWARDED)
+		{
+			return false;
+		}			
+	}
+
+	return true;
+}
+
+bool WorldObject::CheckKMGoVisibility(WorldObject const* obj, Player const* player) const
+{
+	// Archaeology Finds can be seen only by owner
+	if (obj->GetTypeId() == TYPEID_GAMEOBJECT && (obj->GetEntry() == 203071 || obj->GetEntry() == 203078 || obj->GetEntry() == 204282 || obj->GetEntry() == 202655 ||
+		obj->GetEntry() == 206836 || obj->GetEntry() == 207187 || obj->GetEntry() == 207188 || obj->GetEntry() == 207189 || obj->GetEntry() == 207190 ||
+		obj->GetEntry() == 211163 || obj->GetEntry() == 211174 || obj->GetEntry() == 218950))
+	{
+		if (uint64 ownerGUID = obj->GetUInt64Value(GAMEOBJECT_FIELD_CREATED_BY))
+			if (GetGUID() != ownerGUID)
+				return true;
+	}
+
+	auto itr = timelessRareChestsMap.find(obj->GetEntry());
+	if (itr != timelessRareChestsMap.end())
+		if (player->GetQuestStatus(itr->second) == QUEST_STATUS_REWARDED || player->IsWeeklyQuestDone(itr->second) || player->IsDailyQuestDone(itr->second))
+			return true;
+
+	return true;
 }
