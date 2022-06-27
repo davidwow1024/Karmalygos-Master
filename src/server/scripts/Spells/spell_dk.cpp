@@ -1502,6 +1502,10 @@ class spell_dk_death_coil : public SpellScript
                 dk->CastCustomSpell(healSpell, SPELLVALUE_BASE_POINT0, GetEffectValue() * 3.5f, target, true);
             else
             {
+				// not create barrier on caster
+				if (dk == target)
+					return;
+
                 int32 absorb = (GetEffectValue() + dk->GetTotalAttackPowerValue(BASE_ATTACK) * 0.514);
                 if (AuraEffect const* mastery = dk->GetAuraEffect(SPELL_DK_MASTERY_DREAD_BLADE, EFFECT_0))
                     AddPct(absorb, mastery->GetFloatAmount());

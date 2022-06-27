@@ -3,9 +3,12 @@
 #include "Object.h"
 #include "Player.h"
 
-enum CreatureIds :  uint16
+enum CreatureIds :  uint32
 {
-
+	NPC_GARROSHAR_GRUNT	    = 66398,
+	NPC_GARROSHAR_GRUNT2    = 66282,
+	NPC_HORDE_WAR_WAGON     = 66339,
+	NPC_GARROSHARR_SHREDDER = 66397
 };
 
 enum GameobjectIds : uint32
@@ -13,9 +16,9 @@ enum GameobjectIds : uint32
 
 };
 
-enum QuestIds : uint16
+enum  QuestIds : uint16
 {
-
+	THE_RIGTH_TOOL_FOR_THE_JOB = 31735
 };
 
 class visibility_control_script : public PlayerScript
@@ -31,10 +34,14 @@ public:
 		{
 			// Creature part
 			std::list<uint32> NpcEntrys;
-			// Example
-			NpcEntrys.push_back(1);
 
-			std::list<Creature*> creatures = player->FindNearestCreatures(NpcEntrys, 80.0f);
+			// Quest THE_RIGTH_TOOL_FOR_THE_JOB = 31735
+			NpcEntrys.push_back(NPC_GARROSHAR_GRUNT);
+			NpcEntrys.push_back(NPC_GARROSHAR_GRUNT2);
+			NpcEntrys.push_back(NPC_HORDE_WAR_WAGON);
+			NpcEntrys.push_back(NPC_GARROSHARR_SHREDDER);
+
+			std::list<Creature*> creatures = player->FindNearestCreatures(NpcEntrys, 90.0f);
 			for (auto itr : creatures)
 			{
 				player->ExecuteCanNeverSee(itr);
@@ -46,7 +53,7 @@ public:
 			// Example
 			GoEntrys.push_back(1);
 
-			std::list<GameObject*> gameobjects = player->FindNearestGameObject(GoEntrys, 80.0f);
+			std::list<GameObject*> gameobjects = player->FindNearestGameObject(GoEntrys, 90.0f);
 			for (auto itr : gameobjects)
 			{
 				player->ExecuteCanNeverSee(itr);
