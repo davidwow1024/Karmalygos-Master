@@ -218,7 +218,7 @@ INSERT INTO `creature_questender` ( id, quest) VALUES
 (66822,31974);
 
 /* https://www.wowhead.com/npc=66522/lydia-accoste */
-DELETE FROM `creature_questender` WHERE id= 66522;
+DELETE FROM `creature_queststarter` WHERE id= 66522;
 INSERT INTO `creature_queststarter` ( id, quest) VALUES
 (66522,31980);
 
