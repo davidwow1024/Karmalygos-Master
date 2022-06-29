@@ -10,38 +10,40 @@ public:
 	visibility_control_script() : PlayerScript("visibility_control_script") {}
 
 	uint32 checkTimer = 1000;
-	std::list<uint32> NpcEntrys;
-	std::list<uint32> GoEntrys;
+	std::list<uint32> ListNpcEntrys;
+	std::list<uint32> ListGoEntrys;
 	
 	void OnLogin(Player* /*player*/) 
 	{
 		// Creature part
-		NpcEntrys.push_back(NPC_GARROSHAR_GRUNT);
-		NpcEntrys.push_back(NPC_GARROSHAR_GRUNT2);
-		NpcEntrys.push_back(NPC_HORDE_WAR_WAGON);
-		NpcEntrys.push_back(NPC_GARROSHARR_SHREDDER);
+		// Example
+		ListNpcEntrys.push_back(1);
 
 		// Gameobject part
 		// Example
-		GoEntrys.push_back(1);
+		ListGoEntrys.push_back(1);
 	}
 	
 	void OnUpdate(Player* player, uint32 diff) override
 	{
 		if (checkTimer <= diff)
 		{
-			std::list<Creature*> creatures = player->FindNearestCreatures(NpcEntrys, 90.0f);
+			// Creature part
+			std::list<Creature*> creatures = player->FindNearestCreatures(ListNpcEntrys, 90.0f);
 			for (auto itr : creatures)
 			{
 				player->ExecuteCanNeverSee(itr);
 				itr->UpdateObjectVisibility();
+				player->UpdateObjectVisibility();
 			}
 
-			std::list<GameObject*> gameobjects = player->FindNearestGameObject(GoEntrys, 90.0f);
+			// Gameobject part
+			std::list<GameObject*> gameobjects = player->FindNearestGameObject(ListGoEntrys, 90.0f);
 			for (auto itr : gameobjects)
 			{
 				player->ExecuteCanNeverSee(itr);
 				itr->UpdateObjectVisibility();
+				player->UpdateObjectVisibility();
 			}
 
 			checkTimer = 1000;

@@ -938,6 +938,7 @@ class WorldObject : public Object, public WorldLocation
 		void ExecuteCanNeverSee(WorldObject const* obj) { CanNeverSee(obj); }
 		bool CheckKMNpcVisibility(WorldObject const* obj, Player const* player) const;
 		bool CheckKMGoVisibility(WorldObject const* obj, Player const* player) const;
+		bool IsInKMVisibility(WorldObject const* obj) const;
 
     protected:
         std::string m_name;
