@@ -18,6 +18,7 @@ VALUES
 
 -- agregando los nuevos npc
 DELETE FROM `creature` WHERE guid IN ('526840', '526839', '526837', '514094', '514090', '509436');
+/*
 INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `modelid`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `spawntimesecs_max`, `spawndist`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `npcflag2`, `unit_flags`, `unit_flags2`, `dynamicflags`) 
 VALUES
 ('526840','66098','870','0','0','1','4294967295','0','0','202.531','2209.23','272.373','4.41634','300','0','0','0','2852724','0','0','0','0','0','0','0'),
@@ -26,7 +27,7 @@ VALUES
 ('514094','66103','870','0','0','1','4294967295','0','0','2147.97','2619.14','543.092','2.76306','300','0','0','0','2852724','0','0','0','0','0','0','0'),
 ('514090','66001','870','0','0','1','4294967295','0','0','2136.37','2618.08','543.117','0.524664','300','0','0','0','2852724','0','0','0','0','0','0','0'),
 ('509436','66033','870','0','0','1','4294967295','0','0','2138.91','2625.85','543.116','5.27552','300','0','0','0','2852724','0','0','0','0','0','0','0');
-
+*/
 -- agregando items a los vendedores
 DELETE FROM `npc_vendor` WHERE entry IN ('66001', '66033', '66049', '66076', '66098', '66103');
 INSERT INTO `npc_vendor` (`entry`, `slot`, `item`, `maxcount`, `incrtime`, `ExtendedCost`, `type`) VALUES

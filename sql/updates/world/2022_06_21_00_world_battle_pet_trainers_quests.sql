@@ -137,10 +137,12 @@ INSERT INTO `creature_questender` ( id, quest) VALUES
 (63626,31986);
 
 /* https://www.wowhead.com/npc=66824/obalis */
+DELETE FROM `creature_queststarter` WHERE id= 66824;
 INSERT INTO `creature_queststarter` ( id, quest) VALUES
 (66824,31986);
 
 /* https://www.wowhead.com/npc=66466/stone-cold-trixxy */
+DELETE FROM `creature_queststarter` WHERE id= 66466;
 INSERT INTO `creature_queststarter` ( id, quest) VALUES
 (66466,31977);
 
@@ -216,6 +218,7 @@ INSERT INTO `creature_questender` ( id, quest) VALUES
 (66822,31974);
 
 /* https://www.wowhead.com/npc=66522/lydia-accoste */
+DELETE FROM `creature_questender` WHERE id= 66522;
 INSERT INTO `creature_queststarter` ( id, quest) VALUES
 (66522,31980);
 
