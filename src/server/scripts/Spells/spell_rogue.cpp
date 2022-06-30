@@ -734,6 +734,12 @@ class spell_rog_smoke_bomb : public AuraScript
 {
     PrepareAuraScript(spell_rog_smoke_bomb);
 
+	void HandleApply(AuraEffect const* aurEff, AuraEffectHandleModes)
+	{
+		if (DynamicObject * dyn = GetTarget()->GetDynObject(aurEff->GetId()))
+			GetTarget()->CastSpell(*dyn, SPELL_ROGUE_SMOKE_BOMB, true);
+	}
+
     void HandlePeriodic(AuraEffect const* aurEff)
     {
         if (DynamicObject* dyn = GetTarget()->GetDynObject(aurEff->GetId()))
@@ -742,6 +748,7 @@ class spell_rog_smoke_bomb : public AuraScript
 
     void Register() override
     {
+		OnEffectApply += AuraEffectApplyFn(spell_rog_smoke_bomb::HandleApply, EFFECT_1, SPELL_AURA_PERIODIC_DUMMY, AURA_EFFECT_HANDLE_REAL);
         OnEffectPeriodic += AuraEffectPeriodicFn(spell_rog_smoke_bomb::HandlePeriodic, EFFECT_1, SPELL_AURA_PERIODIC_DUMMY);
     }
 };
@@ -961,7 +968,7 @@ class spell_rog_killing_spree_target_selector : public SpellScript
     }
 };
 
-// 57840 - Killing Spree, 36563 - Shadowstep
+// 57840 - Killing Spree, 36563 - Shadowstep 132987 - Shadowstep
 class spell_rog_killing_spree_teleport : public SpellScript
 {
     PrepareSpellScript(spell_rog_killing_spree_teleport);
@@ -2784,6 +2791,7 @@ void AddSC_rogue_spell_scripts()
     new spell_rog_deadly_poison();
     new spell_rog_marked_for_death();
     new aura_script<spell_rog_smoke_bomb>("spell_rog_smoke_bomb");
+	new spell_script<spell_rog_glyph_of_decoy>("spell_rog_smoke_bomb_inst");
     new spell_script<spell_rog_glyph_of_decoy>("spell_rog_glyph_of_decoy");
     new aura_script<spell_rog_killing_spree>("spell_rog_killing_spree");
     new spell_script<spell_rog_killing_spree_target_selector>("spell_rog_killing_spree_target_selector");
