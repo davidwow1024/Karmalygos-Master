@@ -456,9 +456,8 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo)
 				if (!go)
 					break;
 
-				if (go)
-					if (go->GetAIName() == "SmartAI")
-						condMeets = CAST_AI(SmartAI, go->AI())->GetPhase() == ConditionValue1;
+				if (go->GetAIName() == "SmartAI")
+					condMeets = CAST_AI(SmartAI, go->AI())->GetPhase() == ConditionValue1;
 			}
             break;
         }
