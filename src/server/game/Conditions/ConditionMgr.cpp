@@ -443,12 +443,23 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo)
         }
         case CONDITION_SAI_PHASE:
         {
-            if (Creature* creature = object->ToCreature())
-                if (creature->GetAIName() == "SmartAI" && !creature->IsPet())
-                    condMeets = CAST_AI(SmartAI, creature->AI())->GetPhase() == ConditionValue1;
-            if (GameObject* go = object->ToGameObject())
-                if (go->GetAIName() == "SmartAI")
-                    condMeets = CAST_AI(SmartAI, go->AI())->GetPhase() == ConditionValue1;
+			if (Creature* creature = object->ToCreature())
+			{
+				if (!creature)
+					break;
+
+				if (creature->GetAIName() == "SmartAI" && !creature->IsPet())
+					condMeets = CAST_AI(SmartAI, creature->AI())->GetPhase() == ConditionValue1;
+			}
+			if (GameObject* go = object->ToGameObject())
+			{
+				if (!go)
+					break;
+
+				if (go)
+					if (go->GetAIName() == "SmartAI")
+						condMeets = CAST_AI(SmartAI, go->AI())->GetPhase() == ConditionValue1;
+			}
             break;
         }
         case CONDITION_PLAYER_SPEC:
