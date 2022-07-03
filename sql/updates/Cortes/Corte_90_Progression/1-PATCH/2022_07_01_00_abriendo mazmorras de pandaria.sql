@@ -34,3 +34,6 @@ DELETE FROM `access_requirement` WHERE `mapId`=1011 AND `difficulty`='DUNGEON_NO
 INSERT INTO `access_requirement` (`mapId`, `difficulty`, `level_min`, `level_max`, `item_level`, `item`, `item2`, `quest_done_A`, `quest_done_H`, `completed_achievement`, `quest_failed_text`, `comment`) VALUES (1011, 'DUNGEON_NORMAL', 88, 0, 0, 0, 0, 0, 0, 0, NULL, 'Siege of Niuzao Temple - Entrance');
 DELETE FROM `access_requirement` WHERE `mapId`=1011 AND `difficulty`='DUNGEON_HEROIC';
 INSERT INTO `access_requirement` (`mapId`, `difficulty`, `level_min`, `level_max`, `item_level`, `item`, `item2`, `quest_done_A`, `quest_done_H`, `completed_achievement`, `quest_failed_text`, `comment`) VALUES (1011, 'DUNGEON_HEROIC', 90, 0, 0, 0, 0, 0, 0, 0, NULL, 'Siege of Niuzao Temple - Entrance');
+
+DELETE FROM `disables` WHERE `sourceType` = '2' AND `entry` = '1007'; 
+DELETE FROM `disables` WHERE `sourceType` = '2' AND `entry` = '1001'; 

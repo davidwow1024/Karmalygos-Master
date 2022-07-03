@@ -20,15 +20,12 @@ enum ForbiddenAreas : uint16
 			 case ZONE_ISLE_OF_GIANT:
 			 case ZONE_ISLE_OF_THUNDER:
 			 {
-				 uint64 mod = player->GetMoney() * 0.1f;
-
 					 if (player->GetTeamId() == TEAM_ALLIANCE)
 						 player->TeleportTo(0, -8833.07f, 622.778f, 93.9317f, 0.6771f);
 					 else if (player->GetTeamId() == TEAM_HORDE)
 						 player->TeleportTo(1, 1569.97f, -4397.41f, 16.0472f, 0.543025f);
 
-					 player->SetMoney(player->GetMoney() - player->GetMoney() * 0.1f);
-					 ChatHandler(player->GetSession()).PSendSysMessage("|cffFF0000Se le ha retirado|r %u |cffFF0000de oro por intentar entrar en una zona prohibida.|r", mod / 10000);
+					 ChatHandler(player->GetSession()).PSendSysMessage("|cffFF0000No puede entrar a una zona prohibida|r");
 
 				 break;
 			 }
