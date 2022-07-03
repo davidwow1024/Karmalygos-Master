@@ -21,7 +21,8 @@ public:
 
 		// Gameobject part
 		// Example
-		ListGoEntrys.push_back(1);
+		ListGoEntrys.push_back(GO_FIRE_SHIELD_COLLISION_WALL);
+		ListGoEntrys.push_back(GO_WALL_OF_FIRE);
 	}
 	
 	void OnUpdate(Player* player, uint32 diff) override

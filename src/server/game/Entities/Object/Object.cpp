@@ -3876,6 +3876,14 @@ bool WorldObject::CheckKMGoVisibility(WorldObject const* obj, Player const* play
 		if (player->GetQuestStatus(itr->second) == QUEST_STATUS_REWARDED || player->IsWeeklyQuestDone(itr->second) || player->IsDailyQuestDone(itr->second))
 			return true;
 
+	if (obj->GetEntry() == GO_FIRE_SHIELD_COLLISION_WALL || obj->GetEntry() == GO_WALL_OF_FIRE)
+	{
+		if (player->GetQuestStatus(IN_TENTS_CHANNELING) != QUEST_STATUS_REWARDED)
+		{
+			return false;
+		}
+	}
+
 	return true;
 }
 
@@ -3900,7 +3908,8 @@ bool WorldObject::IsInKMVisibility(WorldObject const* obj) const
             obj->GetEntry() == 223100 || obj->GetEntry() == 223101 || obj->GetEntry() == 223102 || obj->GetEntry() == 223103 ||
             obj->GetEntry() == 223104 || obj->GetEntry() == 223105 || obj->GetEntry() == 223106 || obj->GetEntry() == 223107 ||
             obj->GetEntry() == 223108 || obj->GetEntry() == 223109 || obj->GetEntry() == 223110 || obj->GetEntry() == 223111 ||
-            obj->GetEntry() == 223112 || obj->GetEntry() == 223113 || obj->GetEntry() == 223114 || obj->GetEntry() == 223115)
+            obj->GetEntry() == 223112 || obj->GetEntry() == 223113 || obj->GetEntry() == 223114 || obj->GetEntry() == 223115 || 
+			obj->GetEntry() == GO_FIRE_SHIELD_COLLISION_WALL || obj->GetEntry() == GO_WALL_OF_FIRE)
 			return true;
 
 	return false;

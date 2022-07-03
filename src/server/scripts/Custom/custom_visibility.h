@@ -8,10 +8,12 @@ enum CreatureIds : uint32
 
 enum GameobjectIds : uint32
 {
-
+	GO_FIRE_SHIELD_COLLISION_WALL = 211327,
+	GO_WALL_OF_FIRE               = 211328
 };
 
 enum  QuestIds : uint16
 {
-	THE_RIGTH_TOOL_FOR_THE_JOB = 31735
+	THE_RIGTH_TOOL_FOR_THE_JOB = 31735,
+	IN_TENTS_CHANNELING        = 30657
 };

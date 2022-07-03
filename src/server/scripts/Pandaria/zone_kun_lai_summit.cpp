@@ -2698,6 +2698,23 @@ class spell_fresh_pine_scent : public SpellScript
 	}
 };
 
+// Blind Rage Trap 118938
+class spell_blind_rage_trap : public SpellScript
+{
+	PrepareSpellScript(spell_blind_rage_trap);
+
+	void HandleAfterCast()
+	{
+		if (Player* caster = GetCaster()->ToPlayer())
+			caster->KilledMonsterCredit(61336, 0);
+	}
+
+	void Register() override
+	{
+		AfterCast += SpellCastFn(spell_blind_rage_trap::HandleAfterCast);
+	}
+};
+
 void AddSC_kun_lai_summit()
 {
     new npc_nessos_the_oracle();
@@ -2743,4 +2760,5 @@ void AddSC_kun_lai_summit()
     new creature_script<npc_silverback_piker>("npc_silverback_piker");
     new creature_script<npc_broketooth_leaper>("npc_broketooth_leaper");
 	new spell_script<spell_fresh_pine_scent>("spell_fresh_pine_scent");
+	new spell_script<spell_blind_rage_trap>("spell_blind_rage_trap");
 }
