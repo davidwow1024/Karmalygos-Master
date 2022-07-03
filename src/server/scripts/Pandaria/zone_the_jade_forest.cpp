@@ -5038,10 +5038,12 @@ struct npc_bag_training_55184 : public ScriptedAI
 
 	void DamageTaken(Unit* attacker, uint32& damage) override
 	{
-		Creature* nearest = me->FindNearestCreature(55183, 5.0f);
-		bnearest = nearest;
-		nearest->SetInCombatWith(attacker);
-		nearest->ModifyHealth((damage + CalculatePct(damage, 99)) * -1);
+		if (Creature* nearest = me->FindNearestCreature(55183, 5.0f))
+		{
+			bnearest = nearest;
+			nearest->SetInCombatWith(attacker);
+			nearest->ModifyHealth((damage + CalculatePct(damage, 99)) * -1);
+		}
 	}
 
 	void JustDied(Unit* killer) override
