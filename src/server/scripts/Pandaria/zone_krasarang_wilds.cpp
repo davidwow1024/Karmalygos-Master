@@ -432,101 +432,6 @@ class npc_go_kan : public CreatureScript
         }
 };
 
-class npc_despondent_warden_of_zhu : public CreatureScript
-{
-    public:
-        npc_despondent_warden_of_zhu() : CreatureScript("npc_despondent_warden_of_zhu") { }
-
-        bool OnGossipHello(Player * player, Creature* creature) override
-        {
-            creature->AI()->Talk(0);
-            player->KilledMonsterCredit(creature->GetEntry());
-            return false;
-        }
-
-        struct npc_despondent_warden_of_zhuAI : public ScriptedAI
-        {
-            npc_despondent_warden_of_zhuAI(Creature* creature) : ScriptedAI(creature) { }
-
-            uint64 playerGUID;
-            uint32 talkTimer;
-            uint32 auraRecastTimer;
-
-            void Reset() override
-            {
-                me->CastSpell(me, 108450, true);
-                playerGUID = 0;
-                talkTimer = 0;
-                auraRecastTimer = 0;
-            }
-
-            void MoveInLineOfSight(Unit* who) override
-            {
-                if (me->GetDistance(who) > 5.f || talkTimer != 0)
-                    return;
-
-                if (auto player = who->ToPlayer())
-                {
-                    if (player->GetQuestStatus(30089) == QUEST_STATUS_INCOMPLETE)
-                    {
-                        Talk(0);
-                        talkTimer = 20000;
-                    }
-                }
-            }
-
-            void UpdateAI(uint32 diff) override
-            {
-                if (talkTimer != 0)
-                    if (talkTimer <= diff)
-                    {
-                        talkTimer = 0;
-                    }
-                    else talkTimer -= diff;
-
-                if (auraRecastTimer != 0)
-                    if (auraRecastTimer <= diff)
-                    {
-                        me->CastSpell(me, 108450, true);
-                        auraRecastTimer = 0;
-                    }
-                    else auraRecastTimer -= diff;
-            }
-
-            void SpellHit(Unit* caster, const SpellInfo* spell) override
-            {
-                if (auraRecastTimer)
-                    return;
-
-                if (spell->Id == 110169 && caster->GetTypeId() == TYPEID_PLAYER)
-                {
-                    Position pos;
-                    me->GetPosition(&pos);
-                    if (auto summon = me->SummonCreature(58312, pos, TEMPSUMMON_TIMED_DESPAWN, 120 * IN_MILLISECONDS))
-                        summon->AI()->AttackStart(caster);
-
-                    auraRecastTimer = 10000;
-                    playerGUID = caster->GetGUID();
-                }
-            }
-
-            void SummonedCreatureDies(Creature* /*summon*/, Unit* /*killer*/) override
-            {
-                if (auto player = me->GetPlayer(*me, playerGUID))
-                {
-                    player->KilledMonsterCredit(58238);
-                    me->DespawnOrUnsummon(5000);
-                }
-                Talk(1);
-            }
-        };
-
-        CreatureAI* GetAI(Creature* creature) const override
-        {
-            return new npc_despondent_warden_of_zhuAI(creature);
-        }
-};
-
 class npc_zhus_watch_courier : public CreatureScript
 {
     public:
@@ -2930,7 +2835,6 @@ void AddSC_krasarang_wilds()
     new npc_arness_the_scale();
     new npc_torik_ethis();
     new npc_go_kan();
-    new npc_despondent_warden_of_zhu();
     new npc_zhus_watch_courier();
     new creature_script<npc_shieldwall_footman>("npc_shieldwall_footman");
     new creature_script<npc_krasari_tormentor>("npc_krasari_tormentor");
