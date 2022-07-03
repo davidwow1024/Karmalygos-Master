@@ -3563,30 +3563,6 @@ void Player::GiveLevel(uint8 level)
 
     LearnSpecializationSpells();
 
-    // monk class quests
-    std::map<uint8, uint32> monkQuestToLevel =
-    {
-        { 20, 31856 }, // The Peak of Serenity - Begin Your Training
-        { 30, 31855 }, // The Peak of Serenity - Continue Your Training
-        { 40, 31857 }, // The Peak of Serenity - Continue Your Training
-        { 50, 31858 }, // The Peak of Serenity - Continue Your Training
-        { 60, 31859 }, // The Peak of Serenity - Continue Your Training
-        { 70, 31860 }, // The Peak of Serenity - Continue Your Training
-        { 80, 31861 }, // The Peak of Serenity - Continue Your Training
-        { 90, 31989 }, // The Peak of Serenity - Complete Your Training
-    };
-
-    auto itr = monkQuestToLevel.find(getLevel());
-    if (itr != monkQuestToLevel.end())
-        if (getClass() == CLASS_MONK && GetQuestStatus(itr->second) == QUEST_STATUS_NONE)
-            if (Quest const* quest = sObjectMgr->GetQuestTemplate(itr->second))
-            {
-                AddQuest(quest, this);
-                PlayerTalkClass->SendQuestGiverQuestDetails(quest, GetGUID(), true, true);
-                if (CanCompleteQuest(quest->GetQuestId()))
-                    CompleteQuest(quest->GetQuestId());
-            }
-
     sScriptMgr->OnPlayerLevelChanged(this, oldLevel);
 
     SetSaveTimer(1);
