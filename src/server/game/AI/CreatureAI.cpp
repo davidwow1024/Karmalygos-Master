@@ -80,13 +80,14 @@ void CreatureAI::DoZoneInCombat(Creature* creature /*= NULL*/, float maxRangeToN
         }
     }
 
+	/* genera tufe, investigar para eliminar o dejarlo
     // Intended duplicated check, the code above this should select a victim
     // If it can't find a suitable attack target then we should error out.
     if (!creature->HasReactState(REACT_PASSIVE) && !creature->GetVictim())
     {
         TC_LOG_ERROR("misc", "DoZoneInCombat called for creature that has empty threat list (creature entry = %u)", creature->GetEntry());
         return;
-    }
+    } */
 
     Map::PlayerList const& playerList = map->GetPlayers();
 
