@@ -3352,6 +3352,11 @@ class npc_instructor_bladewind : public CreatureScript
 
         bool OnQuestAccept(Player* player, Creature* creature, Quest const* quest) override
         {
+			if (quest->GetQuestId() == 30144)
+			{
+				player->KilledMonsterCredit(58426, 0, 6);
+			}
+
             if (player->GetQuestStatus(QUEST_RING_ROUND_UP) != QUEST_STATUS_INCOMPLETE)
                 return false;
 
@@ -4914,6 +4919,11 @@ struct npc_instructor_xann : public ScriptedAI
 
 	void sQuestAccept(Player* player, Quest const* quest) override
 	{
+		if (quest->GetQuestId() == 29623)
+		{
+			player->CastSpell(player, 102646);
+		}
+
 		if (!player || !quest || quest->GetQuestId() != QUEST_ATTENTION)
 			return;
 

@@ -3450,6 +3450,24 @@ class spell_potion_of_mazus_breath : public AuraScript
 		OnEffectUpdate += AuraEffectUpdateFn(spell_potion_of_mazus_breath::OnUpdate, EFFECT_0, SPELL_AURA_DUMMY);
 	}
 };
+
+// 62151 Xaril the Poisoned Mind
+class npc_xaril_the_poisoned_mind : public CreatureScript
+{
+public:
+	npc_xaril_the_poisoned_mind() : CreatureScript("npc_xaril_the_poisoned_mind") { }
+
+	bool OnGossipHello(Player* player, Creature* creature) override
+	{
+		player->KilledMonsterCredit(63613, 0, 200);
+		player->KilledMonsterCredit(63625, 0, 3);
+		if (player->GetQuestStatus(31211) == QUEST_STATUS_INCOMPLETE)
+			player->CompleteQuest(31211);
+
+		return true;
+	}
+};
+
 void AddSC_dread_wastes()
 {
     // Rare Mobs
@@ -3514,4 +3532,5 @@ void AddSC_dread_wastes()
     new spell_script<spell_dread_waster_gather_shade>("spell_dread_waster_gather_shade");
     new spell_script<spell_dread_waster_sonic_emission>("spell_dread_waster_sonic_emission");
 	new spell_script<spell_wakening_122531>("spell_wakening_122531");
+	new npc_xaril_the_poisoned_mind();
 }
