@@ -101,3 +101,4 @@ DELETE FROM `smart_scripts` WHERE `entryorguid`=54917;
 UPDATE `creature_template` SET `flags_extra`= 2 WHERE `ENTRY` in (55184,55183);
 
 
+UPDATE `gameobject` SET `phaseMask`= 4294967295 WHERE `guid`= 525040;
