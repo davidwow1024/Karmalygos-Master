@@ -204,7 +204,7 @@ DELETE FROM `creature_queststarter` WHERE id= 66815;
 INSERT INTO `creature_queststarter` ( id, quest) VALUES
 (66815,31973);
 
-DELETE FROM `creature_questender` WHERE id= 66819;
+DELETE FROM `creature_questender` WHERE id= 66815;
 INSERT INTO `creature_questender` ( id, quest) VALUES
 (66815,31973);
 
