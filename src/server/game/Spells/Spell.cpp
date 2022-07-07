@@ -6826,7 +6826,13 @@ SpellCastResult Spell::CheckCast(bool strict)
                     || m_spellInfo->Effects[i].ApplyAuraName == SPELL_AURA_MOD_POSSESS)
                 {
                     if (m_caster->GetPetGUID())
-                        return SPELL_FAILED_ALREADY_HAVE_SUMMON;
+						if (Unit* pet = m_caster->ToPlayer()->GetGuardianPet())
+						{
+							if (pet->GetEntry() != 19668) // Shadowfiend
+								return SPELL_FAILED_ALREADY_HAVE_SUMMON;
+						}
+						else
+							return SPELL_FAILED_ALREADY_HAVE_SUMMON;
 
                     if (m_caster->GetCharmGUID())
                         return SPELL_FAILED_ALREADY_HAVE_CHARM;
