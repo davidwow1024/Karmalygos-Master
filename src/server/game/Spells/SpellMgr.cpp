@@ -8073,10 +8073,12 @@ void SpellMgr::LoadSpellInfoCorrections()
 					break;
 				case 89481: // Guild Battle Standard periodic trigger
 					spellInfo->Effects[EFFECT_0].TriggerSpell = 90216;
+					break;
 				case 90216: // Guild Battle Standard bonus
 					spellInfo->Effects[EFFECT_0].BasePoints = 10;
 					spellInfo->Effects[EFFECT_1].BasePoints = 10;
 					spellInfo->Effects[EFFECT_2].BasePoints = 10;
+					break;
                 default:
                     break;
             }
