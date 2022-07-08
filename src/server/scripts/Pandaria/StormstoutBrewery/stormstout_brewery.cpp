@@ -501,7 +501,7 @@ class npc_hozen_party_animal : public CreatureScript
             {
                 me->CombatStop(true);
                 me->AttackStop();
-                me->SetReactState(REACT_PASSIVE);
+             //   me->SetReactState(REACT_PASSIVE);
                 canAggroMore = true;
                 me->HandleEmoteCommand(auiEmotes[(urand(0, 3))]);
 
@@ -547,7 +547,7 @@ class npc_hozen_party_animal : public CreatureScript
                         if (creature->AI() && creature->IsAlive() && !creature->IsInCombat())
                         {
                             creature->AI()->DoAction(1);
-                            creature->AI()->DoZoneInCombat();
+                          //  creature->AI()->DoZoneInCombat();
                         }
                     }
                 }
