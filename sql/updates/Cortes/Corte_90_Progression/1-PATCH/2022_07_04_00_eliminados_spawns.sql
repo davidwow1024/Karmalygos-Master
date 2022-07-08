@@ -15,9 +15,7 @@ INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `p
 */
 
 
-UPDATE `creature_template` SET `npcflag`= 4096 WHERE `entry` in (64595,64032);
+UPDATE `creature_template` SET `npcflag`= 4096 WHERE `entry` in (64595,64032,64606,70346);
 
 UPDATE `creature_template` SET `npcflag`= 3 WHERE `entry` in (64599);
-
-
 

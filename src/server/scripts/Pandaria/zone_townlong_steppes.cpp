@@ -963,8 +963,7 @@ class go_drywood_cage : public GameObjectScript
                 if (auto ranger = GetClosestCreatureWithEntry(player, NPC_LONGYING_RANGER, 10.f))
                 {
                     go->SetGoState(GO_STATE_ACTIVE);
-
-                    player->QuestObjectiveSatisfy(QUEST_OBJECTIVE_LONGYIN_RANGER_RESCUED, 1);
+					player->KilledMonsterCredit(60730);
                     player->CastSpell(player, SPELL_SUMMON_LONGYING_RANGER, true);
 
                     if (auto rangerHelper = GetClosestCreatureWithEntry(player, NPC_LONGYING_RANGER_HELPER, 10.f))
@@ -1020,7 +1019,7 @@ class npc_lin_silentstrike : public CreatureScript
             player->PlayerTalkClass->ClearMenus();
             if (action == GOSSIP_ACTION_INFO_DEF + 1)
             {
-                player->QuestObjectiveSatisfy(QUEST_OBJECTIVE_FREE_LIN_SILENTSTRIKE, 1);
+				player->KilledMonsterCredit(60899);
                 creature->AI()->SetGUID(player->GetGUID(), 0);
                 player->CLOSE_GOSSIP_MENU();
             }
