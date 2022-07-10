@@ -2563,7 +2563,7 @@ struct npc_na_lek : public ScriptedAI
             }
         });
         // reset event
-        me->m_Events.Schedule(120000, [this]()
+        me->m_Events.Schedule(180000, [this]()
         {
             summons.DespawnAll();
             me->DespawnOrUnsummon();
