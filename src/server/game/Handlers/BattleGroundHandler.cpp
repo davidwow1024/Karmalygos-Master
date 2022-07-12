@@ -34,6 +34,8 @@
 #include "DisableMgr.h"
 #include "Group.h"
 #include "LFGMgr.h"
+#include "LFG.h"
+
 
 void WorldSession::HandleBattlemasterHelloOpcode(WorldPacket& recvData)
 {
@@ -78,7 +80,7 @@ void WorldSession::HandleBattlemasterJoinOpcode(WorldPacket& recvData)
     Group* grp = NULL;
     ObjectGuid guid;
     bool hasRoleMask;
-    uint8 roleMask = 0;
+    uint8 roleMask;
 
     for (int i = 0; i < 2; i++) // blacklistedMapIds
         recvData.read_skip<uint32>();
@@ -94,6 +96,8 @@ void WorldSession::HandleBattlemasterJoinOpcode(WorldPacket& recvData)
     guid[2] = recvData.ReadBit();
     guid[5] = recvData.ReadBit();
 
+	recvData.FlushBits();
+
     recvData.ReadByteSeq(guid[7]);
     recvData.ReadByteSeq(guid[2]);
     recvData.ReadByteSeq(guid[4]);
@@ -103,8 +107,13 @@ void WorldSession::HandleBattlemasterJoinOpcode(WorldPacket& recvData)
     recvData.ReadByteSeq(guid[3]);
     recvData.ReadByteSeq(guid[1]);
 
-    if (hasRoleMask)
-        recvData >> roleMask; // Need to set this as group role later
+   /* if (hasRoleMask)
+        recvData >> roleMask; // Need to set this as group role later*/
+
+	if (hasRoleMask)
+		recvData >> roleMask;
+	else
+		roleMask = lfg::LfgRoles::PLAYER_ROLE_DAMAGE;
 
     //extract from guid
     bgTypeId_ = GUID_LOPART(guid);
@@ -196,6 +205,8 @@ void WorldSession::HandleBattlemasterJoinOpcode(WorldPacket& recvData)
             return;
         }
 
+		_player->SetBattleGroundRoles(roleMask);
+
         BattlegroundQueue& bgQueue = sBattlegroundMgr->GetBattlegroundQueue(bgQueueTypeId);
         GroupQueueInfo* ginfo = bgQueue.AddGroup(_player, NULL, bgTypeId, bracketEntry, 0, false, isPremade, 0, 0);
 
@@ -228,6 +239,9 @@ void WorldSession::HandleBattlemasterJoinOpcode(WorldPacket& recvData)
         err = grp->CanJoinBattlegroundQueue(bg, bgQueueTypeId, 0, bg->GetMaxPlayersPerTeam(), false, 0);
         isPremade = (grp->GetMembersCount() >= 4);
 
+		// Set leader role received from the data.
+		_player->SetBattleGroundRoles(roleMask);
+
         BattlegroundQueue& bgQueue = sBattlegroundMgr->GetBattlegroundQueue(bgQueueTypeId);
         GroupQueueInfo* ginfo = NULL;
         uint32 avgTime = 0;
@@ -252,6 +266,10 @@ void WorldSession::HandleBattlemasterJoinOpcode(WorldPacket& recvData)
                 member->GetSession()->SendPacket(&data);
                 continue;
             }
+
+			// Set member roles from those selected in the group (no data sent for them so can only get the roles like this).
+			if (member != _player)
+				member->SetBattleGroundRoles(member->GetBattleGroundRoles());
 
             // add to queue
             uint32 queueSlot = member->AddBattlegroundQueueId(bgQueueTypeId);

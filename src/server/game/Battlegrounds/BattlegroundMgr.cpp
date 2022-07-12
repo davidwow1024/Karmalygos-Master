@@ -52,6 +52,7 @@
 #include "Formulas.h"
 #include "DisableMgr.h"
 #include "Opcodes.h"
+#include "LFGMgr.h"
 
 /*********************************************************/
 /***            BATTLEGROUND MANAGER                   ***/
@@ -164,6 +165,8 @@ void BattlegroundMgr::BuildBattlegroundStatusPacket(WorldPacket* data, Battlegro
     ObjectGuid playerGuid = player->GetGUID();
     ObjectGuid bgGuid;
 
+	bool HasRoles = (player && player->GetBattleGroundRoles() && player->GetBattleGroundRoles() != lfg::LfgRoles::PLAYER_ROLE_DAMAGE) ? true : false;
+
     if (bg && bg->IsRandom() && !bg->IsRated())
         bgGuid = MAKE_NEW_GUID(BATTLEGROUND_RB, 0, HIGHGUID_BATTLEGROUND);
     else if (bg)
@@ -264,7 +267,7 @@ void BattlegroundMgr::BuildBattlegroundStatusPacket(WorldPacket* data, Battlegro
             data->WriteBit(playerGuid[1]);
             data->WriteBit(bgGuid[3]);
             data->WriteBit(bgGuid[2]);
-            data->WriteBit(1); // Missing Role
+			data->WriteBit(!HasRoles);               // Has Role (But not DPS) - Negated.
             data->WriteBit(bgGuid[0]);
             data->WriteBit(playerGuid[0]);
             data->WriteBit(playerGuid[6]);
@@ -282,7 +285,9 @@ void BattlegroundMgr::BuildBattlegroundStatusPacket(WorldPacket* data, Battlegro
             data->WriteByteSeq(playerGuid[2]);
             *data << uint8(bg->IsArena() ? arenatype : 1); // Player count, 1 for bgs, 2-3-5 for arena (2v2, 3v3, 5v5)
             *data << uint32(QueueSlot);                 // Queue slot
-            // *data << uint32(role);
+
+			if (HasRoles)
+				* data << uint8((player->GetBattleGroundRoles() == lfg::LfgRoles::PLAYER_ROLE_TANK) ? 0 : 1); // Client uses sent value like this: Role = 1 << (val + 1).
             *data << uint32(1 /*bg->GetClientInstanceID()*/); // Client Instance ID
             data->WriteByteSeq(bgGuid[6]);
             data->WriteByteSeq(bgGuid[7]);

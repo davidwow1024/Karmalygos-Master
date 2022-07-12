@@ -2303,6 +2303,9 @@ class Player : public Unit, public GridObject<Player>
     static Roles GetRoleForGroup(uint32 specializationId);
     Roles GetRoleForGroup() const { return GetRoleForGroup(GetSpecialization()); }
 
+	uint8 GetBattleGroundRoles() const { return m_bgRoles; }
+	void SetBattleGroundRoles(uint8 roles) { m_bgRoles = roles; }
+
     void SendInspectResult(Player const* player);
 
     bool ResetTalents(bool noCost = false, bool resetTalents = true, bool resetSpecialization = true);
@@ -3841,6 +3844,8 @@ protected:
 
     // last used pet number (for BG's)
     uint32 m_lastpetnumber;
+
+	uint8 m_bgRoles;
 
     // Player summoning
     time_t m_summon_expire;
