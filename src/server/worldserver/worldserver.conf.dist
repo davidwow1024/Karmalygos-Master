@@ -789,6 +789,13 @@ StartHeroicPlayerLevel = 55
 
 StartPlayerMoney = 0
 
+###################################################################
+# Recruit.Friend.System
+# Description: Recruit-A-Friend = true (active) = false (desactivated)
+###################################################################
+
+Recruit.Friend.System.disabled = false
+
 #
 #    RecruitAFriend.MaxLevel
 #        Description: Highest level up to which a character can benefit from the Recruit-A-Friend

@@ -985,6 +985,7 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
 
     bool feedbackSystem = sWorld->getBoolConfig(CONFIG_TICKETS_FEEDBACK_SYSTEM_ENABLED);
     bool excessiveWarning = false;
+	bool RecruitFriend = sWorld->getBoolConfig(CONFIG_RECRUIT_FRIEND_SYSTEM_ENABLED);
 
     data.Initialize(SMSG_FEATURE_SYSTEM_STATUS, 4 + 4 + 4 + 1 + 4 + 2 + 4 + 4 + 4 + 4 + 4 + 4 + 4);
     data << uint32(0);                  // Scroll of Resurrection per day?
@@ -996,7 +997,7 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
     data.WriteBit(0);
     data.WriteBit(sBattlePayMgr->IsStoreEnabled()); // ingame shop status (0 - "The Shop is temporarily unavailable.")
     data.WriteBit(0);
-    data.WriteBit(0);                   // Recruit a Friend button
+    data.WriteBit(RecruitFriend);        // Recruit a Friend button
     data.WriteBit(0);                   // server supports voice chat
     data.WriteBit(true);                // show ingame shop icon
     data.WriteBit(0);                   // Scroll of Resurrection button

@@ -494,6 +494,8 @@ void World::LoadConfigSettings(bool reload)
     ///- Get string for new logins (newly created characters)
     SetNewCharString(sConfigMgr->GetStringDefault("PlayerStart.String", ""));
 
+	m_bool_configs[CONFIG_RECRUIT_FRIEND_SYSTEM_ENABLED] = sConfigMgr->GetBoolDefault("Recruit.Friend.System.disabled", false);
+
     ///- Send server info on login?
     m_int_configs[CONFIG_ENABLE_SINFO_LOGIN] = sConfigMgr->GetIntDefault("Server.LoginInfo", 0);
 
