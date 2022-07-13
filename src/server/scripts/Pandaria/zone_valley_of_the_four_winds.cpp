@@ -2008,7 +2008,7 @@ struct npc_vfw_krungko_fingerlicker : public customCreatureAI
     {
         summonerGUID = summoner->GetGUID();
         
-        if (Creature* hozenHunter = me->SummonCreature(NPC_KUNZEN_HUNTER, *me, TEMPSUMMON_TIMED_DESPAWN, 300 * IN_MILLISECONDS))
+        if (Creature* hozenHunter = me->SummonCreature(NPC_KUNZEN_HUNTER, *me, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 300000))
             helperGUID = hozenHunter->GetGUID();
 
         if (Player* target = ObjectAccessor::GetPlayer(*me, summonerGUID))
