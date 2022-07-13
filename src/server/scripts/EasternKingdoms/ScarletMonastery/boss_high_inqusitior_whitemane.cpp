@@ -49,8 +49,8 @@ enum eActions
 
 enum Durand_Yells
 {
-    DURAND_TALK_INTRO              = 1,
-    DURAND_TALK_SLAY               = 2
+    DURAND_TALK_INTRO              = 0,
+    DURAND_TALK_SLAY               = 1
 };
 
 enum Whitemane_Yells
