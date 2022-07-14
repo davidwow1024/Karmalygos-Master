@@ -325,7 +325,8 @@ enum SpellState
     SPELL_STATE_CASTING   = 2,
     SPELL_STATE_FINISHED  = 3,
     SPELL_STATE_IDLE      = 4,
-    SPELL_STATE_DELAYED   = 5
+    SPELL_STATE_DELAYED   = 5,
+	SPELL_STATE_QUEUED    = 6
 };
 
 enum SpellEffectHandleMode
@@ -541,7 +542,7 @@ class Spell
 
         GameObject* SearchSpellFocus();
 
-        void prepare(SpellCastTargets const* targets, AuraEffect const* triggeredByAura = NULL);
+        void prepare(SpellCastTargets const* targets, AuraEffect const* triggeredByAura = NULL, uint32 gcdAtCast = 0);
         void cancel();
         void update(uint32 difftime);
         void cast(bool skipCheck = false);
