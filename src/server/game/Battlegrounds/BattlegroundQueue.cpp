@@ -89,12 +89,14 @@ BattlegroundQueue::~BattlegroundQueue()
 {
     m_events.KillAllEvents(false);
 
+	m_QueuedPlayers.clear();
     for (int i = 0; i < MAX_BATTLEGROUND_BRACKETS; ++i)
     {
         for (uint32 j = 0; j < BG_QUEUE_GROUP_TYPES_COUNT; ++j)
         {
             for (GroupsQueueType::iterator itr = m_QueuedGroups[i][j].begin(); itr!= m_QueuedGroups[i][j].end(); ++itr)
                 delete (*itr);
+			m_QueuedGroups[i][j].clear();
         }
     }
 }
@@ -325,8 +327,9 @@ GroupQueueInfo* BattlegroundQueue::AddGroup(Player* leader, Group* grp, Battlegr
     ginfo->ArenaMatchmakerRating     = matchmakerRating;
     ginfo->OpponentsTeamRating       = 0;
     ginfo->OpponentsMatchmakerRating = 0;
-
-    ginfo->Players.clear();
+	ginfo->group                     = grp ? grp : NULL;
+   
+	ginfo->Players.clear();
 
     if (sWorld->getBoolConfig(CONFIG_BATTLEGROUND_IGNORE_FACTION) && !arenaType)
     {
@@ -405,21 +408,25 @@ GroupQueueInfo* BattlegroundQueue::AddGroup(Player* leader, Group* grp, Battlegr
     //add players from group to ginfo
     if (grp)
     {
-        for (auto&& member : *grp)
+        for (GroupReference* itr = grp->GetFirstMember(); itr != NULL; itr = itr->next())
         {
+			Player* member = itr->GetSource();
+			if (!member)
+				continue;   // this should never happen
+
             PlayerQueueInfo& playerInfo = m_QueuedPlayers[member->GetGUID()];
             playerInfo.LastOnlineTime   = lastOnlineTime;
             playerInfo.GroupInfo        = ginfo;
-            playerInfo.Role             = SoloQueue::GetRole(member->GetSpecialization());
+            //playerInfo.Role             = SoloQueue::GetRole(member->GetSpecialization());
             // add the pinfo to ginfo's list
             ginfo->Players[member->GetGUID()]  = &playerInfo;
-            if (m_isSolo)
+           /* if (m_isSolo)
             {
                 if (playerInfo.Role == SoloQueueRole::Healer)
                     ++m_healersCount;
                 else
                     ++m_damagersCount;
-            }
+            }*/
         }
     }
     else
@@ -427,16 +434,16 @@ GroupQueueInfo* BattlegroundQueue::AddGroup(Player* leader, Group* grp, Battlegr
         PlayerQueueInfo& playerInfo = m_QueuedPlayers[leader->GetGUID()];
         playerInfo.LastOnlineTime   = lastOnlineTime;
         playerInfo.GroupInfo        = ginfo;
-        playerInfo.Role             = SoloQueue::GetRole(leader->GetSpecialization());
+       //playerInfo.Role             = SoloQueue::GetRole(leader->GetSpecialization());
         ginfo->Players[leader->GetGUID()]  = &playerInfo;
 
-        if (m_isSolo)
+        /*if (m_isSolo)
         {
             if (playerInfo.Role == SoloQueueRole::Healer)
                 ++m_healersCount;
             else
                 ++m_damagersCount;
-        }
+        }*/
     }
 
     //add GroupInfo to m_QueuedGroups
