@@ -604,9 +604,13 @@ void Battleground::ProcessJoin(uint32 diff)
     {
         m_ResetStatTimer = 0;
         for (BattlegroundPlayerMap::const_iterator itr = GetPlayers().begin(); itr != GetPlayers().end(); ++itr)
-            if (Player* player = ObjectAccessor::FindPlayer(itr->first))
-                player->ResetAllPowers();
-    }
+			if (Player * player = ObjectAccessor::FindPlayer(itr->first))
+			{
+				player->ResetAllPowers();
+				player->RemoveArenaSpellCooldowns(true);
+				
+            }
+	}
 
     // Send packet every 10 seconds until the 2nd field reach 0
     if (m_CountdownTimer >= 10000)
