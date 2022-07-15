@@ -4961,6 +4961,9 @@ struct npc_instructor_xann : public ScriptedAI
 
 		Player* player = master;
 
+		if (!player)
+			return;
+
 		while (uint32 eventId = events.ExecuteEvent())
 		{
 			switch (eventId)
