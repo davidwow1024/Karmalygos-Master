@@ -15,7 +15,7 @@ public:
 		boost::gregorian::date date(boost::gregorian::day_clock::local_day());
 		auto day = date.day_of_week();
 
-		if (player->getLevel() < 85)
+		if (player->getLevel() < 90)
 		{
 			if (day == boost::date_time::Saturday || day == boost::date_time::Sunday)
 				amount = amount * 3;
@@ -30,7 +30,7 @@ public:
 		boost::gregorian::date date(boost::gregorian::day_clock::local_day());
 		auto day = date.day_of_week();
 
-		if (player->getLevel() < 85)
+		if (player->getLevel() < 90)
 		{
 			if (day == boost::date_time::Saturday || day == boost::date_time::Sunday)
 				ChatHandler(player->GetSession()).PSendSysMessage("La ganancia de XP estara x3 durante el fin de semana.");
