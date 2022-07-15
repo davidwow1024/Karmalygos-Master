@@ -18,10 +18,10 @@ public:
 		if (player->getLevel() < 90)
 		{
 			if (day == boost::date_time::Saturday || day == boost::date_time::Sunday)
-				amount = amount * 3;
+				amount = amount * 4;
 
 			else if (day >= boost::date_time::Monday && day <= boost::date_time::Friday)
-				amount = amount * 2;
+				amount = amount * 3;
 		}
 	}
 
@@ -33,10 +33,10 @@ public:
 		if (player->getLevel() < 90)
 		{
 			if (day == boost::date_time::Saturday || day == boost::date_time::Sunday)
-				ChatHandler(player->GetSession()).PSendSysMessage("La ganancia de XP estara x3 durante el fin de semana.");
+				ChatHandler(player->GetSession()).PSendSysMessage("La ganancia de XP estara x4 durante el fin de semana.");
 
 			else if (day >= boost::date_time::Monday && day <= boost::date_time::Friday)
-				ChatHandler(player->GetSession()).PSendSysMessage("La ganancia de XP estara x2 durante la semana.");
+				ChatHandler(player->GetSession()).PSendSysMessage("La ganancia de XP estara x3 durante la semana.");
 		}
 	}
 };
