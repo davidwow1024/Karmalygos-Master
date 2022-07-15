@@ -488,15 +488,6 @@ class spell_rog_shiv : public SpellScriptLoader
                             _player->CastSpell(_player, ROGUE_SPELL_LEECH_VITALITY, true);
                         else if (_player->HasAura(ROGUE_SPELL_PARALYTIC_POISON))
                             _player->CastSpell(target, ROGUE_SPELL_PARTIAL_PARALYSIS, true);
-
-						DispelChargesList dispelList;
-						target->GetDispellableAuraList(GetCaster(), DISPEL_ENRAGE, dispelList);
-						// only one
-						for (auto&& itr : dispelList)
-						{ 
-							target->RemoveAurasDueToSpellByDispel(itr.first->GetId(), GetSpellInfo()->Id, itr.first->GetCasterGUID(), GetCaster(), itr.second);
-							return;
-						}
                     }
                 }
             }
