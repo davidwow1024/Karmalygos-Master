@@ -53,6 +53,8 @@ UPDATE `creature_template` SET `npcflag` = 4227 WHERE `entry` = 64032;
 UPDATE `creature_template` SET `npcflag` = 131 WHERE `entry` = 64599;
 UPDATE `creature_template` SET `npcflag` = 4224 WHERE `entry` = 64595;
 UPDATE `creature_template` SET `npcflag` = 4227 WHERE `entry` = 59908;
+update `creature_template` set `npcflag`=4225 where `entry`=59908;
+update `creature_template` set `npcflag`=4227 where `entry`=64001;
 
 
 
