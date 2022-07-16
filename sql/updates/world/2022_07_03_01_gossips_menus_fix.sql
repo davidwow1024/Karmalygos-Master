@@ -1,703 +1,345 @@
-
-UPDATE `gossip_menu_option` SET `option_id`= 1 WHERE `menu_id` in (
-8725, 
-10318,
-11352,
-13128,
-13128,
-13595,
-13739,
-13739,
-13750,
-13848,
-13887,
-14674,
-14946,
-14984,
-14987,
-15011,
-15019,
-15020,
-15020,
-15023,
-15024,
-15025,
-15028,
-15029,
-15035,
-15047,
-15068,
-5963, 
-7367, 
-8228, 
-8749, 
-10411,
-10491,
-10528,
-10722,
-10805,
-10903,
-10958,
-10994,
-10994,
-10994,
-11009,
-11036,
-11036,
-11037,
-11039,
-11041,
-11043,
-11082,
-11115,
-11115,
-11223,
-11238,
-11248,
-11460,
-11481,
-11504,
-11515,
-11516,
-11517,
-11525,
-11525,
-11535,
-11535,
-11535,
-11535,
-11535,
-11535,
-11569,
-11571,
-11572,
-11626,
-11691,
-11704,
-11707,
-11757,
-11757,
-11758,
-11758,
-11781,
-11804,
-11809,
-11832,
-11916,
-11971,
-11996,
-12002,
-12009,
-12019,
-12037,
-12038,
-12099,
-12106,
-12132,
-12227,
-12231,
-12268,
-12299,
-12301,
-12354,
-12403,
-12408,
-12441,
-12596,
-12613,
-12763,
-12805,
-12846,
-12883,
-12930,
-12943,
-13047,
-13111,
-13268,
-13288,
-13301,
-13301,
-13301,
-13301,
-13301,
-13324,
-13343,
-13351,
-13351,
-13377,
-13378,
-13379,
-13384,
-13387,
-13411,
-13424,
-13440,
-13458,
-13458,
-13458,
-13472,
-13519,
-13535,
-13554,
-13555,
-13556,
-13591,
-13611,
-13635,
-13637,
-13646,
-13649,
-13653,
-13653,
-13653,
-13653,
-13653,
-13653,
-13653,
-13653,
-13653,
-13653,
-13653,
-13653,
-13665,
-13671,
-13671,
-13690,
-13691,
-13724,
-13745,
-13759,
-13760,
-13761,
-13789,
-13794,
-13795,
-13796,
-13810,
-13831,
-13893,
-13903,
-14271,
-14271,
-14272,
-14275,
-14288,
-14305,
-14315,
-14325,
-14326,
-14338,
-14338,
-14338,
-14381,
-14484,
-14532,
-14543,
-14543,
-14558,
-14558,
-14558,
-14558,
-14558,
-14558,
-14558,
-14558,
-14558,
-14558,
-14558,
-14562,
-14597,
-14615,
-14648,
-14656,
-14660,
-14681,
-14833,
-14833,
-14833,
-14833,
-14833,
-14833,
-14833,
-14833,
-14833,
-14833,
-14833,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14867,
-14916,
-14917,
-14949,
-14986,
-14992,
-14992,
-14993,
-15050,
-15055,
-15108,
-15153,
-15153,
-15153,
-15153,
-15153,
-15153,
-15153,
-15153,
-15153,
-15153,
-15153,
-15172,
-15371,
-15389,
-15390,
-15540);
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`=  5963 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`=  7367 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`=  8228 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`=  8725 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`=  8749 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 10318 and `id`= 7; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 10411 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 10491 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 10528 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 10805 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 10958 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 10994 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 10994 and `id`= 2; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 10994 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11036 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11036 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11037 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11039 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11041 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11043 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11082 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11115 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11115 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11238 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11352 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11481 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11515 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11516 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11517 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11525 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11525 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11535 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11535 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11535 and `id`= 2; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11535 and `id`= 3; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11535 and `id`= 5; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11535 and `id`= 7; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11569 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11571 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11572 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11626 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11691 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11704 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11707 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11757 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11757 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11758 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11758 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11804 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11809 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11832 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 11916 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 12009 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 12037 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 12038 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 12099 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 12132 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 12227 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 12231 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 12299 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 12301 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 12354 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 12403 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 12408 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 12441 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 12613 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 12763 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 12805 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 12883 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 12930 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 12943 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13128 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13128 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13268 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13288 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13301 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13301 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13301 and `id`= 2; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13301 and `id`= 3; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13301 and `id`= 4; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13324 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13351 and `id`= 2; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13351 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13377 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13378 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13379 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13384 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13387 and `id`= 2; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13411 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13424 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13440 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13458 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13458 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13458 and `id`= 2; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13472 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13519 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13535 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13595 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13611 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13646 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13649 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13653 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13653 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13653 and `id`= 2; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13653 and `id`= 3; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13653 and `id`= 4; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13653 and `id`= 5; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13653 and `id`= 6; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13653 and `id`= 7; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13653 and `id`= 8; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13653 and `id`= 9; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13653 and `id`= 10;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13653 and `id`= 11;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13665 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13671 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13671 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13690 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13691 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13724 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13739 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13739 and `id`= 2; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13745 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13750 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13759 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13760 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13761 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13831 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13848 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13887 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13893 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 13903 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14271 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14271 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14272 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14275 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14288 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14305 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14338 and `id`= 2; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14338 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14381 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14484 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14532 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14543 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14543 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14558 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14558 and `id`= 2; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14558 and `id`= 3; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14558 and `id`= 4; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14558 and `id`= 5; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14558 and `id`= 6; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14558 and `id`= 7; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14558 and `id`= 8; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14558 and `id`= 9; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14558 and `id`= 10;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14558 and `id`= 11;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14562 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14656 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14660 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14681 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14833 and `id`= 10;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14833 and `id`= 11;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14833 and `id`= 8; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14833 and `id`= 9; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14833 and `id`= 7; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14833 and `id`= 6; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14833 and `id`= 5; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14833 and `id`= 4; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14833 and `id`= 3; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14833 and `id`= 2; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14833 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 11;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 9;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 10;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 7; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 8; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 6; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 4; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 5; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 3; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 2; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 13;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 12;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 14;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 15;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 16;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 17;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 18;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 19;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 20;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14843 and `id`= 21;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14867 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14916 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14917 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14946 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14949 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14984 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 14987 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15011 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15019 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15020 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15020 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15023 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15024 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15025 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15028 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15029 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15035 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15047 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15050 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15055 and `id`= 2; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15068 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15108 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15153 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15153 and `id`= 2; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15153 and `id`= 3; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15153 and `id`= 4; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15153 and `id`= 5; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15153 and `id`= 6; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15153 and `id`= 7; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15153 and `id`= 8; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15153 and `id`= 9; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15153 and `id`= 10;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15153 and `id`= 11;
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15172 and `id`= 1; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15371 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15389 and `id`= 0; 
+update `gossip_menu_option` set `option_id`= 1, `npc_option_npcflag`= 1 where `menu_id`= 15390 and `id`= 0; 
 
 
 
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 14674 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 10903 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11009 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11223 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11460 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11504 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11971 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11996 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12002 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12019 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12106 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12268 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 13111 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 13554 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 13555 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 13556 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 13591 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 13635 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 13637 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 13789 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 13794 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 13795 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 13796 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 14325 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 14326 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 14338 and `id`=3;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 14597 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 14615 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 14986 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 15540 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`=   702 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`=  2831 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 10898 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11159 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11402 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11437 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11453 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11465 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11505 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11506 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11520 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11522 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11538 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11646 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11672 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11801 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11822 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11919 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11919 and `id`=3;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 11920 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12012 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12014 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12015 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12017 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12022 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12025 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12033 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12040 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12100 and `id`=3;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12260 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12280 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12439 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12443 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12599 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12642 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12656 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12823 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 12838 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 13374 and `id`=2;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 13651 and `id`=2;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 13782 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 13808 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 14963 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 15094 and `id`=1;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 15718 and `id`=0;
+update `gossip_menu_option` set `option_id`= 3, `npc_option_npcflag`= 128 where `menu_id`= 15952 and `id`=0;
 
-UPDATE `gossip_menu_option` SET `npc_option_npcflag`= 1 WHERE `menu_id` in (
-8725, 
-10318,
-11352,
-13128,
-13128,
-13595,
-13739,
-13739,
-13750,
-13848,
-13887,
-14674,
-5963, 
-7367, 
-8228, 
-8749, 
-10411,
-10491,
-10528,
-10722,
-10805,
-10903,
-10958,
-10994,
-10994,
-10994,
-11009,
-11036,
-11036,
-11037,
-11039,
-11041,
-11043,
-11082,
-11115,
-11115,
-11223,
-11238,
-11248,
-11460,
-11481,
-11504,
-11515,
-11516,
-11517,
-11525,
-11525,
-11535,
-11535,
-11535,
-11535,
-11535,
-11535,
-11569,
-11571,
-11572,
-11626,
-11691,
-11704,
-11707,
-11757,
-11757,
-11758,
-11758,
-11781,
-11804,
-11809,
-11832,
-11916,
-11971,
-11996,
-12002,
-12009,
-12019,
-12037,
-12038,
-12099,
-12106,
-12132,
-12227,
-12231,
-12268,
-12299,
-12301,
-12354,
-12403,
-12408,
-12441,
-12596,
-12613,
-12763,
-12805,
-12846,
-12883,
-12930,
-12943,
-13047,
-13111,
-13268,
-13288,
-13301,
-13301,
-13301,
-13301,
-13301,
-13324,
-13343,
-13351,
-13351,
-13377,
-13378,
-13379,
-13384,
-13387,
-13411,
-13424,
-13440,
-13458,
-13458,
-13458,
-13472,
-13519,
-13535,
-13554,
-13555,
-13556,
-13591,
-13611,
-13635,
-13637,
-13646,
-13649,
-13653,
-13653,
-13653,
-13653,
-13653,
-13653,
-13653,
-13653,
-13653,
-13653,
-13653,
-13653,
-13665,
-13671,
-13671,
-13690,
-13691,
-13724,
-13745,
-13759,
-13760,
-13761,
-13789,
-13794,
-13795,
-13796,
-13810,
-13831,
-13893,
-13903,
-14271,
-14271,
-14272,
-14275,
-14288,
-14305,
-14315,
-14325,
-14326,
-14338,
-14338,
-14338,
-14381,
-14484,
-14532,
-14543,
-14543,
-14558,
-14558,
-14558,
-14558,
-14558,
-14558,
-14558,
-14558,
-14558,
-14558,
-14558,
-14562,
-14597,
-14615,
-14648,
-14656,
-14681,
-14833,
-14833,
-14833,
-14833,
-14833,
-14833,
-14833,
-14833,
-14833,
-14833,
-14833,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14843,
-14867,
-14916,
-14917,
-14986,
-14992,
-14992,
-14993,
-15055,
-15108,
-15153,
-15153,
-15153,
-15153,
-15153,
-15153,
-15153,
-15153,
-15153,
-15153,
-15153,
-15172,
-15371,
-15389,
-15390,
-15540,
-702, 
-1541, 
-2831, 
-2831, 
-3864, 
-5102, 
-6539, 
-8510, 
-8521, 
-8539, 
-9923, 
-10060,
-10192,
-10314,
-10486,
-10509,
-10537,
-10898,
-11061,
-11079,
-11144,
-11159,
-11289,
-11289,
-11289,
-11319,
-11319,
-11347,
-11379,
-11384,
-11402,
-11402,
-11434,
-11434,
-11437,
-11437,
-11444,
-11447,
-11453,
-11465,
-11469,
-11505,
-11506,
-11507,
-11507,
-11507,
-11520,
-11520,
-11522,
-11522,
-11530,
-11538,
-11538,
-11541,
-11546,
-11646,
-11664,
-11665,
-11666,
-11672,
-11706,
-11706,
-11706,
-11706,
-11801,
-11822,
-11822,
-11892,
-11909,
-11919,
-11919,
-11919,
-11919,
-11920,
-12003,
-12012,
-12012,
-12014,
-12014,
-12015,
-12015,
-12017,
-12017,
-12022,
-12025,
-12025,
-12033,
-12040,
-12040,
-12042,
-12055,
-12094,
-12094,
-12100,
-12100,
-12139,
-12143,
-12165,
-12167,
-12167,
-12167,
-12167,
-12168,
-12168,
-12168,
-12238,
-12253,
-12253,
-12260,
-12265,
-12266,
-12266,
-12271,
-12280,
-12381,
-12397,
-12409,
-12439,
-12443,
-12443,
-12451,
-12459,
-12480,
-12504,
-12541,
-12599,
-12599,
-12609,
-12641,
-12642,
-12656,
-12669,
-12669,
-12669,
-12669,
-12760,
-12762,
-12790,
-12795,
-12799,
-12799,
-12799,
-12799,
-12799,
-12823,
-12826,
-12833,
-12838,
-12838,
-12897,
-12911,
-12914,
-12938,
-12939,
-12950,
-12974,
-12985,
-12990,
-12991,
-13015,
-13022,
-13063,
-13164,
-13360,
-13362,
-13373,
-13376);
- 
+update `gossip_menu_option` set `option_id`= 4, `npc_option_npcflag`= 8192 where `menu_id`= 13047 and `id`=0;
 
+update `gossip_menu_option` set `option_id`= 5, `npc_option_npcflag`= 16 where `menu_id`= 12846 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 5, `npc_option_npcflag`= 16 where `menu_id`= 13343 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 5, `npc_option_npcflag`= 16 where `menu_id`= 14992 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 5, `npc_option_npcflag`= 16 where `menu_id`= 14992 and `id`= 1;
+update `gossip_menu_option` set `option_id`= 5, `npc_option_npcflag`= 16 where `menu_id`= 14993 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 5, `npc_option_npcflag`= 16 where `menu_id`=  8521 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 5, `npc_option_npcflag`= 16 where `menu_id`=  8784 and `id`= 1;
+update `gossip_menu_option` set `option_id`= 5, `npc_option_npcflag`= 16 where `menu_id`= 12443 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 5, `npc_option_npcflag`= 16 where `menu_id`= 12641 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 5, `npc_option_npcflag`= 16 where `menu_id`= 12838 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 5, `npc_option_npcflag`= 16 where `menu_id`= 13291 and `id`= 0;
 
+update `gossip_menu_option` set `option_id`= 8, `npc_option_npcflag`= 65536 where `menu_id`= 12596 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 8, `npc_option_npcflag`= 65536 where `menu_id`= 13810 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 8, `npc_option_npcflag`= 65536 where `menu_id`=  2831 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 8, `npc_option_npcflag`= 65536 where `menu_id`= 11402 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 8, `npc_option_npcflag`= 65536 where `menu_id`= 11437 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 8, `npc_option_npcflag`= 65536 where `menu_id`= 11520 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 8, `npc_option_npcflag`= 65536 where `menu_id`= 11522 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 8, `npc_option_npcflag`= 65536 where `menu_id`= 11538 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 8, `npc_option_npcflag`= 65536 where `menu_id`= 11822 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 8, `npc_option_npcflag`= 65536 where `menu_id`= 11919 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 8, `npc_option_npcflag`= 65536 where `menu_id`= 11919 and `id`= 2;
+update `gossip_menu_option` set `option_id`= 8, `npc_option_npcflag`= 65536 where `menu_id`= 12003 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 8, `npc_option_npcflag`= 65536 where `menu_id`= 12025 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 8, `npc_option_npcflag`= 65536 where `menu_id`= 12040 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 8, `npc_option_npcflag`= 65536 where `menu_id`= 12100 and `id`= 2;
+update `gossip_menu_option` set `option_id`= 8, `npc_option_npcflag`= 65536 where `menu_id`= 12599 and `id`= 0;
+
+update `gossip_menu_option` set `option_id`= 9, `npc_option_npcflag`= 131072 where `menu_id`= 10722 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 9, `npc_option_npcflag`= 131072 where `menu_id`= 11248 and `id`= 0;
+update `gossip_menu_option` set `option_id`= 9, `npc_option_npcflag`= 131072 where `menu_id`= 10317 and `id`= 0;
+
+update `gossip_menu_option` set `option_id`= 12, `npc_option_npcflag`= 1048576 where `menu_id`= 11781 and `id`= 0;
