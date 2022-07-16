@@ -2103,7 +2103,7 @@ struct npc_vfw_krungko_fingerlicker : public customCreatureAI
 enum BarrelsManType
 {
     SPELL_BREAKING_BARREL     = 108817,
-    SPELL_BREAKING_BARREL_EFF = 108816,
+    SPELL_BREAKING_BARREL_EFF = 108800,
 
     NPC_UNBARRELED_PANDAREN   = 57681,
 
@@ -2122,6 +2122,7 @@ struct npc_vfw_unbarreled_pandaren : public customCreatureAI
 
     void IsSummonedBy(Unit* summoner) override
     {
+		me->CastSpell(me, SPELL_BREAKING_BARREL_EFF);
         me->ToTempSummon()->SetVisibleBySummonerOnly(true);
         summonerGUID = summoner->GetGUID();
 
