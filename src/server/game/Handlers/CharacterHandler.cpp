@@ -770,7 +770,7 @@ void WorldSession::HandleCharCreateCallback(PreparedQueryResult result, Characte
             stmt->setUInt32(1, realmID);
             trans->Append(stmt);
 
-            stmt = LoginDatabase.GetPreparedStatement(LOGIN_INS_REALM_CHARACTERS);
+            stmt = LoginDatabase.GetPreparedStatement(LOGIN_UPD_REALM_CHARACTERS);
             stmt->setUInt32(0, createInfo->CharCount);
             stmt->setUInt32(1, GetAccountId());
             stmt->setUInt32(2, realmID);
