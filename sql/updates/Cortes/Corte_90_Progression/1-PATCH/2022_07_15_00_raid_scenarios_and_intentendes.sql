@@ -47,3 +47,18 @@ INSERT INTO `access_requirement` (`mapId`, `difficulty`, `level_min`, `level_max
 DELETE FROM `access_requirement` WHERE `mapId`=1008 AND `difficulty`='RAID_25MAN_NORMAL';
 INSERT INTO `access_requirement` (`mapId`, `difficulty`, `level_min`, `level_max`, `item_level`, `item`, `item2`, `quest_done_A`, `quest_done_H`, `completed_achievement`, `quest_failed_text`, `comment`) VALUES 
 (1008, 'RAID_25MAN_NORMAL', 90, 0, 0, 0, 0, 0, 0, 0, NULL, 'Mogu\'shan Vaults (Entrance)');
+ 
+ /*Cosas q Faltaron*/
+UPDATE `creature_template` SET `npcflag` = 4227 WHERE `entry` = 64032;
+UPDATE `creature_template` SET `npcflag` = 131 WHERE `entry` = 64599;
+UPDATE `creature_template` SET `npcflag` = 4224 WHERE `entry` = 64595;
+UPDATE `creature_template` SET `npcflag` = 4227 WHERE `entry` = 59908;
+
+
+
+UPDATE `access_requirement` SET `level_min` = '85' WHERE `mapId` = '1000' AND `difficulty` = 'SCENARIO_NORMAL';
+UPDATE `access_requirement` SET `level_min` = '85' WHERE `mapId` = '999' AND `difficulty` = 'SCENARIO_NORMAL';
+UPDATE `access_requirement` SET `level_min` = '90' WHERE `mapId` = '1050' AND `difficulty` = 'SCENARIO_NORMAL'; -- Level:90 - Assault on Zan'vess Entrance
+UPDATE `access_requirement` SET `level_min` = '90' WHERE `mapId` = '1103' AND `difficulty` = 'SCENARIO_NORMAL'; -- Level:90 - Lion's Landing Entrance
+UPDATE `access_requirement` SET `level_min` = '90' WHERE `mapId` = '1102' AND `difficulty` = 'SCENARIO_NORMAL'; -- Level:90 - Domination Point Entrance
+UPDATE `access_requirement` SET `level_min` = '90' WHERE `mapId` = '1095' AND `difficulty` = 'SCENARIO_NORMAL'; -- Level:90 - Dagger in the Dark Entrance
