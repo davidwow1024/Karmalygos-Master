@@ -464,13 +464,13 @@ class npc_spm_void_sha : public CreatureScript
                 me->SetReactState(REACT_AGGRESSIVE);
                 me->CastSpell(me, SPELL_ON_SPAWN, false);
 
-                Reset();
+               // Reset();
             }
 
-            void Reset() override
+           /* void Reset() override
             {
                 DoZoneInCombat();
-            }
+            }*/
 
             void EnterCombat(Unit* /*who*/) override
             {
