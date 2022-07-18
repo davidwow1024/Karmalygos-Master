@@ -1,6 +1,7 @@
 -- Problemas en la gesta la daga en la oscuridad
 update `creature_template` set `npcflag`=3 where `entry` = 67414;
-update `creature_template` set `faction`=15 where `entry` in (67779,67792);
+update `creature_template` set `faction_H`=15 where `entry` in (67779,67792);
+update `creature_template` set `faction_A`=15 where `entry` in (67779,67792);
 
 -- quest 32247
 update `creature_template` set `AIName`= 'SmartAI', `npcflag`= 1 where `entry` in (68312,68331);
