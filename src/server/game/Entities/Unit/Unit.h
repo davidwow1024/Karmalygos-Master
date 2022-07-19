@@ -2810,6 +2810,7 @@ public:
     void ClearComboPointHolders();
 
     ///----------Pet responses methods-----------------
+	void SendPetCastFail(uint32 spellid, SpellCastResult msg);
     void SendPetActionFeedback(uint8 msg);
     void SendPetTalk(uint32 pettalk);
     void SendPetAIReaction(ObjectGuid UnitGUID);

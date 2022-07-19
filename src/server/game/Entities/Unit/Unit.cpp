@@ -14772,7 +14772,24 @@ Player* Unit::GetSpellModOwner() const
     }
     return NULL;
 }
+///----------Pet responses methods-----------------
+void Unit::SendPetCastFail(uint32 spellid, SpellCastResult result)
+{
+	if (result == SPELL_CAST_OK)
+		return;
 
+	Unit * owner = GetCharmerOrOwner();
+	if (!owner || owner->GetTypeId() != TYPEID_PLAYER)
+		return;
+
+	WorldPacket data(SMSG_PET_CAST_FAILED, 1 + 4 + 1);
+	data.WriteBit(false);
+	data.WriteBit(false);
+	data << uint32(0);                                      // cast count
+	data << uint32(spellid);
+	data << uint8(result);
+	owner->ToPlayer()->GetSession()->SendPacket(&data);
+}
 ///----------Pet responses methods-----------------
 void Unit::SendPetActionFeedback(uint8 msg)
 {
