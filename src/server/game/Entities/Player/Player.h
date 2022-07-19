@@ -2317,6 +2317,7 @@ class Player : public Unit, public GridObject<Player>
     uint32 GetNextResetTalentsCost() const;
     uint32 GetNextResetSpecializationCost() const;
     void InitTalentForLevel();
+	void InitSpellForLevel();
     void BuildPlayerTalentsInfoData(WorldPacket* data);
     void SendTalentsInfoData();
     bool LearnTalent(uint16 talentId);

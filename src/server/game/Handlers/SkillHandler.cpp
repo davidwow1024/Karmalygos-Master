@@ -49,6 +49,7 @@ void WorldSession::HandeSetTalentSpecialization(WorldPacket& recvData)
 
     _player->LearnSpecializationSpells();
     _player->UpdatePvpPower();
+	_player->InitSpellForLevel();
 
     _player->SaveToDB();
 }

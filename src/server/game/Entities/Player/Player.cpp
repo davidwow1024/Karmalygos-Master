@@ -1186,6 +1186,7 @@ bool Player::Create(uint32 guidlow, CharacterCreateInfo* createInfo)
     InitTaxiNodesForLevel();
     InitGlyphsForLevel();
     InitTalentForLevel();
+	InitSpellForLevel();
     InitPrimaryProfessions();                               // to max set before any spell added
 
     // apply original stats mods before spell loading or item equipment that call before equip _RemoveStatsMods()
@@ -3512,6 +3513,7 @@ void Player::GiveLevel(uint8 level)
     SetCreateMana(basemana);
 
     InitTalentForLevel();
+	InitSpellForLevel();
     InitTaxiNodesForLevel();
     InitGlyphsForLevel();
 
@@ -3598,6 +3600,52 @@ void Player::InitTalentForLevel()
 
     if (!GetSession()->PlayerLoading())
         SendTalentsInfoData();                         // update at client
+}
+
+void Player::InitSpellForLevel()
+{
+	auto spellList = sSpellMgr->GetSpellClassList(getClass());
+	uint8 level = getLevel();
+	uint32 specializationId = GetSpecialization(GetActiveSpec());
+
+	for (auto spellId : spellList)
+	{
+		SpellInfo const* spell = sSpellMgr->GetSpellInfo(spellId);
+		if (!spell)
+			continue;
+
+		if (HasSpell(spellId))
+			continue;
+
+		if (!spell->SpecializationIdList.empty())
+		{
+			bool find = false;
+
+			for (auto itr : spell->SpecializationIdList)
+				if (itr == specializationId)
+					find = true;
+
+			if (!find)
+				continue;
+		}
+
+		if (!IsSpellFitByClassAndRace(spellId))
+			continue;
+
+		if (spell->SpellLevel <= level)
+			LearnSpell(spellId, false);
+	}
+
+	// Only for Worgens - Darkflight
+	if (getRace() != RACE_WORGEN)
+	{
+		if (HasSpell(68992))
+			RemoveSpell(68992, false, false);
+
+		if (HasSpell(97709))
+			RemoveSpell(97709, false, false);
+	}
+
 }
 
 void Player::RemoveSpecializationSpells()
@@ -19535,6 +19583,7 @@ bool Player::LoadFromDB(uint32 guid, SQLQueryHolder *holder)
 
     // after spell and quest load
     InitTalentForLevel();
+	InitSpellForLevel();
     LearnDefaultSkills();
     LearnSpecializationSpells();
 
@@ -25966,6 +26015,8 @@ void Player::LearnSpecializationSpells()
 
         LearnSpell(spellInfo->Id, true);
     }
+
+	InitSpellForLevel();
 }
 
 void Player::learnQuestRewardedSpells(Quest const* quest)
@@ -29204,6 +29255,7 @@ void Player::ActivateSpec(uint8 spec)
 
     SetUsedTalentCount(spentTalents);
     InitTalentForLevel();
+	InitSpellForLevel();
 
     {
         PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_CHARACTER_ACTIONS_SPEC);
