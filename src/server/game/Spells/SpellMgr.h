@@ -621,8 +621,6 @@ DiminishingLevels GetDiminishingReturnsMaxLevel(DiminishingGroup group);
 int32 GetDiminishingReturnsLimitDuration(DiminishingGroup group, SpellInfo const* spellproto);
 bool IsDiminishingReturnsGroupDurationLimited(DiminishingGroup group);
 
-typedef std::vector<std::set<uint32> > SpellClassList;
-
 class SpellMgr
 {
     friend class ACE_Singleton<SpellMgr, ACE_Null_Mutex>;
@@ -724,8 +722,6 @@ class SpellMgr
             return mSpellInfoMap[REGULAR_DIFFICULTY][spellId];
         }
 
-		std::set<uint32> GetSpellClassList(uint8 ClassID) const { return mSpellClassInfo[ClassID]; }
-
         SpellInfo const* GetSpellInfo(uint32 spellId, Difficulty difficulty) const;
         uint32 GetSpellInfoStoreSize() const { return mSpellInfoMap[REGULAR_DIFFICULTY].size(); }
 
@@ -793,7 +789,6 @@ class SpellMgr
         PetLevelupSpellMap         mPetSpellMap;
         SpellInfoMap               mSpellInfoMap[MAX_DIFFICULTY];
         std::vector<uint32>        mGlyphSpells[MAX_CLASSES];
-		SpellClassList             mSpellClassInfo;
 };
 
 #define sSpellMgr SpellMgr::instance()
