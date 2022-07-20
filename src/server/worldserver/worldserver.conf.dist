@@ -819,6 +819,7 @@ RecruitAFriend.MaxDifference = 4
 #        Default: 1 (Mods/GMs/Admins)
 #
 
+
 InstantLogout = 1
 
 #
@@ -831,6 +832,20 @@ InstantLogout = 1
 #                     3  - (Enabled, Admins)
 
 DisableWaterBreath = 4
+
+#   Server.Auto.RestartHour
+#        Description: Hour of the day when the server restarts.
+#        Range:       0-23
+#        Default:     4 - (04:00 AM)
+
+Server.Auto.RestartHour = 4
+
+#   DisableRestart
+#        Description: Disable server restart.
+#        Default:     0 - (Disabled, server restarted every day)
+#                     1 - (Enabled)
+
+DisableRestart = 1
 
 #
 #    AllFlightPaths
