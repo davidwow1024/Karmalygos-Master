@@ -608,10 +608,10 @@ void Battleground::ProcessJoin(uint32 diff)
 			{
 				player->ResetAllPowers();
 				player->RemoveArenaSpellCooldowns(true);
-				
+				player->RemoveAurasDueToSpell(6346);				
             }
 	}
-
+	 	
     // Send packet every 10 seconds until the 2nd field reach 0
     if (m_CountdownTimer >= 10000)
     {
