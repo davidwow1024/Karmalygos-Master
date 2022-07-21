@@ -182,6 +182,12 @@ enum ToES_achi_check
     ACH_WILL_OF_THE_EMPEROR_H = 6724,
     // Terrace of Endless Spring
     ACH_TOES_NORMAL = 6689,
+	/// Strings
+	STRING_ID_00 = 15000,
+	STRING_ID_01 = 15001,
+	STRING_ID_02 = 15002,
+	STRING_ID_03 = 15003,
+	STRING_ID_04 = 15004
 };
 
 bool HasCompletedMogushan(Player* p, Difficulty mapDiff)
