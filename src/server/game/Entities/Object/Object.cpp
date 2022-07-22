@@ -2208,17 +2208,6 @@ bool WorldObject::CanNeverSee(WorldObject const* obj) const
 						return true;
 				}
          	}
-	        
-	    	if (obj->GetTypeId() == TYPEID_GAMEOBJECT)
-            {
-				if (IsInKMVisibility(obj))
-				{
-					if (!obj->CheckKMGoVisibility(obj, player))
-						return false;
-					else
-						return true;
-				}
-            }
 	    }	
 		
     if (GetMap() != obj->GetMap() || !InSamePhase(obj))
