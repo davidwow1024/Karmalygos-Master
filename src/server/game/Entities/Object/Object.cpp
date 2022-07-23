@@ -2195,6 +2195,26 @@ bool WorldObject::CanSeeOrDetect(WorldObject const* obj, bool ignoreStealth, boo
 
 bool WorldObject::CanNeverSee(WorldObject const* obj) const
 {
+	// Archaeology Finds can be seen only by owner
+	if (obj->GetTypeId() == TYPEID_GAMEOBJECT && (obj->GetEntry() == 203071 || obj->GetEntry() == 203078 || obj->GetEntry() == 204282 || obj->GetEntry() == 202655 ||
+		obj->GetEntry() == 206836 || obj->GetEntry() == 207187 || obj->GetEntry() == 207188 || obj->GetEntry() == 207189 || obj->GetEntry() == 207190 ||
+		obj->GetEntry() == 211163 || obj->GetEntry() == 211174 || obj->GetEntry() == 218950))
+	{
+		if (uint64 ownerGUID = obj->GetUInt64Value(GAMEOBJECT_FIELD_CREATED_BY))
+			if (GetGUID() != ownerGUID)
+				return true;
+	}
+
+	Player const* player = ToPlayer();
+	if (obj->GetTypeId() == TYPEID_GAMEOBJECT && player && !player->IsGameMaster())
+	{
+		auto itr = timelessRareChestsMap.find(obj->GetEntry());
+		if (itr != timelessRareChestsMap.end())
+			if (player->GetQuestStatus(itr->second) == QUEST_STATUS_REWARDED || player->IsWeeklyQuestDone(itr->second) || player->IsDailyQuestDone(itr->second))
+				return true;
+	}
+
+	// KM Visibility
     if (Player const* player = ToPlayer())
 		if (!player->IsGameMaster())
 	    {
@@ -2208,6 +2228,17 @@ bool WorldObject::CanNeverSee(WorldObject const* obj) const
 						return true;
 				}
          	}
+	        
+	    	if (obj->GetTypeId() == TYPEID_GAMEOBJECT)
+            {
+				if (IsInKMVisibility(obj))
+				{
+					if (!obj->CheckKMGoVisibility(obj, player))
+						return false;
+					else
+						return true;
+				}
+            }
 	    }	
 		
     if (GetMap() != obj->GetMap() || !InSamePhase(obj))
@@ -3850,21 +3881,6 @@ bool WorldObject::CheckKMNpcVisibility(WorldObject const* obj, Player const* pla
 
 bool WorldObject::CheckKMGoVisibility(WorldObject const* obj, Player const* player) const
 {
-	// Archaeology Finds can be seen only by owner
-	if (obj->GetTypeId() == TYPEID_GAMEOBJECT && (obj->GetEntry() == 203071 || obj->GetEntry() == 203078 || obj->GetEntry() == 204282 || obj->GetEntry() == 202655 ||
-		obj->GetEntry() == 206836 || obj->GetEntry() == 207187 || obj->GetEntry() == 207188 || obj->GetEntry() == 207189 || obj->GetEntry() == 207190 ||
-		obj->GetEntry() == 211163 || obj->GetEntry() == 211174 || obj->GetEntry() == 218950))
-	{
-		if (uint64 ownerGUID = obj->GetUInt64Value(GAMEOBJECT_FIELD_CREATED_BY))
-			if (GetGUID() != ownerGUID)
-				return true;
-	}
-
-	auto itr = timelessRareChestsMap.find(obj->GetEntry());
-	if (itr != timelessRareChestsMap.end())
-		if (player->GetQuestStatus(itr->second) == QUEST_STATUS_REWARDED || player->IsWeeklyQuestDone(itr->second) || player->IsDailyQuestDone(itr->second))
-			return true;
-
 	if (obj->GetEntry() == GO_FIRE_SHIELD_COLLISION_WALL || obj->GetEntry() == GO_WALL_OF_FIRE)
 	{
 		if (player->GetQuestStatus(IN_TENTS_CHANNELING) != QUEST_STATUS_REWARDED)
@@ -3879,26 +3895,12 @@ bool WorldObject::CheckKMGoVisibility(WorldObject const* obj, Player const* play
 bool WorldObject::IsInKMVisibility(WorldObject const* obj) const
 {
 	if (obj->GetTypeId() == TYPEID_UNIT)
-		if (obj->GetEntry() == 66398 || obj->GetEntry() == 66282 || obj->GetEntry() == 66339 || obj->GetEntry() == 66397)
+		if (obj->GetEntry() == NPC_GARROSHAR_GRUNT || obj->GetEntry() == NPC_GARROSHAR_GRUNT2 || obj->GetEntry() == NPC_HORDE_WAR_WAGON || 
+			obj->GetEntry() == NPC_GARROSHARR_SHREDDER)
 			return true;
 
 	if (obj->GetTypeId() == TYPEID_GAMEOBJECT)
-		if (obj->GetEntry() == 203071 || obj->GetEntry() == 203078 || obj->GetEntry() == 204282 || obj->GetEntry() == 202655 ||
-			obj->GetEntry() == 206836 || obj->GetEntry() == 207187 || obj->GetEntry() == 207188 || obj->GetEntry() == 207189 || obj->GetEntry() == 207190 ||
-			obj->GetEntry() == 211163 || obj->GetEntry() == 211174 || obj->GetEntry() == 218950 || obj->GetEntry() == 220807 ||
-            obj->GetEntry() == 220832 || obj->GetEntry() == 220901 || obj->GetEntry() == 220902 || obj->GetEntry() == 223204 ||
-            obj->GetEntry() == 220908 || obj->GetEntry() == 220986 || obj->GetEntry() == 221036 || obj->GetEntry() == 221617 ||
-            obj->GetEntry() == 221671 || obj->GetEntry() == 223116 || obj->GetEntry() == 223117 || obj->GetEntry() == 223118 ||
-            obj->GetEntry() == 221672 || obj->GetEntry() == 223119 || obj->GetEntry() == 221673 || obj->GetEntry() == 221670 ||
-            obj->GetEntry() == 223084 || obj->GetEntry() == 223085 || obj->GetEntry() == 223086 || obj->GetEntry() == 223087 ||
-            obj->GetEntry() == 223088 || obj->GetEntry() == 223089 || obj->GetEntry() == 223090 || obj->GetEntry() == 223091 ||
-            obj->GetEntry() == 223092 || obj->GetEntry() == 223093 || obj->GetEntry() == 223094 || obj->GetEntry() == 223095 ||
-            obj->GetEntry() == 223096 || obj->GetEntry() == 223097 || obj->GetEntry() == 223098 || obj->GetEntry() == 223099 ||
-            obj->GetEntry() == 223100 || obj->GetEntry() == 223101 || obj->GetEntry() == 223102 || obj->GetEntry() == 223103 ||
-            obj->GetEntry() == 223104 || obj->GetEntry() == 223105 || obj->GetEntry() == 223106 || obj->GetEntry() == 223107 ||
-            obj->GetEntry() == 223108 || obj->GetEntry() == 223109 || obj->GetEntry() == 223110 || obj->GetEntry() == 223111 ||
-            obj->GetEntry() == 223112 || obj->GetEntry() == 223113 || obj->GetEntry() == 223114 || obj->GetEntry() == 223115 || 
-			obj->GetEntry() == GO_FIRE_SHIELD_COLLISION_WALL || obj->GetEntry() == GO_WALL_OF_FIRE)
+		if (obj->GetEntry() == GO_FIRE_SHIELD_COLLISION_WALL || obj->GetEntry() == GO_WALL_OF_FIRE)
 			return true;
 
 	return false;
