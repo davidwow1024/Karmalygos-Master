@@ -8204,6 +8204,11 @@ uint32 Player::GetCurrencyWeekCap(CurrencyTypesEntry const* currency) const
 
     switch (currency->ID)
     {
+		case CURRENCY_TYPE_CONQUEST_POINTS:
+		{
+			cap = std::max(GetCurrencyWeekCap(CURRENCY_TYPE_CONQUEST_META_ARENA, false), GetCurrencyWeekCap(CURRENCY_TYPE_CONQUEST_META_RATED_BG, false));
+			break;
+		}
         case CURRENCY_TYPE_CONQUEST_META_ARENA:        
         {
             cap = Trinity::Currency::ConquestRatingCalculator(GetMaxArenaRating()) * CURRENCY_PRECISION;
