@@ -1899,6 +1899,7 @@ class npc_spirit_kings_guardian : public CreatureScript
                     if (eventId == EVENT_ACTIVATED)
                     {
                         me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PACIFIED | UNIT_FLAG_NOT_SELECTABLE);
+						me->setFaction(14);
                         me->SetReactState(REACT_AGGRESSIVE);
 
                         if (me->HasAura(SPELL_SPIRIT_KINGS_EVENT_ACTIVATION_VISUAL))
@@ -2024,7 +2025,7 @@ class npc_spirit_kings_story : public CreatureScript
                     if (eventId == EVENT_ACTIVATED)
                         if (!MyMinionsHasAlive(me->GetEntry()))
                         {
-                            if (Creature* LoreWalkerCho = GetClosestCreatureWithEntry(me, NPC_LOREWALKER_CHO, 150.0f, true))
+                            if (Creature* LoreWalkerCho = GetClosestCreatureWithEntry(me, NPC_LOREWALKER_CHO, 500.0f, true))
                                 LoreWalkerCho->AI()->DoAction(ACTION_SPIRIT_KINGS_INTRO);
                             me->DespawnOrUnsummon();
                         }
