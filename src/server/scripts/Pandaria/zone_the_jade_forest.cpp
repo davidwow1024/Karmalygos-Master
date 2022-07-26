@@ -1375,30 +1375,18 @@ class npc_big_bao : public CreatureScript
     public:
         npc_big_bao() : CreatureScript("npc_big_bao") { }
 
-        bool OnGossipHello(Player* player, Creature* creature) override
-        {
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_CHOICE_2, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
-            player->SEND_GOSSIP_MENU(75012, creature->GetGUID());
-
-            return true;
-        }
-
         bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action) override
         {
-            player->PlayerTalkClass->ClearMenus();
-
-            if (action == GOSSIP_ACTION_INFO_DEF + 1)
+            if (player->GetQuestStatus(31718) == QUEST_STATUS_INCOMPLETE)
             {
-                if (player->GetQuestStatus(31718) == QUEST_STATUS_INCOMPLETE)
-                {
-                    creature->setFaction(14);
-                    creature->SetReactState(REACT_DEFENSIVE);
-                    creature->RemoveFlag(UNIT_FIELD_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
-                    creature->AI()->Reset();
-                    creature->CombatStart(player, true);
-                }
-                player->CLOSE_GOSSIP_MENU();
+                creature->setFaction(14);
+                creature->SetReactState(REACT_DEFENSIVE);
+                creature->RemoveFlag(UNIT_FIELD_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
+                creature->AI()->Reset();
+                creature->CombatStart(player, true);
             }
+
+            player->CLOSE_GOSSIP_MENU();
 
             return true;
         }
@@ -1445,7 +1433,7 @@ class npc_big_bao : public CreatureScript
                         me->GetMotionMaster()->MovePoint(0, 1604.75f, -2562.139893f, 153.134003f);
                         me->setFaction(35);
                         me->SetFullHealth();
-                        me->SetFlag(UNIT_FIELD_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
+                        me->SetFlag(UNIT_FIELD_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP | UNIT_NPC_FLAG_QUESTGIVER);
                         player->KilledMonsterCredit(58508);
                     }
                 }
