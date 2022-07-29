@@ -36,6 +36,9 @@
 
 void WaypointMovementGenerator<Creature>::LoadPath(Creature* creature)
 {
+    if (!creature)
+         return;
+	
     if (!path_id)
         path_id = creature->GetWaypointPath();
 
@@ -47,33 +50,59 @@ void WaypointMovementGenerator<Creature>::LoadPath(Creature* creature)
         TC_LOG_ERROR("sql.sql", "WaypointMovementGenerator::LoadPath: creature %s (Entry: %u GUID: %u DB GUID: %u) doesn't have waypoint path id: %u", creature->GetName().c_str(), creature->GetEntry(), creature->GetGUIDLow(), creature->GetDBTableGUIDLow(), path_id);
         return;
     }
-
+   
+    if (!creature->IsAlive())
+        return;
+  
     StartMoveNow(creature);
 }
 
 void WaypointMovementGenerator<Creature>::DoInitialize(Creature* creature)
 {
+	if (!creature)
+        return;
+
+    if (!creature->IsAlive())
+        return;
+	
     LoadPath(creature);
     creature->AddUnitState(UNIT_STATE_ROAMING|UNIT_STATE_ROAMING_MOVE);
 }
 
 void WaypointMovementGenerator<Creature>::DoFinalize(Creature* creature)
 {
+	if (!creature)
+        return;
+	
     creature->ClearUnitState(UNIT_STATE_ROAMING|UNIT_STATE_ROAMING_MOVE);
+	
+	if (!creature->IsAlive())
+        return;
+	
     creature->SetWalk(false);
 }
 
 void WaypointMovementGenerator<Creature>::DoReset(Creature* creature)
 {
+	if (!creature)
+        return;
+
+    if (!creature->IsAlive())
+        return;
+	
     creature->AddUnitState(UNIT_STATE_ROAMING|UNIT_STATE_ROAMING_MOVE);
     StartMoveNow(creature);
 }
 
 void WaypointMovementGenerator<Creature>::OnArrived(Creature* creature)
 {
+	if (!creature)
+        return;
+	
     if (!i_path || i_path->empty())
         return;
-    if (m_isArrivalDone)
+    
+	if (m_isArrivalDone)
         return;
 
     creature->ClearUnitState(UNIT_STATE_ROAMING_MOVE);
@@ -93,6 +122,9 @@ void WaypointMovementGenerator<Creature>::OnArrived(Creature* creature)
 
 bool WaypointMovementGenerator<Creature>::StartMove(Creature* creature)
 {
+	if (!creature)
+        return false;
+	
     if (!i_path || i_path->empty())
         return false;
 
@@ -133,6 +165,9 @@ bool WaypointMovementGenerator<Creature>::StartMove(Creature* creature)
         i_currentNode = (i_currentNode+1) % i_path->size();
     }
 
+    if (!creature->IsAlive())
+        return false; 
+	
     WaypointData const* node = i_path->at(i_currentNode);
 
     m_isArrivalDone = false;
@@ -170,6 +205,12 @@ bool WaypointMovementGenerator<Creature>::StartMove(Creature* creature)
 
 bool WaypointMovementGenerator<Creature>::DoUpdate(Creature* creature, uint32 diff)
 {
+	if (!creature)
+        return false;
+
+    if (!creature->IsAlive())
+        return false;
+	
     // Waypoint movement can be switched on/off
     // This is quite handy for escort quests and other stuff
     if (creature->HasUnitState(UNIT_STATE_NOT_MOVE))
@@ -201,12 +242,18 @@ bool WaypointMovementGenerator<Creature>::DoUpdate(Creature* creature, uint32 di
 
 void WaypointMovementGenerator<Creature>::MovementInform(Creature* creature)
 {
+	if (!creature)
+        return;
+	
     if (creature->AI())
         creature->AI()->MovementInform(WAYPOINT_MOTION_TYPE, i_currentNode);
 }
 
-bool WaypointMovementGenerator<Creature>::GetResetPos(Creature*, float& x, float& y, float& z)
+bool WaypointMovementGenerator<Creature>::GetResetPos(Creature* creature, float& x, float& y, float& z)
 {
+	 if (!creature)
+        return false;
+	
     // prevent a crash at empty waypoint path.
     if (!i_path || i_path->empty())
         return false;
@@ -236,12 +283,21 @@ uint32 FlightPathMovementGenerator::GetPathAtMapEnd() const
 
 void FlightPathMovementGenerator::DoInitialize(Player* player)
 {
+    if (!player)
+        return;
+
+    if (!player->IsAlive())
+        return;
+	
     Reset(player);
     InitEndGridInfo();
 }
 
 void FlightPathMovementGenerator::DoFinalize(Player* player)
 {
+	 if (!player)
+        return;
+	
     // remove flag to prevent send object build movement packets for flight state and crash (movement generator already not at top of stack)
     player->ClearUnitState(UNIT_STATE_IN_FLIGHT);
 
@@ -264,6 +320,12 @@ void FlightPathMovementGenerator::DoFinalize(Player* player)
 
 void FlightPathMovementGenerator::DoReset(Player* player)
 {
+	if (!player)
+        return;
+
+    if (!player->IsAlive())
+        return;
+	
     player->getHostileRefManager().setOnlineOfflineState(false);
     player->AddUnitState(UNIT_STATE_IN_FLIGHT);
     player->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE | UNIT_FLAG_TAXI_FLIGHT);
@@ -287,6 +349,12 @@ void FlightPathMovementGenerator::DoReset(Player* player)
 
 bool FlightPathMovementGenerator::DoUpdate(Player* player, uint32 /*diff*/)
 {
+	if (!player)
+        return false;
+
+    if (!player->IsAlive())
+        return false;
+	
     if (i_currentNode >= i_path->size())
         return false;
 
@@ -332,6 +400,9 @@ void FlightPathMovementGenerator::SetCurrentNodeAfterTeleport()
 
 void FlightPathMovementGenerator::DoEventIfAny(Player* player, TaxiPathNodeEntry const& node, bool departure)
 {
+	if (!player)
+        return;
+	
     if (uint32 eventid = departure ? node.DepartureEventID : node.ArrivalEventID)
     {
         TC_LOG_DEBUG("maps.script", "Taxi %s event %u of node %u of path %u for player %s", departure ? "departure" : "arrival", eventid, node.NodeIndex, node.PathId, player->GetName().c_str());
