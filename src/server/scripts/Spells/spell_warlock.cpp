@@ -1125,29 +1125,6 @@ class spell_warl_fear : public SpellScript
 	}
 };
 
-// 118699 - Fear (Aura)
-class spell_warl_fear_aurascript : public AuraScript 
-{
-
-	PrepareAuraScript(spell_warl_fear_aurascript);
-
-	void HandleProc(ProcEventInfo& event) {
-
-		Unit* target = event.GetActionTarget();
-
-		if (target->HasAura(SPELL_WARLOCK_GLYPH_OF_FEAR_EFFECT))
-			target->RemoveAura(SPELL_WARLOCK_GLYPH_OF_FEAR_EFFECT);
-
-		if (target->HasAura(SPELL_WARLOCK_FEAR_EFFECT))
-			target->RemoveAura(SPELL_WARLOCK_FEAR_EFFECT);
-	}
-
-	void Register() override
-	{
-		OnProc += AuraProcFn(spell_warl_fear_aurascript::HandleProc);
-	}
-};
-
 // Updated 4.3.4
 class spell_warl_banish : public SpellScriptLoader
 {
@@ -4977,6 +4954,5 @@ void AddSC_warlock_spell_scripts()
     new aura_script<spell_warl_meteor_slam>("spell_warl_meteor_slam");
     new aura_script<spell_warl_corruption>("spell_warl_corruption");
     new aura_script<spell_warl_nightfall>("spell_warl_nightfall");
-	new aura_script<spell_warl_fear_aurascript>("spell_warl_fear_aurascript");
 	new aura_script<spell_warl_howl_of_terror>("spell_warl_howl_of_terror");
 }
