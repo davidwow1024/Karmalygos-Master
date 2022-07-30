@@ -2321,6 +2321,7 @@ public:
     void RemoveAurasWithMechanic(uint32 mechanic_mask, AuraRemoveMode removemode = AURA_REMOVE_BY_DEFAULT, uint32 except = 0, bool partial = false, bool onImmunity = false);
     void RemoveAurasWithMechanicOnImmunity(uint32 mechanicMask, uint32 except = 0, bool partial = false);
     void RemoveMovementImpairingAuras(bool partial = false);
+	void RemoveAurasBreakableByDamage();
 
     void RemoveAreaAurasDueToLeaveWorld();
     void RemoveAllAuras();

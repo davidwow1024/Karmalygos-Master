@@ -2257,6 +2257,9 @@ void Unit::CalcAbsorbResist(Unit* victim, SpellSchoolMask schoolMask, DamageEffe
                 uint32 splitAbsorb = dmgInfo.GetAbsorbedSplit();
                 DealDamageMods(caster, splitted, &splitAbsorb);
 
+				// Need to remove all auras breakable by damage.
+				caster->RemoveAurasBreakableByDamage();
+
                 SendSpellNonMeleeDamageLog(caster, (*itr)->GetSpellInfo()->Id, splitted, schoolMask, splitAbsorb, 0, false, 0, false);
 
                 CleanDamage cleanDamage = CleanDamage(splitted, 0, BASE_ATTACK, MELEE_HIT_NORMAL);
@@ -4623,6 +4626,12 @@ void Unit::RemoveAurasWithFamily(SpellFamilyNames family, uint32 familyFlag1, ui
 void Unit::RemoveMovementImpairingAuras(bool partial)
 {
     RemoveAurasWithMechanic((1 << MECHANIC_SNARE) | (1 << MECHANIC_ROOT), AURA_REMOVE_BY_DEFAULT, 0, partial);
+}
+
+void Unit::RemoveAurasBreakableByDamage()
+{
+	RemoveAurasWithInterruptFlags(AURA_INTERRUPT_FLAG_TAKE_DAMAGE);
+	RemoveAurasWithAttribute(SPELL_ATTR0_BREAKABLE_BY_DAMAGE);
 }
 
 void Unit::RemoveAurasWithMechanic(uint32 mechanic_mask, AuraRemoveMode removemode, uint32 except, bool partial, bool onImmunity)
