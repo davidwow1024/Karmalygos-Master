@@ -277,7 +277,8 @@ void WorldSession::HandlePetActionHelper(Unit* pet, uint64 guid1, uint32 spellid
                     // Can't attack if owner is pacified
                     if (_player->HasAuraType(SPELL_AURA_MOD_PACIFY))
                     {
-                        pet->SendPetCastFail(spellid, SPELL_FAILED_PACIFIED);
+                        //pet->SendPetCastFail(spellid, SPELL_FAILED_PACIFIED);
+                        /// @todo Send proper error message to client
                         return;
                     }
 
@@ -286,7 +287,7 @@ void WorldSession::HandlePetActionHelper(Unit* pet, uint64 guid1, uint32 spellid
                     if (!targetUnit)
                         return;
 
-					if (Unit* owner = pet->GetOwner())
+					if (Unit * owner = pet->GetOwner())
 					{
 						if (!owner->IsValidAttackTarget(targetUnit))
 							return;
@@ -299,10 +300,7 @@ void WorldSession::HandlePetActionHelper(Unit* pet, uint64 guid1, uint32 spellid
 					if (sWorld->getBoolConfig(CONFIG_PET_LOS))
 					{
 						if (!pet->IsWithinLOSInMap(targetUnit))
-						{
-							pet->SendPetCastFail(spellid, SPELL_FAILED_LINE_OF_SIGHT);
 							return;
-						}							
 					}
 
                     pet->ClearUnitState(UNIT_STATE_FOLLOW);
@@ -320,10 +318,9 @@ void WorldSession::HandlePetActionHelper(Unit* pet, uint64 guid1, uint32 spellid
                             charmInfo->SetIsCommandFollow(false);
                             charmInfo->SetIsReturning(false);
 
-							// pet->ToCreature()->AI()->AttackStart(targetUnit); old
-							// i not sure about this
-							if (Unit* owner = pet->GetOwner())
-								if (Player* playerOwner = owner->ToPlayer())
+                            pet->ToCreature()->AI()->AttackStart(targetUnit);
+							if (Unit * owner = pet->GetOwner())
+								if (Player * playerOwner = owner->ToPlayer())
 									for (Unit::ControlList::iterator itr = playerOwner->m_Controlled.begin(); itr != playerOwner->m_Controlled.end(); ++itr)
 										if ((*itr)->IsGuardian() && (*itr)->IsAIEnabled)
 											(*itr)->ToCreature()->AI()->AttackStart(targetUnit);
@@ -392,7 +389,7 @@ void WorldSession::HandlePetActionHelper(Unit* pet, uint64 guid1, uint32 spellid
                 case COMMAND_MOVE_TO:
                     if (!pet->HasUnitState(UNIT_STATE_STUNNED | UNIT_STATE_ROOT))
                     {
-						pet->StopMoving();
+                        pet->StopMoving();
                         pet->GetMotionMaster()->Clear(false);
                         pet->GetMotionMaster()->MovePoint(0, x, y, z);
                         charmInfo->SetCommandState(COMMAND_MOVE_TO);
@@ -425,15 +422,17 @@ void WorldSession::HandlePetActionHelper(Unit* pet, uint64 guid1, uint32 spellid
                     if (pet->GetTypeId() == TYPEID_UNIT)
                         pet->ToCreature()->SetReactState(ReactStates(spellid));
                     break;
-                default: 
-			    	break;
+            default: break;
             }
             break;
         case ACT_DISABLED:                                  // 0x81    spell (disabled), ignore
         case ACT_PASSIVE:                                   // 0x01
         case ACT_ENABLED:                                   // 0xC1    spell
         {
-			Unit* unit_target = guid2 ? ObjectAccessor::GetUnit(*_player, guid2) : nullptr;
+             Unit* unit_target = NULL;
+
+            if (guid2)
+                unit_target = ObjectAccessor::GetUnit(*_player, guid2);
           
             // do not cast unknown spells
             SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(spellid);
@@ -480,19 +479,19 @@ void WorldSession::HandlePetActionHelper(Unit* pet, uint64 guid1, uint32 spellid
                 if (unit_target)
                 {
                     pet->SetInFront(unit_target);
-                    if (Player* player = unit_target->ToPlayer())
-                        pet->SendUpdateToPlayer(player);
+                    if (unit_target->GetTypeId() == TYPEID_PLAYER)
+                        pet->SendUpdateToPlayer((Player*)unit_target);
                 }
                 else if (Unit* unit_target2 = spell->m_targets.GetUnitTarget())
                 {
                     pet->SetInFront(unit_target2);
-                    if (Player* player = unit_target2->ToPlayer())
-                        pet->SendUpdateToPlayer(player);
+                    if (unit_target2->GetTypeId() == TYPEID_PLAYER)
+                        pet->SendUpdateToPlayer((Player*)unit_target2);
                 }
 
                 if (Unit* powner = pet->GetCharmerOrOwner())
-                    if (Player* player = powner->ToPlayer())
-                        pet->SendUpdateToPlayer(player);
+                    if (powner->GetTypeId() == TYPEID_PLAYER)
+                        pet->SendUpdateToPlayer(powner->ToPlayer());
 
                 result = SPELL_CAST_OK;
             }
