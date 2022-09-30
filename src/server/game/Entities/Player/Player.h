@@ -1540,9 +1540,6 @@ class Player : public Unit, public GridObject<Player>
     uint8 GetChatTag() const;
     std::string autoReplyMsg;
 
-	/*Custom lag tolerance*/
-	Spell* m_queuedSpell;
-
     uint32 GetBarberShopCost(uint8 newhairstyle, uint8 newhaircolor, uint8 newfacialhair, BarberShopStyleEntry const* newSkin = NULL);
 
     PlayerSocial *GetSocial()

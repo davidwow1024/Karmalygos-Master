@@ -954,9 +954,6 @@ Player::Player(WorldSession* session) : Unit(true), phaseMgr(this), hasForcedMov
     transcendence_spirit = NULL;
 
     m_dynamicValuesCount = PLAYER_DYNAMIC_END;
-    
-	/*Custom lag tolerance*/
-	m_queuedSpell = NULL;
 }
 
 Player::~Player()

@@ -1143,7 +1143,6 @@ void WorldSession::HandleCastSpellOpcode(WorldPacket& recvPacket)
     Spell* spell = new Spell(caster, spellInfo, TRIGGERED_NONE, 0, false);
     spell->m_cast_count = castCount;                       // set count of casts
     spell->m_glyphIndex = glyphIndex;
-	uint32 gcd = _player->GetGlobalCooldownMgr().GetGlobalCooldown(caster,spellInfo);
 
     if (castFlags & 0x8) // Archaeology
     {
@@ -1167,7 +1166,7 @@ void WorldSession::HandleCastSpellOpcode(WorldPacket& recvPacket)
         spell->m_researchData = researchData;
     }
 
-	spell->prepare(&targets, NULL, gcd);
+    spell->prepare(&targets);
 }
 
 void WorldSession::HandleCancelCastOpcode(WorldPacket& recvPacket)

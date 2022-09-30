@@ -65,7 +65,6 @@
 #include <ace/Stack_Trace.h>
 
 extern pEffect SpellEffects[TOTAL_SPELL_EFFECTS];
-#define MAX_SPELL_QUEUE_GCD 400
 
 SpellDestination::SpellDestination()
 {
@@ -3348,7 +3347,7 @@ bool Spell::UpdateChanneledTargetList()
     return channelTargetEffectMask == 0;
 }
 
-void Spell::prepare(SpellCastTargets const* targets, AuraEffect const* triggeredByAura, uint32 gcdAtCast)
+void Spell::prepare(SpellCastTargets const* targets, AuraEffect const* triggeredByAura)
 {
     if (m_CastItem)
         m_castItemGUID = m_CastItem->GetGUID();
@@ -3385,20 +3384,7 @@ void Spell::prepare(SpellCastTargets const* targets, AuraEffect const* triggered
 
     // create and add update event for this spell
     SpellEvent* Event = new SpellEvent(this);
-	if (gcdAtCast && gcdAtCast <= MAX_SPELL_QUEUE_GCD)
-	{
-		if (m_caster->ToPlayer()->m_queuedSpell)
-		{
-			m_caster->ToPlayer()->m_queuedSpell->SendCastResult(SPELL_FAILED_SPELL_IN_PROGRESS);
-			m_caster->ToPlayer()->m_queuedSpell->finish(false);
-		}
-		m_caster->m_Events.AddEvent(Event, m_caster->m_Events.CalculateTime(gcdAtCast));
-		m_spellState = SPELL_STATE_QUEUED;
-		m_caster->ToPlayer()->m_queuedSpell = this;
-		return;
-	}
-	else
-       m_caster->m_Events.AddEvent(Event, m_caster->m_Events.CalculateTime(1));
+    m_caster->m_Events.AddEvent(Event, m_caster->m_Events.CalculateTime(1));
 
     //Prevent casting at cast another spell (ServerSide check)
     if (!(_triggeredCastFlags & TRIGGERED_IGNORE_CAST_IN_PROGRESS) && m_caster->IsNonMeleeSpellCasted(false, true, true) && m_cast_count&& m_spellInfo->Id != 75) // Allow Auto Shot to be turned on while casting
@@ -4133,8 +4119,6 @@ void Spell::SendSpellCooldown()
 
 void Spell::update(uint32 difftime)
 {
-  if (m_spellState != SPELL_STATE_QUEUED)
-  {
     // update pointers based at it's GUIDs
     UpdatePointers();
 
@@ -4162,23 +4146,9 @@ void Spell::update(uint32 difftime)
                 cancel();
         }
     }
-  }
+
     switch (m_spellState)
     {
-	case SPELL_STATE_QUEUED:
-	{
-		m_caster->ToPlayer()->GetGlobalCooldownMgr().CancelGlobalCooldown(m_spellInfo);
-		m_caster->ToPlayer()->m_queuedSpell = NULL;
-		SpellCastTargets targets = m_targets;
-		Spell* spell = new Spell(m_caster, m_spellInfo, TRIGGERED_NONE, 0, false);
-		spell->m_cast_count = m_cast_count;                       // set count of casts
-		spell->m_glyphIndex = m_glyphIndex;
-		cancel();
-		uint64 guid = targets.GetUnitTargetGUID();
-		if (!guid || ObjectAccessor::FindUnit(guid))
-			spell->prepare(&targets);
-		break;
-	}
         case SPELL_STATE_PREPARING:
         {
             if (m_timer > 0)

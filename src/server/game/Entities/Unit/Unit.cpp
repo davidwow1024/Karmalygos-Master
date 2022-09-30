@@ -311,19 +311,8 @@ _aiAnimKitId(0), _movementAnimKitId(0), _meleeAnimKitId(0)
 // Methods of class GlobalCooldownMgr
 bool GlobalCooldownMgr::HasGlobalCooldown(SpellInfo const* spellInfo) const
 {
-    GlobalCooldownList::const_iterator itr = m_GlobalCooldowns.find(spellInfo->StartRecoveryCategory);	
+    GlobalCooldownList::const_iterator itr = m_GlobalCooldowns.find(spellInfo->StartRecoveryCategory);
     return itr != m_GlobalCooldowns.end() && itr->second.duration && getMSTimeDiff(itr->second.cast_time, getMSTime()) < itr->second.duration;
-}
-
-int32 GlobalCooldownMgr::GetGlobalCooldown(Unit* caster, SpellInfo const* spellInfo)
-{
-	if (HasGlobalCooldown(spellInfo))
-	{
-		GlobalCooldownList::const_iterator itr = m_GlobalCooldowns.find(spellInfo->StartRecoveryCategory);
-		return itr->second.duration - getMSTimeDiff(itr->second.cast_time, getMSTime());
-	}
-
-	return 0;
 }
 
 void GlobalCooldownMgr::AddGlobalCooldown(SpellInfo const* spellInfo, uint32 gcd)
